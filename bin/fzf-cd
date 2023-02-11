@@ -1,0 +1,98 @@
+#!/bin/env bash
+
+# Usage:
+# source this file in ~/.bashrc
+# $ sd    # [s]earch [d]irectory
+
+# Dependencies:
+# fzf
+# fd
+
+function sd() {
+	local USAGE='Usage: sd [help|<directory pattern>]'
+	local HELP=''
+	local EXCLUDE_PATTERN
+
+	HELP=('sd <command>'
+	'Change directory by using fzf to filter path'
+	'Commands:'
+	'   -h  --help             print this help message'
+	"   -r  --root             search in git top level directory (default is \$HOME)"
+	'   -R  --ranger           use with ranger'
+	'   <directory pattern>    search pattern for dirname, a regular expression')
+
+	EXCLUDE_PATTERN+=\{
+	EXCLUDE_PATTERN+=node_modules,.cache,.cargo,.dropbox,.git,.local,site-packages,
+	EXCLUDE_PATTERN+=.config/google-chrome
+	EXCLUDE_PATTERN+=\}
+
+	function usage() { # {{{
+		printf '%s\n' "$USAGE"
+	}
+	# }}}
+	function help() { # {{{
+		printf '%s\n' "${HELP[@]}"
+	}
+	# }}}
+	function find_dirs() { # {{{
+		local dir_pattern="${1:-}"
+		if [[ "$#" == 2 ]]; then
+			local path="$2"
+		fi
+		fd --type directory --no-ignore --hidden --exclude="$EXCLUDE_PATTERN" "$dir_pattern" "$path"
+	}
+	# }}}
+	function gitroot() { # {{{
+		git rev-parse --show-toplevel 2> /dev/null
+	}
+	# }}}
+	function cd_fzf() { # {{{
+		local dir_pattern="${1:-}"
+		local root="$2"
+		local directory
+
+		directory=$(find_dirs "$dir_pattern" "${root:-$HOME}" |
+			fzf -1 --height=15 --prompt=cd:\ )
+		if [[ "$directory" != '' ]]; then
+			printf 'cd %s\n' "$(pwd)/$directory"
+			# shellcheck disable=SC2164
+			cd "$directory"
+		fi
+	}
+	# }}}
+	function cd_fzf_with_ranger() { # {{{
+		local root
+		root=$(gitroot)
+		find_dirs "$dir_pattern" "${root:-"$HOME"}" | fzf --prompt='cd: '
+	}
+	# }}}
+	function main() { # {{{
+		local cmd="${1:-}" pattern="${2:-}"
+
+		case "$#" in
+			0)
+				cd_fzf ;;
+			*)
+				case "$cmd" in
+					-h|--help)
+						help ;;
+					-r|--root)
+						cd_fzf "$pattern" "$(gitroot)" ;;
+					-R|--ranger)
+						cd_fzf_with_ranger ;;
+					*)
+						pattern="$1"
+						cd_fzf "$pattern" ;;
+				esac ;;
+		esac
+	}
+	# }}}
+
+	main "$@"
+	unset -f usage
+	unset -f help
+	unset -f find_dirs
+	unset -f cd_fzf
+	unset -f cd_fzf_with_ranger
+	unset -f main
+}

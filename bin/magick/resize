@@ -1,0 +1,10 @@
+#!/bin/bash
+
+PERCENT="$1"
+  shift
+while (( "$#" )); do  
+  convert "$1" -resize "$PERCENT%" -quality 100 "resized_to_${PERCENT}%_$1"
+  shift
+done
+
+exit 0

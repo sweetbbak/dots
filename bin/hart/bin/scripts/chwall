@@ -1,0 +1,20 @@
+#!/bin/sh
+
+# Wallpaper Directory :
+walldir="/mnt/Data/Pictures/Wallpaper/"
+
+# Choose Wallpaper Dirs :
+chosen="$(echo -e "$(ls $walldir | rofi -dmenu -i -selected-row 1 -p "Choose a Dir :" )")"
+
+# Choose Wallpaper :
+chosenwall="$(echo -e "$(ls $walldir$chosen/ | rofi -dmenu -i -selected-row 1 -p "Choose a Wallpaper :" )")" 
+
+# Set Wallpaper :
+wallset=$(feh --bg-fill "$walldir$chosen/$chosenwall")
+#echo "feh --bg-fill $walldir$chosen/$chosenwall &" >> ~/.xprofile
+
+# xprofile :
+sed -i "/\# Wallpaper :/a feh --bg-fill $walldir$chosen/$chosenwall &" ~/.xprofile
+
+# xinitrc :
+sed -i "/\# Wallpaper :/a feh --bg-fill $walldir$chosen/$chosenwall &" ~/.xinitrc

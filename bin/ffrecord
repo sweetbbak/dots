@@ -1,0 +1,20 @@
+#!/bin/bash
+recdir=$HOME/Videos/ffrec
+
+if [ ! -d $recdir ]; then mkdir $recdir; fi
+
+if [ $# -eq 0 ]; then
+	file=$(mktemp '/tmp/ffrec-XXXXXX.mp4')
+else
+	if [ ! -z "$1" ]; then
+		file=$1
+	else
+		file=$(mktemp '/tmp/ffrec-XXXXXX.mp4')
+	fi
+fi
+
+geometry=$(slop -f "-video_size %wx%h -i :0.0+%x,%y")
+echo "recording starting in 3 seconds..."
+sleep 3
+ffmpeg -framerate 30 -f x11grab $geometry ${recdir}/${file}
+notify-send "Video saved" "File saved to ${recdir}/${file}"

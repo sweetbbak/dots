@@ -1,0 +1,77 @@
+#!/bin/sh
+set -eu
+# Dependencies: util.sh, pat_extract (7z only), tar/zip/p7zip/bzip2/gzip/xz/zstd/unrar (optional)
+# Portability:  POSIX
+
+. ${SH_LIB_DIR:-~/bin/}util.sh
+selfdir=$(dirname -- "$(readlinkf "$0")")
+PATH=$PATH:$selfdir
+
+
+fmt_error()
+{
+	die "$1": unknown archive format\; supported formats: 7z, cb7, cbr, cbt, \
+		cbz, pk3, pk7, rar, tar, tar.bz2, tar.gz, tar.lz, tar.xz, tar.zst, \
+		zip
+}
+
+if [ $# -lt 1 ] || [ $# -gt 2 ] || is_help "$@"
+then
+	name=$(basename "$(readlinkf "$0")")
+	cat <<EOF | text_format
+**NAME**
+    $name - List an archive content
+
+**SYNOPSIS**
+    $name [**-h**] __ARCHIVE__
+
+EOF
+	exit 1
+fi
+requirefile -f "$1"
+
+in=$1
+low=$(tolower "$1")
+
+case "$low" in
+	*.7z|*.cb7|*.pk7)
+		! [ -t 0 ] && nostdin=true
+		7z l ${nostdin+-p""} -- "$in" | pat_extract '^---' '^---' | headneg 1 | cut -c54-
+		;;
+	*.rar|*.cbr)
+		unrar lb -- "$in"
+		;;
+	*.zip|*.cbz|*.pk3)
+		zipinfo -1 -- "$in"
+		;;
+	*.tar|*.cbt)
+		tar --version 2>/dev/null | grep -Fq 'GNU tar' &&
+			tar='tar --force-local' || tar=tar
+		$tar -t -f "$in"
+		;;
+	*.tar.*|*.tgz|*.tbz2|*.txz|*.tlz|*.tzst)
+	    case "$low" in
+			*bz2)
+			    bunzip2 -ck -- "$in"
+				;;
+			*gz)
+			    gunzip -ck -- "$in"
+				;;
+			*xz)
+				unxz -ck -- "$in"
+				;;
+			*lz)
+				lzip -dck -- "$in"
+				;;
+			*zst)
+				unzstd -c -- "$in"
+				;;
+			*)
+				fmt_error "$in"
+				;;
+		esac | tar -t
+		;;
+	*)
+		fmt_error "$in"
+		;;
+esac

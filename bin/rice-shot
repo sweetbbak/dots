@@ -1,0 +1,2 @@
+magick montage -background '#141C26' -tile 1x3 -geometry +20+20 umi1.png umi2.png umi3.png montage.png
+convert montage.png -bordercolor "#141C26" -border 20 montage2.png

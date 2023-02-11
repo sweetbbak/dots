@@ -1,0 +1,41 @@
+#!/usr/bin/env zsh
+# vim:ft=zsh
+
+if [ $1 = "--help" ]; then
+cat << EOF
+Convert minutes to seconds and vice versa
+
+min2sec [OPTIONS]
+  -s MIN		sec 	-> min
+  -m SEC		min 	-> sec
+  -T MIN:SEC		min:sec	-> sec
+EOF
+	exit
+fi
+
+mintosec() {
+	let "a = $1 * 60"
+	echo $a
+}
+
+sectomin() {
+	let "a = $1 / 60"
+	echo $a
+}
+
+timeconv() {
+	seg1=$(echo "$1" | cut -d ':' -f 1)
+	seg2=$(echo "$1" | cut -d ':' -f 2)
+	let "min = $seg1 * 60"
+	let "total = $min + $seg2"
+	echo "$total"
+}
+
+while getopts m:s:T: o; do
+	case $o in
+		m) mintosec $OPTARG;;
+		s) sectomin $OPTARG;;
+		T) timeconv $OPTARG;;
+		# [?]) err;;
+	esac
+done

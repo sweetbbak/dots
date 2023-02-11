@@ -1,0 +1,12 @@
+### EXAMPLE COMMAND: ADULT_SWIM-YTDLP robot-chicken
+
+## You Must ONLY PROVIDE the Show's URL Slug
+### JUST FIND THE Show's URL, AND REMOVE "https://www.adultswim.com/videos/" LEAVING JUST THE SHOW'S URL SLUG
+## Example: https://www.adultswim.com/videos/robot-chicken --> robot-chicken
+URL_SLUG=$1
+
+## Now The Script Will Parse The Show's Page Using XIDEL and Grab Episode URLS VIA XPATHs
+## One By One, The Episodes Will Be Downloaded Until They Are All Grabbed
+while read -r l; do 
+    yt-dlp -o '%(series)s/Season %(season_number)s/%(series)s - S%(season_number)02dE%(episode_number)02d - %(episode)s.%(ext)s' "${l}"
+done < <(xidel "https://www.adultswim.com/videos/${1}" -e "//div[@itemprop='containsSeason']/div/div[2]/div/div/div/a/@href" | sed 's#^#https://www.adultswim.com##g')

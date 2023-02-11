@@ -1,0 +1,35 @@
+#!/bin/sh
+set -eu
+# Dependencies: util.sh, archive_extract, archive_create
+# Portability:  POSIX
+
+. ${SH_LIB_DIR:-~/bin/}util.sh
+selfdir=$(dirname -- "$(readlinkf "$0")")
+PATH=$selfdir:$PATH
+
+
+if [ $# -ne 2 ] || is_help "$@"
+then
+	name=$(basename "$(readlinkf "$0")")
+	cat <<EOF | text_format
+**NAME**
+    $name - Convert between archive formats
+
+**SYNOPSIS**
+    $name [**-h**] __ARCHIVE_IN__ __ARCHIVE_OUT__
+
+EOF
+	exit 1
+fi
+requirefile -f "$1"
+forbidfile "$2"
+
+workdir=$(mktemp -d)
+atexit '$_aborted && rm -f -- "$2"'
+atexit 'rm -r -- "$workdir"'
+
+archive_extract -d "$workdir" "$1"
+
+out=$(readlinkf "$2")
+cd -- "$workdir"
+listfiles . | sed 's#^\./##' | xargsnl archive_create "$out"

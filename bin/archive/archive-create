@@ -1,0 +1,82 @@
+#!/bin/sh
+set -eu
+# Dependencies: util.sh, tar/zip/p7zip/bzip2/gzip/xz/zstd (optional)
+# Portability:  POSIX
+
+. ${SH_LIB_DIR:-~/bin/}util.sh
+selfdir=$(dirname -- "$(readlinkf "$0")")
+PATH=$PATH:$selfdir
+
+
+fmt_error()
+{
+	die "$1": unknown archive format\; supported formats: 7z, cb7, cbt, \
+		cbz, pk3, pk7, tar, tar.bz2, tar.gz, tar.lz, tar.xz, tar.zst, zip
+}
+
+if [ $# -lt 2 ] || is_help "$@"
+then
+	name=$(basename "$(readlinkf "$0")")
+	cat <<EOF | text_format
+**NAME**
+    $name - Archive files
+
+**SYNOPSIS**
+    $name [**-h**] __OUT__ __FILE__...
+
+EOF
+	exit 1
+fi
+
+out=$1
+shift
+forbidfile "$out"
+atexit '$_aborted && rm -f -- "$out"'
+
+case "$out" in
+	*.zip|*.pk3)
+		zip -r "$out" "$@"
+		;;
+	*.cbz)
+		zip -r -Zstore "$out" "$@"
+		;;
+	*.7z|*.pk7)
+		7z a -mx=9 "$out" "$@"
+		;;
+	*.cb7)
+		7z a -m0=copy "$out" "$@"
+		;;
+	*.tar|*.cbt)
+		tar --version 2>/dev/null | grep -Fq 'GNU tar' &&
+			tar='tar --numeric-owner --force-local' || tar=tar
+		$tar -cf "$out" -- "$@"
+		;;
+	*.tar.*|*.tgz|*.tbz2|*.txz|*.tlz|*.tzst)
+		tar --version 2>/dev/null | grep -Fq 'GNU tar' &&
+			tar='tar --numeric-owner --force-local' || tar=tar
+		$tar -c -- "$@" |
+		case "$out" in
+			*bz2)
+				bzip2 -9cv >"$out"
+				;;
+			*gz)
+				gzip -9cv >"$out"
+				;;
+			*xz)
+				xz -T0 -Ccrc32 -9cv >"$out"
+				;;
+			*lz)
+				lzip -9cv >"$out"
+				;;
+			*zst)
+				zstd -T0 -19 --long - -o "$out"
+				;;
+			*)
+				fmt_error "$out"
+				;;
+		esac
+		;;
+	*)
+		fmt_error "$out"
+		;;
+esac

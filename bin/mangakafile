@@ -1,0 +1,168 @@
+﻿<!doctype html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width" />
+<meta name="robots" content="noindex,nofollow" />
+<title>Bookmark - Manganato</title>
+<meta name="description" content="Bookmark" />
+<meta name="copyright" content="Copyright © 2019 MangaNato" />
+<meta name="Author" content="Manganato" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="Manganato" />
+<meta name="twitter:title" content="Bookmark - Manganato" />
+<meta name="twitter:description" content="Bookmark" />
+<meta name="twitter:image" content="https://lh3.googleusercontent.com/-iK1y5xV28gs/WCcslYmPKAI/AAAAAAACQGg/o9pv0oioVlY/s0/5826ca23a4ad3.jpg" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Bookmark - Manganato" />
+<meta property="og:url" content="https://manganato.com/bookmark" />
+<meta property="og:image" content="https://lh3.googleusercontent.com/-iK1y5xV28gs/WCcslYmPKAI/AAAAAAACQGg/o9pv0oioVlY/s0/5826ca23a4ad3.jpg" />
+<meta property="og:description" content="Bookmark" />
+<meta property="og:site_name" content="https://manganato.com/" />
+<link rel="icon" type="image/png" href="https://manganato.com/favicon.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="https://manganato.com/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://manganato.com/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="96x96" href="https://manganato.com/favicon-96x96.png" />
+<link rel="stylesheet" href="https://manganato.com/themes/hm/css/c-style.css?v=09082022" />
+<link rel="stylesheet" href="https://manganato.com/themes/hm/css/owl.theme.css" />
+<link rel="stylesheet" href="https://manganato.com/themes/hm/css/owl.carousel.css" />
+<link rel="stylesheet" href="https://manganato.com/themes/hm/css/tooltip.css?v=09082022" />
+<link rel="stylesheet" href="https://manganato.com/themes/hm/css/c-style-search.css?v=09082022" />
+<link href='https://fonts.googleapis.com/css?family=Noto+Sans:400,400italic,700,700italic&subset=latin,vietnamese' rel='stylesheet' />
+<script type="text/javascript" src="https://manganato.com/themes/hm/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="https://manganato.com/themes/hm/js/owl.carousel.js"></script>
+<script type="text/javascript" src="https://manganato.com/themes/hm/js/cookie.js"></script>
+<script type="text/javascript" src="https://manganato.com/themes/hm/js/custom.js?v=09082022"></script>
+<script type="text/javascript" src="https://manganato.com/themes/hm/js/tooltip.js?v=09082022"></script>
+<script type="text/javascript" src="https://manganato.com/themes/hm/js/fsearch.js?v=09082022"></script>
+<link rel="stylesheet" href="https://manganato.com/themes/starrate/css/style.css" />
+<script type="text/javascript" src="https://manganato.com/themes/starrate/js/starwarsjs.js"></script>
+<meta property="fb:app_id" content="1664224760511779" />
+<script>
+    baseurljs = 'https://manganato.com/';
+        tooltypejs = '';
+</script>
+</head>
+<body>
+<div class="body-site">
+<div class="container container-header">
+<div class="logo">
+<a href="https://manganato.com/" title="Manga Online">
+<img src="https://manganato.com/themes/hm/images/logo.png" alt="Manga Online" title="Manga Online">
+</a>
+</div>
+<div class="container-header-top">
+<div class="box-search">
+<form name="frmsearch">
+<input id="search-story" autocomplete="off" placeholder="Search Manga(everything)" class="search-story" />
+<input style="display: none;" />
+</form>
+<script>
+                $search_address = baseurljs + 'search/story/';
+            </script>
+</div>
+<div class="box-user-options">
+<a rel="nofollow" href="https://user.manganelo.com/?l=manganato">
+<span class="user-name">
+<img src="https://avt.mkklcdnv6temp.com/content/avt.png" />
+<p class="text-nowrap a-h">sweet</p>
+</span>
+</a>
+<a rel="nofollow" href="https://manganato.com/bookmark"><i class="user-notification"></i></a>
+
+<a rel="nofollow" href="https://user.manganelo.com/home_logout?l=manganato&re_l=logout"><i class="user-logout"></i></a>
+<i class="mode-changer"></i>
+</div>
+</div>
+<a class="header-mobile-menu">MENU</a>
+<div class="header-menu">
+<a class="a-h" href="https://manganato.com/" title="Manga Online">MANGA ONLINE</a>
+<a class="a-h" href="https://manganato.com/genre-all" title="LATEST MANGA">LATEST MANGA</a>
+<a rel="nofollow" class="a-h" href="https://manganato.com/genre-all?type=topview" title="HOT MANGA">HOT MANGA</a>
+<a rel="nofollow" class="a-h" href="https://manganato.com/genre-all?type=newest" title="NEWEST MANGA">NEWEST MANGA</a>
+</div>
+</div> <div class="container container-silder"> <h2 class="silder-title">TOP WEEK</h2> <div id="owl-slider" class="owl-carousel"><div class="item"> <img class="img-loading" src="https://avt.mkklcdnv6temp.com/10/r/28-1675051432.jpg" onerror="javascript:this.src='https://manganato.com/themes/hm/images/404_not_found.png';" alt="Savage Hero" /> <div class="slide-caption"><h3><a class="text-nowrap a-h" href="https://manganato.com/manga-qb993758" title="Savage Hero">Savage Hero</a></h3><a rel="nofollow" class="text-nowrap a-h" href="https://chapmanganato.com/manga-qb993758/chapter-9" title="Savage Hero Chapter 9">Chapter 9</a></div> </div><div class="item"> <img class="img-loading" src="https://avt.mkklcdnv6temp.com/37/s/21-1595625033.jpg" onerror="javascript:this.src='https://manganato.com/themes/hm/images/404_not_found.png';" alt="Isekai Apocalypse MYNOGHRA ~The Conquest of the World Starts With the Civilization of Ruin~" /> <div class="slide-caption"><h3><a class="text-nowrap a-h" href="https://manganato.com/manga-iv985956" title="Isekai Apocalypse MYNOGHRA ~The Conquest of the World Starts With the Civilization of Ruin~">Isekai Apocalypse Mynoghra ~The Conquest Of The World Starts With The Civilization Of Ruin~</a></h3><a rel="nofollow" class="text-nowrap a-h" href="https://chapmanganato.com/manga-iv985956/chapter-20" title="Isekai Apocalypse MYNOGHRA ~The Conquest of the World Starts With the Civilization of Ruin~ Chapter 20: The End of Freedom">Chapter 20: The End Of Freedom</a></div> </div><div class="item"> <img class="img-loading" src="https://avt.mkklcdnv6temp.com/17/z/20-1583501720.jpg" onerror="javascript:this.src='https://manganato.com/themes/hm/images/404_not_found.png';" alt="Isekai de Cheat Skill wo te ni Shita ore wa, Genjitsu Sekai wo mo Musou Suru ~Level Up wa Jinsei wo Kaeta~" /> <div class="slide-caption"><h3><a class="text-nowrap a-h" href="https://manganato.com/manga-gm984221" title="Isekai de Cheat Skill wo te ni Shita ore wa, Genjitsu Sekai wo mo Musou Suru ~Level Up wa Jinsei wo Kaeta~">Isekai De Cheat Skill Wo Te Ni Shita Ore Wa, Genjitsu Sekai Wo Mo Musou Suru ~Level Up Wa Jinsei Wo Kaeta~</a></h3><a rel="nofollow" class="text-nowrap a-h" href="https://chapmanganato.com/manga-gm984221/chapter-20" title="Isekai de Cheat Skill wo te ni Shita ore wa, Genjitsu Sekai wo mo Musou Suru ~Level Up wa Jinsei wo Kaeta~ Vol.4 Chapter 20: Outdoor Classes">Vol.4 Chapter 20: Outdoor Classes</a></div> </div><div class="item"> <img class="img-loading" src="https://avt.mkklcdnv6temp.com/49/y/25-1654472578.jpg" onerror="javascript:this.src='https://manganato.com/themes/hm/images/404_not_found.png';" alt="Drawing: The Greatest Mangaka Becomes A Skilled “Martial Artist” In Another World" /> <div class="slide-caption"><h3><a class="text-nowrap a-h" href="https://manganato.com/manga-ni991065" title="Drawing: The Greatest Mangaka Becomes A Skilled “Martial Artist” In Another World">Drawing: The Greatest Mangaka Becomes A Skilled “Martial Artist” In Another World</a></h3><a rel="nofollow" class="text-nowrap a-h" href="https://chapmanganato.com/manga-ni991065/chapter-46" title="Drawing: The Greatest Mangaka Becomes A Skilled “Martial Artist” In Another World Chapter 46">Chapter 46</a></div> </div><div class="item"> <img class="img-loading" src="https://avt.mkklcdnv6temp.com/13/c/2-1583466207.jpg" onerror="javascript:this.src='https://manganato.com/themes/hm/images/404_not_found.png';" alt="Tsuki ga Michibiku Isekai Douchuu" /> <div class="slide-caption"><h3><a class="text-nowrap a-h" href="https://manganato.com/manga-rh953142" title="Tsuki ga Michibiku Isekai Douchuu">Tsuki Ga Michibiku Isekai Douchuu</a></h3><a rel="nofollow" class="text-nowrap a-h" href="https://chapmanganato.com/manga-rh953142/chapter-81" title="Tsuki ga Michibiku Isekai Douchuu Chapter 81: Silver Wolf Armor">Chapter 81: Silver Wolf Armor</a></div> </div><div class="item"> <img class="img-loading" src="https://avt.mkklcdnv6temp.com/10/g/25-1638458809.jpg" onerror="javascript:this.src='https://manganato.com/themes/hm/images/404_not_found.png';" alt="Slow Life In Another World (I Wish!)" /> <div class="slide-caption"><h3><a class="text-nowrap a-h" href="https://manganato.com/manga-my990107" title="Slow Life In Another World (I Wish!)">Slow Life In Another World (I Wish!)</a></h3><a rel="nofollow" class="text-nowrap a-h" href="https://chapmanganato.com/manga-my990107/chapter-30" title="Slow Life In Another World (I Wish!) Chapter 30">Chapter 30</a></div> </div><div class="item"> <img class="img-loading" src="https://avt.mkklcdnv6temp.com/3/m/28-1673800639.jpg" onerror="javascript:this.src='https://manganato.com/themes/hm/images/404_not_found.png';" alt="Reincarnation Colosseum - Using the Weakest Skills in Order to Defeat the Strongest Women and Create a Slave Harem" /> <div class="slide-caption"><h3><a class="text-nowrap a-h" href="https://manganato.com/manga-qq993573" title="Reincarnation Colosseum - Using the Weakest Skills in Order to Defeat the Strongest Women and Create a Slave Harem">Reincarnation Colosseum - Using The Weakest Skills In Order To Defeat The Strongest Women And Create A Slave Harem</a></h3><a rel="nofollow" class="text-nowrap a-h" href="https://chapmanganato.com/manga-qq993573/chapter-4" title="Reincarnation Colosseum - Using the Weakest Skills in Order to Defeat the Strongest Women and Create a Slave Harem Chapter 4">Chapter 4</a></div> </div><div class="item"> <img class="img-loading" src="https://avt.mkklcdnv6temp.com/9/i/28-1674988898.jpg" onerror="javascript:this.src='https://manganato.com/themes/hm/images/404_not_found.png';" alt="The Reincarnated Prince Becomes an Alchemist and Brings Prosperity to His Country" /> <div class="slide-caption"><h3><a class="text-nowrap a-h" href="https://manganato.com/manga-qq993725" title="The Reincarnated Prince Becomes an Alchemist and Brings Prosperity to His Country">The Reincarnated Prince Becomes An Alchemist And Brings Prosperity To His Country</a></h3><a rel="nofollow" class="text-nowrap a-h" href="https://chapmanganato.com/manga-qq993725/chapter-11.5" title="The Reincarnated Prince Becomes an Alchemist and Brings Prosperity to His Country Chapter 11.5">Chapter 11.5</a></div> </div><div class="item"> <img class="img-loading" src="https://avt.mkklcdnv6temp.com/49/p/19-1583500979.jpg" onerror="javascript:this.src='https://manganato.com/themes/hm/images/404_not_found.png';" alt="Kaiko sareta Ankoku Heishi (30-dai) no Slow na Second Life" /> <div class="slide-caption"><h3><a class="text-nowrap a-h" href="https://manganato.com/manga-gv983730" title="Kaiko sareta Ankoku Heishi (30-dai) no Slow na Second Life">Kaiko Sareta Ankoku Heishi (30-Dai) No Slow Na Second Life</a></h3><a rel="nofollow" class="text-nowrap a-h" href="https://chapmanganato.com/manga-gv983730/chapter-41" title="Kaiko sareta Ankoku Heishi (30-dai) no Slow na Second Life Chapter 41: Creeping Shadow">Chapter 41: Creeping Shadow</a></div> </div><div class="item"> <img class="img-loading" src="https://avt.mkklcdnv6temp.com/19/b/18-1583497836.jpg" onerror="javascript:this.src='https://manganato.com/themes/hm/images/404_not_found.png';" alt="The Reincarnation Magician Of The Inferior Eyes" /> <div class="slide-caption"><h3><a class="text-nowrap a-h" href="https://manganato.com/manga-eq981551" title="The Reincarnation Magician Of The Inferior Eyes">The Reincarnation Magician Of The Inferior Eyes</a></h3><a rel="nofollow" class="text-nowrap a-h" href="https://chapmanganato.com/manga-eq981551/chapter-91" title="The Reincarnation Magician Of The Inferior Eyes Chapter 91">Chapter 91</a></div> </div><div class="item"> <img class="img-loading" src="https://avt.mkklcdnv6temp.com/6/t/28-1674954038.jpg" onerror="javascript:this.src='https://manganato.com/themes/hm/images/404_not_found.png';" alt="The Banished Sage Who Escaped his Childhood Friend" /> <div class="slide-caption"><h3><a class="text-nowrap a-h" href="https://manganato.com/manga-qd993660" title="The Banished Sage Who Escaped his Childhood Friend">The Banished Sage Who Escaped His Childhood Friend</a></h3><a rel="nofollow" class="text-nowrap a-h" href="https://chapmanganato.com/manga-qd993660/chapter-28" title="The Banished Sage Who Escaped his Childhood Friend Chapter 28: Crimson Fang">Chapter 28: Crimson Fang</a></div> </div><div class="item"> <img class="img-loading" src="https://avt.mkklcdnv6temp.com/18/s/27-1665027889.jpg" onerror="javascript:this.src='https://manganato.com/themes/hm/images/404_not_found.png';" alt="Archmage Transcending Through Regression" /> <div class="slide-caption"><h3><a class="text-nowrap a-h" href="https://manganato.com/manga-pg992715" title="Archmage Transcending Through Regression">Archmage Transcending Through Regression</a></h3><a rel="nofollow" class="text-nowrap a-h" href="https://chapmanganato.com/manga-pg992715/chapter-36" title="Archmage Transcending Through Regression Chapter 36">Chapter 36</a></div> </div><div class="item"> <img class="img-loading" src="https://avt.mkklcdnv6temp.com/42/l/25-1653890003.jpg" onerror="javascript:this.src='https://manganato.com/themes/hm/images/404_not_found.png';" alt="Kaoru Hana wa Rin to Saku" /> <div class="slide-caption"><h3><a class="text-nowrap a-h" href="https://manganato.com/manga-nu990877" title="Kaoru Hana wa Rin to Saku">Kaoru Hana Wa Rin To Saku</a></h3><a rel="nofollow" class="text-nowrap a-h" href="https://chapmanganato.com/manga-nu990877/chapter-48" title="Kaoru Hana wa Rin to Saku Chapter 48: Saku and Subaru">Chapter 48: Saku And Subaru</a></div> </div><div class="item"> <img class="img-loading" src="https://avt.mkklcdnv6temp.com/17/p/27-1664857156.jpg" onerror="javascript:this.src='https://manganato.com/themes/hm/images/404_not_found.png';" alt="Fun Territory Defense by the Optimistic Lord" /> <div class="slide-caption"><h3><a class="text-nowrap a-h" href="https://manganato.com/manga-pd992686" title="Fun Territory Defense by the Optimistic Lord">Fun Territory Defense By The Optimistic Lord</a></h3><a rel="nofollow" class="text-nowrap a-h" href="https://chapmanganato.com/manga-pd992686/chapter-15.2" title="Fun Territory Defense by the Optimistic Lord Chapter 15.2">Chapter 15.2</a></div> </div><div class="item"> <img class="img-loading" src="https://avt.mkklcdnv6temp.com/33/d/1-1583464999.jpg" onerror="javascript:this.src='https://manganato.com/themes/hm/images/404_not_found.png';" alt="The New Gate" /> <div class="slide-caption"><h3><a class="text-nowrap a-h" href="https://manganato.com/manga-lv952256" title="The New Gate">The New Gate</a></h3><a rel="nofollow" class="text-nowrap a-h" href="https://chapmanganato.com/manga-lv952256/chapter-86" title="The New Gate Chapter 86">Chapter 86</a></div> </div><div class="item"> <img class="img-loading" src="https://avt.mkklcdnv6temp.com/31/c/16-1583494587.jpg" onerror="javascript:this.src='https://manganato.com/themes/hm/images/404_not_found.png';" alt="Berserk of Gluttony" /> <div class="slide-caption"><h3><a class="text-nowrap a-h" href="https://manganato.com/manga-be979161" title="Berserk of Gluttony">Berserk Of Gluttony</a></h3><a rel="nofollow" class="text-nowrap a-h" href="https://chapmanganato.com/manga-be979161/chapter-51" title="Berserk of Gluttony Chapter 51">Chapter 51</a></div> </div><div class="item"> <img class="img-loading" src="https://avt.mkklcdnv6temp.com/24/s/26-1657856175.jpg" onerror="javascript:this.src='https://manganato.com/themes/hm/images/404_not_found.png';" alt="Transcension Academy" /> <div class="slide-caption"><h3><a class="text-nowrap a-h" href="https://manganato.com/manga-ox991632" title="Transcension Academy">Transcension Academy</a></h3><a rel="nofollow" class="text-nowrap a-h" href="https://chapmanganato.com/manga-ox991632/chapter-39" title="Transcension Academy Chapter 39">Chapter 39</a></div> </div><div class="item"> <img class="img-loading" src="https://avt.mkklcdnv6temp.com/2/i/20-1583501082.jpg" onerror="javascript:this.src='https://manganato.com/themes/hm/images/404_not_found.png';" alt="Yuru Fuwa Noka No Moji Bake Skill" /> <div class="slide-caption"><h3><a class="text-nowrap a-h" href="https://manganato.com/manga-gu983803" title="Yuru Fuwa Noka No Moji Bake Skill">Yuru Fuwa Noka No Moji Bake Skill</a></h3><a rel="nofollow" class="text-nowrap a-h" href="https://chapmanganato.com/manga-gu983803/chapter-17" title="Yuru Fuwa Noka No Moji Bake Skill Vol.5 Chapter 17: BBQ with Succubus Chief">Vol.5 Chapter 17: Bbq With Succubus Chief</a></div> </div><div class="item"> <img class="img-loading" src="https://avt.mkklcdnv6temp.com/5/j/25-1636606424.jpg" onerror="javascript:this.src='https://manganato.com/themes/hm/images/404_not_found.png';" alt="The People On Earth Are Too Ferocious" /> <div class="slide-caption"><h3><a class="text-nowrap a-h" href="https://manganato.com/manga-mo989997" title="The People On Earth Are Too Ferocious">The People On Earth Are Too Ferocious</a></h3><a rel="nofollow" class="text-nowrap a-h" href="https://chapmanganato.com/manga-mo989997/chapter-119" title="The People On Earth Are Too Ferocious Chapter 119">Chapter 119</a></div> </div><div class="item"> <img class="img-loading" src="https://avt.mkklcdnv6temp.com/3/r/20-1583501137.jpg" onerror="javascript:this.src='https://manganato.com/themes/hm/images/404_not_found.png';" alt="Kubo-san Doesn't Leave Me Be (a Mob)" /> <div class="slide-caption"><h3><a class="text-nowrap a-h" href="https://manganato.com/manga-gd983838" title="Kubo-san Doesn't Leave Me Be (a Mob)">Kubo-San Doesn't Leave Me Be (A Mob)</a></h3><a rel="nofollow" class="text-nowrap a-h" href="https://chapmanganato.com/manga-gd983838/chapter-137" title="Kubo-san Doesn't Leave Me Be (a Mob) Chapter 137">Chapter 137</a></div> </div><div class="item"> <img class="img-loading" src="https://avt.mkklcdnv6temp.com/2/i/19-1583499154.jpg" onerror="javascript:this.src='https://manganato.com/themes/hm/images/404_not_found.png';" alt="Kouryakuhon o Kushi Suru Saikyou no Mahoutsukai ~< meirei sa sero > to wa Iwa Senai Oreryuu Mao Tobatsu Saizen Ruuto ~" /> <div class="slide-caption"><h3><a class="text-nowrap a-h" href="https://manganato.com/manga-fr982452" title="Kouryakuhon o Kushi Suru Saikyou no Mahoutsukai ~< meirei sa sero > to wa Iwa Senai Oreryuu Mao Tobatsu Saizen Ruuto ~">Kouryakuhon O Kushi Suru Saikyou No Mahoutsukai ~< Meirei Sa Sero > To Wa Iwa Senai Oreryuu Mao Tobatsu Saizen Ruuto ~</a></h3><a rel="nofollow" class="text-nowrap a-h" href="https://chapmanganato.com/manga-fr982452/chapter-41.2" title="Kouryakuhon o Kushi Suru Saikyou no Mahoutsukai ~< meirei sa sero > to wa Iwa Senai Oreryuu Mao Tobatsu Saizen Ruuto ~ Chapter 41.2">Chapter 41.2</a></div> </div><div class="item"> <img class="img-loading" src="https://avt.mkklcdnv6temp.com/44/o/25-1654079534.jpg" onerror="javascript:this.src='https://manganato.com/themes/hm/images/404_not_found.png';" alt="I'm Not The Hero!" /> <div class="slide-caption"><h3><a class="text-nowrap a-h" href="https://manganato.com/manga-nu990929" title="I'm Not The Hero!">I'm Not The Hero!</a></h3><a rel="nofollow" class="text-nowrap a-h" href="https://chapmanganato.com/manga-nu990929/chapter-23" title="I'm Not The Hero! Chapter 23: Chapter 23-1">Chapter 23: Chapter 23-1</a></div> </div><div class="item"> <img class="img-loading" src="https://avt.mkklcdnv6temp.com/11/q/28-1675053383.jpg" onerror="javascript:this.src='https://manganato.com/themes/hm/images/404_not_found.png';" alt="He's an Alchemist. His Own Weight Has Been Thrown Into the Trash." /> <div class="slide-caption"><h3><a class="text-nowrap a-h" href="https://manganato.com/manga-qa993783" title="He's an Alchemist. His Own Weight Has Been Thrown Into the Trash.">He's An Alchemist. His Own Weight Has Been Thrown Into The Trash.</a></h3><a rel="nofollow" class="text-nowrap a-h" href="https://chapmanganato.com/manga-qa993783/chapter-15.2" title="He's an Alchemist. His Own Weight Has Been Thrown Into the Trash. Chapter 15.2">Chapter 15.2</a></div> </div><div class="item"> <img class="img-loading" src="https://avt.mkklcdnv6temp.com/32/i/22-1603764529.jpg" onerror="javascript:this.src='https://manganato.com/themes/hm/images/404_not_found.png';" alt="I Was Dismissed from the Hero’s Party Because They Don’t Need My Training Skills, so I Strengthened My [Fief] Which I Got as a Replacement for My Retirement Money." /> <div class="slide-caption"><h3><a class="text-nowrap a-h" href="https://manganato.com/manga-jh987064" title="I Was Dismissed from the Hero’s Party Because They Don’t Need My Training Skills, so I Strengthened My [Fief] Which I Got as a Replacement for My Retirement Money.">I Was Dismissed From The Hero’S Party Because They Don’T Need My Training Skills, So I Strengthened My [Fief] Which I Got As A Replacement For My Retirement Money.</a></h3><a rel="nofollow" class="text-nowrap a-h" href="https://chapmanganato.com/manga-jh987064/chapter-25" title="I Was Dismissed from the Hero’s Party Because They Don’t Need My Training Skills, so I Strengthened My [Fief] Which I Got as a Replacement for My Retirement Money. Chapter 25">Chapter 25</a></div> </div><div class="item"> <img class="img-loading" src="https://avt.mkklcdnv6temp.com/48/y/24-1634356554.jpg" onerror="javascript:this.src='https://manganato.com/themes/hm/images/404_not_found.png';" alt="After Reincarnating, I Became the Son of Inkeepers" /> <div class="slide-caption"><h3><a class="text-nowrap a-h" href="https://manganato.com/manga-mg989841" title="After Reincarnating, I Became the Son of Inkeepers">After Reincarnating, I Became The Son Of Inkeepers</a></h3><a rel="nofollow" class="text-nowrap a-h" href="https://chapmanganato.com/manga-mg989841/chapter-21" title="After Reincarnating, I Became the Son of Inkeepers Chapter 21">Chapter 21</a></div> </div></div> </div>
+<div class="container container-main">
+<div class="container-main-left">
+<div class="panel-breadcrumb">
+<a class="a-h" href="https://manganato.com/" title="Read Manga Online">Read Manga Online</a>
+<span>»</span>
+Bookmark
+</div>
+<div style="float: left; background-color: #2a524a; color: #d0d0d0; margin: 10px 0px; padding: 0px 20px; width: calc(100%  - 40px); ">
+If your bookmarks are not working:<br>
+- Try logging in again.<br>
+- Read chapters in 1 minute.</div>
+<div class="bookmark-content"></div> </div>
+<div class="container-main-right">
+<div class="panel-topview"> <h2 class="panel-topview-title">MOST POPULAR MANGA</h2> <div class="panel-topview-item"> <h3><a class="text-nowrap" href="https://manganato.com/manga-mg989841" title="After Reincarnating, I Became the Son of Inkeepers">After Reincarnating, I Became The Son Of Inkeepers - Chapter 21</a></h3> </div><div class="panel-topview-item"> <h3><a class="text-nowrap" href="https://manganato.com/manga-qb993758" title="Savage Hero">Savage Hero - Chapter 9</a></h3> </div><div class="panel-topview-item"> <h3><a class="text-nowrap" href="https://manganato.com/manga-rh953142" title="Tsuki ga Michibiku Isekai Douchuu">Tsuki Ga Michibiku Isekai Douchuu - Chapter 81: Silver Wolf Armor</a></h3> </div><div class="panel-topview-item"> <h3><a class="text-nowrap" href="https://manganato.com/manga-ho985249" title="The Story of a Waitress and Her Customer">The Story Of A Waitress And Her Customer - Chapter 28</a></h3> </div><div class="panel-topview-item"> <h3><a class="text-nowrap" href="https://manganato.com/manga-gm984221" title="Isekai de Cheat Skill wo te ni Shita ore wa, Genjitsu Sekai wo mo Musou Suru ~Level Up wa Jinsei wo Kaeta~">Isekai De Cheat Skill Wo Te Ni Shita Ore Wa, Genjitsu Sekai Wo Mo Musou Suru ~Level Up Wa Jinsei Wo Kaeta~ - Vol.4 Chapter 20: Outdoor Classes</a></h3> </div><div class="panel-topview-item"> <h3><a class="text-nowrap" href="https://manganato.com/manga-mo989997" title="The People On Earth Are Too Ferocious">The People On Earth Are Too Ferocious - Chapter 119</a></h3> </div><div class="panel-topview-item"> <h3><a class="text-nowrap" href="https://manganato.com/manga-iv985956" title="Isekai Apocalypse MYNOGHRA ~The Conquest of the World Starts With the Civilization of Ruin~">Isekai Apocalypse Mynoghra ~The Conquest Of The World Starts With The Civilization Of Ruin~ - Chapter 20: The End Of Freedom</a></h3> </div><div class="panel-topview-item"> <h3><a class="text-nowrap" href="https://manganato.com/manga-qa993783" title="He's an Alchemist. His Own Weight Has Been Thrown Into the Trash.">He's An Alchemist. His Own Weight Has Been Thrown Into The Trash. - Chapter 15.2</a></h3> </div><div class="panel-topview-item"> <h3><a class="text-nowrap" href="https://manganato.com/manga-ni991065" title="Drawing: The Greatest Mangaka Becomes A Skilled “Martial Artist” In Another World">Drawing: The Greatest Mangaka Becomes A Skilled “Martial Artist” In Another World - Chapter 46</a></h3> </div><div class="panel-topview-item"> <h3><a class="text-nowrap" href="https://manganato.com/manga-pd952912" title="Toaru Ossan no VRMMO Katsudouki">Toaru Ossan No Vrmmo Katsudouki - Vol.10 Chapter 86.2</a></h3> </div></div> <div class="panel-category">
+<h2 class="pn-category-story-title">MANGA BY GENRES</h2>
+<p class="pn-category-row pn-category-row-border">
+<a rel="nofollow" class="ctg-select a-h text-nowrap" href="https://manganato.com/genre-all">Latest</a>
+<a rel="nofollow" class="a-h text-nowrap" href="https://manganato.com/genre-all?type=newest">Newest</a>
+<a rel="nofollow" class="a-h text-nowrap" href="https://manganato.com/genre-all?type=topview">Top view</a>
+</p>
+<p class="pn-category-row pn-category-row-border">
+<a rel="nofollow" class="ctg-select a-h text-nowrap" href="https://manganato.com/genre-all">ALL</a>
+<a class="a-h text-nowrap" href="https://manganato.com/genre-all?state=completed">Completed</a>
+<a class="a-h text-nowrap" href="https://manganato.com/genre-all?state=ongoing">Ongoing</a>
+</p>
+<p class="pn-category-row"><a class=" a-h text-nowrap" href="https://manganato.com/genre-all">ALL</a><a class="a-h text-nowrap" href="https://manganato.com/genre-2" title="Action Manga" />Action</a><a class="a-h text-nowrap" href="https://manganato.com/genre-4" title="Adventure Manga" />Adventure</a></p><p class="pn-category-row"><a class="a-h text-nowrap" href="https://manganato.com/genre-6" title="Comedy Manga" />Comedy</a><a class="a-h text-nowrap" href="https://manganato.com/genre-7" title="Cooking Manga" />Cooking</a><a class="a-h text-nowrap" href="https://manganato.com/genre-9" title="Doujinshi Manga" />Doujinshi</a></p><p class="pn-category-row"><a class="a-h text-nowrap" href="https://manganato.com/genre-10" title="Drama Manga" />Drama</a><a class="a-h text-nowrap" href="https://manganato.com/genre-48" title="Erotica Manga" />Erotica</a><a class="a-h text-nowrap" href="https://manganato.com/genre-12" title="Fantasy Manga" />Fantasy</a></p><p class="pn-category-row"><a class="a-h text-nowrap" href="https://manganato.com/genre-13" title="Gender bender Manga" />Gender bender</a><a class="a-h text-nowrap" href="https://manganato.com/genre-14" title="Harem Manga" />Harem</a><a class="a-h text-nowrap" href="https://manganato.com/genre-15" title="Historical Manga" />Historical</a></p><p class="pn-category-row"><a class="a-h text-nowrap" href="https://manganato.com/genre-16" title="Horror Manga" />Horror</a><a class="a-h text-nowrap" href="https://manganato.com/genre-45" title="Isekai Manga" />Isekai</a><a class="a-h text-nowrap" href="https://manganato.com/genre-17" title="Josei Manga" />Josei</a></p><p class="pn-category-row"><a class="a-h text-nowrap" href="https://manganato.com/genre-44" title="Manhua Manga" />Manhua</a><a class="a-h text-nowrap" href="https://manganato.com/genre-43" title="Manhwa Manga" />Manhwa</a><a class="a-h text-nowrap" href="https://manganato.com/genre-19" title="Martial arts Manga" />Martial arts</a></p><p class="pn-category-row"><a class="a-h text-nowrap" href="https://manganato.com/genre-20" title="Mature Manga" />Mature</a><a class="a-h text-nowrap" href="https://manganato.com/genre-21" title="Mecha Manga" />Mecha</a><a class="a-h text-nowrap" href="https://manganato.com/genre-22" title="Medical Manga" />Medical</a></p><p class="pn-category-row"><a class="a-h text-nowrap" href="https://manganato.com/genre-24" title="Mystery Manga" />Mystery</a><a class="a-h text-nowrap" href="https://manganato.com/genre-25" title="One shot Manga" />One shot</a><a class="a-h text-nowrap" href="https://manganato.com/genre-47" title="Pornographic Manga" />Pornographic</a></p><p class="pn-category-row"><a class="a-h text-nowrap" href="https://manganato.com/genre-26" title="Psychological Manga" />Psychological</a><a class="a-h text-nowrap" href="https://manganato.com/genre-27" title="Romance Manga" />Romance</a><a class="a-h text-nowrap" href="https://manganato.com/genre-28" title="School life Manga" />School life</a></p><p class="pn-category-row"><a class="a-h text-nowrap" href="https://manganato.com/genre-29" title="Sci fi Manga" />Sci fi</a><a class="a-h text-nowrap" href="https://manganato.com/genre-30" title="Seinen Manga" />Seinen</a><a class="a-h text-nowrap" href="https://manganato.com/genre-31" title="Shoujo Manga" />Shoujo</a></p><p class="pn-category-row"><a class="a-h text-nowrap" href="https://manganato.com/genre-32" title="Shoujo ai Manga" />Shoujo ai</a><a class="a-h text-nowrap" href="https://manganato.com/genre-33" title="Shounen Manga" />Shounen</a><a class="a-h text-nowrap" href="https://manganato.com/genre-34" title="Shounen ai Manga" />Shounen ai</a></p><p class="pn-category-row"><a class="a-h text-nowrap" href="https://manganato.com/genre-35" title="Slice of life Manga" />Slice of life</a><a class="a-h text-nowrap" href="https://manganato.com/genre-36" title="Smut Manga" />Smut</a><a class="a-h text-nowrap" href="https://manganato.com/genre-37" title="Sports Manga" />Sports</a></p><p class="pn-category-row"><a class="a-h text-nowrap" href="https://manganato.com/genre-38" title="Supernatural Manga" />Supernatural</a><a class="a-h text-nowrap" href="https://manganato.com/genre-39" title="Tragedy Manga" />Tragedy</a><a class="a-h text-nowrap" href="https://manganato.com/genre-40" title="Webtoons Manga" />Webtoons</a></p><p class="pn-category-row"><a class="a-h text-nowrap" href="https://manganato.com/genre-41" title="Yaoi Manga" />Yaoi</a><a class="a-h text-nowrap" href="https://manganato.com/genre-42" title="Yuri Manga" />Yuri</a></p></div> <div style="clear: both"></div>
+</div>
+</div>
+<div class="container container-footer">
+<div class="container-footer-content">
+<div class="pn-hot-link">
+<a class="a-h text-nowrap" rel="nofollow" href="https://manganato.com/z-privacy-policy.html">Privacy Policy</a>
+<a class="a-h text-nowrap" rel="nofollow" href="https://manganato.com/z-terms-conditions.html">Terms Conditions</a>
+
+</div>
+<div class="pn-contacts">
+<h4>About Us</h4>
+<p>Email : <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="264b4748414748434a490848435266414b474f4a0845494b">[email&#160;protected]</a></p>
+<p>Current Time is Feb 02,2023 - 06:42:12 AM</p>
+</div>
+</div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-198007309-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-198007309-1');
+</script>
+<script>
+        glb_user_data = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.lclNXdfJGbnJyej9GbiojIlBXe09XdfJGbnJCLiwWYyEjI6ICZp9lclNGbnJCLicDM0cTOyV2c19lclNXdfJWYiRXZld3ciojIiwiIht2chxWY5JXYfJXZzV3Xix2ZBpIjoiIn0.QPwz4jKlZHxIZAZsCWqXHtnpDgYY8grLsyHsqMwNvR4';
+        glb_bookmark_link = 'https://manganato.com/bookmark';
+        glb_bm_page = '1';
+
+        $(document).ready(function() {
+            fun_get_list_full_html();
+        });
+    </script>
+<script src="https://manganato.com/themes/hm/js/user.js?09092022"></script>
+<div class="notification-popup">
+<span class="noti-helper"></span>
+<div class="noti-div">
+<p class="notification-content">content notification</p>
+<div class="notification-close a-h">CANCEL</div>
+</div>
+</div>
+</div>
+<div id="fb-root"></div>
+<script>
+    $appidfb = '190712595201460';
+    
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=" + $appidfb;
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+<script type="text/javascript" src="https://manganato.com/themes/hm/js/changes-mode.js?v=09142022"></script>
+</body>
+</html>

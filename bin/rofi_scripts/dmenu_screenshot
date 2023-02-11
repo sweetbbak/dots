@@ -1,0 +1,93 @@
+#!/bin/bash
+# File              : dmenu_screenshot
+# License           : MIT License
+# Author            : M. Nabil Adani <nblid48@gmail.com>
+# Date              : Kamis, 30/07/2020 02:23 WIB
+# Last Modified Date: Kamis, 30/07/2020 05:25 WIB
+# Last Modified By  : M. Nabil Adani <nblid48@gmail.com>
+# Depends on        : imagemagic, flameshot
+
+TIMESTAMP="$(date +%Y%m%d_%H%M%S)"
+SCREENSHOTDIR="$HOME/Pictures/screenshot"
+ICON="$HOME/Dotfiles/icons/gruvbox/camera.png"
+FILENAME="$SCREENSHOTDIR/Screenshot_$TIMESTAMP.png"
+DMENU="rofi -dmenu -p Screenshot"
+LONGTEXT=" $(date '+%A, %d/%m/%Y')  $(date '+%H:%M:%S')"
+SHORTTEXT=" $(date '+%d/%m/%Y')"
+FONT="Iosevka-Nerd-Font-Complete"
+
+takeOnWindow() {
+    rofi -e "Select window to capture"
+    import $FILENAME
+    saveAndCopy
+}
+
+takeOnFullScreen() {
+    import -window root $FILENAME
+    saveAndCopy
+}
+
+takeOnRectange() {
+    flameshot gui --raw >$FILENAME
+
+    mime=$(file -i $FILENAME | cut -d = -f 2)
+
+    if [[ $mime = "binary" ]]; then
+        saveAndCopy
+    else
+        rm $FILENAME
+    fi
+}
+takeOnRectangeWithDelay() {
+    sleep 2
+    takeOnRectange
+}
+
+addRoundedCorner() {
+    convert $FILENAME \( +clone -alpha extract -draw 'fill black polygon 0,0 0,10 10,0 fill white circle 10,10 10,0' \( +clone -flip \) -compose Multiply -composite \( +clone -flop \) -compose Multiply -composite \) -alpha off -compose CopyOpacity -composite $FILENAME
+    convert $FILENAME \( +clone -background black -shadow 0x10+0+0 \) +swap -background white -layers merge +repage $FILENAME
+}
+
+addBorder() {
+    convert $FILENAME -bordercolor "#d79921" -border 2 $FILENAME
+}
+
+addShadow() {
+    convert $FILENAME \( +clone -background black -shadow 20x5+0+0 \) +swap -background "#282828" -layers merge +repage $FILENAME
+}
+
+addAnnotate() {
+    width=$(identify -format "%w" $FILENAME)
+    text="$LONGTEXT"
+    if (($width <= 200)); then
+        text="$SHORTTEXT"
+    fi
+    convert $FILENAME -font $FONT -gravity north -background "#d79921" -fill "#282828" -splice 0x18 -annotate +0+1 "$text" $FILENAME
+}
+
+addProfile() {
+    convert $FILENAME -profile /usr/share/color/icc/colord/sRGB.icc $FILENAME
+}
+
+saveAndCopy() {
+    addAnnotate
+    addBorder
+    addShadow
+    addProfile
+    xclip -selection clipboard -i $FILENAME -t image/png
+    notify-send -i $ICON "Screenshot" "Copied to clipboard"
+}
+
+OPTIONS='''
+[
+    ["Window", "takeOnWindow"],
+    ["Fullscreen", "takeOnFullScreen"],
+    ["Rectange", "takeOnRectange"],
+    ["Rectange With Delay", "takeOnRectangeWithDelay"],
+    ["Flameshot", "flameshot gui"],
+    ["Flameshot Fullscreen", "flameshot screen"]
+]
+'''
+
+menu=$(echo $OPTIONS | jq -r ".[][0]" | $DMENU -theme-str 'window {width: 30%;} listview {lines: 6;}')
+$(echo $OPTIONS | jq -r ".[] | select(.[0] == \"$menu\") | .[1]")

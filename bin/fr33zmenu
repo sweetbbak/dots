@@ -1,0 +1,5 @@
+#!/bin/sh
+
+/home/sweet/.cargo/bin/fr33zmenu ~/.config/fr33zmenu/menu.toml
+    # --exec-with "setsid"
+    # --transient

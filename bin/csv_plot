@@ -1,0 +1,73 @@
+#!/bin/sh
+set -eu
+# Dependencies: util.sh, gnuplot
+# Portability:  POSIX
+
+. ${SH_LIB_DIR:-~/bin/}util.sh
+selfdir=$(dirname -- "$(readlinkf "$0")")
+PATH=$PATH:$selfdir
+
+requirebin gnuplot
+
+
+usage()
+{
+	name=$(basename "$(readlinkf "$0")")
+	cat <<EOF | text_format
+**NAME**
+    $name - Plot a CSV using the first column as x axis
+
+**SYNOPSIS**
+    $name [**-hnt**] [**-d** __DELIM__] __FILE__ [__OUT__]
+
+**OPTIONS**
+    -d __DELIM__
+        Set the field separator to __DELIM__ instead of ",".
+
+    -h
+        Print this notice and exit.
+
+    -n
+        Prepend a column to the CSV containing the line number.
+
+    -t
+        Use the first row as curve titles.
+
+EOF
+	exit $1
+}
+
+delim=,
+nl=false
+autotitle=false
+while getopts "d:hnt" OPT
+do
+	case "$OPT" in
+		d)  delim=$OPTARG;;
+		h)  usage 0;;
+		n)  nl=true;;
+		t)  autotitle=true;;
+		\?) usage 1;;
+	esac
+done
+shift $((OPTIND - 1))
+[ $# -lt 1 ] && [ -t 0 ] && usage 1
+
+csv=$(mktemp)
+atexit 'rm -- "$csv"'
+
+{ [ -t 0 ] && cat -- "$1" || cat; } | \
+	{ $nl && awk -vd="$delim" -vat="$($autotitle; echo $((!$?)))" '
+	  at && NR == 1 {print "\\#" d $0; next}
+	  {print (NR - at) d $0}' || cat; } >"$csv"
+
+nbfield=$(awk -F"$delim" '{print NF; exit}' "$csv")
+
+gnuplot -e "
+$($autotitle && echo set key autotitle columnheader);
+set terminal $([ $# -eq 2 ] && echo png || echo x11);
+$([ $# -eq 2 ] && echo set output \"$2\"\;)
+$([ $# -eq 2 ] && echo set term png size 1440, 1080\;)
+set datafile separator \"$delim\";
+plot for [i=2:$nbfield] \"$csv\" using 1:i with lines;
+pause mouse close"

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [[ "$1" == "--menu" ]]; then
+	~/bin/launcher.sh
+
+elif [[ "$1" == "--search" ]]; then
+	firefox --new-tab "https://google.com"
+
+fi

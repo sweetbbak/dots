@@ -1,0 +1,26 @@
+#!/bin/sh
+#
+# http://github.com/mitchweaver/bin
+#
+# cx - change executability
+#
+# toggle a file between executable / non-executable
+#
+
+if [ $1 = "--help" ]; then
+	echo "cx: toggle execute flag for file"
+	echo "usage: cx [FILE]..."
+	exit
+fi
+
+for file ; do
+    if [ -f "$file" ] ; then
+        if [ -x "$file" ] ; then
+            chmod -x "$file"
+        else
+            chmod +x "$file"
+        fi
+    else
+        >&2 printf 'Error: %s does not exist.\n' "$file"
+    fi
+done

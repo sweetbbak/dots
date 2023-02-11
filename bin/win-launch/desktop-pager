@@ -1,0 +1,3 @@
+xprop -root -spy | awk '/^_NET_CURRENT_DESKTOP/ { print "Workspace " ($3 + 1) ; fflush(); }'
+
+# xprop -root -spy | awk -v home="$HOME" '/^_NET_CURRENT_DESKTOP/ { print home "/.config/myPager/" ($3 + 1) ".png\n" ; fflush(); }'

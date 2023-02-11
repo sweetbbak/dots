@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# Colors
+Black='\033[1;30m'       # Black
+Red='\033[1;31m'         # Red
+Yellow='\033[1;32m'       # Yellow
+Yellow='\033[1;33m'      # Yellow
+Blue='\033[1;34m'        # Blue
+Purple='\033[1;35m'      # Purple
+Cyan='\033[1;36m'        # Cyan
+White='\033[1;37m'       # White
+
+echo -e "$Yellow Date :$Cyan" $(date +"%a %d %b %H:%M"| sed 's/  / /g')
+echo -e "$Yellow User :$Cyan" $(id -un)
+echo -e "$Yellow OS : $Cyan" $(distro | grep "Name" | sed "s/Name\: //")
+echo -e "$Yellow kernel :$Cyan" $(uname -r)
+echo -e "$Yellow Disk :$Cyan" $(df -h "/" | awk ' /[0-9]/ {print $3 "/" $2}')
+echo -e "$Yellow CPU : $Cyan" $(grep 'model name' /proc/cpuinfo | uniq | sed "s/model name[[:blank:]]:[[:blank:]]//")
+echo -e "$Yellow CPU Temp :$Cyan" $(sensors | awk '/Core 0/ {print "" $3}' | sed "s/\.0//")
+echo -e "$Yellow Memory :$Cyan" $(free --mebi | sed -n '2{p;q}' | awk '{printf ("%2.2fGiB/%2.2fGiB\n", ( $3 / 1024), ($2 / 1024))}')
+echo -e "$Yellow Temp :$Cyan"  $(curl -s wttr.in/Algeria\?format=1)
+
+

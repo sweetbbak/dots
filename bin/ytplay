@@ -1,0 +1,79 @@
+#!/bin/bash
+
+usage() {
+  cat << EOF
+Usage: $0 [OPTION] query
+Requires mpv, yt-dlp, jq, curl, awk and fzf to be installed.
+OPTIONS:
+	-m, --music                Music only mode. No video playback.
+	-t, --top                  Play the top search result. No options presented.
+	-l, --loop                 Play the media on an infinite loop
+	-r, --results COUNT        Specify the number of options to be presented
+	-c, --captions             Turns on YouTube captions in English
+	--clip                     Take the query input from clipboard
+	-h, --help                 Show this help
+EOF
+}
+
+query="" # to build the query
+mpv_option="--script-opts=ytdl_hook-ytdl_path=yt-dlp --hwdec"
+results="10" # default number of results to search
+
+if [[ "$#" -eq 0 ]]; then
+  usage
+  exit 1
+fi
+
+# iterate over all arguments
+while [[ "$#" -gt 0 ]]; do
+	case $1 in
+		-m|--music)
+			mpv_option="$mpv_option --no-video"
+			;;
+		-t|--top)
+			results="1"
+			;;
+		-l|--loop)
+			mpv_option="$mpv_option --loop=inf"
+			;;
+		-r|--results)
+			results=$2
+			shift
+			;;
+		-c|--captions)
+			mpv_options="$mpv_option --slang=en --fs --ytdl-raw-options=ignore-config=,sub-lang=en,write-auto-sub="
+			;;
+		--clip)
+			query=$(xclip -o -sel c)
+			;;
+		-h|--help)
+			usage
+			exit 0
+			;;
+		*)
+			query="$query $1"
+			;;
+	esac
+	shift
+done
+
+query=$(printf '%s' "$query" | xargs | tr ' ' '+')
+
+# YT_API_KEY location
+YT_API_KEY="$(cat "${HOME}"/.api_keys/YT_API_KEY)"
+urlstring="https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&type=video&maxResults=$results&key=${YT_API_KEY}"
+
+video_id=$(curl -s "${urlstring}" | jq -r '.items[] | "\(.snippet.channelTitle) => \(.snippet.title) youtu.be/\(.id.videoId)"' \
+	| fzf -1 -0 --with-nth='1..-2' +m \
+	| awk '{print $NF}')
+
+if [[ $video_id == "" ]]; then
+	echo "No results found, try changing your query."
+	exit 1
+fi
+
+url="https://$video_id"
+
+echo "Playing: ${url}"
+notify-send "ytplay" "${url}"
+mpv $mpv_option --ytdl-format="bestvideo[height<=1440]+bestaudio/best" $url

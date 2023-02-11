@@ -1,0 +1,40 @@
+#!/bin/bash
+
+base_url="http://fromtexttospeech.com/"
+
+function usage()
+{
+    cat<<EOF
+Return text from a text file read out as mp3, using $base_url.
+Usage:
+    $0 <in-file> <out-file>
+EOF
+}
+
+if [ -z "$1" ] || [ -z "$2" ]
+then
+    usage
+    exit 1
+fi
+
+tempfile=$(mktemp)
+in_file=$1
+out_file=$2
+
+
+# speed: 0 normal, 1 fast, 2 very fast -- does not seem to work
+
+# request to process text
+curl --output $tempfile \
+    --data "input_text=$(cat $in_file)" \
+    --data "language=US+English" \
+    --data "voice=IVONA+Amy22+(UK+English)" \
+    --data "speed=2" \
+    --data "action=process_text" \
+    $base_url
+
+# look for file name of generated file
+mp3_location=$(grep 'Download audio file' $tempfile | sed "s,^.*href=',," | sed "s,'>Download.*$,,")
+
+# download that file
+curl --output $out_file $base_url/$mp3_location

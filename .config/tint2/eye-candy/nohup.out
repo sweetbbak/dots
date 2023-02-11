@@ -1,0 +1,27 @@
+tint2: Using glib slice allocator (default). Run tint2 with environment variable G_SLICE=always-malloc in case of strange behavior or crashes
+tint2: xRandr: Found crtc's: 4
+[1;34mtint2: xRandr: Linking output HDMI-0 with crtc 0, resolution 1920x1080, DPI 81[0m
+[1;34mtint2: xRandr: Linking output DP-1 with crtc 1, resolution 1920x1080, DPI 81[0m
+[1;34mtint2: xRandr: Linking output DP-3 with crtc 2, resolution 1920x1080, DPI 81[0m
+tint2: xRandr: crtc 3 seems disabled
+tint2: No XSETTINGS manager, tint2 uses config option 'launcher_icon_theme'.
+tint2: Loading config file: eyecandy-custom.tint2rc
+tint2: real transparency off.... depth: 24
+tint2: panel items: PPPPPPPPEPTSC
+tint2: Systray composited rendering off
+tint2: systray_asb forced to 100 0 0
+tint2: nb monitors 3, nb monitors used 3, nb desktops 3
+[1;34mtint2: panel 1 uses scale 1 [0m
+Creating executor '~/.scripts/music-controller.sh icon' with monitor -1 for panel on monitor 0
+[1;34mtint2: panel 2 uses scale 1 [0m
+Creating executor '~/.scripts/music-controller.sh icon' with monitor -1 for panel on monitor 1
+[1;34mtint2: panel 3 uses scale 1 [0m
+Creating executor '~/.scripts/music-controller.sh icon' with monitor -1 for panel on monitor 2
+tint2: Kernel uevent interface initialized...
+[1;31mtint2: another systray is running, cannot use systray[0mtint2:  pid=35536[0m
+sh: line 1: gsimplecal: command not found
+sh: line 1: gsimplecal: command not found
+sh: line 1: gsimplecal: command not found
+sh: line 1: /home/sweet/.config/rofi/scripts/rofi-main.sh: No such file or directory
+sh: line 1: /home/sweet/.config/rofi/scripts/rofi-main.sh: No such file or directory
+sh: line 1: /home/sweet/.config/rofi/scripts/rofi-exts.sh: No such file or directory

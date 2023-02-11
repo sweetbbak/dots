@@ -1,0 +1,6 @@
+#!/bin/sh
+
+printf "Enter url : "
+read url
+
+yt-dlp -f 'bv*[height=1080][ext=mp4]+ba*[ext=m4a]/best[ext=mp4]/best' $url -o '%(title)s.%(ext)s'

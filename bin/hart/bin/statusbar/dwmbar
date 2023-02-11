@@ -1,0 +1,159 @@
+#!/bin/sh
+# colors
+#source ~/.local/bin/statusbar/themes/sweetmars
+#source ~/.local/bin/statusbar/themes/dracula
+#source ~/.local/bin/statusbar/themes/sweetdracula
+#source ~/.local/bin/statusbar/themes/tomorrow-night
+source ~/.local/bin/statusbar/themes/tomorrow-dark
+#source ~/.local/bin/statusbar/themes/tomorrow
+#source ~/.local/bin/statusbar/themes/vacuous
+#source ~/.local/bin/statusbar/themes/doom
+
+interval=0
+
+# Battery :
+bat(){
+	for battery in /sys/class/power_supply/BAT?*; do
+		# If non-first battery, print a space separator.
+		[ -n "${capacity+x}" ] && printf " "
+		# Sets up the status and capacity
+		case "$(cat "$battery/status" 2>&1)" in
+			"Full") status=" " ;;
+			"Discharging") status=" " ;;
+			"Charging") status=" " ;;
+			"Not charging") status=" " ;;
+			"Unknown") status=" " ;;
+			*) exit 1 ;;
+		esac
+		capacity="$(cat "$battery/capacity" 2>&1)"
+		# Will make a warn variable if discharging and low
+		[ "$status" = " " ] && [ "$capacity" -le 25 ] && warn=" "
+		# Prints the info
+		printf "%s%s%d%%" "^c$cyan^$status" "$warn" "$capacity"; unset warn
+	done && printf "^d^\\n"
+}
+
+# Date && clock :
+dat(){
+	date="$(date +"%a %d %b %H:%M"| sed 's/  / /g')"
+	#echo -e " $date"
+	echo -e "^c$blue^ $date^d^"
+	
+}
+
+# Cpu Temp :
+tmp(){
+	ctmp=$(sensors | awk '/Core 0/ {print$3}' | sed 's/+//')
+	echo -e "^c$red^ $ctmp^d^"
+}
+
+# Cpu Usage :
+cpu(){
+	read cpu a b c previdle rest < /proc/stat
+	prevtotal=$((a+b+c+previdle))
+	sleep 0.5
+	read cpu a b c idle rest < /proc/stat
+	total=$((a+b+c+idle))
+	cpu=$((100*( (total-prevtotal) - (idle-previdle) ) / (total-prevtotal) ))
+	#echo -e " $cpu%"
+	echo -e "^c$cyan^ $cpu%^d^" 
+}
+
+# Keybord Layout :
+key(){
+	kb="$(xkb-switch)" || exit 1
+	#echo " $kb"
+	echo -e "^c$green^ $kb^d^"
+	
+}
+
+# Screen Light :
+lit(){
+	#lit="$(xbacklight | sed 's/\..*//g')"
+	#echo " $lit%"
+	lit="$(brightnessctl | grep -oP '[^()]+%')"
+	#echo " $lit"
+	echo -e "^c$yellow^ $lit^d^"		
+}
+
+# Memory :
+mem(){
+	mem="$(free -h | awk '/^Mem/ { print $3 }' | sed s/i//g)"
+	echo -e "^c$green^ $mem^d^"
+}
+
+# Volume :
+vol(){
+	[ $(pamixer --get-mute) = true ] && echo  && exit
+
+	vol="$(pamixer --get-volume)"
+
+	if [ "$vol" -gt "70" ]; then
+		icon=""
+	elif [ "$vol" -gt "30" ]; then
+		icon=""
+	elif [ "$vol" -gt "0" ]; then
+		icon="" 
+	else
+		echo "" && exit
+	fi
+	echo "^c$magenta^$icon $vol%^d^"
+}
+
+
+net() {
+	connected=$(cat /sys/class/net/e*/operstate 2>/dev/null)
+	if [[ "$connected" =~ "up" ]]; then
+		printf "^c$green^ ^d^%s"
+	elif [[ "$connected" =~ "down" ]]; then
+		check_wifi=$(cat /sys/class/net/wl*/operstate 2>/dev/null)
+		if [[ "$check_wifi" =~ "up" ]]; then
+			printf "^c$green^ ^d^%s"
+		elif [[ "$check_wifi" =~ "down" ]]; then
+			printf "^c$green^睊 ^d^%s"
+		fi
+	fi
+}
+
+# Network traffic
+nettrf(){
+	
+	update() {
+		sum=0
+		for arg; do
+			read -r i < "$arg"
+			sum=$(( sum + i ))
+		done
+		cache=${XDG_CACHE_HOME:-$HOME/.cache}/${1##*/}
+		[ -f "$cache" ] && read -r old < "$cache" || old=0
+		printf %d\\n "$sum" > "$cache"
+		printf %d\\n $(( sum - old ))
+	}
+
+	rx=$(update /sys/class/net/[ew]*/statistics/rx_bytes)
+	tx=$(update /sys/class/net/[ew]*/statistics/tx_bytes)
+
+	printf "^c$magenta^ %4sB  %4sB^d^\\n" $(numfmt --to=iec $rx) $(numfmt --to=iec $tx)	
+}
+
+# Updates
+pkg_updates() {
+	#updates=$(xbps-install -un | wc -l) # void
+	updates=$(pacman -Qu | grep -Fcv "[ignored]" | sed "s/^//;s/^0$//g")   # arch , needs pacman contrib
+	# updates=$(aptitude search '~U' | wc -l)  # apt (ubuntu,debian etc)
+
+	if [ "$updates" == "0" ]; then
+		printf "^c$green^ Fully Updated^d^"
+	else
+		printf "^c$green^ $updates"" updates^d^"
+	fi
+}
+while true; do
+ [ $interval = 0 ] || [ $(($interval % 3600)) = 0 ] && updates=$(pkg_updates)
+  interval=$((interval + 1))
+  space=" "
+  range="^c$red^|"
+  
+  xsetroot -name "$range$space$updates$space$(nettrf)$space$(tmp)$space$(cpu)$space$(mem)$space$(vol)$space$(lit)$space$(bat)$space$(key)$space$(dat)$space$(net)$range"
+  sleep 0.2
+done &

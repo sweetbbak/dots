@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+if [ "$(uname -s)" == "Linux" ]; then
+    NF_LS_DIR="$HOME/.cache/fzf/nf-ls"
+elif [ "$(uname -s)" == "Darwin" ]; then
+    NF_LS_DIR="/Library/Caches/fzf/nf-ls"
+fi
+
+get_nf_cheat_sheets() {
+    echo -ne "$(curl -s https://www.nerdfonts.com/cheat-sheet \
+    | grep 'class="class-name">' \
+    | sed 's/ *<div class="class-name">//; s/<\/div><div class="codepoint">/ \\u/; s/<\/div>//; s/\(.* \)\(.*\)/\2 \1/; s/nf-/\ /')"
+}
+
+update_nf-ls_cache() {
+    get_nf_cheat_sheets > "$NF_LS_DIR"/nf-ls-cheat
+}
+export -f update_nf-ls_cache
+
+if [ ! -d "$NF_LS_DIR" ]; then
+    mkdir -p "$NF_LS_DIR"
+    update_nf-ls_cache
+fi
+
+awk '{print $1 "    -- " $2}' "$NF_LS_DIR"/nf-ls-cheat | \
+    fzf -m \
+    --header "Nerd Font Cheat.sh" \
+    --bind "enter:execute(echo {+1} | cb copy; notify-send 'Nerd Font Cheat.sh' '{+1} {+3} - has been copied')" \
+    --bind "alt-u:execute(bash -c update_nf-ls_cache)" \

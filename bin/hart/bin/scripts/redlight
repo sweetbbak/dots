@@ -1,0 +1,2 @@
+#!/bin/sh
+redshift -l 0:0 -t 4500:4500 -r &>/dev/null &

@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# skipper=$(pgrep skippy-xd)
+
+# if pgrep -f "skippy-xd" &>/dev/null; then
+#   echo "Skippy-XD is already running"
+#   exit 1
+# else
+#   skippy-xd
+# fi
+
+for pid in $(pidof -x skip); do
+    if [ $pid != $$ ]; then
+        exit 1
+    fi 
+done
+skippy-xd

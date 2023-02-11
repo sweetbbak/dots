@@ -1,0 +1,87 @@
+#!/usr/bin/env sh
+
+TERMINAL="alacritty"
+ED="nvim"
+
+menu() {
+	printf "OB - $HOME/.config/openbox/rc.xml\n"
+  printf "Hypr - $HOME/.config/hypr"
+	printf "autostart - $HOME/.config/openbox/autostart\n"
+	printf "kitty - $HOME/.config/kitty/kitty.conf\n"
+	printf "rofi - $HOME/.config/rofi/\n"
+	printf "dunst - $HOME/.config/dunst\n"
+	printf "epy - $HOME/.config/epy\n"
+	printf "handlr - $HOME/.config/handlr\n"
+	printf "helix - $HOME/.config/helix\n"
+	printf "mpv - $HOME/.config/mpv\n"
+	printf "mangal - $HOME/.config/mangal\n"
+	printf "nitrogen - $HOME/.config/nitrogen\n"
+	printf "nnn - $HOME/.config/nnn\n"
+	printf "nvim - $HOME/.config/nvim\n"
+	printf "picom - $HOME/.config/picom.conf\n"
+	printf "polybar - $HOME/.config/polybar\n"
+	printf "kpl - $HOME/.config/kpl\n"
+	printf "systemd - $HOME/.config/systemd\n"
+	printf "thunar - $HOME/.config/Thunar\n"
+	printf "tint2 - $HOME/.config/tint2\n"
+	printf "pywal - $HOME/.config/wal\n"
+	printf "zathura - $HOME/.config/zathura\n"
+	printf "rmg - $HOME/.config/rmg\n"
+	printf "api - $HOME/.api_keys\n"
+	printf "bashrc - $HOME/.bashrc\n"
+	printf "cache - $HOME/.cache\n"
+	printf "dmrc - $HOME/.dmrc\n"
+	printf "feh - $HOME/.fehbg\n"
+	printf "local - $HOME/.local\n"
+	printf "zsh - $HOME/.oh-my-zsh\n"
+	printf "w3m - $HOME/.w3m\n"
+	printf "wine - $HOME/.wine\n"
+	printf "winegui - $HOME/.winegui\n"
+	printf "Xresources - $HOME/.Xresources\n"
+	printf "zshrc - $HOME/.zshrc\n"
+	printf "bin - $HOME/bin\n"
+	printf "scripts - $HOME/scripts\n"
+}
+
+choice=$(menu | awk '{print $1}' | rofi -dmenu -l 10 -i -p "What To Edit")
+
+case $choice in
+	OB) $TERMINAL -e $ED $HOME/.config/openbox/rc.xml ;;
+  Hypr) $TERMINAL -e $ED $HOME/.config/hypr/hypr.conf ;;
+	autostart) $TERMINAL -e $ED  $HOME/.config/openbox/autostart ;;
+	kitty) $TERMINAL -e $ED  $HOME/.config/kitty/kitty.conf ;;
+	rofi) $TERMINAL -e $ED  $HOME/.config/rofi/ ;;
+	dunst) $TERMINAL -e $ED  $HOME/.config/dunst ;;
+	epy) $TERMINAL -e $ED  $HOME/.config/epy ;;
+	handlr) $TERMINAL -e $ED  $HOME/.config/handlr ;;
+	helix) $TERMINAL -e $ED  $HOME/.config/helix ;;
+	mpv) $TERMINAL -e $ED  $HOME/.config/mpv ;;
+	mangal) $TERMINAL -e $ED  $HOME/.config/mangal ;;
+	nitrogen) $TERMINAL -e $ED  $HOME/.config/nitrogen ;;
+	nnn) $TERMINAL -e $ED  $HOME/.config/nnn ;;
+	nvim) $TERMINAL -e $ED  $HOME/.config/nvim ;;
+	picom) $TERMINAL -e $ED  $HOME/.config/picom.conf ;;
+	polybar) $TERMINAL -e $ED  $HOME/.config/polybar ;;
+	kpl) $TERMINAL -e $ED  $HOME/.config/kpl ;;
+	systemd) $TERMINAL -e $ED  $HOME/.config/systemd ;;
+	thunar) $TERMINAL -e $ED  $HOME/.config/Thunar ;;
+	tint2) $TERMINAL -e $ED  $HOME/.config/tint2 ;;
+	pywal) $TERMINAL -e $ED  $HOME/.config/wal ;;
+	zathura) $TERMINAL -e $ED  $HOME/.config/zathura ;;
+	rmg) $TERMINAL -e $ED  $HOME/.config/rmg ;;
+	api) $TERMINAL -e $ED  $HOME/.api_keys ;;
+	bashrc) $TERMINAL -e $ED  $HOME/.bashrc ;;
+	cache) $TERMINAL -e $ED  $HOME/.cache ;;
+	dmrc) $TERMINAL -e $ED  $HOME/.dmrc ;;
+	feh) $TERMINAL -e $ED  $HOME/.fehbg ;;
+	local) $TERMINAL -e $ED  $HOME/.local ;;
+	zsh) $TERMINAL -e $ED  $HOME/.oh-my-zsh ;;
+	w3m) $TERMINAL -e $ED  $HOME/.w3m ;;
+	wine) $TERMINAL -e $ED  $HOME/.wine ;;
+	winegui) $TERMINAL -e $ED  $HOME/.winegui ;;
+	Xresources) $TERMINAL -e $ED  $HOME/.Xresources ;;
+	zshrc) $TERMINAL -e $ED  $HOME/.zshrc ;;
+	bin) $TERMINAL -e $ED  $HOME/bin ;;
+	scripts) $TERMINAL -e $ED  $HOME/scripts ;;
+
+esac

@@ -1,0 +1,111 @@
+#!/bin/sh
+set -eu
+# Dependencies: util.sh, tar/zip/p7zip/bzip2/gzip/xz/zstd/unrar (optional)
+# Portability:  POSIX
+
+. ${SH_LIB_DIR:-~/bin/}util.sh
+selfdir=$(dirname -- "$(readlinkf "$0")")
+PATH=$PATH:$selfdir
+
+
+fmt_error()
+{
+	die "$1": unknown archive format\; supported formats: 7z, cb7, cbr, cbt, \
+		cbz, pk3, pk7, rar, tar, tar.bz2, tar.gz, tar.lz, tar.xz, tar.zst, \
+		zip
+}
+
+usage()
+{
+	name=$(basename "$(readlinkf "$0")")
+	cat <<EOF | text_format
+**NAME**
+    $name - Extract members of an archive
+
+**SYNOPSIS**
+    $name [**-h**] [**-d** __OUTDIR__] __ARCHIVE__ \
+[__MEMBER__...]
+
+**DESCRIPTION**
+    Extract all specified members (if not specified, all members) of
+    __ARCHIVE__ to __OUTDIR__ (if not specified, .).
+
+**OPTIONS**
+    **-d** __OUTDIR__
+        Set output directory.
+
+    **-h**
+        Print this notice and exit.
+
+EOF
+	exit $1
+}
+
+outdir=.
+while getopts "d:h" OPT
+do
+	case "$OPT" in
+		d)
+			outdir=$OPTARG
+			mkdir -p -- "$outdir"
+			;;
+		h)  usage 0;;
+		\?) usage 1;;
+	esac
+done
+shift $((OPTIND - 1))
+
+[ $# -lt 1 ] && usage 1
+
+requirefile -f "$1"
+in=$1
+low=$(tolower "$in")
+shift
+
+case "$low" in
+	*.7z|*.cb7|*.pk7)
+		7z x -o"$outdir" -- "$in" "$@"
+		;;
+	*.rar|*.cbr)
+		mkdir -p -- "$outdir"
+		unrar x -- "$in" "$@" "$outdir"
+		;;
+	*.zip|*.cbz|*.pk3)
+		set +e
+		unzip "$in" $([ $# -gt 0 ] && glob_escape "$(map 'quote "$it"' "$@")") -d "$outdir"
+		[ $? -gt 1 ] && die "$in: malformed zip file"
+		set -e
+		# For later pkzip compatibility
+		# 7z x -o"$outdir" -- "$in" "$@"
+		;;
+	*.tar|*.cbt)
+		tar --version 2>/dev/null | grep -Fq 'GNU tar' &&
+			tar='tar --force-local' || tar=tar
+		$tar -x -C "$outdir" -f "$in" -- "$@"
+		;;
+	*.tar.*|*.tgz|*.tbz2|*.txz|*.tlz|*.tzst)
+		case "$low" in
+			*bz2)
+				bunzip2 -ck -- "$in"
+				;;
+			*gz)
+				gunzip -ck -- "$in"
+				;;
+			*xz)
+				unxz -ck -- "$in"
+				;;
+			*lz)
+				lzip -dck -- "$in"
+				;;
+			*zst)
+				unzstd -c -- "$in"
+				;;
+			*)
+				fmt_error "$in"
+				;;
+		esac | tar -x -C "$outdir" -- "$@"
+		;;
+	*)
+		fmt_error "$in"
+		;;
+esac

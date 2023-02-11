@@ -1,0 +1,104 @@
+#!/bin/sh
+set -eu
+# Dependencies: util.sh
+# Optional:     textwidth (https://git.sr.ht/~q3cpma/misc-tools)
+# Portability:  POSIX
+
+. ${SH_LIB_DIR:-~/bin/}util.sh
+selfdir=$(dirname -- "$(readlinkf "$0")")
+PATH=$PATH:$selfdir
+
+
+usage()
+{
+	name=$(basename "$(readlinkf "$0")")
+	cat <<EOF | text_format
+**NAME**
+    $name - Put text in a box
+
+**SYNOPSIS**
+    $name [**-ah**] [**-t** __N__]
+
+**DESCRIPTION**
+    Read stdin, expand(1) it, draw a box around it and print it to stdout.
+
+**OPTIONS**
+    **-a**
+        Use ASCII characters instead of line drawing ones.
+
+    **-h**
+        Print this notice and exit.
+
+    **-t** __N__
+        Set the tab width to __N__.
+
+EOF
+	exit $1
+}
+
+ascii=0
+tabwidth=8
+while getopts "aht:" OPT
+do
+	case "$OPT" in
+		a)  ascii=1;;
+		h)  usage 0;;
+		t)  tabwidth=$OPTARG;;
+		\?) usage 1;;
+	esac
+done
+shift $((OPTIND - 1))
+
+
+script='function srpt(n, s)
+{
+	ret = ""
+	for(i = 0; i < n; ++i)
+		ret = ret s
+	return ret
+}
+
+function width(str)
+{'
+if has_cmd textwidth
+then
+	script=$script'
+		gsub("'\''", "'\''\\'\'''\''", str)
+		cmd = "textwidth -t" tw " -- '\''" str "'\''"
+		cmd | getline ret
+		close(cmd)
+		return ret'
+else
+	script=$script'
+		return length(str)'
+fi
+script=$script'
+}
+
+BEGIN {ORS = ""}
+
+{
+	line[NR] = $0
+	w = width($0)
+	if(w > maxw)
+	{
+		maxw = w
+	}
+}
+
+END\
+{
+	print (ascii ? \
+		"+" srpt(maxw + 2, "-") "+" : \
+		"┌" srpt(maxw + 2, "─") "┐") "\n"
+
+	for(i = 1; i <= NR; ++i)
+		printf (ascii ? "|" : "│") " %-*s " (ascii ? "|" : "│") "\n", maxw, line[i]
+
+	print (ascii ? \
+		"+" srpt(maxw + 2, "-") "+" : \
+		"└" srpt(maxw + 2, "─") "┘") "\n"
+}'
+
+expand -t$tabwidth | \
+	${AWK:-awk} -vtw=$tabwidth -vascii=$ascii "$script"

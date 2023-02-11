@@ -1,0 +1,120 @@
+#!/bin/sh
+
+xcol="$HOME/.config/x11/xcolors"
+xres="$HOME/.config/x11/xresources"
+col="$HOME/.config/x11/colorschemes"
+profiles="$HOME/.config/x11/profiles"
+wall="$HOME/.config/x11/wall"
+gtk="$HOME/.config/gtk-3.0/settings.ini"
+pic="$HOME/.config/picom.conf"
+walldir="$HOME/Pictures/backgrounds/"
+
+rload(){
+        xrdb merge $xres
+        pgrep dnoted > /dev/null && killall dnoted && dnoted &
+        pidof st | xargs kill -s USR1
+        case $1 in
+                -h)pgrep dwm > /dev/null && killall dwm && dwm &;;
+                -s)xdotool key super+F5;;
+        esac
+}
+
+colorscheme(){       
+        local choice=$(ls -A $col | awk -F '.' '{print $1}' | rofi -dmenu)
+        [ -z $choice ] && exit 
+        ln -sf $col/$choice.Xresources $xcol
+        rload -s
+}
+
+papirus(){           
+        local choice=$(papirus-folders -l | sed 's/>//;s/^[[:space:]]*//g' | rofi -dmenu)
+        [ -z $choice ] && exit 
+        papirus-folders -C $choice
+}
+
+font(){
+        local choice=$(fc-list --format="%{family[0]}\n" | sort | uniq | rofi -dmenu)
+        [ -z $choice ] && exit 
+        case $1 in
+                -s) sed -i --follow-symlinks "/\*font/s/: .*:/: $choice:/;/\*dnotedfont/s/: .*:/: $choice:/" $xres
+                    rload -h
+                    ;;
+                -t) sed -i --follow-symlinks "/\*stfont/s/: .*:/: $choice:/" $xres
+                    rload
+                    ;;
+        esac
+}
+
+rounded() {
+        sed -Ei 's/^[[:blank:]]*corner-radius/#&/;t;s/^#([[:blank:]]*corner-radius)/\1/' $pic 
+}
+
+profile() {
+        local choice=$(ls -A $profiles | awk -F '.' '{print $1}' | rofi -dmenu)
+        [ -z $choice ] && exit 
+        ln -sf $profiles/$choice.Xresources $xres
+        rload -h
+}
+
+pywal() {
+        readlink $wall | xargs wal -i
+        ln -sf $HOME/.cache/wal/colors.Xresources $xcol
+        rload -s 
+}
+
+rice(){
+        case "$(printf "Luna\nRose\nEverforest\nNord" | rofi -dmenu)" in
+                'Luna') 
+                        xwallpaper --zoom $walldir/luna.png
+                        ln -sf $col/Kasugano.Xresources $xcol
+                        ln -sf $walldir/luna.png $wall 
+                        rload -s
+                        sed -i 's/gtk-theme-name=.*/gtk-theme-name=Materia-dark/' $gtk 
+                        papirus-folders -C indigo
+                        ;;
+                'Rose')
+                        xwallpaper --zoom $walldir/rose.jpg
+                        ln -sf $col/Rose-Pine-Moon.Xresources $xcol
+                        ln -sf $walldir/rose.jpg $wall 
+                        rload -s
+                        sed -i 's/gtk-theme-name=.*/gtk-theme-name=Rosepine-Moon-BL/' $gtk
+                        papirus-folders -C red
+                        ;;
+                'Everforest')
+                        xwallpaper --zoom $walldir/everforest.png
+                        ln -sf $col/Everforest.Xresources $xcol
+                        ln -sf $walldir/everforest.png $wall 
+                        rload -s
+                        sed -i 's/gtk-theme-name=.*/gtk-theme-name=Everforest-Dark-BL/' $gtk
+                        papirus-folders -C green
+                        ;;
+                'Nord')
+                        xwallpaper --zoom $walldir/nord.jpg
+                        ln -sf $col/Nord.Xresources $xcol
+                        ln -sf $walldir/Nord.jpg $wall 
+                        rload -s
+                        sed -i 's/gtk-theme-name=.*/gtk-theme-name=Materia-dark/' $gtk
+                        papirus-folders -C blue
+                        ;;
+        	*) exit 1 ;;
+        esac
+}
+
+case $1 in
+                -r)rice && exit;;
+                -c)colorscheme && exit;;
+esac
+
+case "$(printf " Color Scheme\nﳨ Rice Selector\nﯔ System Font\n Terminal Font\n Folder Colors\nﬆ Rounded Corners\n Monitor Profile\n Pywal\nﰇ Reload Desktop" | dmenu)" in
+	' Color Scheme') colorscheme;;
+	'ﳨ Rice Selector') rice;;
+        'ﯔ System Font') font -s;;
+        ' Terminal Font') font -t;;
+        ' Folder Colors') papirus;;
+        'ﬆ Rounded Corners') rounded;;
+	' Monitor Profile') profile;;
+        ' Pywal') pywal;;
+        'ﰇ Reload Desktop') rload -h;;
+	*) exit 1 ;;
+esac
+

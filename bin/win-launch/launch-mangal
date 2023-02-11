@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ $(wmctrl -lx | grep -E "mangalx" | grep -oE "[0-9a-z]{10}") ]; then
+  wmctrl -r "mangal" -b toggle,hidden
+else
+  nohup kitty @ launch --type os-window --os-window-class "mangalx"  mangal &
+  while [ "$WID" == "" ]; do
+    WID="$(wmctrl -lx | grep -E "mangalx" | grep -oE "[0-9a-z]{10}")"
+  done
+  wmctrl -i -r "$WID" -e 0,2438,50,920,620
+
+fi

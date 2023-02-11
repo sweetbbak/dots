@@ -1,0 +1,4 @@
+#!/bin/sh
+folders="$HOME/Pictures $HOME/Videos"
+find -L $folders -type f | sed 's/ /\\ /g' | rofi -dmenu | xargs feh 
+

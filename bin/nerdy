@@ -1,0 +1,41 @@
+#!/bin/sh
+# nerdy - nerd font glyph picker
+
+# path of the characters
+# chars_loc="${HOME}/.local/share/chars.csv"
+chars_loc="$HOME/.local/share/nerdy/chars.csv"
+
+# clipboard manager
+clip="xclip -sel clip"
+
+# menu
+menu="rofi -dmenu"
+
+case $1 in
+    x|-x)
+        clip="xclip -sel clip"
+        menu="rofi -dmenu"
+        ;;
+    w|-w)
+        clip="wl-copy"
+        menu="wofi -dmen"
+        ;;
+esac
+
+# if file does not exist, error and exit
+[ ! -f "${chars_loc}" ] && { echo "${chars_loc} doesn't exists." >&2; exit 1; }
+
+# read in lines from chars.csv into array
+readarray chars < "${chars_loc}"
+
+# print all codes and names and select one using the menu
+char_entry=$(
+    for char in "${chars[@]}"; {
+        echo ${char/,/ }
+    } | ${menu}
+)
+# exit if user canceled selection
+[ -z "${char_entry}" ] && exit
+char="${char_entry% *}"
+# copy character to clipboard
+printf "%s" ${char} | ${clip}

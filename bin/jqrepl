@@ -1,0 +1,43 @@
+#!/bin/sh
+#
+# if 1st arg is '-' read from stdin
+# if 1st arg is '--' take the command after it verbatim and execute it to get the input
+# if 1st arg is anything else, treat it as a file
+set -eu
+
+JQ_REPL_JQ="${JQ_REPL_JQ:-jq}"
+
+if [ -n "${1:-}" ] && [ "$1" != "-" ] && [ "$1" != "--" ]; then
+  input="$1"
+else
+  input=$(mktemp)
+  trap 'rm -f "$input"' EXIT
+fi
+
+if [ -z "${1:-}" ] || [ "$1" = "-" ]; then
+  cat /dev/stdin >"$input"
+fi
+if [ "${1:-}" = "--" ]; then
+  shift
+  export FZF_JQ_REPL_COMMAND="$* > $input; jq-paths <$input"
+else
+  export FZF_JQ_REPL_COMMAND="jq-paths < \"$input\""
+fi
+
+fzf_notation_types="~!@#$%^&*;/|"
+skip_notation="$(echo "$FZF_JQ_REPL_COMMAND" | sed -E "s,[^$fzf_notation_types],,g")"
+fzf_notation="$(echo "$fzf_notation_types" | sed -E "s,[$skip_notation],,g" | head -c 1)"
+if [ -z "$fzf_notation" ]; then
+  # fall back to default and hope for the best
+  fzf_notation="#"
+fi
+
+eval "$FZF_JQ_REPL_COMMAND" |
+  fzf \
+    --preview "$JQ_REPL_JQ --color-output ${JQ_REPL_ARGS:-} {q} \"$input\"" \
+    --preview-window="down:90%" \
+    --height="99%" \
+    --query="." \
+    --bind "tab:replace-query,return:print-query" \
+    --bind "alt-up:preview-page-up,alt-down:preview-page-down" \
+    --bind "ctrl-r:reload${fzf_notation}${FZF_JQ_REPL_COMMAND}${fzf_notation}+refresh-preview"

@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+dir="~/.config/rofi/themes"
+uptime=$(uptime -p | sed -e 's/up //g')
+
+rofi_command="rofi -theme $dir/powermenu.rasi"
+
+# Options
+shutdown=" Shutdown"
+reboot=" Reboot"
+lock=" Lock"
+suspend="鈴 Sleep"
+hibernate=" Hibernate"
+logout=" Logout"
+
+# Variable passed to rofi
+options="$lock\n$logout\n$suspend\n$hibernate\n$reboot\n$shutdown"
+
+chosen="$(echo -e "$options" | $rofi_command -p "Uptime: $uptime" -dmenu -selected-row 0)"
+case $chosen in
+    $shutdown)
+		notify-send "👉 Powering Off " && sleep 1 &&
+		systemctl poweroff
+        ;;
+    $reboot)
+		notify-send "👉 Rebooting " && sleep 1 &&
+		systemctl reboot
+        ;;
+    $lock)
+		notify-send "👉 Locking the screen " && sleep 1 &&
+		if [[ -f /usr/local/bin/slock ]]; then
+			slock
+		fi
+        ;;
+    $suspend)
+		mpc -q pause
+		amixer set Master mute
+		systemctl suspend
+        ;;
+    $hibernate)
+		notify-send "👉 Hibernateing " && sleep 1 && 
+		systemctl hibernate
+        ;;
+    $logout)
+		loginctl terminate-session ${XDG_SESSION_ID-}
+        ;;
+esac

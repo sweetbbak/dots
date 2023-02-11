@@ -1,0 +1,4 @@
+(cd ~/Pictures && fd --extension jpg | \
+  fzf --bind 'focus:transform-preview-label:echo [ {} ] | \
+  lolcat -f' --preview 'kitty +kitten icat --clear --transfer-mode file && kitty +kitten icat --transfer-mode file --place "128x20@0x0" {}') | \
+  xsel

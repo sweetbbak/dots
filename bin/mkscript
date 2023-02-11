@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+if [ $# -eq 0 ]; then
+	echo "$(basename $0): make script file with shebang"
+	echo "USAGE: -f filetype [file]"
+	exit 0
+fi
+
+if [ $1 == "--help" ]; then
+	echo "$(basename $0): make script file with shebang"
+	echo "USAGE: -f filetype [file]"
+	exit 0
+fi
+
+if [ $1 == "-h" ]; then
+	echo "$(basename $0): make script file with shebang"
+	echo "USAGE: -f filetype [file]"
+	exit 0
+fi
+
+POSITIONAL_ARGS=()
+
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    -f|--filetype)
+      FILETYPE="$2"
+      shift # past argument
+      shift # past value
+      ;;
+    *)
+      POSITIONAL_ARGS+=" $1" # save positional arg
+      shift # past argument
+      ;;
+  esac
+done
+
+set -- "${POSITIONAL_ARGS[@]}" # restore positional parameters
+
+# echo "FILE TYPE       = ${FILETYPE}"
+# echo "POSITIONAL_ARGS = ${POSITIONAL_ARGS}"
+for i in $POSITIONAL_ARGS; do
+	touch $i && chmod +x $i
+	echo "#!/usr/bin/env ${FILETYPE}" >> $i
+done

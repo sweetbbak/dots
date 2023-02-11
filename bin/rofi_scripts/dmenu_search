@@ -1,0 +1,19 @@
+#!/bin/sh
+query="$(: | rofi -dmenu -p "Search:")"
+[ -z "$query" ] && exit
+browser="firefox"
+check_url() {
+  url="$(echo "$query" | grep -Eo '(https:\/\/)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)')"
+  if [ "$url" = "$query" ]; then
+    $browser --new-tab "$url"
+  else
+    $browser --new-tab "https://search.brave.com/search?q=$query&source=desktop"
+  fi
+}
+case $2 in
+    "ArchWiki") $browser --new-tab "https://wiki.archlinux.org/index.php?search=$query" ;;
+    "Youtube") $browser --new-tab "https://www.youtube.com/results?search_query=$query" ;;
+    "Github") $browser --new-tab "https://github.com/search?q=$query" ;;
+    "Animixplay") $browser --new-tab "https://animixplay.to/?q=$query&sengine=gogoanime" ;;
+    "Search") check_url ;;
+esac

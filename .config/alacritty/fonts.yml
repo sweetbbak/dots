@@ -1,0 +1,45 @@
+# Font configuration
+font:
+  # Normal (roman) font face
+  normal:
+    family: "JetBrainsMono Nerd Font"
+    #family: "Fantasque Sans Mono"
+    #family: "Monospace"
+    #style: Regular
+
+  # Bold font face
+  bold:
+    family: "JetBrainsMono Nerd Font"
+    #family: "Fantasque Sans Mono"
+    #family: "Monospace"
+    #style: Bold
+
+  # Italic font face
+  italic:
+    family: "JetBrainsMono Nerd Font"
+    #family: "Fantasque Sans Mono"
+    #family: "Monospace"
+    #style: Italic
+
+  # Bold italic font face
+  bold_italic:
+    family: "JetBrainsMono Nerd Font"
+    #family: "Fantasque Sans Mono"
+    #family: "Monospace"
+    #style: Bold Italic
+
+  # Point size
+  #JetBrains && Monospace
+  size: 14
+  #Fantasque Sans Mono
+  #size: 14
+
+  # Offset
+  #offset:
+  #  x: 0
+  #  y: 0
+
+  # Glyph offset
+  #glyph_offset:
+  #  x: 0
+  #  y: 0

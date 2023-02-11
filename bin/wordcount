@@ -1,0 +1,10 @@
+N=200
+while read L
+do
+    for W in $L
+    do
+        ((i++))
+        echo -n  "$W"
+        ((i>=N)) && break 2
+    done
+done <file.txt

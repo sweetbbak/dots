@@ -1,0 +1,31 @@
+#!/bin/bash
+
+wifi_list() {
+	nmcli --color yes device wifi
+}
+
+wifi_disconnect() {
+	local interface=$(nmcli -t device | grep ":wifi:" | cut -d: -f1)
+	[[ -n interface ]] && nmcli device disconnect "$interface"
+}
+
+export SHELL=/bin/bash
+export -f wifi_list
+export -f wifi_disconnect
+
+# nmcli device wifi rescan
+network=$( \
+	wifi_list \
+	| fzf --ansi --layout=reverse --header-lines=1 --no-hscroll \
+		--header="Ctrl-r to reload, Ctrl-(i,o) WiFi on/off, Ctrl-d to disconnect" \
+		--bind="ctrl-r:reload(wifi_list)" \
+		--bind="ctrl-i:execute-silent(sudo wifi on)+reload(wifi_list)" \
+		--bind="ctrl-o:execute-silent(sudo wifi off)+reload(wifi_list)" \
+		--bind="ctrl-d:execute-silent(wifi_disconnect)+reload(wifi_list)" \
+	| grep -oE "[0-9A-F:]{17}")
+
+[[ -z $network ]] && exit
+
+echo "connecting to \"${network}\"..."
+nmcli -a device wifi connect "$network"
+

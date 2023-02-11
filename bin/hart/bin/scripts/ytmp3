@@ -1,0 +1,6 @@
+#!/bin/sh
+
+printf "Enter url : "
+read url
+
+yt-dlp -f 'ba' -x --embed-thumbnail --audio-format mp3 $url -o '%(title)s.%(ext)s'

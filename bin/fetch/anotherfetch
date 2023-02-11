@@ -1,0 +1,28 @@
+#!/usr/bin/env zsh
+
+# zsh-isims
+# print -P "Welcome back %F{green}${USER}%F{white}"
+# print -P "it's %F{green}$(date +%I:%M%p) %F{white}$(date +\,\ %B) %F{green}$(date +%d)%F{white}"
+# print -P "Mem: %F{green}$(free --giga -h -t | awk 'FNR == 4 {print $3}')%F{white} Processes: %F{green}$(find /proc -maxdepth 1 -type d | wc -l)%F{white}"
+
+# General color vars
+blk='\033[00;30m'   # Black
+red='\033[00;31m'   # Red
+grn='\033[00;32m'   # Green
+ylw='\033[00;33m'   # Yellow
+blu='\033[00;34m'   # Blue
+pur='\033[00;35m'   # Purple
+cyn='\033[00;36m'   # Cyan
+wht='\033[00;37m'   # White
+clr='\033[00m'      # Reset
+
+echo "   ____
+__/___/______
+|_ \__'   \\=_=\\
+\`())--,())'-,,'"
+echo ""
+
+printf "Welcome back ${grn}${USER}${wht}\n"
+printf "it's ${grn}$(date +%I:%M%p)${wht}$(date +\,\ %B) ${grn}$(date +%d)${wht}\n"
+printf "Mem: ${grn}$(free --giga -h -t | awk 'FNR == 4 {print $3}')${wht} Processes: ${grn}$(find /proc -maxdepth 1 -type d | wc -l)${wht}\n"
+

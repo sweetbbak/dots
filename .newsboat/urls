@@ -1,0 +1,5 @@
+--------ANIME------------
+https://raw.githubusercontent.com/ArjixGamer/gogoanime-rss/main/gogoanime/gogoanime-rss-sub.xml
+https://raw.githubusercontent.com/CoolnsX/anime-rss/main/allanime.xml
+--------youtube-----------
+"filter:~/bin/youtube-rss:https://www.youtube.com/feeds/videos.xml?channel_id=UCVls1GmFKf6WlTraIb_IaJg" linux "~Distrotube"

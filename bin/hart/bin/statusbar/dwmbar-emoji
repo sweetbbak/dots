@@ -1,0 +1,125 @@
+#!/bin/sh
+
+# Battery :
+bat(){
+	for battery in /sys/class/power_supply/BAT?*; do
+		# If non-first battery, print a space separator.
+		[ -n "${capacity+x}" ] && printf " "
+		# Sets up the status and capacity
+		case "$(cat "$battery/status" 2>&1)" in
+			"Full") status="⚡" ;;
+			"Discharging") status="🔋" ;;
+			"Charging") status="🔌" ;;
+			"Not charging") status="🛑" ;;
+			"Unknown") status="♻️" ;;
+			*) exit 1 ;;
+		esac
+		capacity="$(cat "$battery/capacity" 2>&1)"
+		# Will make a warn variable if discharging and low
+		[ "$status" = "🔋" ] && [ "$capacity" -le 25 ] && warn="❗"
+		# Prints the info
+		printf "%s%s%d%%" "$status" "$warn" "$capacity"; unset warn
+	done && printf "\\n"
+}
+
+# Date && clock :
+dat(){
+	clock=$(date '+%I')
+	case "$clock" in
+		"00") icon="🕛" ;;
+		"01") icon="🕐" ;;
+		"02") icon="🕑" ;;
+		"03") icon="🕒" ;;
+		"04") icon="🕓" ;;
+		"05") icon="🕔" ;;
+		"06") icon="🕕" ;;
+		"07") icon="🕖" ;;
+		"08") icon="🕗" ;;
+		"09") icon="🕘" ;;
+		"10") icon="🕙" ;;
+		"11") icon="🕚" ;;
+		"12") icon="🕛" ;;
+	esac
+	date "+📅%a %d %b %Y|$icon%I:%M%p"
+}
+
+# Cpu Temp :
+tmp(){
+	sensors | awk '/Core 0/ {print "🌡" $3}'
+}
+
+# Cpu Usage :
+cpu(){
+	cpu=$(top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{printf "%02.1f%%" , 100 - $1}') 
+	echo -e "💻$cpu"
+}
+
+# Keybord Layout :
+key(){
+	kb="$(xkb-switch)" || exit 1
+	echo "🔤$kb"
+}
+
+# Screen Light :
+lit(){
+	#lit="$(xbacklight | sed 's/\..*//g')"
+	#echo "💡$lit%"
+	lit="$(brightnessctl | grep -oP '[^()]+%')"
+	echo "💡$lit"	
+}
+
+# Memory :
+mem(){
+	free --mebi | sed -n '2{p;q}' | awk '{printf ("🧠%2.2fGiB/%2.2fGiB\n", ( $3 / 1024), ($2 / 1024))}'	
+}
+
+# Volume :
+vol(){
+	[ $(pamixer --get-mute) = true ] && echo 🔇 && exit
+
+	vol="$(pamixer --get-volume)"
+
+	if [ "$vol" -gt "70" ]; then
+		icon="🔊"
+	elif [ "$vol" -gt "30" ]; then
+		icon="🔉"
+	elif [ "$vol" -gt "0" ]; then
+		icon="🔈"
+	else
+		echo 🔇 && exit
+	fi
+	echo "$icon$vol%"
+}
+net(){
+	if grep -xq 'up' /sys/class/net/w*/operstate 2>/dev/null ; then
+		wifiicon="$(awk '/^\s*w/ { print "📶", int($3 * 100 / 70) "% " }' /proc/net/wireless)"
+	elif grep -xq 'down' /sys/class/net/w*/operstate 2>/dev/null ; then
+		grep -xq '0x1003' /sys/class/net/w*/flags && wifiicon="📡 " || wifiicon="❌ "
+	fi
+
+	printf "%s%s%s\n" "$wifiicon" "$(sed "s/down/❎/;s/up/🌐/" /sys/class/net/e*/operstate 2>/dev/null)" "$(sed "s/.*/🔒/" /sys/class/net/tun*/operstate 2>/dev/null)"
+}
+nettrf(){
+	
+	update() {
+		sum=0
+		for arg; do
+			read -r i < "$arg"
+			sum=$(( sum + i ))
+		done
+		cache=${XDG_CACHE_HOME:-$HOME/.cache}/${1##*/}
+		[ -f "$cache" ] && read -r old < "$cache" || old=0
+		printf %d\\n "$sum" > "$cache"
+		printf %d\\n $(( sum - old ))
+	}
+
+	rx=$(update /sys/class/net/[ew]*/statistics/rx_bytes)
+	tx=$(update /sys/class/net/[ew]*/statistics/tx_bytes)
+
+	printf "🔻%4sB 🔺%4sB\\n" $(numfmt --to=iec $rx) $(numfmt --to=iec $tx)	
+}
+
+while true; do
+  xsetroot -name "|$(nettrf)|$(net)|$(tmp)|$(cpu)|$(mem)|$(vol)|$(lit)|$(bat)|$(key)|$(dat) |"
+  sleep 0.2
+done &

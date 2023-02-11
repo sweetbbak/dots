@@ -1,0 +1,22 @@
+#!/bin/sh
+
+help() {
+	printf '
+ Usage: ./cli-gpt "<prompt>" 
+ Example: ./cli-gpt "hello" \n'
+}
+
+[ "$1" = "-h" -o "$1" = "--help" ] && help && exit 0
+
+prompt="$1"
+model="text-davinci-003"
+api_key="<insert here>"
+openai_request(){
+		response=$(curl -s "https://api.openai.com/v1/completions" \
+		-H "Content-Type: application/json" \
+		-H "Authorization: Bearer $api_key" \
+		-d '{"prompt":"'"$prompt"'","model":"'$model'","max_tokens":2048}' | jq -r '.choices[0].text')
+}
+openai_request
+
+echo "$response"

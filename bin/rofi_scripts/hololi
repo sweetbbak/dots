@@ -1,0 +1,35 @@
+#!/bin/sh
+
+. sb-style
+STYLE=4
+
+check_lives () {
+	while read -r id symbol
+    do
+        curl -s "https://www.youtube.com/channel/$id" | grep -qE '{"text":" watching"}|{"text":" assistindo"}' && printf "%s " "$symbol"
+	done
+}
+
+input () {
+	echo "UCYz_5n-uDuChHtLo7My1HnQ 🧟"
+	echo "UCP0BspO_AMEe3aQqqpo89Dg 🌕"
+
+	echo "UCoSrY_IQQVpmIRZ9Xf-y93g 🔱"
+    echo "UCyl1z3jo3XHR1riLFKG5UAg 🔎"
+    echo "UCL_qhgtOy0dy1Agp8vkySQg 💀"
+    echo "UCHsx4Hqa-1ORjQTh9TYDhww 🐔"
+    echo "UCMwGHR0BTZuLsmjY_NT5Pwg 🐙"
+
+    echo "UC8rcEBzJSleTkf_-agPM20g 💎"
+
+    # echo "UCsUj0dszADCGbF3gNrQEuSQ 🪐" :'(
+    echo "UCO_aKKYxn4tvrqPjcTzZ6EQ 🌿"
+    echo "UC3n5uGu18FoCy23ggWWp8tA 🪶 "
+    echo "UCmbs8T6MWqUHP1tIQvSgKrg ⏳"
+    echo "UCgmPnx-EEeOrZSg5Tiw7ZRQ 🎲"
+}
+
+icon=""
+text="$(input | check_lives)"
+
+[ -n "$text" ] && display_info "$STYLE" "$icon" "${text%?}"

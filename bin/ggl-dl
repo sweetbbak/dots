@@ -1,0 +1,825 @@
+#!/usr/bin/env sh
+SELF_SOURCE="true"
+_actual_size_in_bytes(){
+file_actual_size_in_bytes="${1:?Error: give filename}"
+{ _tmp="$(BLOCK_SIZE=512 BLOCKSIZE=512 du "$file_actual_size_in_bytes")"&&_tmp="${_tmp%%$(printf '\t')*}"&&printf "%s\n" "$((_tmp*512))";}||return 1
+}
+_bytes_to_human(){
+b_bytes_to_human="$(printf "%.0f\n" "${1:-0}")" s_bytes_to_human=0
+d_bytes_to_human='' type_bytes_to_human=''
+while [ "$b_bytes_to_human" -gt 1024 ];do
+d_bytes_to_human="$(printf ".%02d" $((b_bytes_to_human%1024*100/1024)))"
+b_bytes_to_human=$((b_bytes_to_human/1024))&&s_bytes_to_human=$((s_bytes_to_human+=1))
+done
+j=0&&for i in B KB MB GB TB PB EB YB ZB;do
+j="$((j+=1))"&&[ "$((j-1))" = "$s_bytes_to_human" ]&&type_bytes_to_human="$i"&&break
+continue
+done
+printf "%s\n" "$b_bytes_to_human$d_bytes_to_human $type_bytes_to_human"
+}
+_check_debug(){
+_print_center_quiet(){ { [ $# = 3 ]&&printf "%s\n" "$2";}||{ printf "%s%s\n" "$2" "$3";};}
+if [ -n "$DEBUG" ];then
+set -x&&PS4='-> '
+_print_center(){ { [ $# = 3 ]&&printf "%s\n" "$2";}||{ printf "%s%s\n" "$2" "$3";};}
+_clear_line(){ :;}&&_move_cursor(){ :;}&&_newline(){ :;}
+else
+if [ -z "$QUIET" ];then
+case "$TERM" in
+xterm*|rxvt*|urxvt*|linux*|vt*|screen*|st*)ansi_escapes="true"
+esac
+if [ -t 2 ]&&[ -n "$ansi_escapes" ];then
+! COLUMNS="$(_get_columns_size)"||[ "${COLUMNS:-0}" -lt 45 ] 2>|/dev/null&&_print_center(){ { [ $# = 3 ]&&printf "%s\n" "[ $2 ]";}||{ printf "%s\n" "[ $2$3 ]";};}
+EXTRA_LOG="_print_center" CURL_PROGRESS="-#"&&export CURL_PROGRESS EXTRA_LOG \
+SUPPORT_ANSI_ESCAPES="true"
+else
+_print_center(){ { [ $# = 3 ]&&printf "%s\n" "[ $2 ]";}||{ printf "%s\n" "[ $2$3 ]";};}
+_clear_line(){ :;}&&_move_cursor(){ :;}
+fi
+_newline(){ printf "%b" "$1";}
+else
+_print_center(){ :;}&&_clear_line(){ :;}&&_move_cursor(){ :;}&&_newline(){ :;}
+fi
+set +x
+fi
+}
+_check_internet(){
+"$EXTRA_LOG" "justify" "Checking Internet Connection.." "-"
+if ! _timeout 10 curl -Is google.com --compressed;then
+_clear_line 1
+"${QUIET:-_print_center}" "justify" "Error: Internet connection" " not available." "="
+exit 1
+fi
+_clear_line 1
+}
+_clear_line(){
+printf "\033[%sA\033[2K" "$1"
+}
+_display_time(){
+t_display_time="$1" day_display_time="$((t_display_time/60/60/24))"
+hr_display_time="$((t_display_time/60/60%24))" min_display_time="$((t_display_time/60%60))" sec_display_time="$((t_display_time%60))"
+[ "$day_display_time" -gt 0 ]&&printf '%dd' "$day_display_time"
+[ "$hr_display_time" -gt 0 ]&&printf '%dh' "$hr_display_time"
+[ "$min_display_time" -gt 0 ]&&printf '%dm' "$min_display_time"
+printf '%ds\n' "$sec_display_time"
+}
+_get_columns_size(){
+{ command -v bash 1>|/dev/null&&bash -c 'shopt -s checkwinsize && (: && :); printf "%s\n" "${COLUMNS}" 2>&1';}||{ command -v zsh 1>|/dev/null&&zsh -c 'printf "%s\n" "${COLUMNS}"';}||{ command -v stty 1>|/dev/null&&_tmp="$(stty size)"&&printf "%s\n" "${_tmp##* }";}||{ command -v tput 1>|/dev/null&&tput cols;}||return 1
+}
+_json_value(){
+{ [ "$2" -gt 0 ] 2>|/dev/null&&no_of_lines_json_value="$2";}||:
+{ [ "$3" -gt 0 ] 2>|/dev/null&&num_json_value="$3";}||{ ! [ "$3" = all ]&&num_json_value=1;}
+_tmp="$(grep -o "\"$1\"\:.*" ${no_of_lines_json_value:+-m} $no_of_lines_json_value)"||return 1
+printf "%s\n" "$_tmp"|sed -e 's/.*"'"$1""\"://" -e 's/[",]*$//' -e 's/["]*$//' -e 's/[,]*$//' -e "s/^ //" -e 's/^"//' -n -e "$num_json_value"p||:
+return 0
+}
+_move_cursor(){
+printf "\033[%sA" "${1:?Error: Num of line}"
+}
+_print_center(){
+[ $# -lt 3 ]&&printf "Missing arguments\n"&&return 1
+term_cols_print_center="$COLUMNS"
+type_print_center="$1" filler_print_center=""
+case "$type_print_center" in
+normal)out_print_center="$2"&&symbol_print_center="$3";;
+justify)if
+[ $# = 3 ]
+then
+input1_print_center="$2" symbol_print_center="$3" to_print_print_center="" out_print_center=""
+to_print_print_center="$((term_cols_print_center-5))"
+{ [ "${#input1_print_center}" -gt "$to_print_print_center" ]&&out_print_center="[ $(printf "%.${to_print_print_center}s\n" "$input1_print_center")..]";}||{ out_print_center="[ $input1_print_center ]";}
+else
+input1_print_center="$2" input2_print_center="$3" symbol_print_center="$4" to_print_print_center="" temp_print_center="" out_print_center=""
+to_print_print_center="$((term_cols_print_center*47/100))"
+{ [ "${#input1_print_center}" -gt "$to_print_print_center" ]&&temp_print_center=" $(printf "%.${to_print_print_center}s\n" "$input1_print_center")..";}||{ temp_print_center=" $input1_print_center";}
+to_print_print_center="$((term_cols_print_center*46/100))"
+{ [ "${#input2_print_center}" -gt "$to_print_print_center" ]&&temp_print_center="$temp_print_center$(printf "%.${to_print_print_center}s\n" "$input2_print_center").. ";}||{ temp_print_center="$temp_print_center$input2_print_center ";}
+out_print_center="[$temp_print_center]"
+fi
+;;
+*)return 1
+esac
+str_len_print_center="${#out_print_center}"
+[ "$str_len_print_center" -ge "$((term_cols_print_center-1))" ]&&{
+printf "%s\n" "$out_print_center"&&return 0
+}
+filler_print_center_len="$(((term_cols_print_center-str_len_print_center)/2))"
+i_print_center=1&&while [ "$i_print_center" -le "$filler_print_center_len" ];do
+filler_print_center="$filler_print_center$symbol_print_center"&&i_print_center="$((i_print_center+1))"
+done
+printf "%s%s%s" "$filler_print_center" "$out_print_center" "$filler_print_center"
+[ "$(((term_cols_print_center-str_len_print_center)%2))" -ne 0 ]&&printf "%s" "$symbol_print_center"
+printf "\n"
+return 0
+}
+_timeout(){
+timeout_timeout="${1:?Error: Specify Timeout}"&&shift
+{
+"$@"&
+child="$!"
+trap -- "" TERM
+{
+sleep "$timeout_timeout"
+kill -9 "$child"
+}&
+wait "$child"
+} 2>|/dev/null 1>&2
+}
+_update_config(){
+[ $# -lt 3 ]&&printf "Missing arguments\n"&&return 1
+value_name_update_config="$1" value_update_config="$2" config_path_update_config="$3"
+! [ -f "$config_path_update_config" ]&&: >|"$config_path_update_config"
+chmod u+w "$config_path_update_config"
+printf "%s\n%s\n" "$(grep -v -e "^$" -e "^$value_name_update_config=" "$config_path_update_config"||:)" \
+"$value_name_update_config=\"$value_update_config\"" >|"$config_path_update_config"
+chmod u-w+r "$config_path_update_config"
+}
+_download_file(){
+[ $# -lt 3 ]&&printf "Missing arguments\n"&&return 1
+file_id_download_file="$1" name_download_file="$2" server_size_download_file="$3" parallel_download_file="$4" \
+use_aria_download_file="$DOWNLOAD_WITH_ARIA"
+unset range_download_file downloaded_download_file old_downloaded_download_file left_download_file speed_download_file eta_download_file \
+flag_download_file flag_value_download_file url_download_file cookies_download_file
+server_size_readable_download_file="$(_bytes_to_human "$server_size_download_file")"
+_print_center "justify" "$name_download_file" " | ${server_size_download_file:+$server_size_readable_download_file}" "="
+if [ -s "$name_download_file" ];then
+local_size_download_file="$(_actual_size_in_bytes "$name_download_file")"
+if [ "$local_size_download_file" -ge "$server_size_download_file" ];then
+"${QUIET:-_print_center}" "justify" "File already present" "="&&_newline "\n"
+_log_in_file
+return 0
+else
+_print_center "justify" "File is partially" " present, resuming.." "-"
+range_download_file="Range: bytes=$local_size_download_file-$server_size_download_file"
+[ -z "${OAUTH_ENABLED:-$API_KEY_DOWNLOAD}" ]&&unset use_aria_download_file
+fi
+else
+[ "$server_size_download_file" -gt 0 ]&&range_download_file="Range: bytes=0-$server_size_download_file"
+_print_center "justify" "Downloading file.." "-"
+fi
+if [ -n "$OAUTH_ENABLED" ];then
+. "${TMPFILE}_ACCESS_TOKEN"
+flag_download_file="--header" flag_value_download_file="Authorization: Bearer $ACCESS_TOKEN"
+url_download_file="$API_URL/drive/$API_VERSION/files/$file_id_download_file?alt=media&supportsAllDrives=true&includeItemsFromAllDrives=true"
+elif [ -n "$API_KEY_DOWNLOAD" ];then
+flag_download_file="--referer" flag_value_download_file="https://drive.google.com"
+url_download_file="$API_URL/drive/$API_VERSION/files/$file_id_download_file?alt=media&supportsAllDrives=true&includeItemsFromAllDrives=true&key=$API_KEY"
+else
+"$EXTRA_LOG" "justify" "Fetching" " cookies.." "-"
+curl -c "${TMPFILE}_${file_id_download_file}_COOKIE" -I $CURL_PROGRESS -o /dev/null "https://drive.google.com/uc?export=download&id=$file_id_download_file"||:
+for _ in 1 2;do _clear_line 1;done
+confirm_string="$(_tmp="$(grep -F 'download_warning' "${TMPFILE}_${file_id_download_file}_COOKIE")"&&printf "%s\n" "${_tmp##*$(printf '\t')}")"||:
+flag_download_file="-b" flag_value_download_file="${TMPFILE}_${file_id_download_file}_COOKIE"
+[ -n "$use_aria_download_file" ]&&{
+cookies_download_file="$(sed -e "s/^\# .*//g" -e "s/^\#HttpOnly_//g" "${TMPFILE}_${file_id_download_file}_COOKIE")"
+printf "%s\n" "$cookies_download_file" >|"${TMPFILE}_${file_id_download_file}_COOKIE"
+flag_download_file="--load-cookies"
+}
+url_download_file="https://drive.google.com/uc?export=download&id=$file_id_download_file${confirm_string:+&confirm=$confirm_string}"
+fi
+if [ -n "$use_aria_download_file" ];then
+aria2c ${SPEED_LIMIT:+$ARIA_SPEED_LIMIT_FLAG} $SPEED_LIMIT ${USER_AGENT:+$USER_AGENT_FLAG} $USER_AGENT $ARIA_EXTRA_FLAGS \
+"$flag_download_file" "$flag_value_download_file" \
+"$url_download_file" -o "$name_download_file"&
+pid="$!"
+else
+curl ${SPEED_LIMIT:+$CURL_SPEED_LIMIT_FLAG} $SPEED_LIMIT ${USER_AGENT:+$USER_AGENT_FLAG} $USER_AGENT $CURL_EXTRA_FLAGS \
+--header "$range_download_file" \
+"$flag_download_file" "$flag_value_download_file" \
+"$url_download_file" >>"$name_download_file"&
+pid="$!"
+fi
+if [ -n "$parallel_download_file" ];then
+wait "$pid" 2>|/dev/null 1>&2
+else
+until [ -f "$name_download_file" ]||! kill -0 "$pid" 2>|/dev/null 1>&2;do sleep 0.5;done
+_newline "\n\n"
+until ! kill -0 "$pid" 2>|/dev/null 1>&2;do
+downloaded_download_file="$(_actual_size_in_bytes "$name_download_file")"
+left_download_file="$((server_size_download_file-downloaded_download_file))"
+speed_download_file="$((downloaded_download_file-old_downloaded_download_file))"
+{ [ "$speed_download_file" -gt 0 ]&&eta_download_file="$(_display_time "$((left_download_file/speed_download_file))")";}||eta_download_file=""
+sleep 0.5
+_move_cursor 2
+_print_center "justify" "Downloaded: $(_bytes_to_human "$downloaded_download_file") " "| Left: $(_bytes_to_human "$left_download_file")" "="
+_print_center "justify" "Speed: $(_bytes_to_human "$speed_download_file")/s " "| ETA: ${eta_download_file:-Unknown}" "-"
+old_downloaded_download_file="$downloaded_download_file"
+done
+fi
+if [ "$(_actual_size_in_bytes "$name_download_file")" -ge "$server_size_download_file" ];then
+for _ in 1 2 3;do _clear_line 1;done
+"${QUIET:-_print_center}" "justify" "Downloaded" "="&&_newline "\n"
+rm -f "$name.aria2"
+else
+"${QUIET:-_print_center}" "justify" "Error: Incomplete" " download." "=" 1>&2
+return 1
+fi
+_log_in_file "$name_download_file" "$server_size_readable_download_file" "$file_id_download_file"
+return 0
+}
+_download_file_main(){
+[ $# -lt 2 ]&&printf "Missing arguments\n"&&return 1
+unset line_download_file_main fileid_download_file_main name_download_file_main size_download_file_main parallel_download_file_main RETURN_STATUS sleep_download_file_main&&retry_download_file_main="${RETRY:-0}"
+[ "$1" = parse ]&&parallel_download_file_main="$3" line_download_file_main="$2" fileid_download_file_main="${line_download_file_main%%"|:_//_:|"*}" \
+name_download_file_main="${line_download_file_main##*"|:_//_:|"}" size_download_file_main="$(_tmp="${line_download_file_main#*"|:_//_:|"}"&&printf "%s\n" "${_tmp%"|:_//_:|"*}")"
+parallel_download_file_main="${parallel_download_file_main:-$5}"
+unset RETURN_STATUS&&until [ "$retry_download_file_main" -le 0 ]&&[ -n "$RETURN_STATUS" ];do
+if [ -n "$parallel_download_file_main" ];then
+_download_file "${fileid_download_file_main:-$2}" "${name_download_file_main:-$3}" "${size_download_file_main:-$4}" true 2>|/dev/null 1>&2&&RETURN_STATUS=1&&break
+else
+_download_file "${fileid_download_file_main:-$2}" "${name_download_file_main:-$3}" "${size_download_file_main:-$4}"&&RETURN_STATUS=1&&break
+fi
+sleep "$((sleep_download_file_main+=1))"
+RETURN_STATUS=2 retry_download_file_main="$((retry_download_file_main-1))"&&continue
+done
+{ [ "$RETURN_STATUS" = 1 ]&&printf "%b" "${parallel_download_file_main:+$RETURN_STATUS\n}";}||printf "%b" "${parallel_download_file_main:+$RETURN_STATUS\n}" 1>&2
+return 0
+}
+_download_folder(){
+[ $# = 0 ]&&printf "Missing arguments\n"&&return 1
+folder_id_download_folder="$1" name_download_folder="$2" parallel_download_folder="$3"
+unset json_search_download_folder json_search_fragment_download_folder next_page_token \
+error_status_download_folder success_status_download_folder \
+files_download_folder folders_download_folder files_size_download_folder files_name_download_folder folders_name_download_folder \
+num_of_files_download_folder num_of_folders_download_folder
+_newline "\n"
+"$EXTRA_LOG" "justify" "$name_download_folder" "="
+"$EXTRA_LOG" "justify" "Fetching folder" " details.." "-"
+_search_error_message_download_folder(){
+"${QUIET:-_print_center}" "justify" "Error: Cannot" ", fetch folder details." "="
+printf "%s\n" "${1:?}"&&return 1
+}
+if json_search_download_folder="$("$API_REQUEST_FUNCTION" "files?q=%27$folder_id_download_folder%27+in+parents&fields=nextPageToken,files(name,size,id,mimeType)&pageSize=1000&orderBy=name")";then
+until ! next_page_token="$(printf "%s\n" "${json_search_fragment_download_folder:-$json_search_download_folder}"|_json_value nextPageToken 1 1)";do
+json_search_fragment_download_folder="$("$API_REQUEST_FUNCTION" "files?q=%27$folder_id_download_folder%27+in+parents&fields=nextPageToken,files(name,size,id,mimeType)&pageSize=1000&orderBy=name&pageToken=$next_page_token")"||_search_error_message_download_folder "$json_search_fragment_download_folder"
+json_search_download_folder="$json_search_download_folder
+$json_search_fragment_download_folder"
+done
+else
+_search_error_message_download_folder "$json_search_download_folder"
+fi&&_clear_line 1
+"$EXTRA_LOG" "justify" "Preparing files list.." "="
+files_download_folder="$(printf "%s\n" "$json_search_download_folder"|grep '"size":' -B3|_json_value id all all)"||:
+files_size_download_folder="$(printf "%s\n" "$json_search_download_folder"|_json_value size all all)"||:
+files_name_download_folder="$(printf "%s\n" "$json_search_download_folder"|grep size -B2|_json_value name all all)"||:
+exec 5<<EOF
+$(printf "%s\n" "$files_download_folder")
+EOF
+exec 6<<EOF
+$(printf "%s\n" "$files_size_download_folder")
+EOF
+exec 7<<EOF
+$(printf "%s\n" "$files_name_download_folder")
+EOF
+files_list_download_folder="$(while read -r id <&5&&read -r size <&6&&read -r name <&7;do
+printf "%s\n" "$id|:_//_:|$size|:_//_:|$name"
+done)"
+exec 5<&-&&exec 6<&-&&exec 7<&-
+_clear_line 1
+[ -n "$INCLUDE_FILES" ]&&files_list_download_folder="$(printf "%s\n" "$files_list_download_folder"|grep -E "$INCLUDE_FILES")"
+[ -n "$EXCLUDE_FILES" ]&&files_list_download_folder="$(printf "%s\n" "$files_list_download_folder"|grep -Ev "$EXCLUDE_FILES")"
+"$EXTRA_LOG" "justify" "Preparing sub folders list.." "="
+folders_download_folder="$(printf "%s\n" "$json_search_download_folder"|grep '"mimeType":.*folder.*' -B2|_json_value id all all)"||:
+folders_name_download_folder="$(printf "%s\n" "$json_search_download_folder"|grep '"mimeType":.*folder.*' -B1|_json_value name all all)"||:
+exec 5<<EOF
+$(printf "%s\n" "$folders_download_folder")
+EOF
+exec 6<<EOF
+$(printf "%s\n" "$folders_name_download_folder")
+EOF
+folders_list_download_folder="$(while read -r id <&5&&read -r name <&6;do
+printf "%s\n" "$id|:_//_:|$name"
+done)"
+exec 5<&-&&exec 6<&-
+_clear_line 1
+if [ -z "${files_list_download_folder:-$folders_download_folder}" ];then
+for _ in 1 2;do _clear_line 1;done&&_print_center "justify" "$name_download_folder" " | Empty Folder" "="&&_newline "\n"&&return 0
+fi
+[ -n "$files_list_download_folder" ]&&num_of_files_download_folder="$(($(printf "%s\n" "$files_list_download_folder"|wc -l)))"
+[ -n "$folders_download_folder" ]&&num_of_folders_download_folder="$(($(printf "%s\n" "$folders_download_folder"|wc -l)))"
+for _ in 1 2;do _clear_line 1;done
+_print_center "justify" \
+"$name_download_folder" \
+"${num_of_files_download_folder:+ | $num_of_files_download_folder files}${num_of_folders_download_folder:+ | $num_of_folders_download_folder sub folders}" "="&&_newline "\n\n"
+if [ -f "$name_download_folder" ];then
+name_download_folder="$name_download_folder$(date +'%s')"
+fi&&mkdir -p "$name_download_folder"
+cd "$name_download_folder"||exit 1
+if [ -n "$num_of_files_download_folder" ];then
+if [ -n "$parallel_download_folder" ];then
+NO_OF_PARALLEL_JOBS_FINAL="$((NO_OF_PARALLEL_JOBS>num_of_files_download_folder?num_of_files_download_folder:NO_OF_PARALLEL_JOBS))"
+[ -f "$TMPFILE"SUCCESS ]&&rm "$TMPFILE"SUCCESS
+[ -f "$TMPFILE"ERROR ]&&rm "$TMPFILE"ERROR
+(printf "%s\n" "$files_list_download_folder"|xargs -n1 -P"$NO_OF_PARALLEL_JOBS_FINAL" -i sh -c '
+                eval "${SOURCE_UTILS}"
+                _download_file_main parse "{}" true
+                ' 1>|"$TMPFILE"SUCCESS 2>|"$TMPFILE"ERROR)&
+pid="$!"
+until [ -f "$TMPFILE"SUCCESS ]||[ -f "$TMPFILE"ERROR ];do sleep 0.5;done
+_clear_line 1
+until ! kill -0 "$pid" 2>|/dev/null 1>&2;do
+success_status_download_folder="$(($(wc -l <"$TMPFILE"SUCCESS)))"
+error_status_download_folder="$(($(wc -l <"$TMPFILE"ERROR)))"
+sleep 1
+if [ "$((success_status_download_folder+error_status_download_folder))" != "$TOTAL" ];then
+printf '%s\r' "$(_print_center "justify" "Status" ": ${success_status_download_folder:-0} Downloaded | ${error_status_download_folder:-0} Failed" "=")"
+fi
+TOTAL="$((success_status_download_folder+error_status_download_folder))"
+done
+_newline "\n"
+success_status_download_folder="$(($(wc -l <"$TMPFILE"SUCCESS)))"
+error_status_download_folder="$(($(wc -l <"$TMPFILE"ERROR)))"
+_clear_line 1&&_newline "\n"
+else
+while read -r line <&4&&{ [ -n "$line" ]||continue;};do
+_download_file_main parse "$line"
+: "$((RETURN_STATUS<2?(success_status_download_folder+=1):(error_status_download_folder+=1)))"
+if [ -z "$VERBOSE" ];then
+for _ in 1 2 3 4;do _clear_line 1;done
+fi
+_print_center "justify" "Status" ": ${success_status_download_folder:-0} Downloaded | ${error_status_download_folder:-0} Failed" "="
+done 4<<EOF
+$(printf "%s\n" "$files_list_download_folder")
+EOF
+fi
+fi
+for _ in 1 2;do _clear_line 1;done
+[ "$success_status_download_folder" -gt 0 ]&&"${QUIET:-_print_center}" "justify" "Downloaded" ": $success_status_download_folder" "="
+[ "${error_status_download_folder:-0}" -gt 0 ]&&"${QUIET:-_print_center}" "justify" "Failed" ": $error_status_download_folder" "="
+_newline "\n"
+if [ -z "$SKIP_SUBDIRS" ]&&[ -n "$num_of_folders_download_folder" ];then
+while read -r line <&4&&{ [ -n "$line" ]||continue;};do
+(_download_folder "${line%%"|:_//_:|"*}" "${line##*"|:_//_:|"}" "${parallel:-}")
+done 4<<EOF
+$(printf "%s\n" "$folders_list_download_folder")
+EOF
+fi
+cd - 2>|/dev/null 1>&2||exit 1
+return 0
+}
+_log_in_file(){
+[ -z "$LOG_FILE_ID" ]||[ -d "$LOG_FILE_ID" ]&&return 0
+{
+printf "%s\n" "Name: $1"
+printf "%s\n" "Size: $2"
+printf "%s\n\n" "ID: $3"
+} >>"$LOG_FILE_ID"
+}
+_api_request(){
+curl -e "https://drive.google.com" --compressed $CURL_PROGRESS \
+"$API_URL/drive/$API_VERSION/${1:?}&key=$API_KEY&supportsAllDrives=true&includeItemsFromAllDrives=true"||return 1
+_clear_line 1 1>&2
+}
+_api_request_oauth(){
+. "${TMPFILE}_ACCESS_TOKEN"
+curl --compressed $CURL_PROGRESS \
+-H "Authorization: Bearer $ACCESS_TOKEN" \
+"$API_URL/drive/$API_VERSION/${1:?}&supportsAllDrives=true&includeItemsFromAllDrives=true"||return 1
+_clear_line 1 1>&2
+}
+_check_id(){
+[ $# = 0 ]&&printf "Missing arguments\n"&&return 1
+"$EXTRA_LOG" "justify" "Validating URL/ID.." "-"
+id_check_id="$1" json_check_id=""
+if json_check_id="$("$API_REQUEST_FUNCTION" "files/$id_check_id?alt=json&fields=name,size,mimeType")";then
+if ! printf "%s\n" "$json_check_id"|_json_value code 1 1 2>|/dev/null 1>&2;then
+NAME="$(printf "%s\n" "$json_check_id"|_json_value name 1 1||:)"
+mime_check_id="$(printf "%s\n" "$json_check_id"|_json_value mimeType 1 1||:)"
+_clear_line 1
+case "$mime_check_id" in
+*folder*)FOLDER_ID="$id_check_id"
+_print_center "justify" "Folder Detected" "="&&_newline "\n"
+;;
+*)SIZE="$(printf "%s\n" "$json_check_id"|_json_value size 1 1||:)"
+FILE_ID="$id_check_id"
+_print_center "justify" "File Detected" "="&&_newline "\n"
+esac
+export NAME SIZE FILE_ID FOLDER_ID
+else
+_clear_line 1&&"${QUIET:-_print_center}" "justify" "Invalid URL/ID" "="&&_newline "\n"
+return 1
+fi
+else
+_clear_line 1
+"${QUIET:-_print_center}" "justify" "Error: Cannot check URL/ID" "="
+printf "%s\n" "$json_check_id"
+return 1
+fi
+return 0
+}
+_extract_id(){
+[ $# = 0 ]&&printf "Missing arguments\n"&&return 1
+LC_ALL=C id_extract_id="$1"
+case "$id_extract_id" in
+*'drive.google.com'*'id='*)_tmp="${id_extract_id##*id=}"&&_tmp="${_tmp%%\?*}"&&id_extract_id="${_tmp%%\&*}";;
+*'drive.google.com'*'file/d/'*|'http'*'docs.google.com'*'/d/'*)_tmp="${id_extract_id##*\/d\/}"&&_tmp="${_tmp%%\/*}"&&_tmp="${_tmp%%\?*}"&&id_extract_id="${_tmp%%\&*}";;
+*'drive.google.com'*'drive'*'folders'*)_tmp="${id_extract_id##*\/folders\/}"&&_tmp="${_tmp%%\?*}"&&id_extract_id="${_tmp%%\&*}"
+esac
+printf "%b" "${id_extract_id:+$id_extract_id\n}"
+}
+_get_access_token_and_update(){
+RESPONSE="${1:-$(curl --compressed -s -X POST --data "client_id=$CLIENT_ID&client_secret=$CLIENT_SECRET&refresh_token=$REFRESH_TOKEN&grant_type=refresh_token" "$TOKEN_URL")}"||:
+if ACCESS_TOKEN="$(printf "%s\n" "$RESPONSE"|_json_value access_token 1 1)";then
+ACCESS_TOKEN_EXPIRY="$(($(date +"%s")+$(printf "%s\n" "$RESPONSE"|_json_value expires_in 1 1)-1))"
+_update_config ACCESS_TOKEN "$ACCESS_TOKEN" "$CONFIG"
+_update_config ACCESS_TOKEN_EXPIRY "$ACCESS_TOKEN_EXPIRY" "$CONFIG"
+else
+"${QUIET:-_print_center}" "justify" "Error: Something went wrong" ", printing error." "=" 1>&2
+printf "%s\n" "$RESPONSE" 1>&2
+return 1
+fi
+return 0
+}
+_usage(){
+printf "%b" "
+The script can be used to download file/directory from google drive.\n
+Usage:\n ${0##*/} [options.. ] <file_[url|id]> or <folder[url|id]>\n
+Options:\n
+  -aria | --aria-flags 'flags' - Use aria2c to download. '-aria' does not take arguments.\n
+      To give custom flags as argument, use long flag, --aria-flags. e.g: --aria-flags '-s 10 -x 10'\n
+      Note 1: aria2c can only resume google drive downloads if '-k/--key' or '-o/--oauth' option is used, otherwise, it will use curl.\n
+      Note 2: aria split downloading won't work in normal mode ( without '-k' or '-o' flag ) because it cannot get the remote server size. Same for any other feature which uses remote server size.\n
+      Note 3: By above notes, conclusion is, aria is basically same as curl in normal mode, so it is recommended to be used only with '--key' and '--oauth' flag.\n
+  -o | --oauth - Use this flag to trigger oauth authentication.\n
+      Note: If both --oauth and --key flag is used, --oauth flag is preferred.\n
+  -k | --key 'API KEY' ( optional arg ) - To download with api key. If api key is not specified, then the predefined api key will be used.\n
+      To save your api key in config file, use 'gdl --key default=your api key'.
+      API key will be saved in '$HOME/.gdl.conf' and will be used from now on.\n
+      Note: If both --key and --key oauth is used, --oauth flag is preferred.\n
+  -c | --config 'config file path' - Override default config file with custom config file. Default: $HOME/.gdl.conf\n
+  -d | --directory 'foldername' - option to _download given input in custom directory.\n
+  -s | --skip-subdirs - Skip downloading of sub folders present in case of folders.\n
+  -p | --parallel 'no_of_files_to_parallely_upload' - Download multiple files in parallel.\n
+  --speed 'speed' - Limit the download speed, supported formats: 1K, and 1M.\n
+  -ua | --user-agent 'user agent string' - Specify custom user agent.\n
+  -R | --retry 'num of retries' - Retry the file upload if it fails, postive integer as argument. Currently only for file uploads.\n
+  -in | --include 'pattern' - Only download the files which contain the given pattern - Applicable for folder downloads.\n
+      e.g: ${0##*/} local_folder --include '1', will only include with files with pattern '1' in the name. Regex can be used which works with grep -E command.\n
+  -ex | --exclude 'pattern' - Exclude the files with the given pattern from downloading. - Applicable for folder downloads.\n
+      e.g: ${0##*/} local_folder --exclude '1', will exclude all the files pattern '1' in the name. Regex can be used which works with grep -E command.\n
+  -l | --log 'file_to_save_info' - Save downloaded files info to the given filename.\n
+  -q | --quiet - Supress the normal output, only show success/error upload messages for files, and one extra line at the beginning for folder showing no. of files and sub folders.\n
+  -V | --verbose - Display detailed message (only for non-parallel uploads).\n
+  --skip-internet-check - Do not check for internet connection, recommended to use in sync jobs.\n
+  -u | --update - Update the installed script in your system.\n
+  -V | --version | --info - Show detailed info, only if script is installed system wide.\n
+  --uninstall - Uninstall script, remove related files.\n
+  -D | --debug - Display script command trace.\n
+  -h | --help - Display usage instructions.\n"
+exit 0
+}
+_short_help(){
+printf "No valid arguments provided, use -h/--help flag to see usage.\n"
+exit 0
+}
+_auto_update(){
+export REPO
+command -v "$COMMAND_NAME" 1>/dev/null&&if [ -n "${REPO:+${COMMAND_NAME:+${INSTALL_PATH:+${TYPE:+$TYPE_VALUE}}}}" ];then
+current_time="$(date +'%s')"
+[ "$((LAST_UPDATE_TIME+AUTO_UPDATE_INTERVAL))" -lt "$(date +'%s')" ]&&_update
+_update_value LAST_UPDATE_TIME "$current_time"
+fi
+return 0
+}
+_update(){
+job_update="${1:-update}"
+[ "$GLOBAL_INSTALL" = true ]&&! [ "$(id -u)" = 0 ]&&printf "%s\n" "Error: Need root access to update."&&return 0
+[ "$job_update" = uninstall ]&&job_string_update="--uninstall"
+_print_center "justify" "Fetching $job_update script.." "-"
+repo_update="${REPO:-labbots/gdrive-downloader}" type_value_update="${TYPE_VALUE:-master}" cmd_update="${COMMAND_NAME:-gdl}" path_update="${INSTALL_PATH:-$HOME/.gdrive-downloader}"
+if script_update="$(curl --compressed -Ls "https://github.com/$repo_update/raw/$type_value_update/install.sh")";then
+_clear_line 1
+printf "%s\n" "$script_update"|sh -s -- ${job_string_update:-} --skip-internet-check --cmd "$cmd_update" --path "$path_update"
+current_time="$(date +'%s')"
+[ -z "$job_string_update" ]&&_update_value LAST_UPDATE_TIME "$current_time"
+else
+_clear_line 1
+"${QUIET:-_print_center}" "justify" "Error: Cannot download" " $job_update script." "=" 1>&2
+exit 1
+fi
+exit "$?"
+}
+_version_info(){
+if command -v "$COMMAND_NAME" 1>/dev/null&&[ -n "${REPO:+${COMMAND_NAME:+${INSTALL_PATH:+${TYPE:+$TYPE_VALUE}}}}" ];then
+for i in REPO INSTALL_PATH INSTALLATION TYPE TYPE_VALUE LATEST_INSTALLED_SHA;do
+printf "%s\n" "$i=\"$(eval printf "%s" \"\$"$i"\")\""
+done|sed -e "s/=/: /g"
+else
+printf "%s\n" "gdrive-downloader is not installed system wide."
+fi
+exit 0
+}
+_update_value(){
+command_path="${INSTALL_PATH:?}/$COMMAND_NAME"
+value_name="${1:-}" value="${2:-}"
+script_without_value_and_shebang="$(grep -v "$value_name=\".*\".* # added values" "$command_path"|sed 1d)"
+new_script="$(sed -n 1p "$command_path"
+printf "%s\n" "$value_name=\"$value\" # added values"
+printf "%s\n" "$script_without_value_and_shebang")"
+chmod +w "$command_path"&&printf "%s\n" "$new_script" >|"$command_path"&&chmod -w "$command_path"
+return 0
+}
+_setup_arguments(){
+[ $# = 0 ]&&printf "Missing arguments\n"&&return 1
+unset LOG_FILE_ID OAUTH_ENABLED API_KEY_DOWNLOAD CONFIG FOLDERNAME SKIP_SUBDIRS NO_OF_PARALLEL_JOBS PARALLEL_DOWNLOAD
+unset DOWNLOAD_WITH_ARIA ARIA_EXTRA_FLAGS ARIA_SPEED_LIMIT_FLAG
+unset DEBUG QUIET VERBOSE VERBOSE_PROGRESS SKIP_INTERNET_CHECK RETRY SPEED_LIMIT USER_AGENT
+unset ID_INPUT_ARRAY FINAL_INPUT_ARRAY INCLUDE_FILES EXCLUDE_FILES
+export USER_AGENT_FLAG="--user-agent"
+CURL_PROGRESS="-s" CURL_SPEED_LIMIT_FLAG="--limit-rate" CURL_EXTRA_FLAGS="-Ls"
+EXTRA_LOG=":"
+CONFIG="$HOME/.gdl.conf"
+API_KEY="AIzaSyD2dHsZJ9b4OXuy5B_owiL8W18NaNOM8tk"
+API_URL="https://www.googleapis.com"
+API_VERSION="v3"
+SCOPE="$API_URL/auth/drive"
+REDIRECT_URI="urn:ietf:wg:oauth:2.0:oob"
+TOKEN_URL="https://accounts.google.com/o/oauth2/token"
+_check_longoptions(){
+[ -z "$2" ]&&printf '%s: %s: option requires an argument\nTry '"%s -h/--help"' for more information.\n' "${0##*/}" "$1" "${0##*/}"&&exit 1
+return 0
+}
+while [ "$#" -gt 0 ];do
+case "$1" in
+-h|--help)_usage;;
+-D|--debug)DEBUG="true"&&export DEBUG;;
+-u|--update)_check_debug&&_update;;
+-U|--uninstall)_check_debug&&_update uninstall;;
+-V|--version|--info)_version_info;;
+-l|--log)_check_longoptions "$1" "$2"
+LOG_FILE_ID="$2"&&shift
+;;
+-aria|--aria-flags)DOWNLOAD_WITH_ARIA="true"
+[ "$1" = "--aria-flags" ]&&{
+_check_longoptions "$1" "$2"
+ARIA_EXTRA_FLAGS=" $ARIA_EXTRA_FLAGS $2 "&&shift
+}
+;;
+-o|--oauth)OAUTH_ENABLED="true";;
+-k|--key)API_KEY_DOWNLOAD="true"
+_API_KEY="${2##default=}"
+if printf "%s\n" "$_API_KEY"|grep -qE 'AIza[0-9A-Za-z_-]{35}';then
+API_KEY="$_API_KEY"&&shift
+[ -z "${2##default=*}" ]&&UPDATE_DEFAULT_API_KEY="_update_config"
+fi
+;;
+-c|--config)_check_longoptions "$1" "$2"
+CONFIG="$2"&&shift
+;;
+-d|--directory)_check_longoptions "$1" "$2"
+FOLDERNAME="$2"&&shift
+;;
+-s|--skip-subdirs)SKIP_SUBDIRS="true"
+;;
+-p|--parallel)_check_longoptions "$1" "$2"
+if [ "$2" -gt 0 ] 2>|/dev/null 1>&2;then
+NO_OF_PARALLEL_JOBS="$2"
+else
+printf "\nError: -p/--parallel value ranges between 1 to 10.\n"
+exit 1
+fi
+PARALLEL_DOWNLOAD="parallel"&&shift
+;;
+--speed)_check_longoptions "$1" "$2"
+regex='^([0-9]+)([k,K]|[m,M])+$'
+if printf "%s\n" "$2"|grep -qE "$regex";then
+SPEED_LIMIT="$2"&&shift
+else
+printf "Error: Wrong speed limit format, supported formats: 1K and 1M.\n" 1>&2
+exit 1
+fi
+;;
+-ua|--user-agent)_check_longoptions "$1" "$2"
+export USER_AGENT="$2"&&shift
+;;
+-R|--retry)_check_longoptions "$1" "$2"
+if [ "$((2))" -gt 0 ] 2>|/dev/null 1>&2;then
+RETRY="$2"&&shift
+else
+printf "Error: -R/--retry only takes positive integers as arguments, min = 1, max = infinity.\n"
+exit 1
+fi
+;;
+-in|--include)_check_longoptions "$1" "$2"
+INCLUDE_FILES="${INCLUDE_FILES:+$INCLUDE_FILES|}$2"&&shift
+;;
+-ex|--exclude)_check_longoptions "$1" "$2"
+EXCLUDE_FILES="${EXCLUDE_FILES:+$EXCLUDE_FILES|}$2"&&shift
+;;
+-q|--quiet)QUIET="_print_center_quiet";;
+--verbose)VERBOSE="true";;
+--skip-internet-check)SKIP_INTERNET_CHECK=":"
+;;
+''|*)[ -n "$1" ]&&{
+if [ -z "${1##-*}" ];then
+printf '%s: %s: Unknown option\nTry '"%s -h/--help"' for more information.\n' "${0##*/}" "$1" "${0##*/}"&&exit 1
+else
+ID_INPUT_ARRAY="$ID_INPUT_ARRAY
+                                    $(_extract_id "$1")"
+fi
+}
+esac
+shift
+done
+[ -z "$ID_INPUT_ARRAY" ]&&_short_help
+[ -n "$OAUTH_ENABLED" ]&&unset API_KEY_DOWNLOAD
+[ -n "$DOWNLOAD_WITH_ARIA" ]&&{
+command -v aria2c 1>|/dev/null||{ printf "%s\n" "Error: aria2c not installed."&&exit 1;}
+ARIA_SPEED_LIMIT_FLAG="--max-download-limit"
+ARIA_EXTRA_FLAGS="$ARIA_EXTRA_FLAGS -q --file-allocation=none --auto-file-renaming=false --continue"
+}
+_check_debug
+return 0
+}
+_check_credentials(){
+[ -r "$CONFIG" ]&&. "$CONFIG"
+if [ -n "$OAUTH_ENABLED" ];then
+! [ -t 1 ]&&[ -z "${CLIENT_ID:+${CLIENT_SECRET:+$REFRESH_TOKEN}}" ]&&{
+printf "%s\n" "Error: Script is not running in a terminal, cannot ask for credentials."
+printf "%s\n" "Add in config manually if terminal is not accessible. CLIENT_ID, CLIENT_SECRET and REFRESH_TOKEN is required."&&return 1
+}
+CLIENT_ID_REGEX='[0-9]+-[0-9A-Za-z_]{32}\.apps\.googleusercontent\.com'
+CLIENT_SECRET_REGEX='[0-9A-Za-z_-]+'
+REFRESH_TOKEN_REGEX='[0-9]//[0-9A-Za-z_-]+'
+ACCESS_TOKEN_REGEX='ya29\.[0-9A-Za-z_-]+'
+AUTHORIZATION_CODE_REGEX='[0-9]/[0-9A-Za-z_-]+'
+until [ -n "$CLIENT_ID" ]&&[ -n "$CLIENT_ID_VALID" ];do
+[ -n "$CLIENT_ID" ]&&{
+if printf "%s\n" "$CLIENT_ID"|grep -qE "$CLIENT_ID_REGEX";then
+[ -n "$client_id" ]&&_update_config CLIENT_ID "$CLIENT_ID" "$CONFIG"
+CLIENT_ID_VALID="true"&&continue
+else
+{ [ -n "$client_id" ]&&message="- Try again";}||message="in config ( $CONFIG )"
+"${QUIET:-_print_center}" "normal" " Invalid Client ID $message " "-"&&unset CLIENT_ID client_id
+fi
+}
+[ -z "$client_id" ]&&printf "\n"&&"${QUIET:-_print_center}" "normal" " Enter Client ID " "-"
+[ -n "$client_id" ]&&_clear_line 1
+printf -- "-> "
+read -r CLIENT_ID&&client_id=1
+done
+until [ -n "$CLIENT_SECRET" ]&&[ -n "$CLIENT_SECRET_VALID" ];do
+[ -n "$CLIENT_SECRET" ]&&{
+if printf "%s\n" "$CLIENT_SECRET"|grep -qE "$CLIENT_SECRET_REGEX";then
+[ -n "$client_secret" ]&&_update_config CLIENT_SECRET "$CLIENT_SECRET" "$CONFIG"
+CLIENT_SECRET_VALID="true"&&continue
+else
+{ [ -n "$client_secret" ]&&message="- Try again";}||message="in config ( $CONFIG )"
+"${QUIET:-_print_center}" "normal" " Invalid Client Secret $message " "-"&&unset CLIENT_SECRET client_secret
+fi
+}
+[ -z "$client_secret" ]&&printf "\n"&&"${QUIET:-_print_center}" "normal" " Enter Client Secret " "-"
+[ -n "$client_secret" ]&&_clear_line 1
+printf -- "-> "
+read -r CLIENT_SECRET&&client_secret=1
+done
+[ -n "$REFRESH_TOKEN" ]&&{
+! printf "%s\n" "$REFRESH_TOKEN"|grep -qE "$REFRESH_TOKEN_REGEX"&&"${QUIET:-_print_center}" "normal" " Error: Invalid Refresh token in config file, follow below steps.. " "-"&&unset REFRESH_TOKEN
+}
+[ -z "$REFRESH_TOKEN" ]&&{
+printf "\n"&&"${QUIET:-_print_center}" "normal" "If you have a refresh token generated, then type the token, else leave blank and press return key.." " "
+printf "\n"&&"${QUIET:-_print_center}" "normal" " Refresh Token " "-"&&printf -- "-> "
+read -r REFRESH_TOKEN
+if [ -n "$REFRESH_TOKEN" ];then
+"${QUIET:-_print_center}" "normal" " Checking refresh token.. " "-"
+if ! printf "%s\n" "$REFRESH_TOKEN"|grep -qE "$REFRESH_TOKEN_REGEX";then
+{ _get_access_token_and_update&&_update_config REFRESH_TOKEN "$REFRESH_TOKEN" "$CONFIG";}||check_error=1
+else
+check_error=true
+fi
+[ -n "$check_error" ]&&"${QUIET:-_print_center}" "normal" " Error: Invalid Refresh token given, follow below steps to generate.. " "-"&&unset REFRESH_TOKEN
+else
+"${QUIET:-_print_center}" "normal" " No Refresh token given, follow below steps to generate.. " "-"
+fi
+[ -z "$REFRESH_TOKEN" ]&&{
+printf "\n"&&"${QUIET:-_print_center}" "normal" "Visit the below URL, tap on allow and then enter the code obtained" " "
+URL="https://accounts.google.com/o/oauth2/auth?client_id=$CLIENT_ID&redirect_uri=$REDIRECT_URI&scope=$SCOPE&response_type=code&prompt=consent"
+printf "\n%s\n" "$URL"
+until [ -n "$AUTHORIZATION_CODE" ]&&[ -n "$AUTHORIZATION_CODE_VALID" ];do
+[ -n "$AUTHORIZATION_CODE" ]&&{
+if printf "%s\n" "$AUTHORIZATION_CODE"|grep -qE "$AUTHORIZATION_CODE_REGEX";then
+AUTHORIZATION_CODE_VALID="true"&&continue
+else
+"${QUIET:-_print_center}" "normal" " Invalid CODE given, try again.. " "-"&&unset AUTHORIZATION_CODE authorization_code
+fi
+}
+{ [ -z "$authorization_code" ]&&printf "\n"&&"${QUIET:-_print_center}" "normal" " Enter the authorization code " "-";}||_clear_line 1
+printf -- "-> "
+read -r AUTHORIZATION_CODE&&authorization_code=1
+done
+RESPONSE="$(curl --compressed "$CURL_PROGRESS" -X POST \
+--data "code=$AUTHORIZATION_CODE&client_id=$CLIENT_ID&client_secret=$CLIENT_SECRET&redirect_uri=$REDIRECT_URI&grant_type=authorization_code" "$TOKEN_URL")"||:
+_clear_line 1 1>&2
+REFRESH_TOKEN="$(printf "%s\n" "$RESPONSE"|_json_value refresh_token 1 1||:)"
+{ _get_access_token_and_update "$RESPONSE"&&_update_config REFRESH_TOKEN "$REFRESH_TOKEN" "$CONFIG";}||return 1
+}
+printf "\n"
+}
+{ [ -z "$ACCESS_TOKEN" ]||! printf "%s\n" "$ACCESS_TOKEN"|grep -qE "$ACCESS_TOKEN_REGEX"||[ "${ACCESS_TOKEN_EXPIRY:-0}" -lt "$(date +'%s')" ];}&&{ _get_access_token_and_update||return 1;}
+printf "%b\n" "ACCESS_TOKEN=\"$ACCESS_TOKEN\"\nACCESS_TOKEN_EXPIRY=\"$ACCESS_TOKEN_EXPIRY\"" >|"${TMPFILE}_ACCESS_TOKEN"
+{
+until ! kill -0 "$MAIN_PID" 2>|/dev/null 1>&2;do
+. "${TMPFILE}_ACCESS_TOKEN"
+CURRENT_TIME="$(date +'%s')"
+REMAINING_TOKEN_TIME="$((CURRENT_TIME-ACCESS_TOKEN_EXPIRY))"
+if [ "$REMAINING_TOKEN_TIME" -le 300 ];then
+CONFIG="${TMPFILE}_ACCESS_TOKEN" _timeout 30 _get_access_token_and_update||:
+else
+TOKEN_PROCESS_TIME_TO_SLEEP="$(if [ "$REMAINING_TOKEN_TIME" -le 301 ];then
+printf "0\n"
+else
+printf "%s\n" "$((REMAINING_TOKEN_TIME-300))"
+fi)"
+sleep "$TOKEN_PROCESS_TIME_TO_SLEEP"
+fi
+sleep 1
+done
+}&
+ACCESS_TOKEN_SERVICE_PID="$!"
+elif [ -n "$API_KEY_DOWNLOAD" ];then
+"${UPDATE_DEFAULT_API_KEY:-:}" API_KEY "$API_KEY" "$CONFIG"
+fi
+return 0
+}
+_process_arguments(){
+export DEBUG LOG_FILE_ID VERBOSE API_KEY API_URL API_VERSION \
+FOLDERNAME SKIP_SUBDIRS NO_OF_PARALLEL_JOBS PARALLEL_DOWNLOAD SKIP_INTERNET_CHECK \
+COLUMNS TMPFILE CURL_PROGRESS EXTRA_LOG RETRY QUIET SPEED_LIMIT SOURCE_UTILS \
+DOWNLOAD_WITH_ARIA ARIA_EXTRA_FLAGS ARIA_SPEED_LIMIT_FLAG CURL_SPEED_LIMIT_FLAG CURL_EXTRA_FLAGS \
+OAUTH_ENABLED API_KEY_DOWNLOAD INCLUDE_FILES EXCLUDE_FILES
+${FOLDERNAME:+mkdir -p $FOLDERNAME}
+cd "${FOLDERNAME:-.}" 2>|/dev/null 1>&2||exit 1
+unset Aseen&&while read -r id <&4&&{ [ -n "$id" ]||continue;}&&case "$Aseen" in
+*"|:_//_:|$id|:_//_:|"*)continue;;
+*)Aseen="$Aseen|:_//_:|$id|:_//_:|"
+esac;do
+_check_id "$id"||continue
+if [ -n "$FOLDER_ID" ];then
+_download_folder "$FOLDER_ID" "$NAME" "${PARALLEL_DOWNLOAD:-}"
+else
+_download_file_main noparse "$FILE_ID" "$NAME" "$SIZE"
+fi
+done 4<<EOF
+$(printf "%s\n" "$ID_INPUT_ARRAY")
+EOF
+return 0
+}
+main(){
+[ $# = 0 ]&&_short_help
+if [ -z "$SELF_SOURCE" ];then
+UTILS_FOLDER="${UTILS_FOLDER:-$PWD}"&&SOURCE_UTILS=". '$UTILS_FOLDER/common-utils.sh' && . '$UTILS_FOLDER/download-utils.sh' && . '$UTILS_FOLDER/drive-utils.sh'"
+eval "$SOURCE_UTILS"||{ printf "Error: Unable to source util files.\n"&&exit 1;}
+else
+SOURCE_UTILS="SOURCED_GDL=true . \"$({ cd "${0%\/*}" 2>|/dev/null||:;}&&pwd)/${0##*\/}\""&&eval "$SOURCE_UTILS"
+fi
+set -o errexit -o noclobber
+TMPFILE="$(command -v mktemp 1>|/dev/null&&mktemp -u)"||TMPFILE="$(pwd)/.$(_t="$(date +"%s")"&&printf "%s\n" "$((_t*_t))").tmpfile"
+_setup_arguments "$@"
+"${SKIP_INTERNET_CHECK:-_check_internet}"
+_cleanup(){
+[ -n "$SUPPORT_ANSI_ESCAPES" ]&&printf "\e[?25h"
+{
+[ -n "$OAUTH_ENABLED" ]&&{
+[ -f "${TMPFILE}_ACCESS_TOKEN" ]&&{
+. "${TMPFILE}_ACCESS_TOKEN"
+[ "$INITIAL_ACCESS_TOKEN" = "$ACCESS_TOKEN" ]||{
+_update_config ACCESS_TOKEN "$ACCESS_TOKEN" "$CONFIG"
+_update_config ACCESS_TOKEN_EXPIRY "$ACCESS_TOKEN_EXPIRY" "$CONFIG"
+}
+} 1>|/dev/null
+[ -n "$ACCESS_TOKEN_SERVICE_PID" ]&&{
+token_service_pids="$(ps --ppid="$ACCESS_TOKEN_SERVICE_PID" -o pid=)"
+kill "$ACCESS_TOKEN_SERVICE_PID"
+} 1>|/dev/null
+}
+script_children_pids="$(ps --ppid="$MAIN_PID" -o pid=)"
+kill $token_service_pids $script_children_pids 1>|/dev/null
+rm -f "${TMPFILE:?}"*
+export abnormal_exit&&if [ -n "$abnormal_exit" ];then
+printf "\n\n%s\n" "Script exited manually."
+kill -9 -$$&
+else
+_auto_update
+fi
+} 2>|/dev/null||:
+return 0
+}
+trap 'abnormal_exit="1" ; exit' INT TERM
+trap '_cleanup' EXIT
+export MAIN_PID="$$"
+if [ -n "$OAUTH_ENABLED" ];then
+"$EXTRA_LOG" "justify" "Checking credentials.." "-"
+{ _check_credentials&&for _ in 1 2;do _clear_line 1;done;}||{ "${QUIET:-_print_center}" "normal" "[ Error: Credentials checking failed ]" "="&&exit 1;}
+_print_center "justify" "Required credentials available." "="
+export API_REQUEST_FUNCTION="_api_request_oauth" OAUTH_ENABLED="true"
+else
+export API_REQUEST_FUNCTION="_api_request"
+fi
+START="$(date +'%s')"
+[ -n "$SUPPORT_ANSI_ESCAPES" ]&&printf "\033[?25l"
+_process_arguments
+END="$(date +'%s')"
+DIFF="$((END-START))"
+"${QUIET:-_print_center}" "normal" " Time Elapsed: ""$((DIFF/60))"" minute(s) and ""$((DIFF%60))"" seconds. " "="
+}
+{ [ -z "$SOURCED_GDL" ]&&main "$@";}||:

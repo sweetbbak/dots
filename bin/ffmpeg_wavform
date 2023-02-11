@@ -1,0 +1,60 @@
+#!/bin/sh
+set -eu
+# Dependencies: util.sh, ffmpeg, gnuplot
+# Portability:  POSIX
+
+. ${SH_LIB_DIR:-~/bin/}util.sh
+selfdir=$(dirname -- "$(readlinkf "$0")")
+PATH=$PATH:$selfdir
+
+requirebin ffmpeg gnuplot
+
+
+if [ $# -gt 2 ] || [ $# -lt 1 ] || is_help "$@"
+then
+	name=$(basename "$(readlinkf "$0")")
+	cat <<EOF | text_format
+**NAME**
+    $name - Draw the waveform of an audio file
+
+**SYNOPSIS**
+    $name [**-h**] __AUDIO__ [__PNG_OUT__]
+
+EOF
+	exit 1
+fi
+requirefile -f "$1"
+
+width=2000
+height=400
+out=${2:-${1%.*}.wave.png}
+chan1=$(mktemp)
+chan2=$(mktemp)
+
+forbidfile "$out"
+atexit '$_aborted && rm -f -- "$out"'
+atexit 'rm -- "$chan1" "$chan2"'
+
+ffmpeg -hide_banner -loglevel error -y -i "$1" \
+	-ac 2 -filter_complex:a '[0:a]aresample=8000, asplit[l][r]' \
+	-map '[l]' -c:a pcm_s16le -f data "$chan1" \
+	-map '[r]' -c:a pcm_s16le -f data "$chan2"
+
+gnuplot <<- EOF
+set terminal png size $width, $height;
+set output "$out";
+
+unset key;
+unset tics;
+unset border;
+set lmargin 0;
+set rmargin 0;
+set tmargin 0
+set bmargin 0;
+set yrange [-32768: 32767]
+
+set multiplot layout 2,1;
+plot "$chan1" binary filetype=bin format='%int16' endian=little array=1:0 with lines linecolor "royalblue";
+plot "$chan2" binary filetype=bin format='%int16' endian=little array=1:0 with lines linecolor "royalblue";
+unset multiplot;
+EOF

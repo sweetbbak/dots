@@ -1,0 +1,50 @@
+theme = "fleet_dark"
+
+# General Helix's configuration
+[editor]
+line-number = "relative"
+cursorline = true
+color-modes = true
+
+# File explorer configuration
+[editor.file-picker]
+hidden = false
+parents = false
+
+[editor.whitespace]
+render = "none"
+
+[editor.indent-guides]
+render = false
+character = "╎" # Some characters that work well: "▏", "┆", "┊", "⸽"
+skip-levels = 1
+
+# Helix's statusline
+[editor.statusline]
+left = ["mode", "spinner"]
+center = ["file-name", "diagnostics"]
+right = ["selections", "position"]
+separator = "│"
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
+
+[keys.normal]
+"C-r" = [":config-reload"]
+"C-s" = [":w"]
+"C-o" = [":open ~/.config/helix/config.toml"]
+"g" = { a = "code_action" }
+"G" = ["goto_last_line"]
+"Z" = { Q = ":quit!" ,  Z = ":write-quit!" }
+"D" = ["extend_to_line_bounds", "delete_selection"]
+"0" = ["goto_line_start"]
+"$" = ["goto_line_end"]
+"=" = [ ":format" ]
+
+[keys.select]
+"D" = ["extend_to_line_bounds", "delete_selection"]
+
+[keys.insert]
+j = { k = "normal_mode" } # Maps `jk` to exit insert mode
+C-left = "move_prev_word_start"
+C-right = "move_next_word_end"

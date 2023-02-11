@@ -1,0 +1,74 @@
+#!/bin/sh
+set -eu
+# Dependencies: util.sh, archive_extract
+# Portability:  GNU, *BSD, MacOS, Illumos
+# +---------+-----+---------+--------+--------------+---------+-------+---------+-------+-----+------+-------+
+# | cmd/OS  | GNU | OpenBSD | NetBSD | DragonflyBSD | FreeBSD | MacOS | Illumos | HP-UX | AIX | IRIX | Tru64 |
+# +---------+-----+---------+--------+--------------+---------+-------+---------+-------+-----+------+-------+
+# | xargsnl | o   | o       | o      | o            | o       | o     | o       |       |     |      |       |
+# +---------+-----+---------+--------+--------------+---------+-------+---------+-------+-----+------+-------+
+
+. ${SH_LIB_DIR:-~/bin/}util.sh
+selfdir=$(dirname -- "$(readlinkf "$0")")
+PATH=$PATH:$selfdir
+
+
+usage()
+{
+	name=$(basename "$(readlinkf "$0")")
+	cat <<EOF | text_format
+**NAME**
+    $name - Merge multiple archives into one while conserving \
+order
+
+**SYNOPSIS**
+    $name [**-hj**] __ARCHIVE_OUT__ __ARCHIVE_IN__...
+
+**OPTIONS**
+    **-j**
+        Extract archives to merge without creating a new directory (may not
+        preserve order).
+
+EOF
+	exit $1
+}
+
+junk=false
+while getopts "hj" OPT
+do
+	case "$OPT" in
+		j)  junk=true;;
+		h)  usage 0;;
+		\?) usage 1;;
+	esac
+done
+shift $((OPTIND - 1))
+[ $# -lt 3 ] && usage 1
+
+
+out=$(readlinkf "$1")
+shift
+forbidfile "$out"
+requirefile -f "$@"
+
+workdir=$(mktemp -d)
+atexit 'rm -r -- "$workdir"'
+atexit '$_aborted && rm -f -- "$out"'
+
+for i
+do
+	if $junk
+	then
+		archive_extract -d "$workdir" "$i"
+	else
+		dir=$workdir/$(basename -- "$i")
+		dir=${dir%.*}
+		mkdir -- "$dir"
+		archive_extract -d "$dir" "$i"
+	fi
+done
+
+cd -- "$workdir"
+listfiles . | awk -F/ '{print $NF}' | \
+	xargsnl archive_create "$out"
+

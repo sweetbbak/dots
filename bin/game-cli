@@ -1,0 +1,21 @@
+#!/bin/sh
+
+page1="https://fitgirl-repacks.site/post-sitemap.xml"
+page2="https://fitgirl-repacks.site/post-sitemap2.xml"
+page3="https://fitgirl-repacks.site/post-sitemap3.xml"
+page4="https://fitgirl-repacks.site/post-sitemap4.xml"
+
+agent="Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/109.0"
+
+download_dir="$HOME/Downloads"
+cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}"
+
+printf "%s\n" "fetching game links"
+curl -A "$agent" -sL "$page1" "$page2" "$page3" "$page4" | sed -nE 's_.*loc>([^<]*)</loc.*_\1_p' > $cache_dir/game.history
+
+sel=$(fzf --reverse --height=35% < "$cache_dir/game.history")
+magnet=$(curl -A "$agent" -sL "$sel" | grep -Eo "magnet:\?xt=urn:btih:[a-zA-Z0-9]*")
+
+[ -z "$magnet" ] && printf "%s\n" "[!] Nothing to download" && exit 1
+
+aria2c -x 16 -s 16 $magnet --dir=$download_dir

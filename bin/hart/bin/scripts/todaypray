@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# Colors :
+Green='\033[1;32m'        # Green
+Cyan='\033[1;36m'        # Cyan
+No='\e[0m'
+
+url="https://www.islamicfinder.org"
+
+# Today Prayer Time:
+#Today=$(curl $url -s | sed -n -e '/todayPrayerName/{N;N;N;N;N;N;N;s/<[^>]*>//g;s/\s\s*/ /g;p}')
+
+# Upcoming Prayer :
+Upcoming=$(curl $url -s | sed -n -e '/Upcoming Prayer/{N;N;N;N;N;N;N;s/<[^>]*>//g;s/\s\s*/ /g;p}')
+
+# Notfication :
+upray=$(echo -e $Upcoming)
+notify-send "📿 $upray"
+
+echo -e "📿${Green}${Upcoming}${No}"
+echo -e "📿 ${Cyan}Today Prayer Time :${No}"
+curl $url -s | sed -n -e '/todayPrayerName/{N;N;N;N;N;N;N;s/<[^>]*>//g;s/\s\s*/ /g;p}' 

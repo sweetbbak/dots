@@ -1,0 +1,14 @@
+#!/bin/bash
+# Requires caarlos0/timer (paru -S timer-bin) to work
+
+declare -A pomo_options
+pomo_options["work"]="45"
+pomo_options["break"]="15"
+
+if [ -n "$1" -a -n "${pomo_options["$1"]}" ]; then
+  val=$1
+  echo $val | figlet | lolcat
+  timer ${pomo_options["$val"]}m
+  mpv /usr/share/sounds/freedesktop/stereo/dialog-error.oga
+
+fi

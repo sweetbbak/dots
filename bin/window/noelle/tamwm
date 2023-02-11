@@ -1,0 +1,420 @@
+#!/bin/sh
+# ==== TAMWM ==================================================================
+# Multi-purpose window-managing script.
+# Dependencies: wmctrl, xdotool
+# Features:
+#    - Launch_app applications with preset geometry
+#    - Workaround for closing ARGB windows with no flicker using Picom fade-out.
+#    - Apply preset layouts on workspace (desktop) change
+#    - Send a window to a position preset
+
+# TODO: replace workspace switching with xprop -spy -root -notype _NET_CURRENT_DESKTOP to watch for workspace changes?
+
+usage() {
+    echo "Usage: tamwm [OPTION] [ARG]
+-l        Launch_app and position a program (args: irc, ncmpcpp, ranger, vim,
+          vivaldi, spare, 3terms)
+-x        Workaround that closes a window with no flicker using Picom
+-d        Desktop manager (args: dprev, dnext, dnum n)
+-s        Positions window (args: 1, 2, 3 etc)"
+}
+
+main() {
+    while getopts l:xd:s:i opt; do
+        case "$opt" in
+        l) instr="launch_app";;
+        x) instr="close_window_workaround";;
+        d) instr="dgoto";;
+        s) instr="move_window_to_preset";;
+        *) instr="usage";;
+        esac
+    done
+    shift
+    $instr "$@"
+}
+
+
+# ===== Main functions ========================================================
+# =============================================================================
+
+launch_app() {
+    set -x
+    tml="alacritty"
+    tml_cls="Alacritty"
+    pre_cmds()     { :; }
+    after_cmds()   { :; }
+
+    case $1 in
+
+    irc|weechat)
+        cls=$tml_cls
+        new_cls="irc"
+        cmd() { $tml -e sh -c 'mosh takat.su -- tmux a; exec zsh'; }
+        after_cmds() { move_window_to_preset 3; } ;;
+
+    ncmpcpp|music)
+        cls=$tml_cls
+        new_cls="ncmpcpp"
+        cmd() { $tml -e sh -c "ncu; clear; exec zsh"; }
+        after_cmds() { move_window_to_preset 4; }
+        ;;
+
+    ranger|r|kranger|fm)
+        cls=$tml_cls
+        new_cls="ranger"
+        cmd() { $tml -e sh -c "r /media/kokone/anime; exec zsh"; }
+        pre_cmds() { mount | grep takat ||
+                   sshfs alpha@takat.su:/home/alpha/ /media/sensei/takatsu & }
+        after_cmds() { move_window_to_preset 5; }
+        ;;
+
+    spare)
+        cls=$tml_cls
+        new_cls="spare"
+        read -r irc_id </tmp/tamwm/WID_irc
+        cmd() { $tml; }
+        after_cmds() { move_window_to_preset 3; }
+        ;;
+
+    vim_one|vim1|nvim1|code1)
+        cls=$tml_cls
+        new_cls="vim_one"
+        cmd() { $tml -d 86 63 -e sh -c \
+                "NVIM_LISTEN_ADDRESS=/tmp/nvimsocket \
+                vim -c 'OpenSession small'; exec zsh"; }
+        after_cmds() { move_window_to_preset 1; };;
+
+    vim2|nvim2|code2)
+        cls=$tml_cls
+        new_cls="vim_two"
+        cmd() { $tml -d 175 63 -e sh -c \
+                "NVIM_LISTEN_ADDRESS=/tmp/nvimsocket2 \
+                vim -c 'OpenSession large'; exec zsh"; }
+        after_cmds() {
+            move_window_to_preset -t "1" 1
+            xdotool set_desktop_for_window "$window_id" 1
+            } ;;
+
+    vim|nvim|code)
+        cmd() { launch_app vim2; launch_app vim1; exit; };;
+
+    vivaldi|web|browser| main )
+        cls="Vivaldi-stable"
+        new_cls="vivaldi"
+        cmd() { vivaldi & }
+        after_cmds() { move_window_to_preset 2; };;
+
+    *) printf '%s\n' "Available -l arguments:" \
+       "irc ncmpcpp ranger vivaldi vim1 vim2 spare"; exit 1 ;;
+
+    esac
+
+    existing_instances=$(count_cls $cls)
+
+    pre_cmds >/dev/null 2>&1 &
+    cmd >/dev/null 2>&1 &
+
+    until [ "$(count_cls $cls)" -gt "$existing_instances" ]; do sleep .1; done
+
+    window_id=$(wmctrl -lx | awk -v c=$cls '$3 ~ c {last=$1} END {print last}')
+
+    if [ -n "$new_cls" ]; then
+        xdotool set_window --class "$new_cls" "$window_id"
+        cls=$new_cls
+    fi
+
+    xdotool windowfocus "$window_id"
+    after_cmds >/dev/null 2>&1 &
+    mkdir -p /tmp/tamwm
+    echo "$window_id" > /tmp/tamwm/WID_"$cls"
+    unset cls new_cls pos size existing_instances window_id tml tml_cls
+}
+
+close_window_workaround() {
+    # If no argument passed, operate on active window
+    [ -z "$1" ] && target=$(active_window)
+    [ -n "$1" ] && target=$1
+    xdotool windowminimize "$target"
+    wmctrl -ic "$target"
+}
+
+move_window_to_preset() {
+    target_dtop=$(active_dtop)
+
+    while getopts t: opt; do
+        case "$opt" in
+        t) target_dtop="$OPTARG"; shift 2;;
+        esac
+    done
+
+    # WORK IN PROGRESS
+    screen_w=$(wmctrl -d | awk -F"[ x]" 'NR==1{print $5}')
+    screen_h=$(wmctrl -d | awk -F"[ x]" 'NR==1{print $6}')
+    pad_top=18 # this is the bar length
+    term_padding=9
+    font_width=7
+    font_height=16
+    min_term_cols=86
+    gaps=17
+
+    top()         { y=36; }
+    left()        { x=14;  }
+    full_height() { h=1026; }
+    eighty_six_cols() { w=627; }
+    vim_two_pos() { top; left; w=1243; full_height; }
+    left_slave()  { eighty_six_cols;  }
+    right_slave() { x=1919; eighty_six_cols; }
+    irc_pos()     { right_slave; top; h=386; }
+    ncmpcpp_pos() { right_slave; y=444; h=242; }
+    ranger_pos()  { right_slave; y=708; h=354; }
+
+    case "$target_dtop" in
+    0) # first workspace/layout
+        case "$1" in
+        1) top; left; eighty_six_cols; full_height ;;
+        2) top; x=655;  w=1250; full_height;;
+        3) irc_pos ;;
+        4) ncmpcpp_pos ;;
+        5) ranger_pos ;;
+        6) right_slave; full_height; top ;;
+        esac
+        ;;
+    1) # second workspace/layout
+        case "$1" in
+        1) vim_two_pos ;;
+        2) x=1271; top; w=1275; full_height ;;
+        esac
+        ;;
+    2) # third workspace/layout
+        case "$1" in
+        1) vim_two_pos ;;
+        3) irc_pos ;;
+        4) ncmpcpp_pos ;;
+        5) ranger_pos ;;
+        6) right_slave; full_height; top ;;
+        esac
+        ;;
+    *) echo "Use: move_window_to_preset 3 / move_window_to_preset -t 2 1"; exit
+        ;;
+    esac
+
+    if [ -z "$2" ]; then
+        target_window="$(active_window)"
+    else
+        read -r target_window </tmp/tamwm/WID_"$2"
+    fi
+    position_window -x "$x" -y "$y" -w "$w" -h "$h" -i "$target_window"
+    xdotool getactivewindow windowactivate
+    unset x y w h
+}
+
+dgoto() {
+    case "$1" in
+    next) destination=$(($(active_dtop)+1))
+          [ "$(active_dtop)" = "$(last_dtop)" ] && destination=0
+          ;;
+    prev) destination=$(($(active_dtop)-1))
+          [ "$(active_dtop)" = 0 ] && destination=$(last_dtop)
+          ;;
+    *)    destination="$1"
+    esac
+
+#    if [ "$destination" = "0" ] || [ "$destination" = "1" ]; then
+        #feh --bg-tile ~/pictures/solidbeige2.gif
+    #fi
+
+    #if [ "$destination" = "2" ] || [ "$destination" = "3" ]; then
+        #feh --no-fehbg --bg-scale ~/pictures/Wallpapers/main.jpg
+    #fi
+
+    switch_to_dtop "$destination"
+
+}
+
+
+# ===== Secondary functions ===================================================
+# =============================================================================
+
+# ==== App launcher
+count_cls() {
+    wmctrl -lx | awk 'BEGIN {i=0} $3~"'"$1"'"{i++} END{print i}'
+}
+
+openbox_actions() {
+    case $1 in
+    to_bottom) xdotool key ctrl+alt+shift+super+1 ;;
+    to_middle) xdotool key ctrl+alt+shift+super+2 ;;
+    to_top)    xdotool key ctrl+alt+shift+super+3 ;;
+    esac
+}
+
+position_window() {
+    unset relativemove relativesize
+    while getopts "i:x:y:w:h:ms" opt; do
+        case "${opt}" in
+        i) id="$OPTARG" ;;
+        x) x="$OPTARG" ;;
+        y) y="$OPTARG" ;;
+        w) width="$OPTARG" ;;
+        h) height="$OPTARG" ;;
+        m) relativemove="--relative";;
+        s) relativesize="--relative";;
+        *) echo "invalid options (ixywh)";;
+        esac
+    done
+
+    if [ -n "$x" ] || [ -n "$y" ]; then
+        xdotool windowmove $relativemove "$id" "$x" "$y"
+    fi
+
+    if [ -n "$width" ] || [ -n "$height" ]; then
+        xdotool windowsize $relativesize "$id" "$width" "$height"
+    fi
+
+    unset id x y width height
+}
+
+# ==== Desktop management
+switch_to_dtop() {
+    set +x
+    active_window=$(active_window)
+    active_dtop=$(active_dtop)
+    read -r irc_wid </tmp/tamwm/WID_irc
+    read -r ncmpcpp_wid </tmp/tamwm/WID_ncmpcpp
+    read -r ranger_wid </tmp/tamwm/WID_ranger
+    read -r vivaldi_wid </tmp/tamwm/WID_vivaldi
+    read -r vim_one_wid </tmp/tamwm/WID_vim_one
+    read -r vim_two_wid </tmp/tamwm/WID_vim_two
+    case $active_dtop in
+        0)
+            if [ $1 = 1 ]; then
+                move_window_to_preset -t 1 2 vivaldi &
+            fi
+            if [ $1 != 0 ]; then
+                position_window -m -x 00 -y 1000 -i $vim_one_wid
+            fi
+            if [ $1 != 0 ] && [ $1 != 2 ]; then
+                position_window -m -x 0 -y -500 -i $irc_wid
+                position_window -m -x 800 -y 0 -i $ncmpcpp_wid
+                position_window -m -x 0 -y 500 -i $ranger_wid
+            fi
+            if [ $1 != 0 ] && [ $1 != 1 ]; then
+                position_window -m -x 0 -y -1000 -i $vivaldi_wid
+            fi
+            ;;
+        1)
+            if [ $1 = 0 ]; then
+                move_window_to_preset -t 0 2 vivaldi &
+            fi
+            if [ $1 != 2 ] && [ $1 != 1 ]; then
+                position_window -m -x -1600 -y 0 -i $vim_two_wid
+            fi
+            if [ $1 != 0 ] && [ $1 != 1 ]; then
+                position_window -m -x 0 -y -1000 -i $vivaldi_wid
+            fi
+            ;;
+        2)
+            if [ $1 != 2 ] && [ $1 != 1 ]; then
+                position_window -m -x -1600 -y 0 -i $vim_two_wid
+            fi
+            if [ $1 != 0 ] && [ $1 != 2 ]; then
+                position_window -m -x 0 -y -500 -i $irc_wid
+                position_window -m -x 800 -y 0 -i $ncmpcpp_wid
+                position_window -m -x 0 -y 500 -i $ranger_wid
+            fi
+            ;;
+    esac
+    sleep .1
+    apply_layout "$1"
+    wmctrl -s "$1"
+    sleep .2
+    xdotool windowfocus "$active_window"
+}
+
+apply_layout() {
+    [ -n "$1" ] && target_layout=$1 || target_layout=$(active_dtop)
+
+    case $target_layout in
+        0)
+        send_to_dtop -g vim_two &
+        send_to_dtop -p "3" irc &
+        send_to_dtop -p "4" ncmpcpp &
+        send_to_dtop -p "5" ranger &
+        send_to_dtop -p "1" vim_one &
+        send_to_dtop -p "2" vivaldi &
+        ;;
+        1)
+        send_to_dtop -g irc &
+        send_to_dtop -g ncmpcpp &
+        send_to_dtop -g ranger &
+        send_to_dtop -g vim_one &
+        move_window_to_preset -t 1 2 vivaldi &
+        send_to_dtop -p "2" vivaldi &
+        send_to_dtop -p "1" vim_two &
+        ;;
+        2)
+        send_to_dtop -g vivaldi &
+        send_to_dtop -g vim_one &
+        send_to_dtop -p "3" irc &
+        send_to_dtop -p "4" ncmpcpp &
+        send_to_dtop -p "5" ranger &
+        send_to_dtop -p "1" vim_two &
+        ;;
+        3)
+        send_to_dtop -g vivaldi &
+        send_to_dtop -g vim_one &
+        send_to_dtop -g irc &
+        send_to_dtop -g ncmpcpp &
+        send_to_dtop -g ranger &
+        send_to_dtop -g vim_two &
+        ;;
+    esac
+}
+
+send_to_dtop() {
+    unset target_layout
+    while getopts p:st:g opt; do
+        case "$opt" in
+        p) target_pos="$OPTARG" ;;
+        s) target_layout="4294967295";;
+        g) target_layout="$(garbage_dtop)";;
+        t) target_layout="$OPTARG";;
+        *) ;;
+        esac
+    done
+    shift $(( OPTIND - 1 ))
+
+    #[ -z "$target_layout" ] && target_layout=$(active_dtop)
+    [ -z "$target_layout" ] && target_layout="4294967295"
+
+    read -r window_id </tmp/tamwm/WID_"$1"
+
+    xdotool set_desktop_for_window "$window_id" "$target_layout"
+    xdotool set_desktop_for_window "$window_id" "$target_layout"
+    if [ "$target_layout" != "$(garbage_dtop)" ]; then
+        xdotool windowactivate "$window_id"
+        xdotool windowactivate "$window_id"
+    fi
+    if [ -n target_pos ]; then
+        move_window_to_preset "$target_pos" "$1"
+    fi
+}
+
+# === Misc
+active_dtop() {
+    wmctrl -d | awk '/\*/ {print $1}'
+}
+
+active_window() {
+    xdotool getactivewindow
+}
+
+last_dtop() {
+    wmctrl -d | awk 'END {print $1-1}'
+}
+
+garbage_dtop() {
+    wmctrl -d | awk 'END {print $1}'
+}
+
+main "$@"

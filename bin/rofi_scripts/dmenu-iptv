@@ -1,0 +1,56 @@
+#!/bin/bash
+# File              : dmenu_iptv
+# License           : MIT License
+# Author            : M. Nabil Adani <nblid48@gmail.com>
+# Date              : Senin, 01/02/2021 11:52 WIB
+# Last Modified Date: Senin, 01/02/2021 11:52 WIB
+# Last Modified By  : M. Nabil Adani <nblid48@gmail.com>
+
+DMENU="rofi -dmenu -i"
+IPTV='''
+[
+    ["ANIMAX",            "http://210.210.155.35/dr9445/h/h144/01.m3u8"],
+    ["ANIPLUS ID",        "http://45.126.83.51/dr9445/h/h02/01.m3u8"],
+    ["ANTV",              "http://210.210.155.35/qwr9ew/s/s07/02.m3u8"],
+    ["AXN",               "http://210.210.155.35:80/session/37ee409e-73b5-11e9-b657-a0899505893d/uq2663/h/h141/01.m3u8"],
+    ["Ahsan TV",          "http://119.82.224.75:1935/live/ahsantv/playlist.m3u8"],
+    ["BERITA SATU 480p",  "https://b1news.beritasatumedia.com/Beritasatu/B1News_960x540.m3u8"],
+    ["BERITA SATU 720p",  "https://b1news.beritasatumedia.com/Beritasatu/B1News_1280x720.m3u8"],
+    ["CINEMA WORLD",      "http://45.126.83.51/uq2663/h/h04/index2.m3u8"],
+    ["CNBN INDONESIA",    "https://live.cnbcindonesia.com/livecnbc/smil:cnbctv.smil/chunklist_w1352897452_b280000_sleng.m3u8"],
+    ["CNN INDONESIA",     "https://live.cnnindonesia.com/livecnn/smil:cnntv.smil/playlist.m3u8"],
+    ["Cartoon Network",   "http://136.243.177.164/CARTOONNETWORK/playlist.m3u8"],
+    ["DISNEY CHANNEL HD", "https://nonton.site:8443/provision/pp/37402"],
+    ["ELSHINTA TV",       "http://210.210.155.35/qwr9ew/s/s10/01.m3u8"],
+    ["GEM TV Asia",       "http://210.210.155.35/uq2663/h/h19/index.m3u8"],
+    ["GTV",               "https://livestreaming-google-etslive.vidio.com/hls-p/ingest_778_720p/index.m3u8"],
+    ["I News",            "https://vcdn2.rctiplus.id/live/eds/inews_fta/live_fta/inews_fta-avc1_1537200=6-mp4a_64000_eng=2.m3u8"],
+    ["INDOSIAR",          "https://livestreaming-google-etslive.vidio.com/hls-p/ingest_205_720p/index.m3u8"],
+    ["JAWAPOS TV",        "http://122.248.43.138:1935/ch6/myStream/live.m3u8"],
+    ["K DRAMA",           "https://nonton.site:8443/provision/pp/35769"],
+    ["K+",                "http://210.210.155.35/uq2663/h/h08/index.m3u8"],
+    ["KIX",               "http://45.126.83.51/uq2663/h/h07/01.m3u8"],
+    ["KOMPAS TV",         "https://livestreaming-google-etslive.vidio.com/hls-p/ingest_874_720p/index.m3u8"],
+    ["METRO TV",          "http://edge.metrotvnews.com:1935/live-edge/smil:metro.smil/playlist.m3u8"],
+    ["MNCTV",             "https://vcdn2.rctiplus.id/live/eds/mnctv_fta/live_fta/mnctv_fta.m3u8"],
+    ["MY KIDS",           "http://210.210.155.35/qwr9ew/s/s30/index2.m3u8"],
+    ["NET TV",            "https://livestreaming-google-etslive.vidio.com/hls-p/ingest_875_720p/index.m3u8"],
+    ["NICKELODEON HD",    "https://nonton.site:8443/provision/pp/37404"],
+    ["RCTI",              "https://vcdn2.rctiplus.id/live/eds/rcti_fta/live_fta/rcti_fta.m3u8"],
+    ["RTV",               "https://livestreaming-google-etslive.vidio.com/hls-p/ingest_1561_720p/index.m3u8"],
+    ["SCTV",              "https://livestreaming-google-etslive.vidio.com/hls-p/ingest_204_720p/index.m3u8"],
+    ["THRILL",            "http://45.126.83.51/qwr9ew/s/s34/index2.m3u8"],
+    ["TRANS 7",           "https://video.detik.com/trans7/smil:trans7.smil/playlist.m3u8"],
+    ["TRANS TV",          "https://video.detik.com/transtv/smil:transtv.smil/playlist.m3u8"],
+    ["TVN MOVIE",            "https://nonton.site:8443/provision/pp/927"],
+    ["TVONE",             "http://chostv.mobie.in/files/iptv/tvone.m3u8"]
+]
+'''
+
+channel=$(echo $IPTV | jq -r "sort | .[][0]" | $DMENU -p "癩 IPTV")
+url=$(echo $IPTV | jq -r ".[] | select(.[0] == \"$channel\") | .[1]")
+
+if [[ $channel != "" ]]; then
+    notify-send "DMENU_IPTV" "Current Playing $channel"
+    mpv --title="$channel | IPTV" "$url" &
+fi

@@ -1,0 +1,81 @@
+#!/bin/bash
+
+# Select the website you want to open in your browser
+
+set -euo pipefail
+
+declare -A website
+# Syntax:
+# website[name]="https://www.example.com"
+
+# Torrent sites
+website[1337x]="https://1337x.to/"
+website[cs.rin.ru]="https://cs.rin.ru"
+website[rutracker]="https://rutracker.org"
+# Google
+website[google classroom]="https://classroom.google.com/u/2/h"
+website[google drive]="https://drive.google.com"
+website[google docs]="https://docs.google.com"
+website[google keep]="https://keep.google.com/u/0/"
+website[google maps]="https://www.google.com/maps"
+website[google photos]="https://photos.google.com"
+website[gmail]="https://gmail.com"
+# Other
+website[about:profiles]="about:profiles"
+website[bitwarden]="https://vault.bitwarden.com/#/"
+website[brave search]="https://search.brave.com"
+website[lichess]="https://lichess.org"
+website[protonmail]="https://mail.protonmail.com/"
+website[archwiki]="https://wiki.archlinux.org/"
+website[awz3converter]="https://ebook.online-convert.com/convert-to-azw3"
+website[discord]="https://discord.com/app"
+website[element]="https://app.element.io"
+website[focloir]="https://focloir.ie/"
+website[github]="https://github.com/"
+website[gitlab]="https://gitlab.com/"
+website[invidious]="https://invidious.kavin.rocks/"
+website[itsfoss]="https://itsfoss.com"
+website[imgflip]="https://imgflip.com/memegenerator"
+website[netflix]="https://netflix.com"
+website[openweathermap]="https://openweathermap.org/city/2966485"
+website[piped]="https://piped.kavin.rocks/feed"
+website[zlibrary]="https://z-lib.org/"
+website[libreddit]="https://libreddit.kavin.rocks/"
+website[rtenews]="https://www.rte.ie/news/"
+website[searx]="https://searx.fmac.xyz"
+website[soundcloud]="https://soundcloud.com/"
+website[tiktok]="https://proxitok.pussthecat.org"
+website[translate]="https://translate.google.com"
+website[tutanota]="https://mail.tutanota.com/"
+website[wayback]="https://web.archive.org/web/"
+website[webster]="https://www.merriam-webster.com/dictionary/"
+website[whatsapp]="https://web.whatsapp.com"
+website[wikiless]="https://wikiless.org/"
+website[wikipedia]="https://wikipedia.org/"
+website[wiktionary]="https://en.wiktionary.org/wiki/"
+website[yewtube]="https://yewtu.be/"
+website[youtube]="https://www.youtube.com/"
+##################################################################
+
+# Find how many lines long the list of websites must be
+# If the number of websites isn't an integer then add one extra line
+if echo "$(printf '%s\n' "${!website[@]}" | wc -l )/2" | bc -l | grep '\.[1-9]'; then
+    LINES="$(echo "$(printf '%s\n' "${!website[@]}" | wc -l)/2+1" | bc)"
+else
+    LINES="$(echo "$(printf '%s\n' "${!website[@]}" | wc -l )/2" | bc)"
+fi
+
+main() {
+  # As this is loaded from other file it is technically not defined
+  # Choosing a website by name from array above.
+  engine=$(printf '%s\n' "${!website[@]}" | sort | \
+	   rofi -dmenu -1 -i -c -bw 2 -g 2 -l "$LINES" -p 'Choose website:') "$@" || exit
+
+  # Getting the URL of the search engine we chose.
+  url="${website["${engine}"]}"
+
+  # Display website in web browser
+  $BROWSER "${url}"
+}
+
+[[ "${BASH_SOURCE[0]}" == "${0}" ]] && main "$@"

@@ -1,0 +1,184 @@
+#!/usr/bin/env bash
+
+# Awesomewm :
+awesome_file=~/.config/awesome/themes/init.lua
+awesome_theme="$(grep 'colors =' $awesome_file | awk '{ print $3 }')"
+
+# Rofi :
+rofi_file=~/.config/rofi/config.rasi
+
+# Rofi Menu :
+rofi_menu_file=~/.config/awesome/libs/misc/rofi/config.rasi
+
+
+# Options
+otis_forest="Otis Forest"
+doom="Doom"
+gruvbox="Gruvbox"
+berry="Berry"
+matcha_sea="Matcha Sea"
+matcha_azul="Matcha Azul"
+matcha_aliz="Matcha Aliz"
+
+# Variable passed to rofi
+options="$otis_forest\n$doom\n$gruvbox\n$berry\n$matcha_sea\n$matcha_azul\n$matcha_aliz"
+chosen="$(echo -e "$options" | rofi -show -dmenu -selected-row 0)"
+
+case $chosen in
+
+    $otis_forest)
+		# Notification :
+		notify-send "Changing Theme to Otis forest" &&
+		sleep 1 &&  
+		# Gtk theme :
+		sed -i '2s/.*/gtk-theme-name=Otis-forest/g' ~/.config/gtk-3.0/settings.ini 
+		# Awesomewm :
+		sed -i "43s/$awesome_theme/otis_forest/" $awesome_file && 
+		# Rofi :
+		sed -i '27s/.*/    background:                     	#1A2026;/g' $rofi_file && 
+		sed -i '28s/.*/    background-alt:             	   	#262F38;/g' $rofi_file && 
+		sed -i '32s/.*/    selected:             	   			#8CA1A5;/g' $rofi_file &&
+		# Rofi Menu :
+		sed -i '27s/.*/    background:                     	#1A2026;/g' $rofi_menu_file && 
+		sed -i '28s/.*/    background-alt:             	   	#262F38;/g' $rofi_menu_file && 
+		sed -i '32s/.*/    selected:             	   			#8CA1A5;/g' $rofi_menu_file &&
+		# Kitty :
+		sed -i '2s/.*/include themes\/otis-forest.conf/g' ~/.config/kitty/kitty.conf  
+		# Reastart Awesomewm :
+		echo 'awesome.restart()' | awesome-client
+        ;;
+        
+    $doom)
+		# Notification :
+		notify-send "Changing Theme to Doom" && 
+		sleep 1 && 
+		# Gtk theme :
+		sed -i '2s/.*/gtk-theme-name=Matcha-dark-azul/g' ~/.config/gtk-3.0/settings.ini 
+		# Awesomewm : 
+		sed -i "43s/$awesome_theme/doom/" $awesome_file &&
+		# Rofi :
+		sed -i '27s/.*/    background:                     	#1c1f24;/g' $rofi_file && 
+		sed -i '28s/.*/    background-alt:             	   	#262A30;/g' $rofi_file && 
+		sed -i '32s/.*/    selected:             	   			#4390c4;/g' $rofi_file &&
+		# Rofi Menu :
+		sed -i '27s/.*/    background:                     	#1c1f24;/g' $rofi_menu_file && 
+		sed -i '28s/.*/    background-alt:             	   	#262A30;/g' $rofi_menu_file && 
+		sed -i '32s/.*/    selected:             	   			#4390c4;/g' $rofi_menu_file &&
+		# Kitty :
+		sed -i '2s/.*/include themes\/doom.conf/g' ~/.config/kitty/kitty.conf    
+		# Reastart Awesomewm :
+		echo 'awesome.restart()' | awesome-client
+        ;;
+        
+    $gruvbox)
+		# Notification :
+		notify-send "Changing Theme to Gruvbox" && 
+		sleep 1 &&  
+		# Gtk theme :
+		sed -i '2s/.*/gtk-theme-name=Gruvbox/g' ~/.config/gtk-3.0/settings.ini
+		# Awesomewm :
+		sed -i "43s/$awesome_theme/gruvbox/" $awesome_file && 
+		# Rofi :
+		sed -i '27s/.*/    background:                     	#262626;/g' $rofi_file && 
+		sed -i '28s/.*/    background-alt:             	   	#333333;/g' $rofi_file && 
+		sed -i '32s/.*/    selected:             	   			#458588;/g' $rofi_file &&
+		# Rofi Menu :
+		sed -i '27s/.*/    background:                     	#262626;/g' $rofi_menu_file && 
+		sed -i '28s/.*/    background-alt:             	   	#333333;/g' $rofi_menu_file && 
+		sed -i '32s/.*/    selected:             	   			#458588;/g' $rofi_menu_file &&
+		# Kitty :
+		sed -i '2s/.*/include themes\/gruvbox.conf/g' ~/.config/kitty/kitty.conf    
+		# Reastart Awesomewm :
+		echo 'awesome.restart()' | awesome-client
+        ;;
+        
+    $berry)
+		# Notification :
+		notify-send "Changing Theme to Berry" &&
+		sleep 1 && 
+		# Gtk theme :
+		sed -i '2s/.*/gtk-theme-name=Otis/g' ~/.config/gtk-3.0/settings.ini 
+		# Awesomewm :  
+		sed -i "43s/$awesome_theme/berry/" $awesome_file && 
+		# Rofi :
+		sed -i '27s/.*/    background:                     	#1C2026;/g' $rofi_file && 
+		sed -i '28s/.*/    background-alt:             	   	#2F3640;/g' $rofi_file && 
+		sed -i '32s/.*/    selected:             	   			#9D6D89;/g' $rofi_file &&
+		# Rofi Menu :
+		sed -i '27s/.*/    background:                     	#1C2026;/g' $rofi_menu_file && 
+		sed -i '28s/.*/    background-alt:             	   	#2F3640;/g' $rofi_menu_file && 
+		sed -i '32s/.*/    selected:             	   			#9D6D89;/g' $rofi_menu_file && 
+		# Kitty :
+		sed -i '2s/.*/include themes\/berry.conf/g' ~/.config/kitty/kitty.conf    
+		# Reastart Awesomewm :
+		echo 'awesome.restart()' | awesome-client
+        ;;  
+    
+    $matcha_sea)
+		# Notification :
+		notify-send "Changing Theme to Matcha sea" && 
+		sleep 1 && 
+		# Gtk theme :
+		sed -i '2s/.*/gtk-theme-name=Matcha-dark-sea/g' ~/.config/gtk-3.0/settings.ini 
+		# Awesomewm :
+		sed -i "43s/$awesome_theme/matcha_sea/" $awesome_file && 
+		# Rofi :
+		sed -i '27s/.*/    background:                     	#1B2224;/g' $rofi_file && 
+		sed -i '28s/.*/    background-alt:             	   	#222B2E;/g' $rofi_file && 
+		sed -i '32s/.*/    selected:             	   			#2F9B85;/g' $rofi_file &&
+		# Rofi Menu :
+		sed -i '27s/.*/    background:                     	#1B2224;/g' $rofi_menu_file && 
+		sed -i '28s/.*/    background-alt:             	   	#222B2E;/g' $rofi_menu_file && 
+		sed -i '32s/.*/    selected:             	   			#2F9B85;/g' $rofi_menu_file &&
+		# Kitty :
+		sed -i '2s/.*/include themes\/matcha-sea.conf/g' ~/.config/kitty/kitty.conf  
+		# Reastart Awesomewm :
+		echo 'awesome.restart()' | awesome-client
+        ;;
+        
+    $matcha_azul)
+		# Notification :
+		notify-send "Changing Theme to Matcha azul" &&  
+		sleep 1 && 
+		# Gtk theme :
+		sed -i '2s/.*/gtk-theme-name=Matcha-dark-azul/g' ~/.config/gtk-3.0/settings.ini
+		# Icons :
+		doas papirus-folders -C red --theme Papirus-Dark
+		# Awesomewm :
+		sed -i "43s/$awesome_theme/matcha_azul/" $awesome_file && 
+		# Rofi :
+		sed -i '27s/.*/    background:                     	#1B1D24;/g' $rofi_file && 
+		sed -i '28s/.*/    background-alt:             	   	#2B2F38;/g' $rofi_file && 
+		sed -i '32s/.*/    selected:             	   			#3498DB;/g' $rofi_file &&
+		# Rofi Menu :
+		sed -i '27s/.*/    background:                     	#1B1D24;/g' $rofi_menu_file && 
+		sed -i '28s/.*/    background-alt:             	   	#2B2F38;/g' $rofi_menu_file && 
+		sed -i '32s/.*/    selected:             	   			#3498DB;/g' $rofi_menu_file && 
+		# Kitty :
+		sed -i '2s/.*/include themes\/matcha-azul.conf/g' ~/.config/kitty/kitty.conf   
+		# Reastart Awesomewm :
+		echo 'awesome.restart()' | awesome-client
+        ;;
+        
+    $matcha_aliz)
+		# Notification :
+		notify-send "Changing Theme to Matcha aliz" &&
+		sleep 1 && 
+		# Gtk theme :
+		sed -i '2s/.*/gtk-theme-name=Matcha-dark-aliz/g' ~/.config/gtk-3.0/settings.ini
+		# Awesomewm :  
+		sed -i "43s/$awesome_theme/matcha_aliz/" $awesome_file && 
+		# Rofi :
+		sed -i '27s/.*/    background:                     	#222222;/g' $rofi_file && 
+		sed -i '28s/.*/    background-alt:             	   	#303030;/g' $rofi_file && 
+		sed -i '32s/.*/    selected:             	   			#f0544c;/g' $rofi_file &&
+		# Rofi Menu :
+		sed -i '27s/.*/    background:                     	#222222;/g' $rofi_menu_file && 
+		sed -i '28s/.*/    background-alt:             	   	#303030;/g' $rofi_menu_file && 
+		sed -i '32s/.*/    selected:             	   			#f0544c;/g' $rofi_menu_file &&  
+		# Kitty :
+		sed -i '2s/.*/include themes\/matcha-aliz.conf/g' ~/.config/kitty/kitty.conf 
+		# Reastart Awesomewm :
+		echo 'awesome.restart()' | awesome-client
+        ;;
+esac

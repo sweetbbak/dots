@@ -1,0 +1,59 @@
+#!/bin/sh
+set -eu
+# Dependencies: util.sh
+# Portability:  POSIX
+
+. ${SH_LIB_DIR:-~/bin/}util.sh
+selfdir=$(dirname -- "$(readlinkf "$0")")
+PATH=$PATH:$selfdir
+
+
+usage()
+{
+	name=$(basename "$(readlinkf "$0")")
+	cat <<EOF | text_format
+**NAME**
+    $name - Extract line from stdin between two patterns
+
+**SYNOPSIS**
+    $name [**-beh**] __PAT_BEGIN__ __PAT_END__
+
+**DESCRIPTION**
+    Read stdin and extract all the lines between __PAT_BEGIN__ and __PAT_END__
+    (not included).
+    These patterns are awk regexps, remember to escape '\\'. If __PAT_BEG__ is
+    never matched, nothing is printed. If __PAT_END__ is never matched,
+    everything starting from __PAT_BEG__ is printed.
+
+    **-e**
+        Include lines matching __PAT_END__.
+
+    **-b**
+        Include lines matching __PAT_BEGIN__.
+
+    **-h**
+        Print this help and exit.
+
+EOF
+	exit $1
+}
+
+incl_beg=false
+incl_end=false
+while getopts "beh" OPT
+do
+	case "$OPT" in
+		b)  incl_beg=true;;
+		e)  incl_end=true;;
+		h)  usage 0;;
+		\?) usage 1;;
+	esac
+done
+shift $((OPTIND - 1))
+[ $# -ne 2 ] && usage 1
+
+awk "
+	/$1/ $($incl_beg && echo '{flag = 1}'        || echo '{flag = 1; next}')
+	/$2/ $($incl_end && echo '{flag = 0; print}' || echo '{flag = 0}')
+	flag"
+

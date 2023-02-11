@@ -1,0 +1,21 @@
+#!/bin/sh
+# Convert leading spaces to tabs and handle # followed by tabs
+set -eu
+
+tw=${1:-8}
+expand -t$tw | ${AWK:-awk} -vtw=$tw '
+	BEGIN {
+        xt = ""
+		for (i = 0; i < tw; ++i)
+			xt = xt " "
+		tre = sprintf("^(#%.*s(%s)*|(%s)+)", tw - 1, xt, xt, xt)
+	}
+	match($0, tre) {
+		if ($0 ~ /^#/)
+			printf "#"
+		for (i = 0; i < RLENGTH; i += tw)
+			printf "\t"
+		print substr($0, RLENGTH + 1)
+		next
+	}
+	{print}'

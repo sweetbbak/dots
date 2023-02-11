@@ -1,0 +1,3 @@
+#!/bin/sh
+#date +"%a_%d_%b_%H:%M"
+maim -m 10 --select | tee ~/Pictures/screenshots/$(date +%Y.%m.%d_%H:%M.%S).png | xclip -sel c -t image/png

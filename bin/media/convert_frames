@@ -1,0 +1,21 @@
+#!/bin/bash
+
+CHOICE=$(gum choose "Convert PNG sequence to GIF" "Convert video to PNG sequence")
+
+function frame_con () {
+  VIDEO=$(gum filter --placeholder "Input file")
+  echo -n $VIDEO
+  ffmpeg -vcodec libvpx-vp9 -i $VIDEO -pix_fmt rgba frame-%03d.png
+}
+
+function frame_gif () {
+  convert frames/*.png -delay 1x8 -coalesce -layers OptimizeTransparency animation.gif
+}
+
+if [[ $CHOICE = "Convert PNG sequence to GIF" ]]
+  then
+    frame_gif
+  elif [[ $CHOICE = "Convert video to PNG sequence" ]]
+  then   
+    frame_con
+fi

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+passg=$(openssl rand -base64 $(($RANDOM % 6 + 15)))
+printf $passg | xclip -selection clipboard
+notify-send "🔒Generated Password copied to clipboard."

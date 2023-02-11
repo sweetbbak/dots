@@ -1,0 +1,3 @@
+#!/bin/bash
+
+(cd ~/Pictures && fzf --preview "(setsid nsxiv {} &)" )    

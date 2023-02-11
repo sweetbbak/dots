@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ "$(wmctrl -lx | grep -E "kitty-fzf" | grep -oE "[0-9a-z]{10}")" ]; then
+  wmctrl -r "kitty-fzf" -b toggle,hidden
+else
+  kitty --class 'kitty-fzf' ~/github/ani-cli/ani-cli &
+  while [ "$WID" == "" ]; do
+    WID="$(wmctrl -lx | grep -E "ani-cli" | grep -oE "[0-9a-z]{10}")"
+  done
+  wmctrl -i -r "$WID" -e 0,2600,50,550,280
+fi

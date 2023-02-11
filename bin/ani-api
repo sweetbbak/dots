@@ -1,0 +1,44 @@
+#!/bin/bash
+
+[ ! -d ~/.cache/anime_api ] && mkdir -p "$HOME"/.cache/anime
+
+function pahe_search() {
+  anime=$(gum input --placeholder "search an anime")
+  query=$(curl -sL https://api.consumet.org/anime/animepahe/"${anime}")
+  json=$(jq '.' < "$query")
+  return "$json"
+}
+
+function gogo_search() {
+  anime=$(gum input --placeholder "search an anime")
+  query=$(curl -sL https://api.consumet.org/anime/gogoanime/"${anime}")
+  json=$(jq '.' < "$query")
+  return "$json"
+}
+
+function gogo_info() {
+  # Requires anime ID from search slug
+  anime=$(gum input --placeholder "search an anime")
+  query=$(curl -sL https://api.consumet.org/anime/gogoanime/info/"${anime}")
+  json=$(jq '.' < "$query")
+  return "$json"
+}
+
+function gogo_top_airing() {
+  curl -sL https://api.consumet.org/anime/gogoanime/recent-episodes > ~/.cache/anime/gogo-top-ani.json
+  test=$(cat ~/.cache/anime/gogo-top-ani.json)
+  choice=$(cat "$HOME"/.cache/anime/gogo-top-ani.json | jq '.results | .[] | .url' | fzf --reverse --cycle --preview='jq ".results | .[] | .title" ~/.cache/anime/gogo-top-ani.json') 
+  handlr open "$choice"
+}
+
+function gogo_recent() {
+  query=$(curl -sL https://api.consumet.org/anime/gogoanime/recent-episodes)
+  jq '.results | .[] | .title, .url, .image' < "$query"
+}
+
+function get_id() {
+  # takes episode ID
+  query=$(curl -sL https://api.consumet.org/anime/gogoanime/watch/"$1")
+}
+
+gogo_top_airing
