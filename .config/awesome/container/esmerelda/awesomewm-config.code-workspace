@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../../../../usr/share/awesome/lib"
+		}
+	],
+	"settings": {
+		"Lua.diagnostics.disable": [
+			"undefined-global"
+		]
+	}
+}
