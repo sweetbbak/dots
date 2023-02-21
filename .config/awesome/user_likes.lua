@@ -1,11 +1,11 @@
 local menubar = require("menubar")
 
-terminal = "st"
+terminal = "kitty"
 explorer = "thunar"
 browser = "firefox"
 launcher = "/home/sweet/bin/launcher.sh"
-editor = os.getenv("EDITOR") or "vim"
-visual_editor = "code" -- vscode
+editor = os.getenv("EDITOR") or "nvim"
+visual_editor = "codium" -- vscode
 editor_cmd = terminal .. " -e " .. editor
 modkey = "Mod4" -- super, the windows key
 -- Set the terminal for applications that require it

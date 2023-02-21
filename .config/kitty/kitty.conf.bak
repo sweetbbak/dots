@@ -79,3 +79,9 @@ map ctrl+alt+enter launch --cwd=current
 map f1 launch --stdin-source=@screen_scrollback --stdin-add-formatting less +G -R
 
 include ~/.cache/wal/colors-kitty.conf
+
+
+# BEGIN_KITTY_THEME
+# Dracula
+include current-theme.conf
+# END_KITTY_THEME

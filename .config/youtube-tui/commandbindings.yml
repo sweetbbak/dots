@@ -1,0 +1,56 @@
+global:
+  'c':
+    2: cp ${url}
+  'f':
+    2: run ${browser} '${url}'
+search:
+  'p':
+    2: run mpv '${hover-url}'
+  'A':
+    1: run ${terminal-emulator} mpv '${hover-url}' --no-video --loop-playlist=inf --shuffle
+  'a':
+    2: run ${terminal-emulator} mpv '${hover-url}' --no-video
+popular:
+  'a':
+    2: run ${terminal-emulator} mpv '${hover-url}' --no-video
+  'p':
+    2: run mpv '${hover-url}'
+  'A':
+    1: run ${terminal-emulator} mpv '${hover-url}' --no-video --loop-playlist=inf --shuffle
+trending:
+  'p':
+    2: run mpv '${hover-url}'
+  'A':
+    1: run ${terminal-emulator} mpv '${hover-url}' --no-video --loop-playlist=inf --shuffle
+  'a':
+    2: run ${terminal-emulator} mpv '${hover-url}' --no-video
+video: {}
+playlist:
+  'a':
+    2: run ${terminal-emulator} mpv '${hover-url}' --no-video
+  'A':
+    1: run ${terminal-emulator} mpv '${hover-url}' --no-video --loop-playlist=inf --shuffle
+  'p':
+    2: run mpv '${hover-url}'
+channel_main: {}
+channel_videos:
+  'p':
+    2: run mpv '${hover-url}'
+  'a':
+    2: run ${terminal-emulator} mpv '${hover-url}' --no-video
+  'A':
+    1: run ${terminal-emulator} mpv '${hover-url}' --no-video --loop-playlist=inf --shuffle
+channel_playlists:
+  'p':
+    2: run mpv '${hover-url}'
+  'a':
+    2: run ${terminal-emulator} mpv '${hover-url}' --no-video
+  'A':
+    1: run ${terminal-emulator} mpv '${hover-url}' --no-video --loop-playlist=inf --shuffle
+watchhistory:
+  'p':
+    2: run mpv '${hover-url}'
+  'a':
+    2: run ${terminal-emulator} mpv '${hover-url}' --no-video
+  'A':
+    1: run ${terminal-emulator} mpv '${hover-url}' --no-video --loop-playlist=inf --shuffle

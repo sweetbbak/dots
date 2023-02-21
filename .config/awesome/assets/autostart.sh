@@ -12,5 +12,8 @@ exe picom --config=./picom/picom.conf -b
 exe "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 
 exe "$HOME/.screenlayout/arandr-layout.sh"
+# exe picom --experimental-backends --config ~/.config/picom.conf
+exe picom --config ~/.config/picom.conf
+exe "$HOME/bin/set-keyrate.sh"
 
 xrdb merge $HOME/.Xresources

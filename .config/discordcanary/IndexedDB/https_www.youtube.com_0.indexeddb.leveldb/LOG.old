@@ -1,0 +1,15 @@
+2023/02/08-16:10:16.896 4d28d Reusing MANIFEST /home/sweet/.config/discordcanary/IndexedDB/https_www.youtube.com_0.indexeddb.leveldb/MANIFEST-000001
+2023/02/08-16:10:16.896 4d28d Recovering log #7
+2023/02/08-16:10:16.897 4d28d Reusing old log /home/sweet/.config/discordcanary/IndexedDB/https_www.youtube.com_0.indexeddb.leveldb/000007.log 
+2023/02/08-16:12:18.073 4d28d Level-0 table #12: started
+2023/02/08-16:12:18.074 4d28d Level-0 table #12: 49284 bytes OK
+2023/02/08-16:12:18.074 4d28d Delete type=0 #7
+2023/02/08-16:12:18.074 4d28d Manual compaction at level-0 from (begin) .. (end); will stop at (end)
+2023/02/08-16:12:18.074 4d28d Manual compaction at level-1 from (begin) .. (end); will stop at '\x00\x02\x01\x1f\x04\x03\x01\x06\x00Q\x00U\x00E\x00U\x00E\x00D\x03\x00\x00\x00\x00\x00\x00L@\x03\x00\x90\x0aS\xe8bxB\x00\x03\x00\x00\x00\x00\x00\x80E@' @ 1275 : 1
+2023/02/08-16:12:18.074 4d28d Compacting 1@1 + 1@2 files
+2023/02/08-16:12:18.075 4d28d Generated table #13@1: 61 keys, 1406 bytes
+2023/02/08-16:12:18.075 4d28d Compacted 1@1 + 1@2 files => 1406 bytes
+2023/02/08-16:12:18.076 4d28d compacted to: files[ 0 0 1 0 0 0 0 ]
+2023/02/08-16:12:18.076 4d28d Delete type=2 #12
+2023/02/08-16:12:18.076 4d28d Delete type=2 #9
+2023/02/08-16:12:18.076 4d28d Manual compaction at level-1 from '\x00\x02\x01\x1f\x04\x03\x01\x06\x00Q\x00U\x00E\x00U\x00E\x00D\x03\x00\x00\x00\x00\x00\x00L@\x03\x00\x90\x0aS\xe8bxB\x00\x03\x00\x00\x00\x00\x00\x80E@' @ 1275 : 1 .. (end); will stop at (end)

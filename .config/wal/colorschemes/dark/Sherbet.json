@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/home/sweet/Pictures/FlOmYMyagAI86u5.jpg",
+    "alpha": "100",
+    "special": {
+        "background": "#454342",
+        "foreground": "#c6c6e1",
+        "cursor": "#c6c6e1"
+    },
+    "colors": {
+        "color0": "#454342",
+        "color1": "#c476c0",
+        "color2": "#488aaa",
+        "color3": "#6796be",
+        "color4": "#cb868f",
+        "color5": "#d3a199",
+        "color6": "#d9c9a8",
+        "color7": "#c6c6e1",
+        "color8": "#8a8a9d",
+        "color9": "#c476c0",
+        "color10": "#488aaa",
+        "color11": "#6796be",
+        "color12": "#cb868f",
+        "color13": "#d3a199",
+        "color14": "#d9c9a8",
+        "color15": "#c6c6e1"
+    }
+}

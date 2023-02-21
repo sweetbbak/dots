@@ -19,7 +19,7 @@ local function setup_rules ()
                 instance = { "copyq", "pinentry" },
                 class    = {
                     "Arandr", "Blueman-manager", "Gpick", "Kruler", "Sxiv", "Nsxiv", "Clip Studio Paint",
-                    "Tor Browser", "Wpa_gui", "veromix", "xtightvncviewer"
+                    "Tor Browser", "Wpa_gui", "veromix", "xtightvncviewer", "feh"
                 },
                 name    = {
                     "Event Tester",  -- xev.

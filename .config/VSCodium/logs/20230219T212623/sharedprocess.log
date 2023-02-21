@@ -1,0 +1,10 @@
+2023-02-19 21:26:24.841 [info] Starting worker process with pid 1688711 (type: fileWatcher, window: 1).
+2023-02-19 21:26:29.441 [info] Getting Manifest... ms-toolsai.jupyter-keymap
+2023-02-19 21:26:29.441 [info] Getting Manifest... ms-toolsai.vscode-jupyter-cell-tags
+2023-02-19 21:26:29.442 [info] Getting Manifest... ms-toolsai.vscode-jupyter-slideshow
+2023-02-19 21:26:29.995 [info] Installing extension: ms-toolsai.jupyter-keymap
+2023-02-19 21:26:30.001 [info] Installing extension: ms-toolsai.vscode-jupyter-cell-tags
+2023-02-19 21:26:30.004 [info] Installing extension: ms-toolsai.vscode-jupyter-slideshow
+2023-02-19 21:26:30.374 [info] Extension installed successfully: ms-toolsai.jupyter-keymap
+2023-02-19 21:26:30.378 [info] Extension installed successfully: ms-toolsai.vscode-jupyter-cell-tags
+2023-02-19 21:26:30.380 [info] Extension installed successfully: ms-toolsai.vscode-jupyter-slideshow

@@ -22,6 +22,7 @@ neovidecloseterminal () {
 
 d() {
   # shows file and symlink
+  hx "$(which $1)"
   file "$(which $1)"
 }
 

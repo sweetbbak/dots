@@ -1,0 +1,4 @@
+player=mpv
+subs_language=English
+video_quality=1080
+preferred_server=vidcloud

@@ -1,0 +1,22 @@
+[Added Associations]
+application/pdf=org.pwmt.zathura-pdf-mupdf.desktop;
+application/postscript=helix.desktop;
+application/x-executable=nvim.desktop;kitty.desktop;
+application/x-shellscript=nvim.desktop;
+application/x-trash=helix.desktop;
+application/xml=helix.desktop;
+image/gif=nsxiv.desktop;feh.desktop;mpv.desktop;
+image/jpeg=nsxiv.desktop;
+image/png=nsxiv.desktop;feh.desktop;
+text/plain=neovide.desktop;helix.desktop;
+text/x-python=nvim.desktop;helix.desktop;
+text/x-lua=neovide.desktop;
+application/x-wine-extension-ini=neovide.desktop;
+image/webp=nsxiv.desktop;
+text/html=neovide.desktop;
+text/x-install=helix.desktop;
+
+[Default Applications]
+application/x-executable=kitty.desktop;
+application/x-trash=helix.desktop;
+x-scheme-handler/terminal=kitty.desktop;

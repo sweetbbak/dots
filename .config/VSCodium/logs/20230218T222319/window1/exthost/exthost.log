@@ -1,0 +1,25 @@
+2023-02-18 22:23:20.747 [info] Extension host with pid 1011933 started
+2023-02-18 22:23:20.819 [info] ExtensionService#_doActivateExtension vscode.emmet, startup: false, activationEvent: 'onLanguage'
+2023-02-18 22:23:20.819 [info] ExtensionService#_doActivateExtension shakram02.bash-beautify, startup: false, activationEvent: 'onLanguage:shellscript'
+2023-02-18 22:23:20.819 [info] ExtensionService#_doActivateExtension timonwong.shellcheck, startup: false, activationEvent: 'onLanguage:shellscript'
+2023-02-18 22:23:20.819 [info] ExtensionService#_doActivateExtension vscode.git-base, startup: true, activationEvent: '*', root cause: vscode.git
+2023-02-18 22:23:20.898 [info] ExtensionService#_doActivateExtension vscode.git, startup: true, activationEvent: '*'
+2023-02-18 22:23:20.898 [info] ExtensionService#_doActivateExtension vscode.github, startup: true, activationEvent: '*'
+2023-02-18 22:23:21.073 [info] Eager extensions activated
+2023-02-18 22:23:21.100 [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: false, activationEvent: 'onStartupFinished'
+2023-02-18 22:23:21.100 [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
+2023-02-18 22:30:00.727 [info] Extension host terminating: received terminate message from renderer
+2023-02-18 22:30:00.732 [info] Extension host with pid 1011933 exiting with code 0
+2023-02-18 22:30:01.963 [info] Extension host with pid 1018314 started
+2023-02-18 22:30:01.963 [info] Skipping acquiring lock for /home/sweet/.config/VSCodium/User/workspaceStorage/16f96b6dae5a8694614e9603fd80ff96.
+2023-02-18 22:30:02.020 [info] ExtensionService#_doActivateExtension vscode.emmet, startup: false, activationEvent: 'onLanguage'
+2023-02-18 22:30:02.020 [info] ExtensionService#_doActivateExtension vscode.git-base, startup: true, activationEvent: '*', root cause: vscode.git
+2023-02-18 22:30:02.063 [info] ExtensionService#_doActivateExtension ms-python.python, startup: true, activationEvent: 'workspaceContains:*.py', root cause: ms-python.isort
+2023-02-18 22:30:02.063 [info] ExtensionService#_doActivateExtension vscode.git, startup: true, activationEvent: '*'
+2023-02-18 22:30:02.063 [info] ExtensionService#_doActivateExtension vscode.github, startup: true, activationEvent: '*'
+2023-02-18 22:30:02.208 [info] ExtensionService#_doActivateExtension ms-python.isort, startup: true, activationEvent: 'workspaceContains:*.py'
+2023-02-18 22:30:02.256 [info] Eager extensions activated
+2023-02-18 22:30:02.278 [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: false, activationEvent: 'onStartupFinished'
+2023-02-18 22:30:02.278 [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
+2023-02-18 22:30:06.068 [info] Extension host terminating: received terminate message from renderer
+2023-02-18 22:30:06.092 [info] Extension host with pid 1018314 exiting with code 0

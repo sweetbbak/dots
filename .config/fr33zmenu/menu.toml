@@ -1,0 +1,44 @@
+[menus.programs]         # Define a new menu named "programs"
+order  = -1              # Ensure it is the first menu
+prompt = "launch -> "    # Give it a cool prompt
+
+[menus.programs.entries] # Define the menu's entries
+# ↓ Name      ↓ Value
+nvim       = "kitty nvim"
+ani-cli    = "alacritty --class='kitty-fzf' -e ani-cli"
+firefox    = "firefox"
+discord    = "discord-canary"
+neovide    = "neovide"
+
+[menus.power]            # Another menu
+prompt = "power -> "
+
+[menus.power.entries]
+logout   = "openbox --exit"
+reboot   = "reboot"
+
+[keybinds]
+exit        = [ "escape", "ctrl+c" ]
+submit      = [ "enter" ]
+clear       = [ "shift+del", "ctrl+del" ]
+delete_next = [ "delete" ]
+delete_back = [ "backspace" ]
+input_next  = [ "right" ]
+input_back  = [ "left" ]
+entry_next  = [ "down", "ctrl+down", "ctrl+j", "tab" ]
+entry_back  = [ "up", "ctrl+up", "ctrl+k", "shift+tab" ]
+menu_next   = [ "ctrl+right", "ctrl+l" ]
+menu_back   = [ "ctrl+left", "ctrl+h" ]
+
+[theme]
+prompt             = { fg = "#a6e3a1", attrs = "bold" }
+input              = { fg = "#cdd6f4" }
+entry_name         = { fg = "#cdd6f4" }
+entry_value        = { fg = "#6c7086" }
+entry_match        = { fg = "#74c7ec", attrs = "bold" }
+entry_hidden       = { fg = "#45475a" }
+entry_cursor       = { fg = "#1e1e2e", bg = "#cdd6f4", attrs = "bold" }
+entry_cursor_match = { fg = "#1e1e2e", bg = "#74c7ec", attrs = "bold" }
+menu_name          = { fg = "#f38ba8" }
+menu_cursor        = { fg = "#1e1e2e", bg = "#f38ba8", attrs = "bold" }
+overflow           = { fg = "#f9e2af", attrs = "bold" }

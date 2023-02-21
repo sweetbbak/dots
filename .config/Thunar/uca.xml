@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+<action>
+	<icon>utilities-terminal</icon>
+	<name>Open with neovim</name>
+	<submenu></submenu>
+	<unique-id>1674290290358378-1</unique-id>
+	<command>kitty nvim %f</command>
+	<description>nvim</description>
+	<range></range>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+	<other-files/>
+	<text-files/>
+</action>
+<action>
+	<icon>application-x-compress</icon>
+	<name>ouch-decompress</name>
+	<submenu></submenu>
+	<unique-id>1674597669660490-1</unique-id>
+	<command>ouch decompress %f</command>
+	<description>Use Ouch to extract in place</description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<directories/>
+	<other-files/>
+</action>
+<action>
+	<icon>object-rotate-left</icon>
+	<name>Rotate left 90</name>
+	<submenu></submenu>
+	<unique-id>1675285737145140-2</unique-id>
+	<command>/home/sweet/bin/magick/rotate90.sh l %f</command>
+	<description>use convert to rotate 90</description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<image-files/>
+</action>
+<action>
+	<icon>object-rotate-right</icon>
+	<name>Rotate right 90 </name>
+	<submenu></submenu>
+	<unique-id>1675285838578156-3</unique-id>
+	<command>/home/sweet/bin/magick/rotate90.sh r %f</command>
+	<description>use convert 90 right</description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<image-files/>
+</action>
+<action>
+	<icon>whiskers_256x256</icon>
+	<name>Open terminal here</name>
+	<submenu></submenu>
+	<unique-id>1675832441632359-1</unique-id>
+	<command>kitty %f</command>
+	<description></description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<directories/>
+</action>
+<action>
+	<icon>nsxiv</icon>
+	<name>open Nsxiv</name>
+	<submenu></submenu>
+	<unique-id>1675916508935771-1</unique-id>
+	<command>nsxiv -at %f*</command>
+	<description></description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<directories/>
+	<image-files/>
+</action>
+</actions>

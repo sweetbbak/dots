@@ -1,0 +1,23 @@
+[Info  - 9:14:23 PM] (1681836) Pylance language server 2023.2.30 (pyright dec6aa20) starting
+[Info  - 9:14:23 PM] (1681836) Server root directory: /home/sweet/.vscode-oss/extensions/ms-python.vscode-pylance-2023.2.30/dist
+[Info  - 9:14:23 PM] (1681836) Starting service instance "possessing_nothing"
+[Info  - 9:14:23 PM] (1681836) Starting service instance "<default>"
+[Info  - 9:14:23 PM] (1681836) No configuration file found.
+[Info  - 9:14:23 PM] (1681836) No pyproject.toml file found.
+[Info  - 9:14:23 PM] (1681836) Setting pythonPath for service "possessing_nothing": "/bin/python"
+[Warn  - 9:14:23 PM] (1681836) stubPath /home/sweet/lightnovels/possessing_nothing/typings is not a valid directory.
+[Info  - 9:14:23 PM] (1681836) Assuming Python version 3.10
+[Info  - 9:14:23 PM] (1681836) Assuming Python platform Linux
+[Info  - 9:14:23 PM] (1681836) Searching for source files
+[Info  - 9:14:23 PM] (1681836) No source files found.
+[Info  - 9:14:23 PM] (1681836) No pyproject.toml file found.
+[Info  - 9:14:23 PM] (1681836) Setting pythonPath for service "<default>": "/bin/python"
+[Warn  - 9:14:23 PM] (1681836) stubPath typings is not a valid directory.
+[Info  - 9:14:23 PM] (1681836) Assuming Python version 3.10
+[Info  - 9:14:23 PM] (1681836) Assuming Python platform Linux
+[Info  - 9:14:23 PM] (1681836) Searching for source files
+[Info  - 9:14:23 PM] (1681836) No source files found.
+[Info  - 9:14:23 PM] (1681836) Background analysis(2) root directory: /home/sweet/.vscode-oss/extensions/ms-python.vscode-pylance-2023.2.30/dist
+[Info  - 9:14:23 PM] (1681836) Background analysis(2) started
+[Info  - 9:14:23 PM] (1681836) Background analysis(1) root directory: /home/sweet/.vscode-oss/extensions/ms-python.vscode-pylance-2023.2.30/dist
+[Info  - 9:14:23 PM] (1681836) Background analysis(1) started

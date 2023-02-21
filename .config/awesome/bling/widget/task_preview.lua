@@ -140,7 +140,6 @@ local enable = function(opts)
         or dpi(3)
 
     local task_preview_box = awful.popup({
-        screen = awful.screen.focused(),
         type = "dropdown_menu",
         visible = false,
         ontop = true,
@@ -171,7 +170,6 @@ local enable = function(opts)
 
     awesome.connect_signal("bling::task_preview::visibility", function(s, v, c)
         if v then
-            task_preview_box.screen = awful.screen.focused()
             -- Update task preview contents
             task_preview_box.widget = draw_widget(
                 c,

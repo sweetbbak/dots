@@ -171,7 +171,6 @@ local enable = function(opts)
         or dpi(3)
 
     local tag_preview_box = awful.popup({
-        screen = awful.screen.focused(),
         type = "dropdown_menu",
         visible = false,
         ontop = true,
@@ -209,6 +208,7 @@ local enable = function(opts)
         tag_preview_box.maximum_width = scale * geo.width + margin * 2
         tag_preview_box.maximum_height = scale * geo.height + margin * 2
 
+
         tag_preview_box.widget = draw_widget(
             t,
             tag_preview_image,
@@ -237,8 +237,6 @@ local enable = function(opts)
         if v == false then
             tag_preview_box.widget = nil
             collectgarbage("collect")
-        else
-            tag_preview_box.screen = awful.screen.focused()
         end
 
         tag_preview_box.visible = v

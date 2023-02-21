@@ -37,11 +37,9 @@ local capi = { awesome = awesome }
 local playerctl = { mt = {} }
 
 function playerctl:disable()
-    if self._private.metadata_timer then
-        self._private.metadata_timer:stop()
-    end
+    self._private.metadata_timer:stop()
     self._private.metadata_timer = nil
-    awful.spawn.with_shell("pkill playerctl")
+    awful.spawn.with_shell("killall playerctl")
 end
 
 function playerctl:pause(player)

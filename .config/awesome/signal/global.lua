@@ -1,2 +1,2 @@
-VolumeSignal = require 'signal.volume'
-BrightnessSignal = require 'signal.brightness'
+VolumeSignal = require("signal.volume")
+BrightnessSignal = require("signal.brightness")

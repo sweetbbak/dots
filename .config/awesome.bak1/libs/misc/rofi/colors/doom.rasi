@@ -1,0 +1,15 @@
+/*
+* AUTHOR: Luca
+*/
+
+* {
+	background:			#1c1f24;
+	background-alt:		#262A30;
+	brdr:               #191F21;
+    foreground:			#D8D8D8;
+    foresel:            #67AFC1;
+    selected:			#4390c4;
+	urgent:				#E06C75;
+	on:					#87A181;
+	off:				#D88B9F;
+}

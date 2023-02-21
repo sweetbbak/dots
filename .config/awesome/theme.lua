@@ -22,7 +22,6 @@ theme.material_icons = "Material Icons"
 theme.font_size = "10"
 theme.font = theme.font_name .. " " .. theme.font_size
 
--- base colors
 theme.black = "#151720"
 theme.dimblack = "#1a1c25"
 theme.light_black = "#262831"
@@ -64,10 +63,10 @@ theme.actions = {
 theme.bar_height = 40
 
 -- gaps and borders
-theme.useless_gap = dpi(4)
+theme.useless_gap = dpi(7)
 theme.border_width = dpi(5)
 theme.border_color_normal = theme.grey
-theme.border_color_active = theme.cyan
+theme.border_color_active = theme.magenta
 theme.border_color_marked = theme.bg_normal
 theme.border_radius = dpi(14)
 
@@ -124,7 +123,9 @@ theme.titlebar_minimize_button_normal = gears.color.recolor_image(titlebar_asset
 theme.titlebar_minimize_button_focus = gears.color.recolor_image(titlebar_assets_path .. "circle.png", theme.green)
 
 -- wallpaper
-theme.wallpaper = assets_path .. "wallpaper.jpg"
+-- theme.wallpaper = assets_path .. "wallpaper.jpg"
+-- wallpaper
+theme.wallpaper = "/home/sweet/Pictures/backgrounds/beaeop4.jpeg"
 
 -- layouts
 theme.layout_fairh = gears.color.recolor_image(themes_path .. "default/layouts/fairhw.png", theme.fg_normal)

@@ -1,18 +1,35 @@
-set default-bg "#0C0E0D"
-set inputbar-bg "#0C0E0D"
-set inputbar-fg "#e0c9c0"
-set notification-bg "#0C0E0D"
-set notification-fg "#e0c9c0"
-set notification-error-bg "#A84B3A"
-set notification-error-fg "#e0c9c0"
-set notification-warning-bg "#A84B3A"
-set notification-warning-fg "#e0c9c0"
-set statusbar-bg "#0C0E0D"
-set statusbar-fg "#e0c9c0"
-set index-bg "#0C0E0D"
-set index-fg "#e0c9c0"
-set index-active-bg "#e0c9c0"
-set index-active-fg "#0C0E0D"
-set render-loading-bg "#0C0E0D"
-set render-loading-fg "#e0c9c0"
-set window-title-home-tilde true
+# Rosé Pine 
+# Author: Ahloi
+
+set default-bg                  "#232136"
+set default-fg                  "#e0def4"
+
+set statusbar-fg                "#232136"
+set statusbar-bg                "#c4a7e7"
+
+set inputbar-bg                 "#f6c177"
+set inputbar-fg                 "#232136"
+
+set notification-bg             "#9ccfd8"
+set notification-fg             "#232136"
+
+set notification-error-bg       "#eb6f92"
+set notification-error-fg       "#232136"
+
+set notification-warning-bg     "#eb6f92"
+set notification-warning-fg     "#e0def4"
+
+set highlight-color             "#3e8fb0"
+set highlight-active-color      "#e0def4"
+
+set completion-bg               "#9ccfd8"
+set completion-fg               "#c4a7e7"
+
+set completion-highlight-fg     "#e0def4"
+set completion-highlight-bg     "#232136"
+
+# set recolor-lightcolor          "#232136"
+# set recolor-darkcolor           "#e0def4"
+
+# set recolor                     "true"
+# set recolor-keephue             "false"

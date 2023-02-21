@@ -1,0 +1,16 @@
+2023-02-13 16:06:05.483 [info] Extension host with pid 1399729 started
+2023-02-13 16:06:05.483 [info] Skipping acquiring lock for /home/sweet/.config/VSCodium/User/workspaceStorage/63cf7dcdedf04cbf6de79d6128ab3810.
+2023-02-13 16:06:05.538 [info] ExtensionService#_doActivateExtension vscode.emmet, startup: false, activationEvent: 'onLanguage'
+2023-02-13 16:06:05.539 [info] ExtensionService#_doActivateExtension vscode.git-base, startup: true, activationEvent: '*', root cause: vscode.git
+2023-02-13 16:06:05.665 [info] ExtensionService#_doActivateExtension vscode.git, startup: true, activationEvent: '*'
+2023-02-13 16:06:05.666 [info] ExtensionService#_doActivateExtension vscode.github, startup: true, activationEvent: '*'
+2023-02-13 16:06:05.713 [info] ExtensionService#_doActivateExtension timonwong.shellcheck, startup: true, activationEvent: 'workspaceContains:**/.shellcheckrc'
+2023-02-13 16:06:12.523 [info] Not activating extension 'ms-python.isort': Timed out while searching for 'workspaceContains' pattern *.py
+2023-02-13 16:06:12.523 [info] Not activating extension 'rust-lang.rust-analyzer': Timed out while searching for 'workspaceContains' pattern */Cargo.toml,*/rust-project.json
+2023-02-13 16:06:12.525 [info] Eager extensions activated
+2023-02-13 16:06:12.532 [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: false, activationEvent: 'onStartupFinished'
+2023-02-13 16:06:12.533 [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
+2023-02-13 16:06:22.449 [info] ExtensionService#_doActivateExtension ms-python.python, startup: false, activationEvent: 'onLanguage:ini'
+2023-02-13 16:06:34.158 [info] ExtensionService#_doActivateExtension vscode.npm, startup: false, activationEvent: 'onLanguage:properties'
+2023-02-13 16:06:42.187 [info] Extension host terminating: received terminate message from renderer
+2023-02-13 16:06:44.195 [info] Extension host with pid 1399729 exiting with code 0

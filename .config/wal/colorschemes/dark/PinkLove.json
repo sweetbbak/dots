@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/home/sweet/Pictures/FmmcYPfagAAI_qQ.jpg",
+    "alpha": "100",
+    "special": {
+        "background": "#070405",
+        "foreground": "#f3e1e7",
+        "cursor": "#f3e1e7"
+    },
+    "colors": {
+        "color0": "#070405",
+        "color1": "#EB6099",
+        "color2": "#AC969C",
+        "color3": "#F592AE",
+        "color4": "#F89FC2",
+        "color5": "#FCB2CC",
+        "color6": "#FEC4D6",
+        "color7": "#f3e1e7",
+        "color8": "#aa9da1",
+        "color9": "#EB6099",
+        "color10": "#AC969C",
+        "color11": "#F592AE",
+        "color12": "#F89FC2",
+        "color13": "#FCB2CC",
+        "color14": "#FEC4D6",
+        "color15": "#f3e1e7"
+    }
+}

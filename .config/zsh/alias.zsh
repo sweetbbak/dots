@@ -80,13 +80,13 @@ alias pacd="pacman -Qq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 
 alias pacc="pacman -Slq | fzf --preview 'pacman -Si {}' --layout=reverse"
 
 #handy shit
-alias eip="echo $(curl -s http://ifconfig.me)"
+alias eip='echo $(curl -s http://ifconfig.me)'
 alias hlp='find ./ -printf "%f\n" | gum filter'
 alias px2ansi='python ~/github/px2ansi/px2ansi.py'
 alias icat="kitty +kitten icat"
 alias zshxc="zsh -ixc : 2>&1 | grep"
 alias fzman="echo '' | fzf --preview 'man {q}'"
-alias fzawk='echo "" | fzf --print-query --preview 'echo "a\nb\nc\nd" | awk {q}''
+# alias fzawk='echo "" | fzf --print-query --preview 'echo "a\nb\nc\nd" | awk {q}''
 
 # Programs
 alias top="btop"

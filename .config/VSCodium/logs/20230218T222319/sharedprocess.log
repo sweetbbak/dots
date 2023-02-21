@@ -1,0 +1,21 @@
+2023-02-18 22:23:20.903 [info] Starting worker process with pid 1011989 (type: fileWatcher, window: 1).
+2023-02-18 22:23:26.400 [info] Getting Manifest... ms-python.vscode-pylance
+2023-02-18 22:23:26.401 [info] Getting Manifest... ms-toolsai.jupyter-keymap
+2023-02-18 22:23:26.402 [info] Getting Manifest... ms-toolsai.vscode-jupyter-cell-tags
+2023-02-18 22:23:26.403 [info] Getting Manifest... ms-toolsai.vscode-jupyter-slideshow
+2023-02-18 22:23:27.055 [info] Installing extension: ms-toolsai.jupyter-keymap
+2023-02-18 22:23:27.057 [info] Installing extension: ms-toolsai.vscode-jupyter-cell-tags
+2023-02-18 22:23:27.059 [info] Installing extension: ms-toolsai.vscode-jupyter-slideshow
+2023-02-18 22:23:27.127 [info] Installing extension: ms-python.vscode-pylance
+2023-02-18 22:23:27.516 [info] Extension installed successfully: ms-toolsai.vscode-jupyter-cell-tags
+2023-02-18 22:23:27.520 [info] Extension installed successfully: ms-toolsai.vscode-jupyter-slideshow
+2023-02-18 22:23:27.523 [info] Extension installed successfully: ms-toolsai.jupyter-keymap
+2023-02-18 22:23:27.697 [info] Getting Manifest... ms-python.python
+2023-02-18 22:23:36.037 [info] Extension signature verification: ms-python.vscode-pylance. Verification status: Unverified.
+2023-02-18 22:23:37.705 [info] Extracted extension to /home/sweet/.vscode-oss/extensions/.107cbf98-81af-4ffb-a3ab-9f4fe0381e6b: ms-python.vscode-pylance
+2023-02-18 22:23:37.708 [info] Renamed to /home/sweet/.vscode-oss/extensions/ms-python.vscode-pylance-2023.2.30
+2023-02-18 22:23:37.709 [info] Extracting completed. ms-python.vscode-pylance
+2023-02-18 22:23:37.715 [info] Extension installed successfully: ms-python.vscode-pylance
+2023-02-18 22:23:37.734 [info] Marked extension as uninstalled ms-python.vscode-pylance-2023.2.20
+2023-02-18 22:30:00.739 [info] Worker process with pid 1011989 terminated normally (type: fileWatcher, window: 1).
+2023-02-18 22:30:01.704 [info] Starting worker process with pid 1018313 (type: fileWatcher, window: 1).

@@ -3,14 +3,13 @@ local beautiful = require("beautiful")
 
 local op = beautiful.flash_focus_start_opacity or 0.6
 local stp = beautiful.flash_focus_step or 0.01
-local timeout = beautiful.flash_focus_timeout or stp
 
 local flashfocus = function(c)
     if c and #c.screen.clients > 1 then
         c.opacity = op
         local q = op
         local g = gears.timer({
-            timeout = timeout,
+            timeout = stp,
             call_now = false,
             autostart = true,
         })

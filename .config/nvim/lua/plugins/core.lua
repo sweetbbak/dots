@@ -5,6 +5,10 @@ return {
   { "norcalli/nvim-colorizer.lua" },
 
   {
+    "windwp/nvim-spectre",
+  },
+
+  {
     "nvim-treesitter/nvim-treesitter",
     opts = {
       ensure_installed = {
