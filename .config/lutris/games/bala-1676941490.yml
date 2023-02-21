@@ -1,5 +1,0 @@
-game:
-  exe: /home/sweet/.wine/drive_c/Program Files/Balabolka/balabolka.exe
-  prefix: ~/.wine
-system: {}
-wine: {}

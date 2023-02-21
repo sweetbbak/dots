@@ -1,8 +1,0 @@
-2023-02-18 22:23:19.320 [info] update#setState idle
-2023-02-18 22:23:20.336 [info] Starting extension host with pid 1011933 (fork() took 5 ms).
-2023-02-18 22:23:49.322 [info] update#setState checking for updates
-2023-02-18 22:23:49.483 [info] update#setState idle
-2023-02-18 22:30:00.737 [info] Extension host with pid 1011933 exited with code: 0, signal: null.
-2023-02-18 22:30:01.703 [info] Starting extension host with pid 1018314 (fork() took 5 ms).
-2023-02-18 22:30:06.096 [info] Waiting for extension host with pid 1018314 to exit.
-2023-02-18 22:30:06.112 [info] Extension host with pid 1018314 exited with code: 0, signal: null.
