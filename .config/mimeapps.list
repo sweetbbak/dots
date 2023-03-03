@@ -15,8 +15,12 @@ application/x-wine-extension-ini=neovide.desktop;
 image/webp=nsxiv.desktop;
 text/html=neovide.desktop;
 text/x-install=helix.desktop;
+font/collection=geoclue-where-am-i.desktop;
+application/zip=kitty.desktop;
+application/x-desktop=codium.desktop;dev.lapce.lapce.desktop;
 
 [Default Applications]
 application/x-executable=kitty.desktop;
 application/x-trash=helix.desktop;
 x-scheme-handler/terminal=kitty.desktop;
+font/collection=geoclue-where-am-i.desktop

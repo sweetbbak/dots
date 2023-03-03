@@ -124,17 +124,17 @@ download = {}
 upload = {}
 user_browse = {'filename': {'visible': True, 'width': 600}, 'size': {'visible': True, 'width': 100}, 'bitrate': {'visible': True, 'width': 100}, 'length': {'visible': True, 'width': 235}}
 buddy_list = {}
-chat_room = {'nicotine': {'status': {'visible': True, 'width': 25}, 'country': {'visible': True, 'width': 25}, 'user': {'visible': True, 'width': 155}, 'speed': {'visible': True, 'width': 100}, 'files': {'visible': True, 'width': 94}}}
+chat_room = {'nicotine': {}}
 
 [searches]
 expand_searches = True
 group_searches = folder_grouping
 maxresults = 150
 enable_history = True
-history = ['software', 'clip studio', 'anime']
+history = ['photoshop', 'clip studio paint', 'software', 'clip studio', 'anime']
 enablefilters = False
 filters_visible = False
-defilter = ['', '', '', '', 0, '']
+defilter = ['', '', '', '', False, '', '']
 filtercc = []
 filterin = []
 filterout = []

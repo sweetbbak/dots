@@ -1,5 +1,4 @@
-export PATH=$PATH:~/.local/bin:~/bin:~/.cargo/bin:~/go/bin:~/dev/bin:~/.luarocks/bin:"$PATH"
-export PATH=$PATH:~/scripts:~/src:~/node_modules/.bin:"$PATH"
+export PATH=$PATH:~/.local/bin:~/bin:~/.cargo/bin:~/go/bin:~/dev/bin:~/.luarocks/bin::~/scripts:~/scripts/fzf-bin:~/src:~/node_modules/.bin:~/apps:~/apps/blender340:
 export EDITOR='helix'
 # export STARSHIP_CONFIG=~/example/non/default/path/starship.toml
 
@@ -8,14 +7,14 @@ export HISTSIZE=100000
 export SAVEHIST=100000
 export HISTDUP=erase
 
-export VISUAL='codium'
+export VISUAL='lapce'
 export PAGER='less -R'
 export DIFFPROG="nvim -d"
 export DOTBARE_DIR="$HOME/.dotfiles"
 export DOTBARE_TREE="$HOME"
 export DOTBARE_PREVIEW="bat -n {}"
-export DOTBARE_BACKUP="/run/media/sweet/Hard\ Drive/linux-backups/dotbare"
-PATH=$PATH$( find $HOME/bin/ -type d -printf ":%p" ):$PATH
+export DOTBARE_BACKUP="/run/media/sweet/Hard Drive/linux-backups/dotbare"
+PATH=$PATH$( find $HOME/bin/ -type d -printf ":%p" )
 # PATH=$PATH$( find $HOME/scripts/ -type d -printf ":%p" ):$PATH
 # export PATH=$HOME/.config/rofi/scripts:$PATH
 
@@ -25,7 +24,7 @@ source "$HOME/.cache/wal/colors.sh"
 # fzf tab
 source "$HOME/github/fzf-tab/fzf-tab.plugin.zsh"
 source "$HOME/.config/zsh/fzf-history/zsh-fzf-history-search.zsh"
-
+zstyle ':autocomplete:*' default-context history-incremental-search-backward
 # fzf history
 # source ~/github/zsh-autocomp/zsh-autocomplete.plugin.zsh
 
@@ -68,42 +67,61 @@ compinit -d ~/.cache/zcompdump
 # History configurations
 setopt autocd
 # setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
-setopt hist_ignore_dups       # ignore duplicated commands history list
-setopt hist_ignore_space      # ignore commands that start with space
-setopt hist_verify            # show command with history expansion to user before running it
+# setopt hist_ignore_dups       # ignore duplicated commands history list
+# setopt hist_ignore_space      # ignore commands that start with space
+# setopt hist_verify            # show command with history expansion to user before running it
 setopt share_history         # share command history data
-setopt appendhistory
+# setopt appendhistory
 setopt sharehistory
-setopt incappendhistory
-setopt hist_ignore_all_dups
-setopt hist_save_no_dups
-setopt hist_ignore_dups
-setopt hist_find_no_dups
+# setopt incappendhistory
+# setopt hist_ignore_all_dups
+# setopt hist_save_no_dups
+# setopt hist_ignore_dups
+# setopt hist_find_no_dups
 setopt interactivecomments # allow comments in interactive mode
-setopt magicequalsubst     # enable filename expansion for arguments of the form ‘anything=expression’
-setopt nonomatch           # hide error message if there is no match for the pattern
-setopt notify              # report the status of background jobs immediately
-setopt numericglobsort     # sort filenames numerically when it makes sense
-setopt promptsubst         # enable command substitution in prompt
+# setopt magicequalsubst     # enable filename expansion for arguments of the form ‘anything=expression’
+# setopt nonomatch           # hide error message if there is no match for the pattern
+# setopt notify              # report the status of background jobs immediately
+# setopt numericglobsort     # sort filenames numerically when it makes sense
+# setopt promptsubst         # enable command substitution in prompt
 
+setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
+setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
+setopt HIST_IGNORE_ALL_DUPS      # Delete old recorded entry if new entry is a duplicate.
+# bindkey '\e[1;5A' history-beginning-search-backward
+# bindkey '\e[1;5B' history-beginning-search-forward
+
+# THIS IS IT LOL THIS WAS WHAT I WAS LOOKING FOR HAHAHA
+# match the command in history and search ie: wget ... + up key searches for wget cmds
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search # Up
+bindkey "^[[B" down-line-or-beginning-search # Down
+
+
+# autoload -Uz compinstall && compinstall
 # configure key keybindings
 # bindkey -e                                        # emacs key bindings
-# bindkey ' ' magic-space                           # do history expansion on space
-# bindkey '^U' backward-kill-line                   # ctrl + U
+bindkey ' ' magic-space                           # do history expansion on space
+bindkey '^U' backward-kill-line                   # ctrl + U
 # bindkey '^[[3;5~' kill-word                       # ctrl + Supr
-# bindkey '^[[3~' delete-char                       # delete
-# bindkey '^[[1;5C' forward-word                    # ctrl + ->
-# bindkey '^[[1;5D' backward-word                   # ctrl + <-
-# bindkey '^[[5~' beginning-of-buffer-or-history    # page up
-# bindkey '^[[6~' end-of-buffer-or-history          # page down
-# bindkey '^[[H' beginning-of-line                  # home
-# bindkey '^[[F' end-of-line                        # end
+bindkey '^[[3~' delete-char                       # delete
+bindkey '^[[1;5C' forward-word                    # ctrl + ->
+bindkey '^[[1;5D' backward-word                   # ctrl + <-
+bindkey '^[[5~' beginning-of-buffer-or-history    # page up
+bindkey '^[[6~' end-of-buffer-or-history          # page down
+bindkey '^[[H' beginning-of-line                  # home
+bindkey '^[[F' end-of-line                        # end
 # bindkey '^[[Z' undo                               # shift + tab undo last action
 
 # configure `time` format
 TIMEFMT=$'\nreal\t%E\nuser\t%U\nsys\t%S\ncpu\t%P'
 
 export MANPATH="/usr/local/man:$MANPATH"
+# $(printf '%s="%s"\n' 'PATH' "$(printf "%s:" $(echo "${PATH}" | tr ':' '\n' | sort -u) )" | sed -e 's/:"/"/')
+# export PATH
 
 # ani-cli shit
 # export ANI_CLI_EXTERNAL_MENU=0

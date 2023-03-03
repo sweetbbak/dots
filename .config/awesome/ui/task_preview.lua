@@ -8,13 +8,16 @@ local dpi = xresources.apply_dpi
 bling.widget.task_preview.enable {
     height = dpi(300),
     width = dpi(300),
-    placement_fn = function (c)
-        awful.placement.bottom(c, {
-            margins = {
-                bottom = beautiful.bar_height + beautiful.useless_gap * 2,
-            }
-        })
-    end,
+    parent = awful.screen.focused,
+    x = 890,
+    y = 50,
+    -- placement_fn = function (c)
+        -- awful.placement.center(c, {
+            -- margins = {
+                -- bottom = beautiful.bar_height + beautiful.useless_gap * 160,
+            -- }
+        -- })
+    -- end,
     widget_structure = {
         {
             {
@@ -38,6 +41,7 @@ bling.widget.task_preview.enable {
             halign = 'center',
             widget = wibox.widget.imagebox,
         },
-        layout = wibox.layout.fixed.vertical
+        layout = wibox.layout.fixed.vertical,
+        parent = awful.screen.focused
     }
 }

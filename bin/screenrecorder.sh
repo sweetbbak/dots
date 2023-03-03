@@ -1,11 +1,15 @@
 #!/bin/sh
 
-VIDEO_RECORDINGS_DIR="$HOME/Videos/"
+VIDEO_RECORDINGS_DIR="$HOME/Videos/screen-recordings"
 TMP_VIDEO_FILE="/tmp/recording.mp4"
 FPS="60"
 
+if [ -d "$VIDEO_RECORDINGS_DIR" ]; then
+	mkdir -p "$VIDEO_RECORDINGS_DIR"
+fi
+
 launcher() {
-	rofi -dmenu -i -p "$1" # -theme ~/.config/rofi/
+	rofi -dmenu -i -p "$1"
 	# wofi -d -p "$1"
 	# tofi --require-match false --fuzzy-match true --prompt-text "$1"
 }
@@ -19,15 +23,15 @@ test -e /tmp/recordingpid &&
 	pgrep ffmpeg && kill -9 "$recpid"
 
 get_name() {
-	name=$(echo "" | launcher "Name your recording:" | tr " " "_")
+	name=$(echo "" | launcher "Name your recording: " | tr " " "_")
 	[ -z "$name" ] && rm "$TMP_VIDEO_FILE" && exit 1
 }
 
 start_recording() {
 	rm $TMP_VIDEO_FILE
-	monitor_number=$(printf "1. (DP-2)\n2. (HDMI-a-1)" | launcher "Choose a monitor")
+	monitor_number=$(printf "1. (DP-2)\n2. (HDMI-a-1)" | launcher "Choose a monitor: ")
 	[ -z "$monitor_number" ] && exit 1
-	notify-send "Recording started" -t 1000 && sleep 1.5
+	notify-send "Recording started" -t 1000 && sleep 2
 	wf-recorder -f "$TMP_VIDEO_FILE" &
 
 	pgrep wf-recorder >/tmp/recordingpid &&
@@ -48,7 +52,7 @@ kill_recording() {
 	fi
 	notify-send "Recording Stopped" -t 1000
 	format=$(printf "1. 1440p\n2. 1080p\n3. 720p\n4. Discord (under 8mb)\n5. Discord share (upload to oshi.at and copy to clipboard)\n6. gif\n7. Delete" |
-		launcher "Choose a format" | sed -nE 's/[0-9]. (.*)/\1/p')
+		launcher "Choose a format: " | sed -nE 's/[0-9]. (.*)/\1/p')
 	convert_recording "$format"
 }
 
@@ -82,7 +86,7 @@ convert_recording() {
 		;;
 	*) notify-send "No format selected" ;;
 	esac
-	notify-send "Recording saved as $name.mp4 in ~/videos/screen-recordings in $1 format"
+	notify-send "Recording saved as $name.mp4 in ~/Videos/screen-recordings in $1 format"
 }
 
 case "$1" in

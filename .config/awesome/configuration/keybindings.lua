@@ -107,6 +107,12 @@ local function set_keybindings()
 		end, { description = "restore minimized", group = "client" }),
 	})
 
+	awful.keyboard.append_global_keybindings({
+		awful.key({}, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer -D pulse sset Master 2%+", false) end),
+		awful.key({}, "XF86AudioLowerVolume", function () awful.util.spawn("amixer -D pulse sset Master 2%-", false) end),
+		awful.key({}, "XF86AudioMute", function () awful.util.spawn("amixer -D pulse sset Master toggle", false) end),
+	})
+
 	-- Layout related keybindings
 	awful.keyboard.append_global_keybindings({
 		awful.key({ modkey, "Shift" }, "j", function()

@@ -1,4 +1,5 @@
 ---@diagnostic disable:undefined-global
+-- disabled to fix Clip studio paint plus child popups from being forced to center
 
 local awful = require 'awful'
 

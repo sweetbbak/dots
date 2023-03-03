@@ -16,10 +16,10 @@ local titlebar_assets_path = assets_path .. "titlebar/"
 local theme = {}
 
 -- fonts
-theme.font_name = "Product Sans"
-theme.nerd_font = "Iosevka NF"
+theme.font_name = "Maple Mono"
+theme.nerd_font = "Maple Mono"
 theme.material_icons = "Material Icons"
-theme.font_size = "10"
+theme.font_size = "12"
 theme.font = theme.font_name .. " " .. theme.font_size
 
 theme.black = "#151720"
@@ -60,13 +60,13 @@ theme.actions = {
 }
 
 -- bar
-theme.bar_height = 40
+theme.bar_height = 36
 
 -- gaps and borders
-theme.useless_gap = dpi(7)
-theme.border_width = dpi(5)
+theme.useless_gap = dpi(5)
+theme.border_width = dpi(3)
 theme.border_color_normal = theme.grey
-theme.border_color_active = theme.magenta
+theme.border_color_active = theme.blue
 theme.border_color_marked = theme.bg_normal
 theme.border_radius = dpi(14)
 
@@ -81,6 +81,7 @@ theme.taglist_bg = theme.bg_normal
 theme.taglist_bg_urgent = theme.taglist_bg
 theme.normal_tag_format = assets_path .. "taglist/ghost.svg"
 theme.occupied_tag_format = theme.normal_tag_format
+-- theme.selected_tag_format = assets_path .. "taglist/pacman.svg"
 theme.selected_tag_format = assets_path .. "taglist/pacman.svg"
 theme.taglist_fg_focus = theme.yellow
 theme.taglist_fg = theme.dimblack
@@ -125,7 +126,8 @@ theme.titlebar_minimize_button_focus = gears.color.recolor_image(titlebar_assets
 -- wallpaper
 -- theme.wallpaper = assets_path .. "wallpaper.jpg"
 -- wallpaper
-theme.wallpaper = "/home/sweet/Pictures/backgrounds/beaeop4.jpeg"
+-- theme.wallpaper = "/home/sweet/Pictures/backgrounds/anime_girl_snow.jpg"
+theme.wallpaper = "/home/sweet/Pictures/backgrounds/dream_chaser.png"
 
 -- layouts
 theme.layout_fairh = gears.color.recolor_image(themes_path .. "default/layouts/fairhw.png", theme.fg_normal)

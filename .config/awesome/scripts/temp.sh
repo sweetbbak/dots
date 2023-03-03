@@ -18,7 +18,7 @@ path () {
 }
 
 get () {
-  local path=$(path)
+  path=$(path)
   if [[ $path == "" ]]; then
     path="/sys/class/thermal/thermal_zone0/temp"
   fi
@@ -26,7 +26,8 @@ get () {
   local max_temp=100
   local temp=$(cat $path)
 
-  jq -n $(jq -n $temp/1000)/$max_temp*100
+  # jq -n $(jq -n $temp/1000)/$max_temp*100
+  /home/sweet/bin/get_cpu_temp.sh | awk '{print $2}'
 }
 
 _ () {

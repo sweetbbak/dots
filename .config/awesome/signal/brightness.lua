@@ -2,7 +2,7 @@
 local gears = require 'gears'
 local awful = require 'awful'
 
-local script = 'light -G | sed -s "s/\\./ /g" | awk "{print \\$1}"'
+local script = 'echo 100 | sed -s "s/\\./ /g" | awk "{print \\$1}"'
 
 gears.timer {
     timeout = 5,
@@ -16,7 +16,7 @@ gears.timer {
 }
 
 local function set(val)
-    awful.spawn('light -S ' .. tonumber(val))
+    awful.spawn('redshift -O ' .. tonumber(val))
 end
 
 return { set = set }

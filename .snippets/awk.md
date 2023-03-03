@@ -1,0 +1,70 @@
+% awk
+
+# select columns from file
+awk 'BEGIN{FS=OFS=","} {print $1,$2}' <filename>
+
+# check if records have same columns
+awk -F ',' '{print NF}' <filename>  | sort | uniq -c | wc -l
+
+# change delimiter
+awk '$1=$1' FS="<old>" OFS="<new>" <filename>
+
+# search regex in column
+awk -F ',' '$<colNr> ~/<regex>/' <filename> | column -t -s, | bat --file-name <filename>
+
+# exclude regex in column
+awk -F ',' '$<colNr> !~/<regex>/' <filename> | column -t -s, | bat --file-name <filename>
+
+# remove all white spaces
+awk 'BEGIN{FS=OFS=","} {gsub(/[ \t]+/,""); print }' <filename>
+
+# trim leading and trailing white spaces
+awk 'BEGIN{FS=OFS=","} { gsub(/^[ \t]+|[ \t]+$/, ""); print }' <filename>
+
+# replace everywhere
+awk 'BEGIN{FS=OFS=","} {gsub(/<pattern>/,"<replacement>"); print }' <filename>
+
+# replace in column
+awk 'BEGIN{FS=OFS=","} {gsub(/<pattern>/,"<replacement>",$<column>); print }' <filename>
+
+# replace in column on condition
+awk 'BEGIN{FS=OFS=","} {if(<condition>) gsub(/<pattern>/,"<replacement>",$<column>); print }' <filename>
+
+# data validation/condition
+awk -F ',' '<condition> { print }' <filename>
+
+# remove empty lines
+awk NF <filename>
+
+# remove duplicates
+awk -F ',' '!seen[$0]++' <filename>
+
+# remove duplicates in column
+awk -F ',' '!seen[$<colNr>]++' <filename>
+
+# print index of empty lines
+awk '!NF {print NR}' <filename>
+
+# select null in column
+awk -F ',' '!$<colNr>' <filename>
+
+# exclude null in column
+awk -F ',' '$<colNr>' <filename>
+
+# search for only spaces in column
+awk -F ',' '$<colNr> ~/^[[:blank:]]+$/' <filename>
+
+# select row by index
+awk -F ',' 'NR==<index>' <filename>
+
+# count lines that match pattern
+awk -F ',' '/<pattern>/{++count} END {print count}' <filename>
+
+# count distinct
+: <filename>; awk -F ',' 'NR > 1 {print $<colNr>}' <filename> | sort | uniq -c | wc -l
+
+# count frequencies of values in column
+: <filename>; awk -F ',' 'NR!=1 {print $<colNr>}' <filename> | sort | uniq -c | sort -nr
+
+$ filename: fd -I -t f -e csv
+$ colNr: xsv headers <filename> --- --column 1

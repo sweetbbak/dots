@@ -102,7 +102,7 @@ awesome.connect_signal("disk::usage", function(used)
 end)
 
 awesome.connect_signal("temperature::value", function(temperature)
-	temp.chart_value = temperature / 100
+	temp.chart_value = 10
 end)
 
 -- container

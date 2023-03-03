@@ -1,8 +1,15 @@
-Nsxiv.window.background: #1e1e1e
-Nsxiv.window.foreground: #ffffff
-Nsxiv.bar.font: "FiraCode NF 18"
-Nsxiv.bar.background: #1e1e1e
-Nsxiv.mark.foreground: #F5C2E7
+! Nsxiv
+Nsxiv.bar.font         : MapleMono-Bold:size=20
+Nsxiv.bar.background   : #c4a7e7
+Nsxiv.bar.foreground   : #232136
+Nsxiv.window.foreground: #ea9a97
+Nsxiv.window.background: #232136
+Nsxiv.mark.foreground  : #c4a7e7
+
+! Sxiv
+Sxiv.bar.font  : MapleMono-Bold:size=20 
+Sxiv.foreground: #c4a7e7
+Sxiv.background: #232136
 
 /* !! Catppuccin */
 st.background: #1E1E2E
@@ -50,25 +57,46 @@ st.tabspaces: 4
 
 !-- colors --!
 
-*.foreground:   #a5b6cf
-*.background:   #0d0f18
-*.cursorColor:  #151720
-*fading: 35
+!! *.foreground:   #a5b6cf
+!! *.background:   #0d0f18
+!! *.cursorColor:  #151720
+!! *fading: 35
+!! 
+!! *.color0: #151720
+!! *.color1: #dd6777
+!! *.color2: #90ceaa
+!! *.color3: #ecd3a0
+!! *.color4: #86aaec
+!! *.color5: #c296eb
+!! *.color6: #93cee9
+!! *.color7: #cbced3
+!! 
+!! *.color8: #262831
+!! *.color9: #e26c7c
+!! *.color10: #95d3af
+!! *.color11: #f1d8a5
+!! *.color12: #8baff1
+!! *.color13: #c79bf0
+!! *.color14: #98d3ee
+!! *.color15: #d0d3d8
 
-*.color0: #151720
-*.color1: #dd6777
-*.color2: #90ceaa
-*.color3: #ecd3a0
-*.color4: #86aaec
-*.color5: #c296eb
-*.color6: #93cee9
-*.color7: #cbced3
-
-*.color8: #262831
-*.color9: #e26c7c
-*.color10: #95d3af
-*.color11: #f1d8a5
-*.color12: #8baff1
-*.color13: #c79bf0
-*.color14: #98d3ee
-*.color15: #d0d3d8
+*background:	#232136
+*foreground:	#e0def4
+*cursorColor:	#e0def4
+*color0:	#232136
+*color1:	#eb6f92
+*color2:    #3e8fb0 
+*color3:    #f6c177
+*color4:	#9ccfd8
+*color5:    #c4a7e7
+*color6:	#ea9a97
+*color7:    #e0def4
+*color8:    #e0def4
+*color9:    #eb6f92
+*color10:   #3e8fb0
+*color11:   #f6c177
+*color12:   #9ccfd8
+*color13:   #c4a7e7
+*color14:   #ea9a97
+*color15:   #e0def4
+*color16:   #c4a7e7

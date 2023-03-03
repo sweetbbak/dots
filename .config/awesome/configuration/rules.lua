@@ -18,7 +18,7 @@ local function setup_rules ()
             rule_any = {
                 instance = { "copyq", "pinentry" },
                 class    = {
-                    "Arandr", "Blueman-manager", "Gpick", "Kruler", "Sxiv", "Nsxiv", "Clip Studio Paint",
+                    "Arandr", "Blueman-manager", "mpv", "Krita", "Sxiv", "Nsxiv", "clipstudiopaint.exe", "nsxiv",
                     "Tor Browser", "Wpa_gui", "veromix", "xtightvncviewer", "feh"
                 },
                 name    = {
@@ -28,6 +28,7 @@ local function setup_rules ()
                     "AlarmWindow",    -- Thunderbird's calendar.
                     "ConfigManager",  -- Thunderbird's about:config.
                     "pop-up",         -- e.g. Google Chrome's (detached) Developer Tools.
+                    "Pop-up",         -- e.g. Google Chrome's (detached) Developer Tools.
                 }
             },
             properties = { floating = true }

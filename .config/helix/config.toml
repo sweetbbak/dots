@@ -1,4 +1,4 @@
-theme = "dracula"
+theme = "rose_pine_moon"
 
 # General Helix's configuration
 [editor]
@@ -15,8 +15,8 @@ parents = false
 render = "none"
 
 [editor.indent-guides]
-render = false
-character = "╎" # Some characters that work well: "▏", "┆", "┊", "⸽"
+render = true
+character = "▏" # Some characters that work well: "▏", "┆", "┊", "⸽"
 skip-levels = 1
 
 # Helix's statusline
@@ -25,14 +25,15 @@ left = ["mode", "spinner"]
 center = ["file-name", "diagnostics"]
 right = ["selections", "position"]
 separator = "│"
-mode.normal = "NORMAL"
-mode.insert = "INSERT"
-mode.select = "SELECT"
+mode.normal = "NORMAL  "
+mode.insert = "INSERT  "
+mode.select = "SELECT 麗"
 
 [keys.normal]
 "C-r" = [":config-reload"]
 "C-s" = [":w"]
 "C-o" = [":open ~/.config/helix/config.toml"]
+"C-O" = [":open ~/.snippets"]
 "g" = { a = "code_action" }
 "G" = ["goto_last_line"]
 "Z" = { Q = ":quit!" ,  Z = ":write-quit!" }
@@ -40,6 +41,18 @@ mode.select = "SELECT"
 "0" = ["goto_line_start"]
 "$" = ["goto_line_end"]
 "=" = [ ":format" ]
+
+# recent additions
+"^" = "goto_first_nonwhitespace"
+V = ["select_mode", "extend_to_line_bounds"]
+S = "surround_add" # Would be nice to be able to do something after this but it isn't chainable
+
+
+# Some nice Helix stuff
+C-h = "select_prev_sibling"
+C-j = "shrink_selection"
+C-k = "expand_selection"
+C-l = "select_next_sibling"
 
 [keys.select]
 "D" = ["extend_to_line_bounds", "delete_selection"]

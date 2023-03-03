@@ -1,7 +1,221 @@
+## some handy functions I've written or collected
+
+# print an alias to the command line to edit and run
+func() {
+  print -z $(functions "$@")
+}
+ali() {
+  print -z $(alias "$@")
+}
+nwal() {
+  wal -n -i "$(nsxiv -otfr ~/Pictures)"
+}
+
+# quickly copy a file or directory from ~/Downloads to current directory
+cpd() {
+  file=$(fd . "$HOME/Downloads" -t f|fzf -d"/" --with-nth -1.. --height=95%)
+  [ ! -z "$file" ] && cp $file . && gum confirm "Delete the original file?" && rm $file || exit 1
+}
+
+# use fzf with tree preview to go into a directory
+change_folder() {
+  CHOSEN=$(fd '.' -d 4 -H -t d $DIR|fzf --cycle --height=95% --preview="exa -T {}" --reverse)
+  [ -z $CHOSEN ] && return 0 || cd "$CHOSEN" && [ $(ls|wc -l) -le 60 ] && ls
+}
+
+open_with_mpv() {
+  VIDEO_PATH=$(rg --files -g '!anime/' -g '!for_editing/' -g '*.{mp4,mkv,webm,m4v}' | fzf --cycle)
+    [[ -z $VIDEO_PATH ]] || (mpv "$VIDEO_PATH")
+}
+animes(){
+  animdl stream "$1" -r "$2"
+}
+
+animeg() {
+  animdl grab "$1" -r "$2" --index 1|sed -nE 's|.*stream_url": "(.*)".*|\1|p'|wl-copy
+}
+
+cchar1() {
+  char=$(curl -s "https://re-zero.fandom.com/wiki/Category:Characters"|
+    grep -B6 'class="category-page__member-thumbnail "'|
+    sed -nE 's_.*href="([^"]*)".*_\1_p; s_.*data-src="([^"]*)".*_\1_p; s_.*alt="([^"]*)".*_\1_p'|
+    sed -e 'N;N;s/\n/\t/g' -e 's_/width/[[:digit:]]\{1,3\}_/width/800_g' \
+    -e 's_/height/[[:digit:]]\{1,3\}_/height/600_g'|
+    fzf --reverse --with-nth 3.. --cycle --preview="kitty +kitten icat --clear --transfer-mode file; \
+    kitty +kitten icat --place "256x17@10x10" --scale-up --transfer-mode file {2}"|cut -f1)
+  [ -z "$char" ] && exit 1 || images=$(curl -sL "https://you-zitsu.fandom.com"$char|
+    sed -nE 's_.*src="([^"]*)".*class="pi-image-thumbnail".*alt="([^"]*)".*_\1\t\2_p')
+  [ $(printf "%s" "$images"|wc -l) -lt 2 ] && kitty +kitten icat $(printf "%s" "$images"|cut -f1) ||
+  printf "%s" "$images"|fzf --with-nth 2.. --cycle --preview="kitty +kitten icat --clear --transfer-mode file; \
+    kitty +kitten icat --place "256x17@10x10" --scale-up --transfer-mode file {1}" > /dev/null
+}
+
+configs () {
+  local search_dir=~/.config
+  local preview_cmd="exa -lah --sort=type --icons --no-permissions --no-filesize --no-time --no-user $search_dir/{}"
+
+  local target_dir=$(fd . $search_dir --exact-depth=1 --type d --exec printf '{/}\0' | fzf --preview $preview_cmd --exit-0 --read0)
+
+  if [ -n $target_dir ]; then
+    cd $search_dir/$target_dir
+    exa -lah --group-directories-first --icons
+  fi
+}
+
+### Fzf functions
+
+# Modified version where you can press
+#   - CTRL-O to open with `open` command,
+#   - CTRL-E or Enter key to open with the $EDITOR
+fo() {
+  IFS=$'\n' out=("$(fzf-tmux --query="$1" --exit-0 --expect=ctrl-o,ctrl-e)")
+  key=$(head -1 <<< "$out")
+  file=$(head -2 <<< "$out" | tail -1)
+  if [ -n "$file" ]; then
+    [ "$key" = ctrl-o ] && open "$file" || ${EDITOR:-vim} "$file"
+  fi
+}
+
+### Other
+
+emoji() {
+  emojis=$(curl -sSL 'https://git.io/JXXO7')
+  selected_emoji=$(printf "%s" $emojis|fzf --preview-window=hidden --cycle)
+  [ -z "$selected_emoji" ] || printf "%s" "$selected_emoji"|cut -d" " -f1|wl-copy
+} 
+
+# pick an image with fzf and copy it to the clipboard
+# ic = image copy
+ic() {
+  image=$(fd -t f -d 1 --extension png --extension jpg --extension jpeg --extension webm|
+    fzf -0 --cycle --preview="kitty +kitten icat --clear --transfer-mode file; \
+  kitty +kitten icat --place "256x17@10x10" --scale-up --transfer-mode file {}")
+  [ -z "$image" ] || wl-copy "$image"
+}
+
+# pick and image with fzf and quickly share it
+# is = image share
+is() {
+  image=$(fd -t f -d 1|fzf --cycle --preview="kitty +kitten icat --clear --transfer-mode file; \
+  kitty +kitten icat --place "256x17@10x10" --scale-up --transfer-mode file {}")
+  [ -z "$image" ] || printf $(curl -# "https://0x0.st" -F "file=@${image}")|xsel
+}
+
+#nnn -c to activate disables -e
+
+n () {
+    # Block nesting of nnn in subshells
+    if [ -n $NNNLVL ] && [ "${NNNLVL:-0}" -ge 1 ]; then
+        echo "nnn is already running"
+        return
+    fi
+
+    # The behaviour is set to cd on quit (nnn checks if NNN_TMPFILE is set)
+    # To cd on quit only on ^G, either remove the "export" as in:
+    #    NNN_TMPFILE="${XDG_CONFIG_HOME:-/home/daru/.config}/nnn/.lastd"
+    #    (or, to a custom path: NNN_TMPFILE=/tmp/.lastd)
+    # or, export NNN_TMPFILE after nnn invocation
+    export NNN_TMPFILE="${XDG_CONFIG_HOME:-/home/chokerman/.config}/nnn/.lastd"
+
+    # Unmask ^Q (, ^V etc.) (if required, see stty -a) to Quit nnn
+    # stty start undef
+    # stty stop undef
+    # stty lwrap undef
+    # stty lnext undef
+
+    nnn -cda "$@"
+    #nnn -cdHa "$@" -P v
+
+    if [ -f "$NNN_TMPFILE" ]; then
+            . "$NNN_TMPFILE"
+            rm -f "$NNN_TMPFILE" > /dev/null
+    fi
+}
+
+addpkg(){
+    paru -Ss "$*" | sed -nE 's|^[a-z]*/([^ ]*).*|\1|p' | fzf --preview 'paru -Si {} | bat --language=yaml --color=always -pp' --preview-window right:65%:wrap -m | paru -S -
+}
+
+rmpkg(){
+    paru -Qq | fzf --preview 'paru -Si {} | bat --language=yaml --color=always -pp' --preview-window right:65%:wrap -m | paru -Rcns -
+}
+
+# fuzzy-find a file and cd to its directory
+cdff() {
+  local seld="$(fff "$@")"
+  [ -n "$seld" ] && pushd "$(dirname "$seld")"
+}
+
+# fuzzy-find in history and paste to command-line
+fzh() {
+  local selh="$(history -1 0 | fzf --query="$@" --ansi --no-sort -m --height=50% --min-height=25 -n 2.. | awk '{ sub(/^[ ]*[^ ]*[ ]*/, ""); sub(/[ ]*$/, ""); print }')"
+  [ -n "$selh" ] && print -z -- ${selh}
+}
+
+cdrg() {
+  cd $(fd -t d | rg "$1" | fzf)
+}
+
+# list env variables
+list_env() {
+	local var
+	var=$(printenv | cut -d= -f1 | fzf --prompt 'env:' --preview='printenv {}') \
+		&& echo "$var=$(printenv "$var")" \
+		&& unset var
+}
+
+# fzf browse files
+find_files() {
+	IFS=$'\n' files=($(fzf --query="$1" --multi --select-1 --exit-0 --prompt 'files:'))
+	[[ -n "$files" ]] && ${EDITOR} "${files[@]}"
+}
+
+# list env variables
+list_env() {
+	local var
+	var=$(printenv | cut -d= -f1 | fzf --prompt 'env:' --preview='printenv {}') \
+		&& echo "$var=$(printenv "$var")" \
+		&& unset var
+}
+
+fcd() {
+  # use print -z -- $(func) to just add to command line
+	local dir
+	dir=$(fd -IH -t d 2> /dev/null | fzf --prompt 'folders:' +m --preview-window='right:50%:nohidden:wrap' --preview='exa --tree --level=2 {}') && cd "$dir"
+}
+snips() {
+  "$EDITOR" /home/sweet/.snippets
+}
+
+fzx() {
+  print -z -- $(fd -t d | fzf)
+}
+
+fzs() {
+    local sels=( "${(@f)$(fd --color=always . "${@:2}" | fzf -m --height=25% --reverse --ansi)}" )
+    [ -n "$sels" ] && print -z -- "$1 ${sels[@]:q:q}"
+}
+
+function ranger {
+    local IFS=$'\t\n'
+    local tempfile="$(mktemp -t tmp.XXXXXX)"
+    local ranger_cmd=(
+        command
+        ranger
+        --cmd="map Q chain shell echo %d > "$tempfile"; quitall"
+    )
+    
+    ${ranger_cmd[@]} "$@"
+    if [[ -f "$tempfile" ]] && [[ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]]; then
+        cd -- "$(cat "$tempfile")" || return
+    fi
+    command rm -f -- "$tempfile" 2>/dev/null
+}
+alias rn='ranger'
+
 anima() {
   animdl grab "$1" -r "$2" --index 1 | sed -nE 's|.*stream_url": "(.*)".*|\1|p'| cb copy
 }
-
 
 # Modified version where you can press
 #   - CTRL-O to open with `open` command,
@@ -177,20 +391,6 @@ cchar() {
     kitty +kitten icat --place "256x17@10x10" --scale-up --transfer-mode file {1}" > /dev/null
 }
 
-# anime() {
-  # ~/github/ani-cli/ani-cli
-# }
-
-open_with_nvim_filetype() {
-  filetype=$(gum filter --indicator="→ " \
-    --placeholder="Choose a filetype" --match.foreground="212" \
-    --indicator.foreground="212" --text.foreground="360" \
-    < ~/dev/sh_scripts/extensions.txt) || filetype=$*
-  [ -z "$filetype" ] || FILE=$(rg --files -g "*.$filetype"|
-    sort|fzf --cycle --reverse --height 95% -0)
-  [[ -z "$FILE" ]] || $1 "$FILE"
-}
-
 open_with_nvim() {
   FILE=$(rg --files -g '!*.{gif,png,jp(e)g,mp4,mkv,webm,m4v,mov,MOV}'|fzf --reverse --height 95%)
   [[ -z $FILE ]] || $1 "$FILE"
@@ -216,70 +416,41 @@ chst() {
 # quickly access any alias or function i have
 qa() { eval $( (alias && functions|sed -nE 's@^([^_].*)\(\).*@\1@p')|cut -d"=" -f1|fzf --reverse) }
 
-# quickly copy a file or directory from ~/Downloads to current directory
-cpd() {
-  file=$(fd . "$HOME/Downloads" -t f|fzf -d"/" --with-nth -1.. --height=95%)
-  [ ! -z "$file" ] && cp $file . && gum confirm "Delete the original file?" && rm $file || exit 1
-}
-
-# quickly edit config files
-vc() {
-  file=$(fd . "$HOME/.config" -t f|fzf -d"/" --with-nth -1.. --height=95%)
-  [ -z "$file" ] || $EDITOR $file
-}
-
-# quickly edit nvim config stuff
-nvc() {
-  file=$(fd . "$HOME/.config/nvim" -t f -d 1|fzf -d"/" --with-nth -1.. --height=95%)
-  [ -z "$file" ] || $EDITOR $file
-}
-
 # quickly edit zsh config stuff
 zrg() {
   var=$(gum choose "zshrc" "functions" "aliases" "kitty" "xports" "bin" --item.foreground="360" --cursor="→ ")
   case $var in
     zshrc)
-      $EDITOR $HOME/.zshrc ;;
+      $EDITOR $HOME/.zshrc && source ~/.zshrc;;
     functions)
-      $EDITOR $HOME/.oh-my-zsh/custom/functions.zsh ;;
+      $EDITOR $HOME/.config/zsh/functions.zsh ;;
     aliases)
-      $EDITOR $HOME/.oh-my-zsh/custom/alias.zsh ;;
+      $EDITOR $HOME/.config/zsh/alias.zsh ;;
     kitty)
       $EDITOR $HOME/.config/kitty/kitty.conf ;;
     xports)
-      $EDITOR $HOME/.oh-my-zsh/custom/xport.zsh ;;
+      $EDITOR $HOME/.config/zsh/xport.zsh ;;
     bin)
       $EDITOR $HOME/bin ;;
   esac
 }
 
-# quickly edit or run scripts from my scripts directory
-se() {
-  var=$(gum choose "edit" "run" --item.foreground="360" --cursor="→ ")
-  script=$(find $HOME/bin -type f|sort|fzf --height=12 --cycle -d"/" --reverse)
-  case $var in
-    edit)
-      printf "%s\n" "$script"|xargs nvim ;;
-    run)
-      sh $script ;;
-  esac
-}
-
 #makes dir and cd's into it
 mkcd() { mkdir -p -- "$@" && cd -- "$@"; }
-filefndr() { find -type f -name "$1" -printf '%f\n' }
+
+# filefndr() { find -type f -name "$1" -printf '%f\n' }
 
 #interactive cd
 function jj {
         cd "$(llama "$@")"
 }
-function ff {
-        cd "$(f "$@")"
-}
+# function ff {
+        # cd "$(shfm "$@")"
+# }
 #interactive cd
-function nnn_cd {
-    if ! [ -z "$NNN_PIPE" ]; then
-        printf "%s\0" "0c${PWD}" > "${NNN_PIPE}" !&
-    fi  
-}
-trap nnn_cd EXIT
+# function nnn_cd {
+    # if ! [ -z "$NNN_PIPE" ]; then
+        # printf "%s\0" "0c${PWD}" > "${NNN_PIPE}" !&
+    # fi  
+# }
+# trap nnn_cd EXIT

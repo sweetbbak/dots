@@ -1,0 +1,98 @@
+# remove first line of a file
+tail -n +2 <filename>
+
+# remove last line of a file
+ghead -n -1 <filename>
+
+# check if file contains EOF
+tail -c1 <filename>
+
+$ filename: fd -t f
+
+
+% cut, column
+
+# select columns from tabular delimiters
+gcut -f<colNr> -d, <filename>
+
+# omit columns from tabular delimiters
+gcut -f<colNr> -d, --complement <filename>
+
+# columnate tabular data
+column -t -s, <filename>
+
+$ filename: fd -t f
+
+
+% sed
+
+# select row by index
+sed -n '<index>p' <filename> | bat --file-name <filename>
+
+# slice file between two lines
+sed -n '<start>,<end>p' <filename> | bat --file-name <filename>
+
+# replace within file
+sed -i 's/<original-text>/<new-text>/g' <filename>
+
+# remove all white spaces
+sed 's/[[:space:]]//g' <filename>
+
+# remove all lines containing a pattern
+sed -i '/<pattern>/d' <filename>
+
+$ filename: fd -t f
+
+
+% env file
+
+# export .env file
+export $(xargs < .env)
+
+
+% tr
+
+# highlight white spaces and tabs
+tr " " "␣" < <filename> | tr "\t" "→" | bat --file-name <filename>
+
+# convert to lowercase
+tr "[:upper:]" "[:lower:]" < <filename>
+
+# squeeze all spaces into one
+tr -s " " < <filename>
+
+# print all $PATH directories
+echo $PATH | tr  ':' '\n'
+
+$ filename: fd -t f
+
+
+% curl
+
+# get request with json body
+curl -s -H "Content-Type: application/json" -X POST -d @<body> "$APP_HOST:$APP_PORT/endpoint" | jq
+
+$ body: find . -type f -iname '*.json' | sed 's/^\.\///g'
+
+
+%man
+
+# man page of bash conditionals
+man test
+
+
+% find
+
+# find files by extension
+find . -type f -name '*.<extension>'
+
+# count files by extension
+find . -type f | grep -v '.git/' | awk -F'/' '{print $NF}' | awk -F'.' '  {print $NF}' | sort | uniq -c | sort -nr
+
+
+% jq
+
+# extract by regex
+jq 'to_entries[]|select(.key|test("<regex>"))' <filename>
+
+$ filename: fd -t f -e json

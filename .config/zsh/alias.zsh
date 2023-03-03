@@ -25,7 +25,6 @@ alias cxx='chmod +x "$(rg --files -g "*.sh"|fzf -1 --height=20% --preview-window
 # Utility functions for Core utils
 alias ag="alias | grep "
 alias zrc="hx ~/.zshrc && source ~/.zshrc"
-alias vg='nvim $(gum filter)'
 
 alias ..="cd .."
 alias ...='cd ../..'
@@ -39,6 +38,7 @@ alias chx="chmod +x"
 # alias fix-perms="find /home/sweet/bin -type d -exec chmod 774 {} +"
 # alias fix-perms="find /home/sweet/bin -type f -exec chmod 664 {} +"
 alias awtt="awesome-test"
+alias b='cd $(dirs -v|fzf)'
 
 # Git
 alias gcl='git clone'
@@ -50,6 +50,8 @@ alias nv='neovidecloseterminal'
 # fzf
 alias fsh='fc -l -n -r 1 | sed -Ee "s/^[[:blank:]]+//" | uniq | fzf | tr -d \\n | xclip -selection c'
 alias config='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias fzf-preview='printf "fzf --with-nth 2.. --cycle --preview=\"kitty +kitten icat --clear --transfer-mode file;\
+  kitty +kitten icat --place "190x12@10x10" --scale-up --transfer-mode file {1}\""|xsel'
 
 # Internet
 alias wget-links='wget -U "Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/81.0" --no-check-certificate "$1" -q -O - | grep -Po "(?<=href=\")[^^\"]*"'
@@ -59,7 +61,7 @@ alias wget-images='wget -U "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:49.0) Gec
 alias fzr='\ls -vR ~/bin | fzf --reverse --bind "enter:execute({})+accept"'
 alias anifzf='alacritty --class "kitty-fzf" -e bash -c "ani-cli"'
 alias pass-to-fzf='alacritty --class "kitty-fzf" -e bash -c "fzf $* < /proc/$$/fd/0 > /proc/$$/fd/1"'
-
+alias vg='nvim $(gum filter)'
 # Locations
 alias t7='cd /run/media/sweet/T7'
 alias windows='cd /run/media/sweet/623C48973C48685D/Users/User'
@@ -92,7 +94,7 @@ alias fzman="echo '' | fzf --preview 'man {q}'"
 alias top="btop"
 alias lsall='find ./ -printf "%f\n"'
 alias py='python'
-alias n='nnn -de'
+# alias n='nnn -de'
 alias share='printf $(curl -# "https://oshi.at" -F "f=@$(fd -t f -d 1|fzf)"|sed -nE "s_DL: (.*)_\1_p")|xsel' #share file to file share site
 alias ximg='xclip -selection clipboard -target image/png -i'
 alias xout='xclip -se c -t image/png -o >'

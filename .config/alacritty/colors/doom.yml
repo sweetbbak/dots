@@ -1,30 +1,93 @@
-colors:
-  # Default colors
-    primary:
-      background: '#282c34'
-      foreground: '#bbc2cf'
-    cursor:
-      text: CellBackground
-      cursor: '#528bff'
-    selection:
-      text: CellForeground
-      background: '#3e4451'
-    normal:
-      black:   '#1c1f24'
-      red:     '#ff6c6b'
-      green:   '#98be65'
-      yellow:  '#da8548'
-      blue:    '#51afef'
-      magenta: '#c678dd'
-      cyan:    '#5699af'
-      white:   '#202328'
-    bright:
-      black:   '#5b6268'
-      red:     '#da8548'
-      green:   '#4db5bd'
-      yellow:  '#ecbe7b'
-      blue:    '#3071db'   # This is 2257a0 in Doom Emacs but I lightened it.
-      magenta: '#a9a1e1'
-      cyan:    '#46d9ff'
-      white:   '#dfdfdf'
+# colors:
+#   # Default colors
+#     primary:
+#       background: '#282c34'
+#       foreground: '#bbc2cf'
+#     cursor:
+#       text: CellBackground
+#       cursor: '#528bff'
+#     selection:
+#       text: CellForeground
+#       background: '#3e4451'
+#     normal:
+#       black:   '#1c1f24'
+#       red:     '#ff6c6b'
+#       green:   '#98be65'
+#       yellow:  '#da8548'
+#       blue:    '#51afef'
+#       magenta: '#c678dd'
+#       cyan:    '#5699af'
+#       white:   '#202328'
+#     bright:
+#       black:   '#5b6268'
+#       red:     '#da8548'
+#       green:   '#4db5bd'
+#       yellow:  '#ecbe7b'
+#       blue:    '#3071db'   # This is 2257a0 in Doom Emacs but I lightened it.
+#       magenta: '#a9a1e1'
+#       cyan:    '#46d9ff'
+#       white:   '#dfdfdf'
 
+colors:
+  primary:
+    background: "#161616"
+    foreground: "#f2f4f8"
+
+  # selection:
+    # background: "#525252"
+    # text: "#f2f4f8"
+    # text: "#000000"
+
+  normal:
+    black: "#262626"
+    # color8 #393939
+
+    red: "#ff7eb6"
+    # color9 #ff7eb6
+
+    green: "#42be65"
+    # color10 #42be65
+
+    # color3 "#82cfff"
+    # color11 #82cfff
+
+    blue: "#33b1ff"
+    # color12 #33b1ff
+
+    magenta: "#ee5396"
+    # color13 #ee5396
+
+    cyan: "#3ddbd9"
+    # color14 #3ddbd9
+
+    white: "#dde1e6"
+    # color15 #ffffff
+
+cursor:
+  style:
+    shape: Underline
+    # blinking: Always
+    # shape: Block
+
+window:
+  padding:
+    x: 25
+    y: 25
+  dynamic_padding: true
+  opacity: 0.8
+
+font: 
+  normal:
+    family: "Liga SFMono Nerd Font"
+    # family: "FiraCode Nerd Font"
+    # family: "ComicCodeLigatures"
+    # family: "PxPlus IBM VGA8"
+    # family: "Audiowide"
+    # family: "Tomorrow"
+    # family: "Share Tech Mono"
+    # family: "Illusion Z"
+
+  size: 16
+  offset:
+    x: 0
+    y: 0

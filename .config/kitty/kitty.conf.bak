@@ -82,6 +82,6 @@ include ~/.cache/wal/colors-kitty.conf
 
 
 # BEGIN_KITTY_THEME
-# Dracula
+# 80s-anime
 include current-theme.conf
 # END_KITTY_THEME
