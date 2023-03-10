@@ -10,10 +10,19 @@
 ## style-1     style-2     style-3     style-4     style-5
 ## style-6     style-7     style-8     style-9     style-10
 
-dir="$HOME/.config/rofi/anime/launchers/type-7"
-theme='style-2'
+# dir="$HOME/.config/rofi/anime/launchers/type-7"
+# theme='style-2'
+
+## Run
+# rofi \
+    # -show drun \
+    # -theme ${dir}/${theme}.rasi
+
+# dir="$HOME/.config/rofi/rofi-adi/launchers/type-7"
+# theme='style-2'
 
 ## Run
 rofi \
     -show drun \
-    -theme ${dir}/${theme}.rasi
+    -icons ePapirus
+    # -theme ${dir}/${theme}.rasi

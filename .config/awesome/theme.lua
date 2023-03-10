@@ -127,7 +127,8 @@ theme.titlebar_minimize_button_focus = gears.color.recolor_image(titlebar_assets
 -- theme.wallpaper = assets_path .. "wallpaper.jpg"
 -- wallpaper
 -- theme.wallpaper = "/home/sweet/Pictures/backgrounds/anime_girl_snow.jpg"
-theme.wallpaper = "/home/sweet/Pictures/backgrounds/dream_chaser.png"
+theme.wallpaper = "/home/sweet/Pictures/backgrounds/FaYVOwPWAAEWzCg.jpg"
+-- theme.wallpaper = "/home/sweet/Pictures/laptop/backgrounds/RxMZu6A.png"
 
 -- layouts
 theme.layout_fairh = gears.color.recolor_image(themes_path .. "default/layouts/fairhw.png", theme.fg_normal)

@@ -17,7 +17,7 @@ render = "none"
 [editor.indent-guides]
 render = true
 character = "▏" # Some characters that work well: "▏", "┆", "┊", "⸽"
-skip-levels = 1
+skip-levels = 0
 
 # Helix's statusline
 [editor.statusline]
@@ -41,6 +41,11 @@ mode.select = "SELECT 麗"
 "0" = ["goto_line_start"]
 "$" = ["goto_line_end"]
 "=" = [ ":format" ]
+
+# test for project launcher
+[keys.normal.space]
+c = ":sh kitty @ send-text --match 'title:^Terminal' cargo run \\\\n" 
+t = ":sh kitty @ send-text --match 'title:^Terminal' 'clear \\ncargo test \\n'"
 
 # recent additions
 "^" = "goto_first_nonwhitespace"

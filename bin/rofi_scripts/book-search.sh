@@ -18,11 +18,12 @@
 # Script:
 
 # Books directory
-BOOKS_DIR=~/Books
-mkdir -p ~/Books
+BOOKS_DIR=~/manga
+# mkdir -p ~/manga
+opener="$(which rmg)"
 
 # Save find result to F_ARRAY
-readarray -t F_ARRAY <<< "$(find "$BOOKS_DIR" -type f -name '*.pdf')"
+readarray -t F_ARRAY <<< "$(fd . "$BOOKS_DIR" -e cbz -e zip)"
 
 # Associative array for storing books
 # key => book name
@@ -61,10 +62,10 @@ gen_list(){
 
 main() {
   get_books
-  book=$( (gen_list) | rofi -dmenu -i -matching fuzzy -no-custom -location 0 -p "Book > " )
+  book=$( (gen_list) | rofi -dmenu -i -matching fuzzy -no-custom -location 0 -p "manga > " )
 
   if [ -n "$book" ]; then
-    xdg-open "${BOOKS[$book]}"
+    "$opener" "${BOOKS[$book]}"
   fi
 }
 

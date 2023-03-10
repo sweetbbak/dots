@@ -1,5 +1,20 @@
 ## some handy functions I've written or collected
 
+# like rfv but with ripgrep-all for pdf, doc, sqlite, jpg, movie subs etc...
+rga-fzf() {
+	RG_PREFIX="rga --files-with-matches"
+	local file
+	file="$(
+		FZF_DEFAULT_COMMAND="$RG_PREFIX '$1'" \
+			fzf --sort --preview="[[ ! -z {} ]] && rga --pretty --context 5 {q} {}" \
+				--phony -q "$1" \
+				--bind "change:reload:$RG_PREFIX {q}" \
+				--preview-window="70%:wrap"
+	)" &&
+	echo "opening $file" &&
+	xdg-open "$file"
+}
+
 # print an alias to the command line to edit and run
 func() {
   print -z $(functions "$@")

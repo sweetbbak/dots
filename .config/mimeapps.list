@@ -2,7 +2,7 @@
 application/pdf=org.pwmt.zathura-pdf-mupdf.desktop;
 application/postscript=helix.desktop;
 application/x-executable=nvim.desktop;kitty.desktop;
-application/x-shellscript=nvim.desktop;
+application/x-shellscript=helix.desktop;nvim.desktop;
 application/x-trash=helix.desktop;
 application/xml=helix.desktop;
 image/gif=nsxiv.desktop;feh.desktop;mpv.desktop;
@@ -13,14 +13,16 @@ text/x-python=nvim.desktop;helix.desktop;
 text/x-lua=neovide.desktop;
 application/x-wine-extension-ini=neovide.desktop;
 image/webp=nsxiv.desktop;
-text/html=neovide.desktop;
+text/html=firefox.desktop;neovide.desktop;
 text/x-install=helix.desktop;
 font/collection=geoclue-where-am-i.desktop;
 application/zip=kitty.desktop;
-application/x-desktop=codium.desktop;dev.lapce.lapce.desktop;
+application/x-desktop=helix.desktop;codium.desktop;dev.lapce.lapce.desktop;
+application/vnd.sqlite3=helix.desktop;
 
 [Default Applications]
 application/x-executable=kitty.desktop;
 application/x-trash=helix.desktop;
 x-scheme-handler/terminal=kitty.desktop;
 font/collection=geoclue-where-am-i.desktop
+application/vnd.sqlite3=helix.desktop

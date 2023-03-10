@@ -27,6 +27,8 @@ modify_font underline_position 1 # 3 -> 1
 modify_font underline_thickness 1
 modify_font baseline 0
 
+map ctrl+shift+f launch --stdin-source=@screen_scrollback --type=overlay fzf --no-sort --exact --tac --bind "enter:execute(xsel --primary <<< {}; notify-send copied! {})"
+
 ##### CURSOR #####
 cursor_shape block
 

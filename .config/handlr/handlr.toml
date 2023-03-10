@@ -1,2 +1,2 @@
-enable_selector = false
+enable_selector = true
 selector = "rofi -dmenu -p 'Open With: '"

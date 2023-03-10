@@ -1,4 +1,4 @@
-export PATH=$PATH:~/.local/bin:~/bin:~/.cargo/bin:~/go/bin:~/dev/bin:~/.luarocks/bin::~/scripts:~/scripts/fzf-bin:~/src:~/node_modules/.bin:~/apps:~/apps/blender340:
+export PATH=$PATH:~/.local/bin:~/bin:~/.cargo/bin:~/go/bin:~/dev/bin:~/.luarocks/bin:~/scripts:~/scripts/fzf-bin:~/src:~/node_modules/.bin:~/apps:~/apps/blender340
 export EDITOR='helix'
 # export STARSHIP_CONFIG=~/example/non/default/path/starship.toml
 
@@ -14,7 +14,8 @@ export DOTBARE_DIR="$HOME/.dotfiles"
 export DOTBARE_TREE="$HOME"
 export DOTBARE_PREVIEW="bat -n {}"
 export DOTBARE_BACKUP="/run/media/sweet/Hard Drive/linux-backups/dotbare"
-PATH=$PATH$( find $HOME/bin/ -type d -printf ":%p" )
+# PATH=$PATH$( find $HOME/bin/ -type d -printf ":%p" )
+PATH=$PATH$( fd . $HOME/bin/ -t d -d 1 -X printf ":%s" {} )
 # PATH=$PATH$( find $HOME/scripts/ -type d -printf ":%p" ):$PATH
 # export PATH=$HOME/.config/rofi/scripts:$PATH
 
@@ -39,6 +40,13 @@ bindkey ' ' magic-space
 # enable completion features
 autoload -Uz compinit
 compinit -d ~/.cache/zcompdump
+setopt COMPLETE_IN_WORD     # Complete from both ends of a word.
+setopt AUTO_LIST            # Automatically list choices on ambiguous completion.
+setopt magicequalsubst     # enable filename expansion for arguments of the form ‘anything=expression’
+setopt nonomatch           # hide error message if there is no match for the pattern
+setopt notify              # report the status of background jobs immediately
+setopt numericglobsort     # sort filenames numerically when it makes sense
+setopt promptsubst         # enable command substitution in prompt
 # zstyle ':completion:*' completer _extensions _complete _approximate
 # zstyle ':completion:*' menu select
 # zstyle ':completion:*:*:*:*:descriptions' format '%F{green}-- %d --%f'
@@ -47,28 +55,30 @@ compinit -d ~/.cache/zcompdump
 # zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 # zstyle ':completion:*:*:*:*:*' menu select
-# zstyle ':completion:*' auto-description 'specify: %d'
-# zstyle ':completion:*' completer _expand _complete
-# zstyle ':completion:*' format 'Completing %d'
-# zstyle ':completion:*' group-name ''
-# zstyle ':completion:*' list-colors ''
-# zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
 # zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 # zstyle ':completion:*' rehash true
-# zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
-# zstyle ':completion:*' use-compctl false
-# zstyle ':completion:*' verbose true
 # zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd' #pletion of files and dirnames
-# zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-# zstyle ':completion:*' fzf-search-display true
+zstyle ':completion:*' fzf-search-display true
 # bindkey '\e[A' history-beginning-search-backward
 # bindkey '\e[B' history-beginning-search-forward
 
+# fzf-tab
+# disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
+# set descriptions format to enable group support
+zstyle ':completion:*:descriptions' format '[%d]'
+# set list-colors to enable filename colorizing
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# preview directory's content with exa when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
+# switch group using `,` and `.`
+zstyle ':fzf-tab:*' switch-group ',' '.'
+
 # History configurations
 setopt autocd
-# setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
+setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
 # setopt hist_ignore_dups       # ignore duplicated commands history list
-# setopt hist_ignore_space      # ignore commands that start with space
+setopt hist_ignore_space      # ignore commands that start with space
 # setopt hist_verify            # show command with history expansion to user before running it
 setopt share_history         # share command history data
 # setopt appendhistory
@@ -79,11 +89,7 @@ setopt sharehistory
 # setopt hist_ignore_dups
 # setopt hist_find_no_dups
 setopt interactivecomments # allow comments in interactive mode
-# setopt magicequalsubst     # enable filename expansion for arguments of the form ‘anything=expression’
-# setopt nonomatch           # hide error message if there is no match for the pattern
-# setopt notify              # report the status of background jobs immediately
-# setopt numericglobsort     # sort filenames numerically when it makes sense
-# setopt promptsubst         # enable command substitution in prompt
+setopt numericglobsort     # sort filenames numerically when it makes sense
 
 setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
 setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
@@ -100,13 +106,12 @@ zle -N down-line-or-beginning-search
 bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
 
-
 # autoload -Uz compinstall && compinstall
 # configure key keybindings
 # bindkey -e                                        # emacs key bindings
 bindkey ' ' magic-space                           # do history expansion on space
 bindkey '^U' backward-kill-line                   # ctrl + U
-# bindkey '^[[3;5~' kill-word                       # ctrl + Supr
+bindkey '^[[3;5~' kill-word                       # ctrl + Supr
 bindkey '^[[3~' delete-char                       # delete
 bindkey '^[[1;5C' forward-word                    # ctrl + ->
 bindkey '^[[1;5D' backward-word                   # ctrl + <-
@@ -114,14 +119,12 @@ bindkey '^[[5~' beginning-of-buffer-or-history    # page up
 bindkey '^[[6~' end-of-buffer-or-history          # page down
 bindkey '^[[H' beginning-of-line                  # home
 bindkey '^[[F' end-of-line                        # end
-# bindkey '^[[Z' undo                               # shift + tab undo last action
+bindkey '^[[Z' undo                               # shift + tab undo last action
 
 # configure `time` format
 TIMEFMT=$'\nreal\t%E\nuser\t%U\nsys\t%S\ncpu\t%P'
 
 export MANPATH="/usr/local/man:$MANPATH"
-# $(printf '%s="%s"\n' 'PATH' "$(printf "%s:" $(echo "${PATH}" | tr ':' '\n' | sort -u) )" | sed -e 's/:"/"/')
-# export PATH
 
 # ani-cli shit
 # export ANI_CLI_EXTERNAL_MENU=0
@@ -163,6 +166,6 @@ source "$HOME/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 # Remove forward-char widgets from ACCEPT
 # ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${(@)ZSH_AUTOSUGGEST_ACCEPT_WIDGETS:#forward-char}")
 # Add forward-char widgets to PARTIAL_ACCEPT
-ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS+=(forward-char)
+# ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS+=(forward-char)
 
 source "$HOME/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"

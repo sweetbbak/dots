@@ -1,5 +1,5 @@
 configuration {
-    font:                           "Liga SFMono Nerd Font 13";
+    font:                           "Maple Mono 12";
     me-select-entry:                "";
 }
 
