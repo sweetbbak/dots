@@ -17,3 +17,11 @@ git push --follow-tags
 
 # add files by pattern
 git diff --name-only | grep '<pattern>' | xargs -n 1 -t git add
+
+# committing deleted and modified files 
+$ git commit -am "changing and deleting files" (works for dotbare and dotfiles)
+
+$ git add -A stages All (include new files, modified and deleted)
+$ git add . stages new and modified, without deleted
+$ git add -u stages modified and deleted, without new
+git commit -m "..." then commit

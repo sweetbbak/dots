@@ -19,6 +19,8 @@ font/collection=geoclue-where-am-i.desktop;
 application/zip=kitty.desktop;
 application/x-desktop=helix.desktop;codium.desktop;dev.lapce.lapce.desktop;
 application/vnd.sqlite3=helix.desktop;
+application/x-7z-compressed=kitty.desktop;
+image/x-xbitmap=nsxiv.desktop;
 
 [Default Applications]
 application/x-executable=kitty.desktop;
