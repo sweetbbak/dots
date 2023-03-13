@@ -1,355 +1,381 @@
----@diagnostic disable: undefined-global
-local awful = require("awful")
-local beautiful = require("beautiful")
-local gears = require("gears")
-local wibox = require("wibox")
-local helpers = require("helpers")
-local dpi = beautiful.xresources.apply_dpi
+-----------------------
+-- bar configuration --
+-----------------------
 
-local network = require("ui.bar.actions-icons.network")
-local volume = require("ui.bar.actions-icons.volume")
-local get_screenshot_icon = require("ui.bar.actions-icons.screenshot")
+-- Imports
+----------
+local awful     = require('awful')
+local wibox     = require('wibox')
+local beautiful = require('beautiful')
+local dpi       = beautiful.xresources.apply_dpi
 
-require("ui.bar.calendar")
-require("ui.bar.tray")
-require("ui.powermenu")
+local helpers   = require('helpers')
+local gettags   = require('ui.bar.modules.tags')
+local gettasks  = require('ui.bar.modules.tasks')
+local getlayout = require('ui.bar.modules.layout')
+local launcher  = require('ui.app_launcher')
 
+-- Bar Widgets
+--------------
+-- Awesome launcher button
+local bar_dash = wibox.widget { 
+    {
+        {
+            {
+                image      = beautiful.awesome_icon,
+                clip_shape = helpers.mkroundedrect(beautiful.border_radius / 2), 
+                widget     = wibox.widget.imagebox 
+            },
+            margins = dpi(beautiful.bar_size / 7),
+            widget  = wibox.container.margin
+        },
+        align  = "center",
+        widget = wibox.container.place
+    },
+    bg     = beautiful.lbg,
+    shape  = helpers.mkroundedrect(),
+    forced_height = dpi(beautiful.bar_size),
+    forced_width  = dpi(beautiful.bar_size),
+    widget = wibox.container.background,
+    buttons = {
+        awful.button({}, 1, function()
+            awesome.emit_signal('widget::dashboard')
+        end)
+    },
+}
+helpers.add_hover(bar_dash, beautiful.lbg, beautiful.blk)
+
+-- Application Launcher
+local bar_launcher = wibox.widget {
+    {
+        {
+            text    = "",
+            font    = beautiful.ic_font .. dpi(beautiful.bar_size / 3),
+            align   = "center",
+            widget  = wibox.widget.textbox
+        },
+        margins = dpi(beautiful.bar_size / 8),
+        widget  = wibox.container.margin
+    },
+    bg      = beautiful.lbg,
+    shape   = helpers.mkroundedrect(),
+    forced_height = dpi(beautiful.bar_size),
+    forced_width  = dpi(beautiful.bar_size),
+    widget  = wibox.container.background,
+    buttons = {
+        awful.button({}, 1, function()
+            launcher:toggle()
+        end)
+    }
+}
+helpers.add_hover(bar_launcher, beautiful.lbg, beautiful.blk)
+
+-- Status icons
+local function status_widget(button)
+    local status = wibox.widget {
+        {
+            {
+                id      = "text_role",
+                font    = beautiful.ic_font .. dpi(beautiful.bar_size / 3),
+                align   = "center",
+                widget  = wibox.widget.textbox,
+            },
+            margins = dpi(beautiful.bar_size / 12),
+            widget  = wibox.container.margin
+        },
+        bg     = beautiful.nbg,
+        shape  = helpers.mkroundedrect(),
+        widget = wibox.container.background,
+        buttons = {
+            awful.button({}, 1, button)
+        },
+        set_text = function(self, content)
+            self:get_children_by_id('text_role')[1].text = content
+        end
+    }
+    helpers.add_hover(status, beautiful.nbg, beautiful.lbg)
+    return status
+end
+
+local bar_btn_sound = status_widget(function() awesome.emit_signal("volume::mute") end) 
+local bar_btn_net   = status_widget() 
+local bar_btn_blue  = status_widget(function() awesome.emit_signal("bluetooth::toggle") end) 
+
+-- Battery bar
+local bar_battery_prog = wibox.widget {
+    max_value        = 100,
+    forced_width     = beautiful.bar_type == "vertical" and dpi(beautiful.bar_size * 5/4)
+                       or dpi(beautiful.bar_size * beautiful.aspect_ratio),
+    clip             = true,
+    shape            = helpers.mkroundedrect(),
+    bar_shape        = helpers.mkroundedrect(),
+    background_color = beautiful.bg_focus,
+    border_color     = beautiful.bg_focus,
+    border_width     = dpi(beautiful.bar_size * 0.1),
+    color            = {
+       type  = "linear",
+       from  = { dpi(beautiful.bar_size), 0 },
+       to    = { 0, 0 },
+       stops = { { 0, beautiful.grn }, { 1, beautiful.grn_d } }
+    },
+    widget           = wibox.widget.progressbar
+}
+local flipped_battery = wibox.widget {
+    bar_battery_prog,
+    direction = "east",
+    widget    = wibox.container.rotate
+}
+local bar_battery_text = wibox.widget {
+    {
+        id      = "text_role",
+        font    = beautiful.ic_font .. dpi(beautiful.bar_size / 3),
+        align   = "center",
+        widget  = wibox.widget.textbox,
+    },
+    margins = dpi(beautiful.bar_size / 12),
+    widget  = wibox.container.margin,
+    set_text = function(self, content)
+        self:get_children_by_id('text_role')[1].text = content
+    end
+}
+
+-- The actual systray
+local systray     = wibox.widget {
+    {
+        horizontal  = beautiful.bar_type == "horizontal",
+        base_size   = dpi(beautiful.bar_size / 2),
+        widget      = wibox.widget.systray
+    },
+    align   = "center",
+    visible = false,
+    layout  = wibox.container.place
+}
+local systray_btn = wibox.widget { 
+    {
+        {
+            text    = "",
+            font    = beautiful.ic_font .. dpi(beautiful.bar_size / 2.5),
+            align   = "center",
+            widget  = wibox.widget.textbox,
+        },
+        direction   = beautiful.bar_type == "vertical" and "east" or "south",
+        widget      = wibox.container.rotate
+    },
+    bg     = beautiful.nbg,
+    shape  = helpers.mkroundedrect(),
+    widget = wibox.container.background,
+    buttons = {
+        awful.button({}, 1, function()
+            systray.visible = not systray.visible
+        end)
+    }
+}
+helpers.add_hover(systray_btn, beautiful.nbg, beautiful.lbg)
+
+-- Create a textclock widget
+local vbar_clock = {
+    {
+        {
+            {
+                format = '<b>%H</b>',
+                font   = beautiful.mn_font .. dpi(beautiful.bar_size / 3.75),
+                halign = "center",
+                widget = wibox.widget.textclock
+            },
+            {
+                {
+                    format = '<b>%M</b>',
+                    font   = beautiful.mn_font .. dpi(beautiful.bar_size / 3.75),
+                    halign = "center",
+                    widget = wibox.widget.textclock
+                },
+                fg     = beautiful.dfg,
+                widget = wibox.container.background
+            },
+            layout  = wibox.layout.fixed.vertical
+        },
+        margins = dpi(beautiful.bar_size / 8),
+        widget  = wibox.container.margin
+    },
+    bg     = beautiful.lbg,
+    shape  = helpers.mkroundedrect(),
+    widget = wibox.container.background
+}
+local hbar_clock = {
+    {
+        {
+            format = '<b>%H:%M</b>',
+            font   = beautiful.mn_font .. dpi(beautiful.bar_size / 4),
+            valign = "center",
+            widget = wibox.widget.textclock
+        },
+        left   = dpi(beautiful.bar_size / 5),
+        right  = dpi(beautiful.bar_size / 5),
+        bottom = dpi(beautiful.bar_size / 8), 
+        top    = dpi(beautiful.bar_size / 8), 
+        widget = wibox.container.margin
+    },
+    bg     = beautiful.lbg,
+    shape  = helpers.mkroundedrect(),
+    widget = wibox.container.background
+}
+
+-- Awesome Bar
+--------------
+-- Bar length handling to switch between gapped and non-gapped modes.
+local bar_length = beautiful.bar_type == "horizontal" and
+                    dpi(100 * beautiful.resolution * beautiful.aspect_ratio) 
+                    or dpi(100 * beautiful.resolution)
+if beautiful.bar_gap then
+    bar_length = beautiful.bar_type == "horizontal" and
+                    dpi(100 * beautiful.resolution * beautiful.aspect_ratio - beautiful.outer_gaps * 2) or
+                    dpi(100 * beautiful.resolution - beautiful.outer_gaps * 2)
+end
+
+-- The actual bar itself
 screen.connect_signal("request::desktop_decoration", function(s)
-	awful.tag({ "1", "2", "3", "4", "5", "6" }, s, awful.layout.layouts[1])
+    awful.tag({ "1", "2", "3", "4", "5", "6", "7" }, s, awful.layout.layouts[1])
 
-	local launcher = helpers.mkbtn({
-		image = beautiful.launcher_icon,
-		forced_height = dpi(16),
-		forced_width = dpi(16),
-		halign = "center",
-		valign = "center",
-		widget = wibox.widget.imagebox,
-	}, beautiful.black, beautiful.dimblack)
+    local taglist_v = wibox.widget {
+        {
+            gettags(s),
+            margins = dpi(beautiful.bar_size / 3.6),
+            widget  = wibox.container.margin
+        },
+        shape   = helpers.mkroundedrect(),
+        bg      = beautiful.lbg,
+        widget  = wibox.container.background
+    }
+    local taglist_h = wibox.widget {
+        taglist_v,
+        direction   = "east",
+        widget      = wibox.container.rotate
+    }
+    s.mywibox = awful.wibar {
+        visible  = beautiful.bar_enabled,
+        position = beautiful.bar_position,
+        screen   = s,
+        width    = beautiful.bar_type == "horizontal" and dpi(bar_length) or dpi(beautiful.bar_size),
+        height   = beautiful.bar_type == "horizontal" and dpi(beautiful.bar_size) or dpi(bar_length),
+        shape    = beautiful.bar_gap and helpers.mkroundedrect(),
+        widget   = {
+            {
+                { -- Top Widgets
+                    bar_dash,
+                    beautiful.bar_type == "horizontal" and taglist_h or taglist_v,
+                    spacing = dpi(beautiful.bar_size / 8),
+                    layout  = beautiful.bar_type == "horizontal" and wibox.layout.fixed.horizontal or wibox.layout.fixed.vertical,
+                },
+                { -- Middle Widgets
+                    gettasks(s),
+                    align  = "center",
+                    widget = wibox.container.place
+                },
+                { -- Bottom Widgets
+                    systray, 
+                    systray_btn,
+                    bar_launcher,
+                    {
+                        beautiful.bar_type == "horizontal" and bar_battery_prog or flipped_battery,
+                        {
+                            bar_battery_text,
+                            fg     = beautiful.bg_normal,
+                            widget = wibox.container.background
+                        },
+                        visible = beautiful.battery_enabled,
+                        layout = wibox.layout.stack
+                    },
+                    beautiful.bar_type == "horizontal" and hbar_clock or vbar_clock,
+                    {
+                        bar_btn_sound,
+                        {
+                            bar_btn_blue,
+                            visible = beautiful.bluetooth_enabled,
+                            widget  = wibox.container.background
+                        },
+                        bar_btn_net,
+                        layout  = beautiful.bar_type == "horizontal" and wibox.layout.fixed.horizontal or wibox.layout.fixed.vertical
+                    },
+                    {
+                        {
+                            getlayout(s),
+                            margins = dpi(beautiful.bar_size / 7),
+                            widget  = wibox.container.margin
+                        },
+                        bg      = beautiful.lbg,
+                        shape   = helpers.mkroundedrect(),
+                        widget  = wibox.container.background
+                    },
+                    spacing = dpi(beautiful.bar_size / 8),
+                    layout  = beautiful.bar_type == "horizontal" and wibox.layout.fixed.horizontal or wibox.layout.fixed.vertical,
+                },
+                layout = beautiful.bar_type == "horizontal" and wibox.layout.align.horizontal or wibox.layout.align.vertical
+            },
+            left    = beautiful.bar_type == "horizontal" and dpi(beautiful.bar_size / 4) or dpi(beautiful.bar_size / 7),
+            right   = beautiful.bar_type == "horizontal" and dpi(beautiful.bar_size / 4) or dpi(beautiful.bar_size / 7),
+            top     = beautiful.bar_type == "horizontal" and dpi(beautiful.bar_size / 7) or dpi(beautiful.bar_size / 4),
+            bottom  = beautiful.bar_type == "horizontal" and dpi(beautiful.bar_size / 7) or dpi(beautiful.bar_size / 4),
+            widget  = wibox.container.margin
+        }
+    }
+end)
 
-	local launcher_tooltip = helpers.make_popup_tooltip("Search Applications", function(d)
-		return awful.placement.bottom_left(d, {
-			margins = {
-				bottom = beautiful.bar_height + beautiful.useless_gap * 2,
-				left = beautiful.useless_gap * 2,
-			},
-		})
-	end)
+-- Bar Gaps to Edge
+-------------------
+if beautiful.bar_gap then
+    local screen = awful.screen.focused()
+    screen.mywibox.margins = {
+        right   = beautiful.bar_position == "right" and dpi(beautiful.outer_gaps) or 0,
+        left    = beautiful.bar_position == "left" and dpi(beautiful.outer_gaps) or 0,
+        bottom  = beautiful.bar_position == "bottom" and dpi(beautiful.outer_gaps) or 0,
+        top     = beautiful.bar_position == "top" and dpi(beautiful.outer_gaps) or 0
+    }
+end
 
-	launcher_tooltip.attach_to_object(launcher)
+-- Signal Connections
+---------------------
+-- Toggle bar
+awesome.connect_signal("widget::bar", function()
+    local s = awful.screen.focused()
+    s.mywibox.visible = not s.mywibox.visible
+end)
 
-	launcher:add_button(awful.button({}, 1, function()
-		launcher_tooltip.hide()
-		awful.spawn("/home/sweet/bin/launcher.sh")
-	end))
+-- Battery signal
+if beautiful.battery_enabled then
+    awesome.connect_signal("signal::battery", function(level, state, _, _, _)
+        bar_battery_prog.value  = level
+        -- 2 stands for discharging. For more information refer to:
+        -- https://lazka.github.io/pgi-docs/UPowerGlib-1.0/enums.html#UPowerGlib.DeviceState
+        if state ~= 2 then
+            bar_battery_text.text = ""
+            bar_battery_text.font = beautiful.ic_font .. dpi(beautiful.bar_size / 3)
+        else
+            bar_battery_text.text = level
+            bar_battery_text.font = beautiful.ui_font .. "Bold " .. dpi(beautiful.bar_size / 3.33)
+        end
+    end)
+end
 
-	local get_tags = require("ui.bar.tags")
-	local taglist = get_tags(s)
-
-	local settings_button = helpers.mkbtn({
-		widget = wibox.widget.imagebox,
-		image = beautiful.menu_icon,
-		forced_height = dpi(16),
-		forced_width = dpi(16),
-		halign = "center",
-	}, beautiful.black, beautiful.dimblack)
-
-	local settings_tooltip = helpers.make_popup_tooltip("Toggle dashboard", function(d)
-		return awful.placement.bottom_left(d, {
-			margins = {
-				bottom = beautiful.bar_height + beautiful.useless_gap * 2,
-				left = beautiful.useless_gap * 2 + 165,
-			},
-		})
-	end)
-
-	settings_tooltip.attach_to_object(settings_button)
-
-	settings_button:add_button(awful.button({}, 1, function()
-		require("ui.dashboard")
-		awesome.emit_signal("dashboard::toggle")
-	end))
-
-	local tasklist = awful.widget.tasklist({
-		screen = s,
-		filter = awful.widget.tasklist.filter.allscreen,
-		-- sort clients by tags
-		source = function()
-			local ret = {}
-
-			for _, t in ipairs(s.tags) do
-				gears.table.merge(ret, t:clients())
-			end
-
-			return ret
-		end,
-		buttons = {
-			awful.button({}, 1, function(c)
-				if not c.active then
-					c:activate({
-						context = "through_dock",
-						switch_to_tag = true,
-					})
-				else
-					c.minimized = true
-				end
-			end),
-			awful.button({}, 4, function()
-				awful.client.focus.byidx(-1)
-			end),
-			awful.button({}, 5, function()
-				awful.client.focus.byidx(1)
-			end),
-		},
-		style = {
-			shape = gears.shape.circle,
-		},
-		layout = {
-			spacing = dpi(5),
-			layout = wibox.layout.fixed.horizontal,
-		},
-		widget_template = {
-			{
-				{
-					{
-						id = "icon_role",
-						widget = wibox.widget.imagebox,
-					},
-					margins = 2,
-					widget = wibox.container.margin,
-				},
-				margins = dpi(4),
-				widget = wibox.container.margin,
-			},
-			id = "background_role",
-			widget = wibox.container.background,
-			create_callback = function(self, c, _, _)
-				self:connect_signal("mouse::enter", function()
-					awesome.emit_signal("bling::task_preview::visibility", s, true, c)
-				end)
-				self:connect_signal("mouse::leave", function()
-					awesome.emit_signal("bling::task_preview::visibility", s, false, c)
-				end)
-			end,
-		},
-	})
-
-	local tray_dispatcher = wibox.widget({
-		image = beautiful.tray_chevron_up,
-		forced_height = 14,
-		forced_width = 14,
-		valign = "center",
-		halign = "center",
-		widget = wibox.widget.imagebox,
-	})
-
-	local tray_dispatcher_tooltip = helpers.make_popup_tooltip("Press to toggle the systray panel", function(d)
-		return awful.placement.bottom_right(d, {
-			margins = {
-				bottom = beautiful.bar_height + beautiful.useless_gap * 2,
-				right = beautiful.useless_gap * 33,
-			},
-		})
-	end)
-
-	tray_dispatcher:add_button(awful.button({}, 1, function()
-		awesome.emit_signal("tray::toggle")
-		tray_dispatcher_tooltip.hide()
-
-		if s.tray.popup.visible then
-			tray_dispatcher.image = beautiful.tray_chevron_down
-		else
-			tray_dispatcher.image = beautiful.tray_chevron_up
-		end
-	end))
-
-	tray_dispatcher_tooltip.attach_to_object(tray_dispatcher)
-
-	-- make screenshot action icon global to edit it in anothers contexts.
-	s.myscreenshot_action_icon = get_screenshot_icon(s)
-
-	local actions_icons_container = helpers.mkbtn({
-		{
-			network,
-			volume,
-			s.myscreenshot_action_icon,
-			spacing = dpi(8),
-			layout = wibox.layout.fixed.horizontal,
-		},
-		left = dpi(5),
-		right = dpi(6),
-		widget = wibox.container.margin,
-	}, beautiful.black, nil, dpi(50))
-
-	local clock_formats = {
-		hour = "%I:%M %p",
-		day = "%d/%m/%Y",
-	}
-
-	local clock = wibox.widget({
-		format = clock_formats.hour,
-		widget = wibox.widget.textclock,
-	})
-
-	local date = wibox.widget({
-		{
-			clock,
-			fg = beautiful.blue,
-			widget = wibox.container.background,
-		},
-		margins = dpi(7),
-		widget = wibox.container.margin,
-	})
-
-	date:connect_signal("mouse::enter", function()
-		awesome.emit_signal("calendar::visibility", true)
-	end)
-
-	date:connect_signal("mouse::leave", function()
-		awesome.emit_signal("calendar::visibility", false)
-	end)
-
-	date:add_button(awful.button({}, 1, function()
-		clock.format = clock.format == clock_formats.hour and clock_formats.day or clock_formats.hour
-	end))
-
-	local base_layoutbox = awful.widget.layoutbox({
-		screen = s,
-	})
-
-	-- remove built-in tooltip.
-	base_layoutbox._layoutbox_tooltip:remove_from_object(base_layoutbox)
-
-	-- create button container
-	local layoutbox = helpers.mkbtn(base_layoutbox, beautiful.black, beautiful.dimblack)
-
-	-- function that returns the layout name but capitalized lol.
-	local function layoutname()
-		return "Layout: " .. helpers.capitalize(awful.layout.get(s).name)
-	end
-
-	-- make custom tooltip for the whole button
-	local layoutbox_tooltip = helpers.make_popup_tooltip(layoutname(), function(d)
-		return awful.placement.bottom_right(d, {
-			margins = {
-				bottom = beautiful.bar_height + beautiful.useless_gap * 2,
-				right = beautiful.useless_gap * 2,
-			},
-		})
-	end)
-
-	layoutbox_tooltip.attach_to_object(layoutbox)
-
-	-- updates tooltip content
-	local update_content = function()
-		layoutbox_tooltip.widget.text = layoutname()
-	end
-
-	tag.connect_signal("property::layout", update_content)
-	tag.connect_signal("property::selected", update_content)
-
-	-- layoutbox buttons
-	helpers.add_buttons(layoutbox, {
-		awful.button({}, 1, function()
-			awful.layout.inc(1)
-		end),
-		awful.button({}, 3, function()
-			awful.layout.inc(-1)
-		end),
-		awful.button({}, 4, function()
-			awful.layout.inc(-1)
-		end),
-		awful.button({}, 5, function()
-			awful.layout.inc(1)
-		end),
-	})
-
-	local powerbutton = helpers.mkbtn({
-		image = beautiful.powerbutton_icon,
-		forced_height = dpi(16),
-		forced_width = dpi(16),
-		halign = "center",
-		valign = "center",
-		widget = wibox.widget.imagebox,
-	}, beautiful.black, beautiful.dimblack)
-
-	local powerbutton_tooltip = helpers.make_popup_tooltip("Open powermenu", function(d)
-		return awful.placement.bottom_right(d, {
-			margins = {
-				bottom = beautiful.bar_height + beautiful.useless_gap * 2,
-				right = beautiful.useless_gap * 2,
-			},
-		})
-	end)
-
-	powerbutton_tooltip.attach_to_object(powerbutton)
-
-	powerbutton:add_button(awful.button({}, 1, function()
-		powerbutton_tooltip.hide()
-		awesome.emit_signal("powermenu::toggle")
-	end))
-
-	local function mkcontainer(template)
-		return wibox.widget({
-			template,
-			left = dpi(8),
-			right = dpi(8),
-			top = dpi(6),
-			bottom = dpi(6),
-			widget = wibox.container.margin,
-		})
-	end
-
-	s.mywibox = awful.wibar({
-		position = "top",
-		screen = s,
-		width = s.geometry.width,
-		height = beautiful.bar_height,
-		shape = gears.shape.rectangle,
-	})
-
-	s.mywibox:setup({
-		{
-			layout = wibox.layout.align.horizontal,
-			{
-				{
-					mkcontainer({
-						launcher,
-						taglist,
-						settings_button,
-						spacing = dpi(12),
-						layout = wibox.layout.fixed.horizontal,
-					}),
-					widget = wibox.container.margin,
-				},
-				layout = wibox.layout.fixed.horizontal,
-			},
-			nil,
-			{
-				mkcontainer({
-					{
-						tray_dispatcher,
-						right = dpi(5),
-						widget = wibox.container.margin,
-					},
-					actions_icons_container,
-					date,
-					layoutbox,
-					powerbutton,
-					spacing = dpi(8),
-					layout = wibox.layout.fixed.horizontal,
-				}),
-				layout = wibox.layout.fixed.horizontal,
-			},
-		},
-		{
-			mkcontainer({
-				tasklist,
-				layout = wibox.layout.fixed.horizontal,
-			}),
-			halign = "center",
-			widget = wibox.widget.margin,
-			layout = wibox.container.place,
-		},
-		layout = wibox.layout.stack,
-	})
+-- Sound signal
+awesome.connect_signal("signal::volume", function(volume, muted)
+    if muted then
+        bar_btn_sound.text    = ""
+        bar_btn_sound.visible = true
+    else
+        bar_btn_sound.visible = false
+    end
+end)
+-- Networking signals
+if beautiful.bluetooth_enabled then
+    awesome.connect_signal("signal::bluetooth", function(is_enabled)
+        if is_enabled then
+            bar_btn_blue.text   = ""
+            bar_btn_blue.visible = true
+        else
+            bar_btn_blue.visible = false
+        end
+    end)
+end
+awesome.connect_signal("signal::network", function(is_enabled)
+    bar_btn_net.text   = is_enabled and "" or ""
 end)
