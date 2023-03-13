@@ -21,6 +21,7 @@ application/x-desktop=helix.desktop;codium.desktop;dev.lapce.lapce.desktop;
 application/vnd.sqlite3=helix.desktop;
 application/x-7z-compressed=kitty.desktop;
 image/x-xbitmap=nsxiv.desktop;
+application/x-krita=Krita.desktop;
 
 [Default Applications]
 application/x-executable=kitty.desktop;
@@ -28,3 +29,4 @@ application/x-trash=helix.desktop;
 x-scheme-handler/terminal=kitty.desktop;
 font/collection=geoclue-where-am-i.desktop
 application/vnd.sqlite3=helix.desktop
+application/x-krita=Krita.desktop

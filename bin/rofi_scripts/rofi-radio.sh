@@ -84,8 +84,8 @@ main() {
 			;;
 
 		9)
-			notification "Nirvana Shatakam 🕉️";
-            URL="https://youtu.be/Ed_RsCvuPBQ"
+			notification "Lofi;
+            URL="https://www.youtube.com/watch?v=jfKfPfyJRdk"
 	    ADDITIONAL_ARGS="--loop"
 			break
 			;;

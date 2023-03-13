@@ -12,25 +12,61 @@ Sxiv.foreground: #c4a7e7
 Sxiv.background: #232136
 
 /* !! Catppuccin */
-st.background: #1E1E2E
-st.foreground: #CDD6F4
-st.cursorcolor: #F5E0DC
-st.color0: #45475A
-st.color1: #F38BA8
-st.color2: #A6E3A1
-st.color3: #F9E2AF
-st.color4: #89B4FA
-st.color5: #F5C2E7
-st.color6: #94E2D5
-st.color7: #BAC2DE
-st.color8: #585B70
-st.color9: #F38BA8
-st.color10: #A6E3A1
-st.color11: #F9E2AF
-st.color12: #89B4FA
-st.color13: #F5C2E7
-st.color14: #94E2D5
-st.color15: #A6ADC8
+! st.background: #1E1E2E
+! st.foreground: #CDD6F4
+! st.cursorcolor: #F5E0DC
+! st.color0: #45475A
+! st.color1: #F38BA8
+! st.color2: #A6E3A1
+! st.color3: #F9E2AF
+! st.color4: #89B4FA
+! st.color5: #F5C2E7
+! st.color6: #94E2D5
+! st.color7: #BAC2DE
+! st.color8: #585B70
+! st.color9: #F38BA8
+! st.color10: #A6E3A1
+! st.color11: #F9E2AF
+! st.color12: #89B4FA
+! st.color13: #F5C2E7
+! st.color14: #94E2D5
+! st.color15: #A6ADC8
+
+! Rose pine moon
+*background: #232136 
+*foreground: #e0def4
+
+! overlay + muted
+*color0: #393552
+*color8: #6e6a86
+
+! love
+*color1: #eb6f92
+*color9: #eb6f92
+
+! foam
+*color2: #9ccfd8
+*color10: #9ccfd8
+
+! gold
+*color3: #f6c177
+*color11: #f6c177
+
+! pine
+*color4: #3e8fb0
+*color12: #3e8fb0
+
+! iris
+*color5: #c4a7e7
+*color13: #c4a7e7
+
+! rose
+*color6: #ea9a97
+*color14: #ea9a97
+
+! text
+*color7: #e0def4
+*color15: #e0def4
 
 /* !! Decayed Nord */
 !! st.background: #171a1f
@@ -80,23 +116,60 @@ st.tabspaces: 4
 !! *.color14: #98d3ee
 !! *.color15: #d0d3d8
 
-*background:	#232136
-*foreground:	#e0def4
-*cursorColor:	#e0def4
-*color0:	#232136
-*color1:	#eb6f92
-*color2:    #3e8fb0 
-*color3:    #f6c177
-*color4:	#9ccfd8
-*color5:    #c4a7e7
-*color6:	#ea9a97
-*color7:    #e0def4
-*color8:    #e0def4
-*color9:    #eb6f92
-*color10:   #3e8fb0
-*color11:   #f6c177
-*color12:   #9ccfd8
-*color13:   #c4a7e7
-*color14:   #ea9a97
-*color15:   #e0def4
-*color16:   #c4a7e7
+! *background:	#232136
+! *foreground:	#e0def4
+! *cursorColor:	#e0def4
+! *color0:	#232136
+! *color1:	#eb6f92
+! *color2:    #3e8fb0 
+! *color3:    #f6c177
+! *color4:	#9ccfd8
+! *color5:    #c4a7e7
+! *color6:	#ea9a97
+! *color7:    #e0def4
+! *color8:    #e0def4
+! *color9:    #eb6f92
+! *color10:   #3e8fb0
+! *color11:   #f6c177
+! *color12:   #9ccfd8
+! *color13:   #c4a7e7
+! *color14:   #ea9a97
+! *color15:   #e0def4
+! *color16:   #c4a7e7
+
+! special
+*.foreground:   #e0def4
+*.background:   #232136
+*.cursorColor:  #e0def4
+
+! black
+*.color0:       #2a273f
+*.color8:       #393552
+
+! red
+*.color1:       #eb6f92
+*.color9:       #eb6f92
+
+! green
+*.color2:       #f6c177
+*.color10:      #f6c177
+
+! yellow
+*.color3:       #ea9a97
+*.color11:      #ea9a97
+
+! blue
+*.color4:       #3e8fb0
+*.color12:      #3e8fb0
+
+! magenta
+*.color5:       #c4a7e7
+*.color13:      #c4a7e7
+
+! cyan
+*.color6:       #9ccfd8
+*.color14:      #9ccfd8
+
+! white
+*.color7:       #6e6a86
+*.color15:      #908caa

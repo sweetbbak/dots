@@ -1,4 +1,6 @@
-export PATH=$PATH:~/.local/bin:~/bin:~/.cargo/bin:~/go/bin:~/dev/bin:~/.luarocks/bin:~/scripts:~/scripts/fzf-bin:~/src:~/node_modules/.bin:~/apps:~/apps/blender340
+# export PATH=$PATH:~/.local/bin:~/bin:~/.cargo/bin:~/go/bin:~/dev/bin:~/.luarocks/bin:~/scripts:~/scripts/fzf-bin:~/src:~/node_modules/.bin:~/apps:~/apps/blender340:~/dev/bin
+# export path+=(~/.local/bin ~/bin ~/.cargo/bin ~/go/bin ~/dev/bin ~/.luarocks/bin ~/scripts ~/scripts/fzf-bin ~/src ~/node_modules/.bin ~/apps ~/apps/blender340 ~/dev/bin)
+# path+=$( fd . $HOME/bin/ -t d -d 1 -X printf " %s" {} )
 export EDITOR='helix'
 # export STARSHIP_CONFIG=~/example/non/default/path/starship.toml
 
@@ -7,7 +9,7 @@ export HISTSIZE=100000
 export SAVEHIST=100000
 export HISTDUP=erase
 
-export VISUAL='lapce'
+export VISUAL='Codium'
 export PAGER='less -R'
 export DIFFPROG="nvim -d"
 export DOTBARE_DIR="$HOME/.dotfiles"
@@ -15,15 +17,19 @@ export DOTBARE_TREE="$HOME"
 export DOTBARE_PREVIEW="bat -n {}"
 export DOTBARE_BACKUP="/run/media/sweet/Hard Drive/linux-backups/dotbare"
 # PATH=$PATH$( find $HOME/bin/ -type d -printf ":%p" )
-PATH=$PATH$( fd . $HOME/bin/ -t d -d 1 -X printf ":%s" {} )
+# PATH=$PATH$( fd . $HOME/bin/ -t d -d 1 -X printf " %s" {} )
+# path+=$( fd . $HOME/bin/ -t d -d 1 -X printf " %s" {} )
 # PATH=$PATH$( find $HOME/scripts/ -type d -printf ":%p" ):$PATH
 # export PATH=$HOME/.config/rofi/scripts:$PATH
 
 # export BAT_THEME="Catppuccin-mocha"
+# shellcheck source=/dev/null
 source "$HOME/.cache/wal/colors.sh"
 
 # fzf tab
+# shellcheck source=/dev/null
 source "$HOME/github/fzf-tab/fzf-tab.plugin.zsh"
+# shellcheck source=/dev/null
 source "$HOME/.config/zsh/fzf-history/zsh-fzf-history-search.zsh"
 zstyle ':autocomplete:*' default-context history-incremental-search-backward
 # fzf history
@@ -47,20 +53,8 @@ setopt nonomatch           # hide error message if there is no match for the pat
 setopt notify              # report the status of background jobs immediately
 setopt numericglobsort     # sort filenames numerically when it makes sense
 setopt promptsubst         # enable command substitution in prompt
-# zstyle ':completion:*' completer _extensions _complete _approximate
-# zstyle ':completion:*' menu select
-# zstyle ':completion:*:*:*:*:descriptions' format '%F{green}-- %d --%f'
-# zstyle ':completion:*:*:-command-:*:*' group-order alias builtins functions commands
-# zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-# zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
-# zstyle ':completion:*:*:*:*:*' menu select
-# zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
-# zstyle ':completion:*' rehash true
-# zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd' #pletion of files and dirnames
 zstyle ':completion:*' fzf-search-display true
-# bindkey '\e[A' history-beginning-search-backward
-# bindkey '\e[B' history-beginning-search-forward
 
 # fzf-tab
 # disable sort when completing `git checkout`
@@ -83,11 +77,6 @@ setopt hist_ignore_space      # ignore commands that start with space
 setopt share_history         # share command history data
 # setopt appendhistory
 setopt sharehistory
-# setopt incappendhistory
-# setopt hist_ignore_all_dups
-# setopt hist_save_no_dups
-# setopt hist_ignore_dups
-# setopt hist_find_no_dups
 setopt interactivecomments # allow comments in interactive mode
 setopt numericglobsort     # sort filenames numerically when it makes sense
 
@@ -124,7 +113,7 @@ bindkey '^[[Z' undo                               # shift + tab undo last action
 # configure `time` format
 TIMEFMT=$'\nreal\t%E\nuser\t%U\nsys\t%S\ncpu\t%P'
 
-export MANPATH="/usr/local/man:$MANPATH"
+# export MANPATH="/usr/local/man:$MANPATH"
 
 # ani-cli shit
 # export ANI_CLI_EXTERNAL_MENU=0
@@ -143,24 +132,20 @@ if [ -f /usr/share/nnn/quitcd/quitcd.bash_zsh ]; then
     source /usr/share/nnn/quitcd/quitcd.bash_zsh
 fi
 
-# export FZF_DEFAULT_OPTS="
-#   --color=fg:#ff007c,bg:-1,hl:#03d8f3 --color=fg+:#00ffc8,bg+:,hl+:#03d8f3 
-#   --color=info:#ff0055,prompt:#fcee0c,pointer:#ffb800 --color=marker:#00ffc8,spinner:#ffb800,header:#fcee0c
-#   --reverse --border=rounded
-# "
-# Custom Pink & Black theme
-# export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS' --color=fg:#ff5f87,hl:#008ec4 --color=fg+:#d75f87,bg+:#4e4e4e,hl+:#5fd7ff --color=info:#afaf87,prompt:#c30771,pointer:#af5fff --color=marker:#c30771,spinner:#af5fff,header:#a790d5'
-# umask 022 to set default permissions
-# export PATH="$PATH:/home/sweet/.bin"
-
-
 # source aliases and personal scripts
+# shellcheck source=/dev/null
 source "$HOME/.config/zsh/alias.zsh"
+# shellcheck source=/dev/null
 source "$HOME/.config/zsh/functions.zsh"
+# shellcheck source=/dev/null
 source "$HOME/.config/zsh/fzf.zsh"
+# shellcheck source=/dev/null
 source "$HOME/.config/zsh/xport.zsh"
+# shellcheck source=/dev/null
+source ~/.config/zsh/colored-man.zsh
 
 # source auto suggestions and syntax highlighting (syntax needs to be last)
+# shellcheck source=/dev/null
 source "$HOME/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 # ZSH_AUTOSUGGEST_STRATEGY=(history)
 # Remove forward-char widgets from ACCEPT
@@ -168,4 +153,5 @@ source "$HOME/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 # Add forward-char widgets to PARTIAL_ACCEPT
 # ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS+=(forward-char)
 
+# shellcheck source=/dev/null
 source "$HOME/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"

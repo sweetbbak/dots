@@ -4,7 +4,7 @@ local bling = require("bling")
 local rubato = require("rubato")
 -- local term_scratch = require("signal.scratchpad")
 local anim_y = rubato.timed({
-	pos = 1090,
+	pos = 0,
 	rate = 50,
 	easing = rubato.quadratic,
 	intro = 0.1,
@@ -13,7 +13,7 @@ local anim_y = rubato.timed({
 })
 
 local anim_x = rubato.timed({
-	pos = 2080,
+	pos = 2533,
 	rate = 50,
 	easing = rubato.quadratic,
 	intro = 0.1,
@@ -27,7 +27,7 @@ local term_scratch = bling.module.scratchpad({
 	sticky = true,
 	autoclose = true,
 	floating = true,
-	geometry = { x = 2550, y = 120, height = 300, width = 700 },
+	geometry = { x = 2533, y = 120, height = 900, width = 1100 },
 	reapply = true,
 	dont_focus_before_close = true,
 	rubato = { x = anim_x, y = anim_y },
@@ -42,8 +42,13 @@ local function set_keybindings()
 			awful.spawn(terminal)
 		end, { description = "open a terminal", group = "launcher" }),
 		awful.key({ modkey }, "p", function()
-			menubar.show()
-		end, { description = "show the menubar", group = "launcher" }),
+			awful.spawn("/home/sweet/bin/rofi-handler.sh")
+		end, { description = "show the rofi list for other rofi menus", group = "launcher" }),
+
+		awful.key({ modkey }, "r", function()
+			awful.spawn("/home/sweet/bin/toggle-redshift.sh")
+		end, { description = "toggle redshift", group = "launcher" }),
+
 		awful.key({ modkey }, "d", function()
 			awful.spawn("/home/sweet/bin/launcher.sh")
 		end, { description = "Open rofi", group = "launcher" }),
@@ -108,9 +113,15 @@ local function set_keybindings()
 	})
 
 	awful.keyboard.append_global_keybindings({
-		awful.key({}, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer -D pulse sset Master 2%+", false) end),
-		awful.key({}, "XF86AudioLowerVolume", function () awful.util.spawn("amixer -D pulse sset Master 2%-", false) end),
-		awful.key({}, "XF86AudioMute", function () awful.util.spawn("amixer -D pulse sset Master toggle", false) end),
+		awful.key({}, "XF86AudioRaiseVolume", function()
+			awful.util.spawn("amixer -D pulse sset Master 2%+", false)
+		end),
+		awful.key({}, "XF86AudioLowerVolume", function()
+			awful.util.spawn("amixer -D pulse sset Master 2%-", false)
+		end),
+		awful.key({}, "XF86AudioMute", function()
+			awful.util.spawn("amixer -D pulse sset Master toggle", false)
+		end),
 	})
 
 	-- Layout related keybindings

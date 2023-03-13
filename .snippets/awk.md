@@ -1,5 +1,14 @@
 % awk
 
+# remove files with less than 10 (x) lines
+- find files - exec awk -v set varible 10 - if more than 10 then rm file
+- the -v flag to Awk allows us to set an Awk variable (once) before the Awk commands are executed (for each line of the file.) In this case we set x to 10.
+- NR is a special Awk variable referring to the "Number of the current Record." In other words, it is the line number we are looking at in any particular pass through the loop.
+  (Note that it is possible, though unusual, to use a different "Record Separator" than the default of a newline character, by setting RS. Here is an example of playing with record separators.)
+- So if the Awk script exits successfully, it means you have a file of less than ten lines. The next exec on success removes the file
+
+find . -type f -exec awk -v x=10 'NR==x{exit 1}' {} \; -exec echo rm -f {} \;
+
 # select columns from file
 awk 'BEGIN{FS=OFS=","} {print $1,$2}' <filename>
 
