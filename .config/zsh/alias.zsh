@@ -23,6 +23,8 @@ alias rd='rm -rI "$(exa -D| fzf --height=20% --preview="exa -l {}")"'
 alias cxx='chmod +x "$(rg --files -g "*.sh"|fzf -1 --height=20% --preview-window=hidden)"'
 
 # Utility functions for Core utils
+alias srs="fd . $path | fzf | xargs bash -c"
+
 alias ag="alias | grep "
 alias zrc="hx ~/.zshrc && source ~/.zshrc"
 

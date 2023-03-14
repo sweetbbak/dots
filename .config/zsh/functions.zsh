@@ -1,5 +1,16 @@
 ## some handy functions I've written or collected
 
+vreplace () {
+    if [ $# -lt 2 ]
+    then
+        echo "Recursive, interactive text replacement"
+        echo "Usage: replace text replacement"
+        return
+    fi
+
+    vim -u NONE -c ":execute ':argdo %s/$1/$2/gc | update' | :q" $(rg $1 -l)
+}
+
 # like rfv but with ripgrep-all for pdf, doc, sqlite, jpg, movie subs etc...
 rga-fzf() {
 	RG_PREFIX="rga --files-with-matches"
