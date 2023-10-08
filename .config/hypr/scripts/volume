@@ -58,14 +58,16 @@ notify_user() {
 
 # Increase Volume
 inc_volume() {
- # pactl set-sink-volume @DEFAULT_SINK@ +5% && notify_user && $play
- pamixer -i 5 && notify_user && $play    # an alternative to pactl, doesn't go beyond 100% tho
+  pactl set-sink-volume @DEFAULT_SINK@ +5% && notify_user && $play
+  [ -f /tmp/wob_???.fifo ] && echo "$(get_volume)" > /tmp/wob_???.fifo
+ # pamixer -i 5 && notify_user && $play    # an alternative to pactl, doesn't go beyond 100% tho
 }
 
 # Decrease Volume
 dec_volume() {
-#  pactl set-sink-volume @DEFAULT_SINK@ -5% && notify_user && $play
-   pamixer -d 5 && notify_user && $play  # an alternative to pactl, doesn't go beyond 100% tho
+  pactl set-sink-volume @DEFAULT_SINK@ -5% && notify_user && $play
+  [ -f /tmp/wob_???.fifo ] && echo "$(get_volume)" > /tmp/wob_???.fifo
+   # pamixer -d 5 && notify_user && $play  # an alternative to pactl, doesn't go beyond 100% tho
 }
 
 # Toggle AUDIO Mute
