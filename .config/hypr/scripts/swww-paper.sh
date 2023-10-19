@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # wallfile=/tmp/wallpaper-33
-wallfile=/.cache/wallpaper-33
+wallfile=/home/sweet/.cache/wallpaper-33
 
 picdir="$HOME/Pictures/backgrounds"
 [ ! -d "$picdir" ] && picdir="$HOME/ssd/gallery-dl"
