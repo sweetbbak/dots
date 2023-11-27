@@ -1,0 +1,68 @@
+## ░█▀▀░▀█▀░█▀█░█▀▄░█▀▀░█░█░▀█▀░█▀█
+## ░▀▀█░░█░░█▀█░█▀▄░▀▀█░█▀█░░█░░█▀▀
+## ░▀▀▀░░▀░░▀░▀░▀░▀░▀▀▀░▀░▀░▀▀▀░▀░░
+
+# Sweet's starship config
+
+scan_timeout = 3
+command_timeout = 10
+
+# Setups
+format="$directory$git_branch$character"
+right_format = """$cmd_duration"""
+add_newline = false 
+
+# Other languages configurations:
+# c.disabled = true
+cmake.disabled = true
+haskell.disabled = true
+python.disabled = true
+ruby.disabled = true
+# rust.disabled = true
+perl.disabled = true
+package.disabled = true
+lua.disabled = true
+nodejs.disabled = true
+java.disabled = true
+# golang.disabled = true
+
+[conda]
+format = ' [$symbol$environment](dimmed green) '
+
+# Prompt symbols 
+[character]
+success_symbol = "[](#76946A bold)"
+error_symbol = "[](#C0A36E)"
+vicmd_symbol = "[](#DD8F6E)"
+
+[directory]
+format = "[]($style)[ ](bg:#312C2E fg:#7B98D3)[$path](bg:#312C2E fg:#D27E99 bold)[ ]($style)"
+style = "bg:none fg:#312C2E"
+truncation_length = 3
+truncate_to_repo=false
+
+[git_branch]
+format = "[]($style)[[ ](bg:#312C2E fg:#7E9CD8 bold)$branch](bg:#312C2E fg:#DCD7BA)[ ]($style)"
+style = "bg:none fg:#312C2E"
+
+[git_status]
+# format = "[]($style)[$all_status$ahead_behind](bg:#312C2E fg:#b4befe)[ ]($style)"
+format = "[]($style)[$all_status$ahead_behind](bg:#312C2E fg:#7E9CD8)[ ]($style)"
+style = "bg:none fg:#312C2E"
+conflicted = "="
+ahead =	"⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+up_to_date = ""
+untracked = "?${count}"
+stashed = ""
+modified = "!${count}"
+staged = "+${count}"
+renamed = "»${count}"
+deleted = "${count}"
+
+[cmd_duration]
+min_time = 1
+format = "[]($style)[[ ](bg:#312C2E fg:#6A9589 bold)$duration](bg:#312C2E fg:#DCD7BA)[ ]($style)"
+disabled = false
+style = "bg:none fg:#312C2E"

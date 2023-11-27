@@ -1,0 +1,147 @@
+# Author: YardQuit
+
+# Syntax highlighting
+"attribute" = { fg = "yellow" }
+"comment" = { fg = "gray" }
+"constant" = { fg = "light_blue" }
+"constructor" = { fg = "orange" }
+"condtant.builtin.boolean" = { fg = "light_blue" }
+"constant.character.escape" = { fg = "yellow" }
+"constant.character.numeric.integer" = { fg = "light_blue" }
+"constant.character.numeric.float" = { fg = "light_blue" }
+"function" = { fg = "purple" }
+"function.builtin" = { fg = "purple" }
+"function.method" = { fg = "light_green" }
+"function.macro" = { fg = "light_green" } # println! format!
+"keyword" = { fg = "red" } # impl, struct, enum, trait, let
+"keyword.control.conditional" = { fg = "red" }
+"keyword.control.repeat" = { fg = "red" }
+"keyword.control.import" = { fg = "red" }
+"keyword.operator" = { fg = "blue" }
+"keyword.function" = { fg = "red" } # fn
+"keyword.exception" = { fg = "red" }
+"keyword.return" = { fg = "red" }
+"operator" = { fg = "white" }
+"punctuation" = { fg = "white" }
+"punctuation.delimiter" = { fg = "white" }
+"punctuation.bracket" = { fg = "mikado_yellow" } # #[ ()] and {}()[]
+"punctuation.special" = { fg = "yellow" }
+"string" = { fg = "bright_blue" }
+"string.special" = { fg = "bright_blue" }
+"string.regexp" = { fg = "yellow" }
+"storage" = { fg = "red" }
+"storage.type" = { fg = "red" }
+"storage.modifier" = { fg = "yellow" }
+"tag" = { fg = "light_green" }
+"label" = { fg = "blue" } # 'static, 'a (tic status)
+"type" = { fg = "hgd_cream_white" } # type like String, struct names etc. 
+"type.builtin" = { fg = "light_blue" } # str
+"namespace" = { fg = "white" }
+# "variable" = { fg = "yellow" } # variable name
+"variable" = { fg = "vivid_blue" } # variable name
+"variable.builtin" = { fg = "orange" } # self
+"variable.parameter" = { fg = "yellow" }
+"variable.other.member" = { fg = "light_green" }
+"diff.plus" = { fg = "green" }
+"diff.delta" = { fg = "yellow" }
+"diff.minus" = { fg = "red" }
+
+# Markup
+"markup.heading" = { fg = "normal", modifiers = ["bold"] }
+"markup.list" = { fg = "normal" }
+"markup.bold" = { modifiers = ["bold"] }
+"markup.italic" = { modifiers = ["italic"] }
+"markup.link.url" = { fg = "light_blue" }
+"markup.link.text" = { fg = "gray" }
+"markup.quote" = { fg = "light_green", modifiers = ["italic"] }
+"markup.raw" = { fg = "light_blue" }
+
+# Interface
+"ui.background" = { fg = "normal", bg = "default" }
+"ui.help" = { fg = "normal", bg = "dark" }
+"ui.linenr" = { fg = "gray" }
+"ui.linenr.selected" = { fg = "orange" }
+"ui.menu" = { fg = "gray", bg = "dark" }
+"ui.menu.selected" = { fg = "dark", bg = "light_blue" }
+"ui.popup" = { fg = "gray", bg = "dark" }
+"ui.selection" = { bg = "mark" }
+"ui.selection.primary" = { bg = "mark" }
+"ui.statusline" = { fg = "normal", bg = "dark" }
+"ui.statusline.normal" = { fg = "green", bg = "list", modifiers = ["reversed"] }
+"ui.statusline.insert" = { fg = "orange", bg = "list", modifiers = ["reversed"] }
+"ui.statusline.select" = { fg = "blue", bg = "list", modifiers = ["reversed"] }
+"ui.statusline.inactive" = { fg = "gray", bg = "list" }
+"ui.text" = { fg = "normal" }
+"ui.text.focus" = { fg = "green" }
+"ui.window" = { fg = "dark" }
+"ui.cursor" = { modifiers = ["reversed"] }
+"ui.cursor.match" = { fg = "orange", modifiers = ["bold"] }
+"ui.cursor.primary" = { modifiers = ["reversed"] }
+# "ui.cursor.primary.normal" = { fg = "white" }
+# "ui.cursor.primary.insert" = { fg = "green" }
+# "ui.cursor.primary.select" = { fg = "blue" }
+"ui.cursorline.primary" = { bg = "list" }
+"ui.cursorline.secondary" = { bg = "dark" }
+"ui.cursorcolumn.primary" = { bg = "list" }
+"ui.cursorcolumn.secondary" = { bg = "dark" }
+"ui.virtual.ruler" = { bg = "rustic_red" }
+"ui.virtual.whitespace" = { fg = "brown" }
+"ui.virtual.indent-guide" = { fg = "brown" }
+"ui.virtual.inlay-hint" = { fg = "air_blue"}
+"ui.virtual.wrap" = { fg = "yellow"}
+"ui.gutter" = { bg = "default" }
+"ui.gutter.selected" = { bg = "dark" }
+
+# Diagnostics
+"error" = { fg = "red" }
+"warning" = { fg = "mustard_yellow" }
+"info" = { fg = "blue" }
+"hint" = { fg = "white" }
+"diagnostic" = { modifiers = ["underlined"] }
+"special" = { fg = "sky_blue" } #[derive] inside square-brackets
+
+[palette]
+default = "#0d1117"
+dark = "#010409"
+light = "#2f343b"
+mark = "#540099"
+list = "#161b22"
+normal = "#c9d1d9"
+white = "#ecf2f8"
+brass_white = "#d1ccaf"
+cream_white = "#f2eae9"
+blue_white = "#ebf0f2"
+gray = "#8b949e"
+soft_gray = "#90a19d"
+brown = "#8b8061"
+yellow = "#faa356"
+mustard_yellow = "#c2bb00"
+bright_yellow = "#ffec5c"
+orange = "#ff6e39"
+red = "#fa7970"
+soft_red = "#bf665e"
+# blue = "#1f6feb"
+blue = "#0099dd"
+light_blue = "#77bdfb"
+bright_blue = "#9dcef8"
+soft_blue = "#0897b4"
+air_blue = "#5D8AA8"
+green = "#009602"
+light_green = "#73da7c"
+soft_green = "#03a696"
+teal_green = "#00b3ad"
+purple = "#d2a8ff"
+soft_pink = "#f4e2de"
+plum_purple = "#dda0dd"
+giants_orange = "#fe5a1d"
+sky_blue = "#00bfff"
+vivid_blue = "#00ccff"
+unknown = "#5500ff"
+green_yellow = "#adff2f"
+mikado_yellow = "#ffc40c"
+magic_gray = "#91a3b0"
+apple_green = "#8db600"
+crimson_harvard = "#a51c30"
+crimson_red = "#9D2235"
+rustic_red = "#540b0c"
+dark_red = "#AB2328"

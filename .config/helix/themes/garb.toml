@@ -1,0 +1,86 @@
+# Author: Luke Ochoa
+# Based on the AYU theme colors from https://github.com/dempfi/ayu
+
+# Syntax highlighting
+"type" = "blue"
+"type.builtin" = "blue"
+"constructor" = "green"
+"constant" = "magenta"
+"string" = "green"
+"string.regexp" = "orange"
+"string.special" = "yellow"
+"comment" = { fg = "gray", modifiers = ["bold" ,"italic"] }
+"variable" = "white"
+"label" = "orange"
+"punctuation" = "foreground"
+"keyword" = { fg = "#FFEF00", modifiers = ["bold", "italic"] }
+"keyword.control" = "yellow" # Keywords like 'return', this will change its color 
+"keyword.directive" = "yellow"
+"operator" = "orange"
+"function" = {fg = "deep_red", modifiers = ["bold"]}
+"tag" = "blue"
+"namespace" = "blue"
+"markup.heading" = "orange"
+"markup.list" = "yellow"
+"markup.raw.block" = { bg = "gray", fg = "orange" }
+"markup.link.url" = "blue"
+"markup.link.text" = "yellow"
+"markup.link.label" = "green"
+"markup.quote" = "yellow"
+"diff.plus" =  "green"
+"diff.minus" = "red"
+"diff.delta" = "yellow"
+
+# Interface
+"ui.background"= { bg = "#0b0e14" }  #"#000000" }
+"ui.cursor" = { fg = "dark_gray", bg = "orange" }
+"ui.cursor.match" = { bg = "darker_than_green", fg = "yellow", modifiers = ["bold", "rapid_blink", "crossed_out"] } # BLINKING Parenths! Things like parenthesis and brackets. When you hover over them the cursor, it highlights the corresponding opposite thingy
+"ui.linenr" = {fg = "magenta", modifiers = ["bold", "italic"]} # !Line Numbers (Usually on the left side of the screen... idk what some of yall did to yo syhstums!)     This is studidly named!
+"ui.linenr.selected" = "gray"
+"ui.statusline" = { fg = "foreground", bg = "black" }
+"ui.cursorline" = { bg = "black" }
+"ui.popup" = { fg = "#7B91b3", bg = "black" }
+"ui.window" = "dark_gray"
+"ui.help" = { fg = "#7B91b3", bg = "black" }
+"ui.text" = "foreground"
+"ui.text.focus" = { bg = "dark_gray", fg = "foreground" }
+"ui.text.info" = "foreground"
+"ui.virtual.whitespace" = "dark_gray"
+"ui.virtual.ruler" = { bg = "black" }
+"ui.virtual.inlay-hint" = { fg = "#e6b450", bg = "#302a20" }  # original bg #e6b45033
+"ui.menu" = { fg = "foreground", bg = "black" }
+"ui.menu.selected" = { bg = "gray", fg = "background" }
+"ui.selection" = { bg = "luke_ocean" } # the Selection Highligher when you press "x" on a row
+"warning" = {fg = "white", modifiers = ["underlined"]} # This is the little dot on the left side of the screen!(but for compiler/linter warnings? could be a little different depending on you lang) You people need to name these things better! What the heck mans, it aint that hard. That why no one uses this goodgood tech. You make it to hard/inconvenient for normal people to use...
+"error" = { bg = "#340034" , fg = "deep_red", modifiers = ["underlined"] }
+"info" = { fg = "blue", modifiers = ["bold"] }
+"hint" = { fg = "blue", modifiers = ["bold"] }
+"diagnostic.hint" = { underline = { color = "blue", style="curl"} }
+"diagnostic.info" = { underline = { color = "blue", style="curl"} }
+"diagnostic.warning" = { underline = { color = "green", style="curl"} }#e6ff00
+"diagnostic.error" = { bg = "dark_gray", fg = "deep_red", modifiers = ["crossed_out", "bold"] } #{   underline = { color = "deep_red", style="curl"} }
+"ui.bufferline" = { fg = "gray", bg = "background" }
+"ui.bufferline.active" = { fg = "foreground", bg = "dark_gray" }
+"ui.debug" = { fg = "orange", bg = "background" }
+"ui.highlight.frameline" = { bg = "#0067a3" }
+
+"special" = "orange"
+
+[palette]
+background = "#0f1419"
+foreground = "#bfbdb6"
+
+luke_ocean = "#1e5061"
+darker_than_black = "#030201"
+darker_than_green = "#013220"
+black = "#131721"
+blue = "#59c2ff"
+dark_gray = "#2d3640"
+cyan = "#73b8ff"
+gray = "#5c6773"
+green = "#aad94c"
+magenta = "#d2a6ff"
+orange = "#ff8f40"
+red = "#f07178"
+deep_red = "#8b0000"
+yellow = "#e6b450"

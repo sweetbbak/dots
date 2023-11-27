@@ -1,0 +1,861 @@
+: 1700598808:0;e
+: 1700598814:0;sleep 10 & ps -o rss,vsz,cmd -C sleep
+: 1700598821:0;gc https://github.com/unsigned-enby/lSel.git
+: 1700598823:0;e
+: 1700598830:0;mkdir build && cd build\
+cmake -DCMAKE_BUILD_TYPE=Release ..\
+make -j$(nproc)
+: 1700598845:0;e
+: 1700598848:0;mkdir build && cd build\
+cmake -DCMAKE_BUILD_TYPE=Release ..\
+make -j$(nproc)
+: 1700598850:0;e
+: 1700598851:0;e
+: 1700598856:0;make -j20
+: 1700598857:0;e
+: 1700598863:0;cmake -DCMAKE_BUILD_TYPE=Release ..\
+make -j$(nproc)
+: 1700598866:0;e
+: 1700598868:0;..
+: 1700598868:0;e
+: 1700598871:0;rm -r build
+: 1700598872:0;e
+: 1700598881:0;mkdir build && cd build || exit\
+cmake -DCMAKE_BUILD_TYPE=Release ..\
+make -j$(nproc)
+: 1700598883:0;e
+: 1700598897:0;make -j20 ..
+: 1700598898:0;e
+: 1700598905:0;..
+: 1700598905:0;e
+: 1700598912:0;make -j20 all
+: 1700598918:0;e
+: 1700598921:0;cmake -DCMAKE_BUILD_TYPE=Release ..\
+make -j$(nproc)
+: 1700598926:0;..
+: 1700598929:0;cmake -DCMAKE_BUILD_TYPE=Release ..\
+make -j$(nproc)
+: 1700598933:0;cmake -DCMAKE_BUILD_TYPE=Release\
+make -j$(nproc)
+: 1700598951:0;e
+: 1700598966:0;make -j20 depend
+: 1700598969:0;make -j20 all
+: 1700598977:0;git pull
+: 1700598979:0;make -j20 all
+: 1700598981:0;e
+: 1700599006:0;ls _deps
+: 1700599010:0;ls _deps/ftxui-build
+: 1700599019:0;e
+: 1700599022:0;cd build
+: 1700599022:0;e
+: 1700599029:0;cmake -DCMAKE_BUILD_TYPE=Release\
+make -j$(nproc)
+: 1700599031:0;cmake -DCMAKE_BUILD_TYPE=Release ..\
+make -j$(nproc)
+: 1700601583:0;e
+: 1700601585:0;ua
+: 1700601586:0;ya
+: 1700601722:0;e
+: 1700601725:0;cd dev
+: 1700601726:0;e
+: 1700601746:0;nf
+: 1700601747:0;nf
+: 1700601748:0;nf
+: 1700601755:0;ls -lah1
+: 1700601772:0;cd repos/u-root
+: 1700601779:0;cd cmds/core
+: 1700601780:0;e
+: 1700601804:0;ls io
+: 1700601809:0;hx io/io_linux.go
+: 1700601823:0;man io
+: 1700601846:0;hx io/io.go
+: 1700601870:0;e
+: 1700601871:0;cd io
+: 1700601872:0;e
+: 1700601873:0;gb
+: 1700601874:0;e
+: 1700601875:0;./io
+: 1700601880:0;./io rs index
+: 1700601884:0;./io rs 1
+: 1700601886:0;sudo ./io rs 1
+: 1700601891:0;sudo ./io rs 2
+: 1700601892:0;sudo ./io rs 2
+: 1700601893:0;sudo ./io rs 3
+: 1700601895:0;sudo ./io rs
+: 1700601920:0;sudo ./io rs 1
+: 1700601933:0;..
+: 1700601933:0;e
+: 1700601966:0;hx stty/stty.go
+: 1700601978:0;..
+: 1700601978:0;..
+: 1700601979:0;e
+: 1700601985:0;cd pkg/termios
+: 1700601985:0;e
+: 1700601995:0;hx termios_linux.go
+: 1700602025:0;cd mybox
+: 1700602025:0;e
+: 1700602028:0;mkcd stty
+: 1700602028:0;e
+: 1700602033:0;sl
+: 1700602037:0;sleep 1
+: 1700602277:0;hx termios.go
+: 1700602292:0;e
+: 1700602307:0;hx var_linux.go
+: 1700602317:0;e
+: 1700602325:0;hx sgtty.go
+: 1700602358:0;stty pretty
+: 1700602363:0;stty dump
+: 1700602370:0;stty echo
+: 1700602377:0;stty raw
+: 1700602382:0;ls -lah1 ..
+: 1700602408:0;stty eol
+: 1700602412:0;stty sane
+: 1700602414:0;ls //
+: 1700602416:0;ls ..
+: 1700602430:0;e
+: 1700602432:0;..
+: 1700602433:0;e
+: 1700602434:0;l
+: 1700602440:0;ls qemu
+: 1700602444:0;hx qemu/qemu.go
+: 1700602488:0;ls ls
+: 1700602494:0;hx ls/fileinfo_unix.go
+: 1700602591:0;e
+: 1700602596:0;hx ls/ls.go
+: 1700602671:0;ls mei
+: 1700602678:0;ls namespace
+: 1700602682:0;ls mount
+: 1700602697:0;ls mount/block
+: 1700602708:0;ls sh
+: 1700602713:0;hx sh/run.go
+: 1700602753:0;e
+: 1700602764:0;ls ts
+: 1700602771:0;hx ts/ts.go
+: 1700602780:0;ls msr
+: 1700602785:0;hx msr/msr.go
+: 1700602830:0;e
+: 1700602838:0;ls mktemp
+: 1700602843:0;hx mktemp/mktemp.go
+: 1700603180:0;mktemp
+: 1700603191:0;rm /tmp/tmp.ZWC122hfd6
+: 1700603193:0;e
+: 1700603194:0;..
+: 1700603194:0;e
+: 1700603233:0;e
+: 1700603237:0;ls dd
+: 1700603240:0;hx dd/dd.go
+: 1700603472:0;e
+: 1700603474:0;ls df
+: 1700603478:0;cd df
+: 1700603478:0;e
+: 1700603479:0;e
+: 1700603483:0;hx dev.go
+: 1700603518:0;mkcd df
+: 1700603519:0;e
+: 1700603522:0;hx dev.go
+: 1700603525:0;e
+: 1700603528:0;gmt
+: 1700603529:0;e
+: 1700603533:0;hx dev.go
+: 1700603539:0;gmt
+: 1700603540:0;e
+: 1700603547:0;e
+: 1700603553:0;hx dev_uint32.go
+: 1700603570:0;hx df.go
+: 1700603588:0;hx df.go
+: 1700604390:0;go run df.go
+: 1700604863:0;hx df.go
+: 1700604875:0;e
+: 1700604878:0;cat dev.go
+: 1700604893:0;hx dev.go
+: 1700604912:0;e
+: 1700604929:0;go build -ldflags "-s -w"
+: 1700604934:0;./df
+: 1700604938:0;sudo ./df
+: 1700604940:0;df
+: 1700604947:0;which df
+: 1700604954:0;ls -lah /sbin/df
+: 1700604963:0;e
+: 1700604973:0;sudo chown root:root df
+: 1700604974:0;e
+: 1700604976:0;ll
+: 1700604979:0;./df
+: 1700604982:0;sudo ./df
+: 1700605003:0;e
+: 1700605004:0;..
+: 1700605004:0;e
+: 1700605009:0;hx hexdump
+: 1700605026:0;hexdump
+: 1700605030:0;which hexdump
+: 1700605039:0;hexdump < df
+: 1700605111:0;e
+: 1700605118:0;hx hwclock
+: 1700605137:0;e
+: 1700605144:0;hx rm/rm.go
+: 1700605230:0;e
+: 1700605234:0;hx mv/mv.go
+: 1700605322:0;e
+: 1700605322:0;..
+: 1700605323:0;e
+: 1700605323:0;e
+: 1700605325:0;mkcd rm
+: 1700605326:0;e
+: 1700605327:0;..
+: 1700605328:0;e
+: 1700605330:0;mkcd mv
+: 1700605331:0;e
+: 1700605334:0;hx mv.go
+: 1700605385:0;man mv
+: 1700607842:0;e
+: 1700607845:0;nf
+: 1700607847:0;nf
+: 1700607847:0;nf
+: 1700607851:0;topgrade
+: 1700608138:0;nf
+: 1700608139:0;nf
+: 1700608140:0;nf
+: 1700608536:0;gup update
+: 1700608540:0;l
+: 1700608542:0;ee
+: 1700608543:0;e
+: 1700608769:0;db enter debian
+: 1700608793:0;pacman -Qq
+: 1700608796:0;pacman -Qq | wc -l
+: 1700608801:0;pacman -Q | wc -l
+: 1700608803:0;pacman -Qe | wc -l
+: 1700608809:0;d paruz
+: 1700608828:0;pacman -Sl
+: 1700608832:0;pacman -Sl | wc -l
+: 1700608835:0;paruz
+: 1700608845:0;pacman -Sl
+apt list
+apt list | wc -l
+pacman -QQ
+ls
+exit
+: 1700608865:0;db stop debian
+: 1700608871:0;cd dev
+: 1700608872:0;e
+: 1700608881:0;mkcd go-aptfzf
+: 1700608885:0;..
+: 1700608891:0;cd go-paru
+: 1700608891:0;e
+: 1700608895:0;./paruz
+: 1700608901:0;e
+: 1700608920:0;mkcd arch
+: 1700608921:0;..
+: 1700608921:0;e
+: 1700608923:0;mkcd apt
+: 1700608924:0;e
+: 1700608925:0;..
+: 1700608925:0;e
+: 1700608937:0;gmi pkg-fzf
+: 1700608938:0;e
+: 1700608939:0;e
+: 1700608952:0;wlc < main.go
+: 1700608955:0;cd arch
+: 1700608960:0;hx arch.go
+: 1700608968:0;e
+: 1700608969:0;..
+: 1700608969:0;e
+: 1700608971:0;cd apt
+: 1700608972:0;e
+: 1700608974:0;hx apt.go
+: 1700609051:0;e
+: 1700609054:0;go run apt.go
+: 1700609057:0;e
+: 1700609063:0;db enter debian
+: 1700609101:0;gb
+: 1700609101:0;e
+: 1700609127:0;hx apt.go
+: 1700609167:0;hx apt.go
+: 1700609174:0;gb
+: 1700609356:0;hx dev/my-go-libs/shlex.go
+: 1700609461:0;hx apt.go
+: 1700609481:0;e
+: 1700609483:0;gb
+: 1700609685:0;cat apt.go
+: 1700609690:0;e
+: 1700609693:0;hx apt.go
+clear
+printf '\x1b[2J'
+ls
+printf '\x1b[2J\x1b[H'
+ls
+go
+./apt
+ls
+./apt
+ls
+apt list
+apt list > apt-list
+e
+ls
+cat apt-list 
+./apt
+./apt
+nala
+sudo apt install nala fzf bat
+printf '\x1b[2J\x1b[H'
+ls
+./apt
+bat
+nala install bat
+sudo nala install bat
+bat
+cat
+ls
+which baty
+which bat
+ls
+ls /bin
+ls /bin/bat
+nala search bat
+cat -p
+batcat
+e
+ls
+./apt 
+printf '\x1b[2J\x1b[H'
+exit
+: 1700609884:0;nf
+: 1700609885:0;nf
+: 1700609886:0;nf
+: 1700609941:0;nf
+: 1700609942:0;nf
+: 1700609943:0;nf
+: 1700609947:0;nf
+: 1700609948:0;nf
+: 1700609950:0;nf
+: 1700609952:0;nf
+: 1700610040:0;cd repos
+: 1700610041:0;e
+: 1700610047:0;cd lSel
+: 1700610047:0;e
+: 1700610062:0;cmake -DCMAKE_BUILD_TYPE=Release ..\
+make -j$(nproc)
+: 1700610066:0;git pull
+: 1700610068:0;cmake -DCMAKE_BUILD_TYPE=Release ..\
+make -j$(nproc)
+: 1700610071:0;e
+: 1700610075:0;./lSel
+: 1700610079:0;fd|./lSel
+: 1700610142:0;e
+: 1700620642:0;pkill gammastep ; (gammastep -O 4500)&|
+: 1700620645:0;fd
+: 1700621474:0;e
+: 1700621475:0;fd
+: 1700621477:0;e
+: 1700621477:0;e
+: 1700621492:0;ls /usr/lib/systemd/system
+: 1700621498:0;cd /
+: 1700621498:0;e
+: 1700621501:0;ls boot
+: 1700621504:0;ls dev
+: 1700621508:0;ls dev/disk
+: 1700621513:0;ls dev/disk/by-id
+: 1700621521:0;lsblk
+: 1700621532:0;cd repos/u-root
+: 1700621535:0;cd repos
+: 1700621535:0;e
+: 1700621538:0;cd lSel
+: 1700621538:0;e
+: 1700621547:0;mv lSel ~/bin/lsel
+: 1700621550:0;lsel
+: 1700621558:0;seq 1 100|lsel
+: 1700621600:0;hx src
+: 1700621700:0;pkill gammastep ; (gammastep -O 3500)&|
+: 1700621710:0;ls dev/disk/by-id
+: 1700621712:0;ls dev/disk/
+: 1700621717:0;ls dev/disk/by-uuid
+: 1700621727:0;ls dev
+: 1700621731:0;ls dev/mapper
+: 1700621733:0;ls dev/mapper/control
+: 1700621737:0;fo;e dev/mapper/control
+: 1700621746:0;file dev/mapper/control
+: 1700621752:0;cat dev/mapper/control
+: 1700621755:0;sudo cat dev/mapper/control
+: 1700621757:0;e
+: 1700621763:0;ls dev/
+: 1700621767:0;ls dev/char
+: 1700621772:0;ls dev/char/1:1
+: 1700621775:0;cat dev/char/1:1
+: 1700621778:0;sudo cat dev/char/1:1
+: 1700622062:0;printf '\x1b[2J\x1b[H'
+: 1700622070:0;printf '%02x(%a)' 1
+: 1700622077:0;printf '%02xa' 1
+: 1700622082:0;printf '%02d' 1
+: 1700622090:0;printf '%02d' 1aaaaaaaa
+: 1700622094:0;printf '%02d' 11111
+: 1700622097:0;printf '%02v' 11111
+: 1700622101:0;printf '%@' 11111
+: 1700622134:0;printf "%#04x" 112233
+: 1700622140:0;printf "%#04x" 333
+: 1700622144:0;printf "%#02x" 333
+: 1700622150:0;printf "%#26x" 333
+: 1700622153:0;printf "%#16x" 333
+: 1700622157:0;printf "%#1x" 333
+: 1700622160:0;printf "%#2x" 333
+: 1700622161:0;printf "%#3x" 333
+: 1700622163:0;printf "%#4x" 333
+: 1700622167:0;printf "%#4x" 333a
+: 1700622169:0;printf "%#4x" 3333
+: 1700622174:0;ls efi
+: 1700622177:0;ls etc
+: 1700622188:0;hx etc/whois.conf
+: 1700622199:0;nginx
+: 1700622213:0;e
+: 1700622218:0;ls lib
+: 1700622226:0;ls mnt
+: 1700622230:0;ls sbin
+: 1700622233:0;ll sbin
+: 1700622234:0;ll
+: 1700622243:0;ls root
+: 1700622246:0;sudo ls root
+: 1700622252:0;sudo ls -la root
+: 1700622268:0;sudo ls -la root/.config
+: 1700622275:0;ls opt
+: 1700622279:0;ls proc
+: 1700622286:0;ls proc/bus
+: 1700622293:0;ls proc/bus/input
+: 1700622300:0;cat /proc/bus/input/devices
+: 1700622330:0;ls proc
+: 1700622373:0;cat proc/partition
+: 1700622379:0;cat proc/partitions
+: 1700622387:0;ls run
+: 1700622392:0;ls run/blkid
+: 1700622397:0;cat run/blkid/blkid.tab
+: 1700622404:0;ls run/
+: 1700622408:0;ls run/dbus
+: 1700622410:0;ls run/dbus/containers
+: 1700622420:0;ls run/faillock
+: 1700622423:0;ls run/faillock/sweet
+: 1700622426:0;file run/faillock/sweet
+: 1700622431:0;cat run/faillock/sweet
+: 1700622434:0;ls run/
+: 1700622440:0;ls run/lock
+: 1700622446:0;ls run/udeb
+: 1700622449:0;ls run/udev
+: 1700622451:0;ls run/udev/control
+: 1700622460:0;file run/udev/control
+: 1700622467:0;cat run/udev/data
+: 1700622682:0;cat run/udev/data
+: 1700622686:0;cat run/udev/data/+acpi:ACPI0007:02
+: 1700622701:0;ls srv
+: 1700622711:0;ls srv/ftp
+: 1700622717:0;ls sys
+: 1700622721:0;ls sys/block
+: 1700622727:0;ls sys/bus
+: 1700622734:0;ls sys/bus/soc
+: 1700622739:0;ls sys/bus/node
+: 1700622743:0;ls sys/bus/hid
+: 1700622754:0;suwu cat sys/bus/hid/uevent
+: 1700622762:0;sudo cat sys/bus/hid/uevent
+: 1700622771:0;ls sys/
+: 1700622774:0;ls sys/class
+: 1700622778:0;ls sys/class/block
+: 1700622791:0;ls sys/class/accel
+: 1700622794:0;ls sys/class/ata_device
+: 1700622799:0;ls sys/class/wwan
+: 1700622810:0;ls sys/class/watchdog
+: 1700622812:0;ls sys/class/watchdog/watchdog0
+: 1700622816:0;ls sys/class/watchdog/watchdog0/device
+: 1700622819:0;ls sys/class/watchdog/watchdog0/device/driver
+: 1700622836:0;ls --dereference sys/class/watchdog/watchdog0/device/driver
+: 1700622848:0;realpath sys/class/watchdog/watchdog0/device/driver
+: 1700622855:0;realpath sys/class/watchdog/watchdog0/
+: 1700622872:0;realpath sys/class/ata_port
+: 1700622874:0;realpath sys/class/ata_port/ata1
+: 1700622883:0;file sys/class/ata_port/ata1
+: 1700622891:0;ls sys/
+: 1700622893:0;ls sys/dev
+: 1700622896:0;ls sys/dev/block
+: 1700622900:0;ls sys/dev/block/259:0
+: 1700622908:0;ls sys/dev/block/259:0/power
+: 1700622916:0;ls sys/dev/
+: 1700622919:0;ls sys/dev/char
+: 1700622922:0;ls sys/
+: 1700622927:0;ls sys/fs
+: 1700622931:0;ls sys/fs/ext4
+: 1700622936:0;ls sys/fs/ext4/nvme3n1p2
+: 1700622949:0;ls sys/hypervisor
+: 1700622951:0;ls sys/hypervisor
+: 1700622954:0;ls sys/power
+: 1700622959:0;ls sys/power/suspend_stats
+: 1700622963:0;ls sys/module
+: 1700622970:0;ls sys/module/binder
+: 1700622976:0;ls sys/module/rfkill
+: 1700622982:0;ls sys/module/rfkill/sections
+: 1700622987:0;ls sys/module/rfkill/parameters
+: 1700622991:0;cat sys/module/rfkill/parameters/default_state
+: 1700622997:0;ls sys/module/rfkill/notes
+: 1700623000:0;ls sys/module/rfkill/notes
+: 1700623003:0;ls -a sys/module/rfkill/notes
+: 1700623007:0;ls -a sys/module/
+: 1700623027:0;ls -a sys/module/button/parameters
+: 1700623038:0;e
+: 1700623041:0;ll /
+: 1700623045:0;ll /usr
+: 1700623052:0;ll /usr/include
+: 1700623056:0;ll /usr/local
+: 1700623061:0;ll /usr/local/share
+: 1700623064:0;ll /usr/local/share/man
+: 1700623066:0;ll /usr/local/share/man
+: 1700623075:0;ll /usr/local/etc
+: 1700623081:0;ll /usr/
+: 1700623110:0;ll /usr/
+: 1700623124:0;ll /usr/man
+: 1700623129:0;ll /usr/man/man1
+: 1700623131:0;ll /usr/man/man1/nosetests.1.gz
+: 1700623150:0;e
+: 1700623154:0;cd dev
+: 1700623155:0;e
+: 1700623164:0;ll
+: 1700623171:0;cd mybox
+: 1700623172:0;e
+: 1700623176:0;ks
+: 1700623184:0;cd cmds/core
+: 1700623185:0;e
+: 1700623256:0;false/false
+: 1700623261:0;true/true
+: 1700623296:0;while ~/dev/mybox/true/true; do echo 1 ;done
+: 1700623366:0;bind
+: 1700623366:0;e
+: 1700623370:0;ls bind
+: 1700623389:0;lsblk
+: 1700623392:0;man lsblk
+: 1700623417:0;lsblk -N
+: 1700623423:0;lsblk -fa
+: 1700623427:0;lsblk
+: 1700623435:0;ls strings
+: 1700623439:0;hx strings/strings.go
+: 1700623493:0;e
+: 1700624126:0;ls printenv
+: 1700624129:0;hx printenv/printenv.go
+: 1700624137:0;printenv
+: 1700624139:0;e
+: 1700624144:0;mkcd printenv
+: 1700624144:0;e
+: 1700624148:0;hx printenv.go
+: 1700624304:0;gb
+: 1700624304:0;e
+: 1700624308:0;e
+: 1700624309:0;ll
+: 1700624312:0;du printenv
+: 1700624317:0;upx printenv
+: 1700624320:0;du printenv
+: 1700624325:0;./printenv
+: 1700624333:0;./printenv | hl
+: 1700624338:0;./printenv | hl -l yaml
+: 1700624342:0;./printenv | hl -l bash
+: 1700624504:0;hx printenv.go
+: 1700624870:0;e
+: 1700624872:0;..
+: 1700624872:0;e
+: 1700624875:0;cd echoe
+: 1700624878:0;cd echo 
+: 1700624878:0;e
+: 1700624884:0;./echo 
+: 1700624887:0;./echo -f 
+: 1700624906:0;./echo -f '{#ffffff}YOU'
+: 1700624922:0;printenv | hl -bash
+: 1700624925:0;printenv | hl -l bash
+: 1700624950:0;./echo -f '{#ffffff}YOU{#F92672}='
+: 1700624968:0;./echo -f '{#ffffff}YOU{#F92672}={##E6DB74}COOL'
+: 1700624972:0;./echo -f '{#ffffff}YOU{#F92672}={#E6DB74}COOL'
+: 1700624987:0;./echo -f '{#ffffff}YOU{#F92672}={#E6DB74}COOL'
+: 1700624991:0;hx echo.go
+: 1700625028:0;hex2ansi
+: 1700625084:0;../echo
+: 1700625084:0;e
+: 1700625086:0;./echo -f '{#ffffff}YOU{#F92672}={#E6DB74}COOL'
+: 1700625116:0;pastel #E6DB74
+: 1700625120:0;pastel '#E6DB74'
+: 1700625124:0;pastel color '#E6DB74'
+: 1700625164:0;pastel color '#ffffff'
+: 1700625205:0;./echo -f '{#ffffff}YOU{#F92672}={#E6DB74}COOL'
+: 1700625217:0;pastel color '#F92672'
+: 1700625577:0;e
+: 1700625578:0;gb
+: 1700625578:0;e
+: 1700625584:0;./printenv | hl -l bash
+: 1700625590:0;./printenv -p
+: 1700625630:0;gb
+: 1700625633:0;./printenv -p
+: 1700625642:0;./printenv | hl -l bash
+: 1700625655:0;./printenv
+: 1700625694:0;gb
+: 1700625696:0;./printenv
+: 1700625698:0;./printenv -p
+: 1700625868:0;gb
+: 1700625870:0;./printenv -p
+: 1700625945:0;gb
+: 1700625946:0;./printenv -p
+: 1700625973:0;printenv | hl -l bash
+: 1700626111:0;gb
+: 1700626113:0;./printenv -p
+: 1700626178:0;gb
+: 1700626180:0;./printenv -p
+: 1700626201:0;gb
+: 1700626203:0;./printenv -p
+: 1700626305:0;gb
+: 1700626307:0;./printenv -p
+: 1700626322:0;gb
+: 1700626323:0;./printenv -p
+: 1700626376:0;go run printenv.go
+: 1700626379:0;go run printenv.go -p
+: 1700626494:0;go run printenv.go -p
+: 1700626579:0;gb
+: 1700626581:0;./printenv -p
+: 1700626614:0;gb
+: 1700626615:0;./printenv -p
+: 1700626625:0;gb
+: 1700626626:0;./printenv -p
+: 1700626677:0;du printenv
+: 1700626682:0;upx printenv
+: 1700626683:0;e
+: 1700626685:0;du printenv
+: 1700626690:0;e
+: 1700626691:0;./printenv -p
+: 1700626694:0;./printenv
+: 1700626696:0;./printenv -p
+: 1700626699:0;./printenv -h
+: 1700626704:0;./printenv -p
+: 1700626706:0;ls
+: 1700626708:0;./printenv -p\ 
+: 1700626709:0;./printenv -p
+: 1700626783:0;e
+: 1700626791:0;hx seq/seq.go
+: 1700626801:0;e
+: 1700626805:0;seq 1 100|lsel
+: 1700626808:0;seq 1 100|lsel
+: 1700626824:0;seq --separator=' ' 1 10
+: 1700626827:0;seq --separator=' ' 1 1000
+: 1700626835:0;ls sort
+: 1700626872:0;hx md5sum/md5sum.go
+: 1700626890:0;ls poweroff
+: 1700626893:0;hx poweroff/poweroff_linux.go
+: 1700626901:0;hx poweroff/poweroff_linux.go
+: 1700626912:0;..
+: 1700626918:0;mkcd reboot
+: 1700626918:0;e
+: 1700626928:0;hx reboot.go
+: 1700626941:0;mv reboot.go shutdown.go
+: 1700626944:0;rm reboot
+: 1700626945:0;e
+: 1700626946:0;..
+: 1700626951:0;mv reboot shutdown
+: 1700626953:0;mkcd reboot
+: 1700626953:0;e
+: 1700626956:0;hx reboot.go
+: 1700626960:0;e
+: 1700626961:0;gb
+: 1700626962:0;e
+: 1700626964:0;e
+: 1700626970:0;e
+: 1700627012:0;time
+: 1700627070:0;tldr timeout
+: 1700627092:0;timeout --signal INT 2s sleep 5
+: 1700627096:0;e
+: 1700627102:0;hx timeout
+: 1700627114:0;e
+: 1700627116:0;e
+: 1700627130:0;hx umount
+: 1700627156:0;e
+: 1700627165:0;hx which
+: 1700627239:0;which *
+: 1700627242:0;which ls
+: 1700627244:0;which ls -a
+: 1700627249:0;which -a ls
+: 1700627260:0;stat /sbin/ls
+: 1700627266:0;stat /bin/ls
+: 1700627280:0;stat /usr/bin/ls
+: 1700627283:0;e
+: 1700627295:0;e
+: 1700627297:0;ls id
+: 1700627301:0;hx id/groups.go
+: 1700627302:0;e
+: 1700627359:0;hx yes/yes.go
+: 1700627384:0;e
+: 1700627387:0;./printenv -p
+: 1700627389:0;..
+: 1700627389:0;e
+: 1700627390:0;e
+: 1700627393:0;mkcd yes
+: 1700627394:0;e
+: 1700627396:0;hx yes.go
+: 1700627637:0;gb
+: 1700627638:0;e
+: 1700627641:0;./yes
+: 1700627642:0;e
+: 1700627665:0;read -s
+: 1700627674:0;read -s yes 
+: 1700627680:0;./yes|read -s yes 
+: 1700627682:0;e
+: 1700627689:0;./yes|read -s yes ; echo $yes
+: 1700627719:0;..
+: 1700627719:0;e
+: 1700627720:0;e
+: 1700627723:0;e
+: 1700627724:0;e
+: 1700627738:0;hx uname
+: 1700628498:0;hex="11001A"\
+printf "%d %d %d\n" 0x${hex:0:2} 0x${hex:2:2} 0x${hex:4:2}
+: 1700628685:0;ldd $(which rg)
+: 1700628690:0;ldd $(which eza)
+: 1700630326:0;cat /proc/bus/input/devices
+: 1700630352:0;lsusb
+: 1700630356:0;man lsusb
+: 1700631039:0;cat /run/udev/data
+: 1700631046:0;ls /run/udev/data
+: 1700631116:0;strace lsusb
+: 1700631214:0;cat /sys/devices/pci0000:00/0000:00:14.0/usb1/1-5/1-5.3/uevent
+: 1700631236:0;cat /sys/devices/pci0000:00/0000:00:1f.5
+: 1700631244:0;e
+: 1700632995:0;ff
+: 1700632997:0;fd
+: 1700633002:0;cd dev
+: 1700633002:0;e
+: 1700633014:0;cd mybox
+: 1700633014:0;e
+: 1700633021:0;uptime/uptime
+: 1700633031:0;uptime/uptime -p
+: 1700633039:0;clear
+: 1700633041:0;ll
+: 1700633058:0;pwdx
+: 1700633066:0;pwdx
+: 1700633069:0;pwdx 
+: 1700633071:0;pwdx a
+: 1700633091:0;echo/echo -f '{#121212} FFF'
+: 1700633116:0;echo/echo -f '{#a3c2ff} FFF'
+: 1700633124:0;echo/echo -f '{#a3c2ff} FFFffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff'
+: 1700633127:0;ll
+: 1700633129:0;df
+: 1700633133:0;df/df
+: 1700633136:0;sudo df/df
+: 1700633149:0;ls echo
+: 1700633152:0;ls false
+: 1700633154:0;ls free
+: 1700633158:0;free/free
+: 1700633161:0;free/free -p
+: 1700633181:0;free/free -p 
+: 1700633185:0;e
+: 1700633203:0;./printenv/printenv -p
+: 1700633219:0;printenv | hl -l bash
+: 1700633234:0;printenv/printenv -p
+: 1700633236:0;printenv/printenv -p
+: 1700633236:0;printenv/printenv -p
+: 1700633237:0;printenv/printenv -p
+: 1700633290:0;printenv/printenv -p
+: 1700633292:0;printenv/printenv
+: 1700633293:0;printenv/printenv -p
+: 1700633722:0;printenv/printenv -p
+: 1700633824:0;printenv/printenv -p
+: 1700633834:0;cd $OLDPWD
+: 1700633837:0;cd $OLDPWD
+: 1700633838:0;cd $OLDPWD
+: 1700633838:0;cd $OLDPWD
+: 1700633839:0;cd $OLDPWD
+: 1700633839:0;cd $OLDPWD
+: 1700633840:0;cd $OLDPWD
+: 1700633841:0;cd $OLDPWD
+: 1700634189:0;pkill gammastep ; (gammastep -O 1500)&|
+: 1700634199:0;e
+: 1700634207:0;cd $OLDPWD
+: 1700634209:0;cd $OLDPWD
+: 1700634209:0;e
+: 1700634220:0;ls gosh
+: 1700634225:0;hx gosh/gosh.go
+: 1700634260:0;e
+: 1700634264:0;ls ip
+: 1700634267:0;hx ip/ip_linux.go
+: 1700634447:0;e
+: 1700634448:0;ip
+: 1700634450:0;ip a
+: 1700634454:0;ipa
+: 1700634455:0;ip a
+: 1700634458:0;ipa
+: 1700634463:0;ip a
+: 1700634468:0;ls find
+: 1700634470:0;ls sync
+: 1700634473:0;ls time
+: 1700634475:0;ls uname
+: 1700634479:0;ls wc
+: 1700634481:0;ls wget
+: 1700634485:0;ls which
+: 1700634489:0;ls xargs
+: 1700634493:0;hx xargs/xargs.go
+: 1700635172:0;e
+: 1700635176:0;hx xargs/xargs_test.go
+: 1700635184:0;e
+: 1700635194:0;cd dev/mybox
+: 1700635195:0;e
+: 1700635197:0;mkcd xargs
+: 1700635198:0;e
+: 1700635199:0;e
+: 1700635203:0;hx xargs.go
+: 1700635223:0;e
+: 1700635225:0;gb
+: 1700635226:0;e
+: 1700635230:0;./xargs
+: 1700635244:0;ls -1 | ./xargs echo
+: 1700635257:0;ls -1 | ./xargs printf "%s\n"
+: 1700635262:0;\ls -1 | ./xargs printf "%s\n"
+: 1700635266:0;\ls -1 ~ | ./xargs printf "%s\n"
+: 1700635273:0;ls -1 ~ | ./xargs printf "%s\n"
+: 1700635281:0;ls -1 ~ | ./xargs printf "%s %s\n"
+: 1700635288:0;ls -1 ~/bin | ./xargs printf "%s %s\n"
+: 1700635298:0;ls -1
+: 1700635304:0;ls -1 ~/bin | ./xargs printf "%s %s\n"
+: 1700635307:0;ls -1 ~/bin
+: 1700635310:0;e
+: 1700635324:0;./xargs -h
+: 1700635365:0;printf -v
+: 1700635368:0;man printf
+: 1700635371:0;e
+: 1700635372:0;..
+: 1700635372:0;e
+: 1700635378:0;mkcd sprintf
+: 1700635378:0;e
+: 1700635382:0;hx sprintf.go
+: 1700635573:0;e
+: 1700635575:0;gb
+: 1700635575:0;e
+: 1700635585:0;./sprintf "%s\n" yo
+: 1700635588:0;hx sprintf.go
+: 1700635609:0;gb
+: 1700635609:0;e
+: 1700635611:0;./sprintf "%s\n" yo
+: 1700635714:0;gb
+: 1700635716:0;./sprintf "%s\n" yo
+: 1700635764:0;printf "%#4x" 333a
+: 1700635774:0;printf "%s\n" a f
+: 1700635776:0;printf "%s\n" a f c
+: 1700635777:0;printf "%s\n" a f c a
+: 1700635802:0;gb
+: 1700635804:0;./sprintf "%s\n" yo
+: 1700635806:0;./sprintf "%s\n" y o
+: 1700635969:0;ls ~/repos/u-root
+: 1700636003:0;gb
+: 1700636004:0;./sprintf "%s\n" y o
+: 1700636235:0;..
+: 1700636235:0;e
+: 1700636237:0;mkcd env
+: 1700636237:0;e
+: 1700636240:0;hx env.go
+: 1700636558:0;e
+: 1700636559:0;gb
+: 1700636559:0;e
+: 1700636562:0;hx env.go
+: 1700636763:0;gb
+: 1700636764:0;e
+: 1700636766:0;./env
+: 1700636773:0;./env -i ls
+: 1700636782:0;./env ls
+: 1700636793:0;./env -i /usr/bin/ls
+: 1700636823:0;e
+: 1700678235:0;pkill gammastep
+: 1700678255:0;sudo umount sda sdx ssd hdd
+: 1700678259:0;sync
+                                         : 1700678634:0;ls
+: 1700678670:0;mv ~/.config/zsh/.zsh_history ~/.config/zsh/.zsh_history2

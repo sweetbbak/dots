@@ -1,0 +1,2434 @@
+: 1700379790:0;e
+: 1700379870:0;zcat ./initrd
+: 1700379879:0;e ./initrd
+: 1700379888:0;e initrd
+: 1700379912:0;cpio -idv < initrd
+: 1700379934:0;e
+: 1700379942:0;ls kernel
+: 1700379943:0;ls kernel/x86
+: 1700379946:0;ls kernel/x86/microcode
+: 1700379957:0;xxd kernel/x86/microcode/GenuineIntel.bin
+: 1700379960:0;e
+: 1700379963:0;cat early_cpio
+: 1700379967:0;rm early_cpio
+: 1700379972:0;rm -r kernel
+: 1700379972:0;e
+: 1700379975:0;rm initrd
+: 1700379976:0;e
+: 1700420361:0;pkill gammastep 
+: 1700420368:0;sudo umount sda sdx ssd hdd
+: 1700420372:0;sync
+: 1700420375:0;systemctl reboot
+: 1700420764:0;swww img ~/Pictures/backgrounds/80s_retro_anime.jpg --transition-type=center
+: 1700422727:0;ldd /bin/* | grep libc | wc -l
+: 1700422810:0;hx procbomb.c
+: 1700422830:0;gcc procbomb.c -o procbomb
+: 1700422831:0;e
+: 1700422862:0;free -h && ./procbomb -10000 sleep 10 && sleep 2 && free -h
+: 1700422870:0;top
+: 1700422897:0;free -h 
+: 1700422961:0;ps -o rss,vsz,cmd -C sleep
+: 1700422977:0;ps -o rss,vsz,cmd -C a2fa
+: 1700422990:0;sleep 10 & ps -o rss,vsz,cmd -C sleep
+: 1700423121:0;e
+: 1700423127:0;mv procbomb.c dev
+: 1700423127:0;e
+: 1700423129:0;rm procbomb
+: 1700423129:0;e
+: 1700424300:0;cd dev
+: 1700424301:0;e
+: 1700424304:0;mkcd go-grep
+: 1700424304:0;e
+: 1700424306:0;hx main.go
+: 1700424311:0;gb
+: 1700424319:0;gmi grab
+: 1700424321:0;gmt
+: 1700424322:0;gb
+: 1700424323:0;e
+: 1700424326:0;./grab
+: 1700424349:0;echo "Hello, World" | ./grab
+: 1700424354:0;echo "Hello, World" | ./grab -E 'e'
+: 1700424356:0;e
+: 1700424360:0;echo "Hello, World" | ./grab -E 'el'
+: 1700424364:0;echo "Hello, World" | ./grab -E '.el'
+: 1700424367:0;echo "Hello, World" | ./grab -E '.*el'
+: 1700424370:0;echo "Hello, World" | ./grab -E '.*el.*'
+: 1700424373:0;echo "Hello, World" | ./grab -E '*el*'
+: 1700424379:0;echo "Hello, World" | ./grab -E 'Helol'
+: 1700424381:0;hx main.go
+: 1700424397:0;e
+: 1700424399:0;gb
+: 1700424402:0;echo "Hello, World" | ./grab -E 'Helol'
+: 1700424404:0;echo "Hello, World" | ./grab -E 'Hell'
+: 1700424406:0;echo "Hello, World" | ./grab -E 'Hel'
+: 1700424411:0;echo "Hello, World" | ./grab -E '*'
+: 1700424413:0;echo "Hello, World" | ./grab -E "*"
+: 1700424414:0;e
+: 1700424416:0;hx main.go
+: 1700424575:0;e
+: 1700424577:0;echo "Hello, World" | ./grab -E "*"
+: 1700424579:0;echo "Hello, World" | ./grab -E ""
+: 1700424581:0;echo "Hello, World" | ./grab 
+: 1700424584:0;echo "Hello, World" | ./grab 'f'
+: 1700424586:0;echo "Hello, World" | ./grab 'e'
+: 1700424589:0;echo "Hello, World" | ./grab -E 'e'
+: 1700424590:0;e
+: 1700424714:0;snippy new
+: 1700424745:0;snippy new
+: 1700424757:0;snippy new
+: 1700424776:0;hx .snippets/snips/go-worklist.md
+: 1700424783:0;hx .snippets/snips/go-worklist.md
+: 1700424796:0;hx .snippets/snips/go-worklist.md
+: 1700424801:0;hx .snippets/snips/go-worklist.md
+: 1700424820:0;nv .snippets/snips/go-worklist.md
+: 1700424848:0;nv ~/.config/nvim/init.lua
+: 1700425428:0;nv ~/.config/nvim/init.lua
+: 1700427196:0;mkcd worklist
+: 1700427196:0;e
+: 1700427200:0;hx worker.go
+: 1700427227:0;e
+: 1700427229:0;..
+: 1700427303:0;gmt
+: 1700427304:0;e
+: 1700427308:0;hx main.go
+: 1700427367:0;e
+: 1700427376:0;mkcd worker
+: 1700427382:0;hx worker.go
+: 1700427421:0;..
+: 1700427421:0;e
+: 1700427425:0;hx main.go
+: 1700427629:0;gb
+: 1700427630:0;e
+: 1700427651:0;./grab 
+: 1700427665:0;./grab main.go ./
+: 1700427674:0;./grab main.go "defer"
+: 1700427681:0;./grab "defer" main.go
+: 1700427687:0;./grab "defer" .
+: 1700427705:0;e
+: 1700427710:0;./grab "defer" ./worker
+: 1700427713:0;./grab "de" ./worker
+: 1700427717:0;./grab "func" ./worker
+: 1700427730:0;stat grab
+: 1700427733:0;file grab
+: 1700427751:0;e
+: 1700427758:0;e
+: 1700427825:0;e
+: 1700427826:0;..
+: 1700427831:0;mkcd go-regex
+: 1700427831:0;e
+: 1700427833:0;hx main.go
+: 1700428022:0;e
+: 1700428023:0;gb
+: 1700428027:0;gmi reg
+: 1700428027:0;e
+: 1700428029:0;gmt
+: 1700428030:0;e
+: 1700428031:0;gb
+: 1700428031:0;e
+: 1700428058:0;fd . .. | ./reg "`f`"
+: 1700428060:0;fd . .. | ./reg "f"
+: 1700428067:0;fd . ~/dev | ./reg "f"
+: 1700428079:0;fd . .. --max-depth=1 | ./reg "f"
+: 1700428082:0;fd . .. --max-depth=2 | ./reg "f"
+: 1700428089:0;fd . .. --max-depth=2 | ./reg "go-flat"
+: 1700428105:0;fd . .. --max-depth=2 | ./reg "../.*/.*"
+: 1700428108:0;fd . .. --max-depth=2 | ./reg "../.*/"
+: 1700428136:0;fd . .. --max-depth=2 | ./reg "../g.-..."
+: 1700428145:0;fd . .. --max-depth=2 | ./reg "../g.-....-"
+: 1700428151:0;fd . .. --max-depth=2 | ./reg "../g.-....-?"
+: 1700428156:0;e
+: 1700428210:0;e
+: 1700428212:0;hx main.go
+: 1700428405:0;gb
+: 1700428407:0;fd . .. --max-depth=2 | ./reg "../g.-....-?"
+: 1700428415:0;hx main.go
+: 1700428423:0;gb
+: 1700428424:0;hx main.go
+: 1700428427:0;fd . .. --max-depth=2 | ./reg "../g.-....-?"
+: 1700428444:0;gb
+: 1700428445:0;fd . .. --max-depth=2 | ./reg "../g.-....-?"
+: 1700428458:0;fd . .. --max-depth=2 | ./reg "*.go$"
+: 1700428463:0;fd . .. --max-depth=2 | ./reg '*.go$'
+: 1700428466:0;fd . .. --max-depth=2 | ./reg '.*.go$'
+: 1700428512:0;gb
+: 1700428514:0;fd . .. --max-depth=2 | ./reg '.*.go$'
+: 1700428617:0;gb
+: 1700428619:0;fd . .. --max-depth=2 | ./reg '.*.go$'
+: 1700428634:0;gb
+: 1700428635:0;fd . .. --max-depth=2 | ./reg '.*.go$'
+: 1700428641:0;fd . .. --max-depth=2 | ./reg '.go$'
+: 1700428661:0;gb
+: 1700428662:0;fd . .. --max-depth=2 | ./reg '.go$'
+: 1700428741:0;gb
+: 1700428743:0;fd . .. --max-depth=2 | ./reg '.go$'
+: 1700428749:0;fd . .. --max-depth=2 | ./reg 'go$'
+: 1700428750:0;fd . .. --max-depth=2 | ./reg 'go'
+: 1700428984:0;gb
+: 1700428986:0;gb
+: 1700428992:0;e
+: 1700428993:0;./reg
+: 1700429042:0;gb
+: 1700429044:0;./reg
+: 1700429073:0;gb
+: 1700429075:0;./reg
+: 1700429078:0;fd . .. --max-depth=2 | ./reg 'go'
+: 1700429085:0;fd . .. --max-depth=2 | ./reg 'my-'
+: 1700429090:0;fd . .. --max-depth=2 | ./reg 'o'
+: 1700429097:0;fd . .. --max-depth=2 | ./reg '.c$'
+: 1700429104:0;e
+: 1700429129:0;./reg 'var' < main.go
+: 1700429177:0;./reg 'var' < /proc/acpi/wakeup
+: 1700429180:0;./reg '*' < /proc/acpi/wakeup
+: 1700429183:0;./reg '.*' < /proc/acpi/wakeup
+: 1700429194:0;./reg 'PX' < /proc/acpi/wakeup
+: 1700429202:0;./reg 'PX.*\n' < /proc/acpi/wakeup
+: 1700429207:0;./reg 'PX.*$' < /proc/acpi/wakeup
+: 1700429212:0;./reg '^.*$' < /proc/acpi/wakeup
+: 1700429222:0;snips
+: 1700429282:0;./reg '^()$' < /proc/acpi/wakeup
+: 1700429292:0;./reg '^(P)$' < /proc/acpi/wakeup
+: 1700429333:0;./reg '^(P)$' < /proc/acpi/wakeup
+: 1700429335:0;gb
+: 1700429336:0;e
+: 1700429338:0;./reg '^(P)$' < /proc/acpi/wakeup
+: 1700429341:0;./reg '^$' < /proc/acpi/wakeup
+: 1700429344:0;./reg
+: 1700429367:0;gb
+: 1700429368:0;e
+: 1700429417:0;fd . .. --max-depth=2 | ./reg '.c$'
+: 1700429419:0;fd . .. --max-depth=2 | ./reg '.go$'
+: 1700429428:0;fd . ~ --max-depth=2 | ./reg '.go$'
+: 1700429431:0;fd . ~ --max-depth=5 | ./reg '.go$'
+: 1700429467:0;fd . .. --max-depth=2 | ./reg '/home/sweet/(.*)1/'
+: 1700429469:0;fd . .. --max-depth=2 | ./reg '/home/sweet/(.*)1'
+: 1700429470:0;fd . .. --max-depth=2 | ./reg '/home/sweet/(.*)'
+: 1700429497:0;ff .snippets/snips/go-regex-syntax.md
+: 1700429514:0;cp .snippets/snips/go-regex-syntax.md ./f.html
+: 1700429516:0;ff ./f.html
+: 1700429557:0;fd . .. --max-depth=2 | ./reg '(?.*)'
+: 1700429561:0;fd . .. --max-depth=2 | ./reg '(?/)'
+: 1700429597:0;fd . .. --max-depth=2 | ./reg '[[:ascii:]]'
+: 1700429607:0;cat ~/novels/killed-the-academy-player/ch-10.txt | ./reg '[[:ascii:]]'
+: 1700429613:0;cat ~/novels/killed-the-academy-player/ch-10.txt | ./reg '[[:alpha:]]'
+: 1700429626:0;cat ~/novels/killed-the-academy-player/ch-10.txt | ./reg '[[:space:]]'
+: 1700429633:0;cat ~/novels/killed-the-academy-player/ch-10.txt | ./reg '[[:alnum:]]'
+: 1700429641:0;cat ~/novels/killed-the-academy-player/ch-10.txt | ./reg '[[:upper:]]'
+: 1700429652:0;cat ~/novels/killed-the-academy-player/ch-10.txt | grep '[[:upper:]]'
+: 1700429656:0;cat ~/novels/killed-the-academy-player/ch-10.txt | grep '[[:ascii:]]'
+: 1700429661:0;cat ~/novels/killed-the-academy-player/ch-10.txt | grep '[[:alnum:]]'
+: 1700429670:0;cat ~/novels/killed-the-academy-player/ch-10.txt | ./reg '[[:alnum:]]'
+: 1700429724:0;cat ~/novels/killed-the-academy-player/ch-10.txt | ./reg '[[:upper:]]'
+: 1700429728:0;cat ~/novels/killed-the-academy-player/ch-10.txt | ./reg '[[:alnum:]]'
+: 1700429822:0;cat ~/novels/killed-the-academy-player/ch-10.txt | ./reg '[A-Za-z1-9 ]'
+: 1700429838:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '[A-Za-z1-9 ]'
+: 1700429843:0;cat ~/novels/killed-the-academy-player/ch-10.wav | ./reg '[A-Za-z1-9 ]'
+: 1700429857:0;pkill kitty
+: 1700424299:0;cd
+: 1700429860:0;cd dev
+: 1700429860:0;e
+: 1700429861:0;zi
+: 1700429863:0;e
+: 1700429871:0;cat ~/novels/killed-the-academy-player/ch-9.txt | ./reg '[A-Za-z1-9 ]'
+: 1700429876:0;cat ~/novels/killed-the-academy-player/ch-9.txt | ./reg '[A-Za-z1-9]'
+: 1700429885:0;cat ~/novels/killed-the-academy-player/ch-9.txt | ./reg '[a-z1-9]'
+: 1700429890:0;cat ~/novels/killed-the-academy-player/ch-9.txt | ./reg 'a-z1-9'
+: 1700429893:0;cat ~/novels/killed-the-academy-player/ch-9.txt | ./reg '[a-z1-9]'
+: 1700429895:0;cat ~/novels/killed-the-academy-player/ch-9.txt | ./reg '[a-z 1-9]'
+: 1700429918:0;cat ~/novels/killed-the-academy-player/ch-9.txt | ./reg '\W'
+: 1700429924:0;cat ~/novels/killed-the-academy-player/ch-9.txt | ./reg '!\W'
+: 1700429933:0;cat ~/novels/killed-the-academy-player/ch-9.txt | ./reg '\s'
+: 1700429935:0;cat ~/novels/killed-the-academy-player/ch-9.txt | ./reg '\t'
+: 1700429960:0;cat ~/novels/killed-the-academy-player/ch-9.txt | ./reg '\.'
+: 1700429964:0;cat ~/novels/killed-the-academy-player/ch-9.txt | ./reg ''
+: 1700429972:0;cat ~/novels/killed-the-academy-player/ch-9.txt | ./reg 'â€ƒ¼'
+: 1700429980:0;cat ~/novels/killed-the-academy-player/ch-9.txt | ./reg 'â€ƒ¼â€ƒ½'
+: 1700429984:0;cat ~/novels/killed-the-academy-player/ch-9.txt | ./reg 'â€ƒ¼.*â€ƒ½'
+: 1700429995:0;cat ~/novels/killed-the-academy-player/ch-9.txt | ./reg '(â€ƒ¼)(â€ƒ½)'
+: 1700429998:0;cat ~/novels/killed-the-academy-player/ch-9.txt | ./reg '(â€ƒ¼).(â€ƒ½)'
+: 1700430003:0;cat ~/novels/killed-the-academy-player/ch-9.txt | ./reg '(â€ƒ¼).*(â€ƒ½)'
+: 1700430008:0;cat ~/novels/killed-the-academy-player/ch-9.txt | ./reg '(â€ƒ¼)(â€ƒ½)'
+: 1700430013:0;cat ~/novels/killed-the-academy-player/ch-9.txt | ./reg '\(â€ƒ¼)\(â€ƒ½)'
+: 1700430018:0;cat ~/novels/killed-the-academy-player/ch-9.txt | ./reg '(?â€ƒ¼)(â€ƒ½)'
+: 1700430020:0;cat ~/novels/killed-the-academy-player/ch-9.txt | ./reg '(?â€ƒ¼)(?â€ƒ½)'
+: 1700430028:0;cat ~/novels/killed-the-academy-player/ch-9.txt | ./reg '?(â€ƒ¼)?(â€ƒ½)'
+: 1700430033:0;cat ~/novels/killed-the-academy-player/ch-9.txt | ./reg '.(â€ƒ¼).(â€ƒ½)'
+: 1700430060:0;cat ~/novels/killed-the-academy-player/ch-9.txt | ./reg '[:ascii:]'
+: 1700430066:0;cat ~/novels/killed-the-academy-player/ch-9.txt | ./reg '\[:ascii:]'
+: 1700430069:0;cat ~/novels/killed-the-academy-player/ch-9.txt | ./reg '\[:ascii:\]'
+: 1700430072:0;cat ~/novels/killed-the-academy-player/ch-9.txt | ./reg '...[:ascii:]'
+: 1700430075:0;cat ~/novels/killed-the-academy-player/ch-9.txt | ./reg '.....[:ascii:]'
+: 1700430087:0;e
+: 1700430089:0;hx main.go
+: 1700430365:0;go run main.go
+: 1700430368:0;fd|go run main.go
+: 1700430373:0;fd|go run main.go '.*'
+: 1700430383:0;fd|go run main.go '.*'
+: 1700430391:0;fd . .. |go run main.go '.*'
+: 1700430407:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go '[:ascii:]'
+: 1700430415:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go '[:alnum:]'
+: 1700430471:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go '[:alnum:]'
+: 1700430477:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go '[:alnum:]'
+: 1700430497:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go '[:alnum:]'
+: 1700430511:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go '[:alnum:]'
+: 1700430643:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go '[:alnum:]'
+: 1700430652:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go '[:alnum:]'
+: 1700430667:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go '[:alnum:]'
+: 1700430687:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go '[A-Za-z1-9 ]'
+: 1700430764:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go '[A-Za-z1-9 ]'
+: 1700430808:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go '[A-Za-z1-9 ]'
+: 1700430873:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go '[A-Za-z1-9 ]'
+: 1700430902:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go '[A-Za-z1-9 ]'
+: 1700430913:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go '[A-Za-z1-9 ]'
+: 1700430919:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go '[A-Za-z1-9 ]'
+: 1700430929:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go '[A-Za-z1-9 ]'
+: 1700431101:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go '[A-Za-z1-9 ]'
+: 1700431207:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go '[A-Za-z1-9 ]'
+: 1700431216:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go '[A-Za-z1-9 .,]'
+: 1700431219:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go '[A-Za-z1-9 .,?]'
+: 1700431229:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go '![A-Za-z1-9 .,?]'
+: 1700431239:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go '\![A-Za-z1-9 .,?]'
+: 1700431244:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go '^[A-Za-z1-9 .,?]'
+: 1700431247:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go '^[A-Za-z1-9]'
+: 1700431250:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go '[A-Za-z1-9]'
+: 1700431274:0;fd . .. |go run main.go '.*'
+: 1700431282:0;fd . .. |go run main.go '.go$'
+: 1700431477:0;fd . .. |go run main.go '.go$'
+: 1700431490:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go '[A-Za-z1-9]'
+: 1700431496:0;cat ~/novels/killed-the-academy-player/ch-9.txt | head | go run main.go '[A-Za-z1-9]'
+: 1700431507:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n1p | go run main.go '[A-Za-z1-9]'
+: 1700431509:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[A-Za-z1-9]'
+: 1700431513:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p 
+: 1700431518:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[A-Za-z1-9]'
+: 1700431552:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[A-Za-z1-9]'
+: 1700431558:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[A-Za-z1-9]'
+: 1700431568:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[A-Za-z1-9]'
+: 1700431583:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[:ascii:]'
+: 1700431591:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[[:ascii:]]'
+: 1700431645:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[[:ascii:]]'
+: 1700431658:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[[:ascii:]]'
+: 1700431665:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[[:ascii:]]'
+: 1700431722:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[[:ascii:]]'
+: 1700431726:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[[:ascii:]]'
+: 1700431740:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[[:ascii:]]'
+: 1700431905:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[[:ascii:]]'
+: 1700431918:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[[:ascii:]]'
+: 1700431981:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[[:ascii:]]'
+: 1700431986:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[[:ascii:]]'
+: 1700432012:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[[:ascii:]]'
+: 1700432023:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[[:alnum:]]'
+: 1700432028:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[[:ascii:]]'
+: 1700432032:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[[:numeric:]]'
+: 1700432034:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[[:num:]]'
+: 1700432039:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[[:upper:]]'
+: 1700432415:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[[:upper:]]'
+: 1700432521:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[[:upper:]]'
+: 1700432523:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[[:upper:]]'
+: 1700432530:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[[:upper:]]'
+: 1700432581:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[[:upper:]]'
+: 1700432604:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[[:upper:]]'
+: 1700432629:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[[:ascii:]]'
+: 1700432634:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[[:lower:]]'
+: 1700432793:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[[:lower:]]'
+: 1700432891:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[[:lower:]]'
+: 1700432906:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[[:lower:]]'
+: 1700432907:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[[:lower:]]'
+: 1700432977:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[[:lower:]]'
+: 1700433010:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[[:lower:]]'
+: 1700433018:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[[:lower:]]'
+: 1700433024:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[[:lower:]]'
+: 1700433028:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[[:ascii:]]'
+: 1700433035:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[[:upper:]]'
+: 1700433185:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[[:upper:]]'
+: 1700433214:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[[:upper:]]'
+: 1700433258:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[[:upper:]]'
+: 1700433278:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[[:upper:]]'
+: 1700433366:0;cat ~/novels/killed-the-academy-player/ch-9.txt | sed -n 1p | go run main.go '[[:upper:]]'
+: 1700433372:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go '[[:upper:]]'
+: 1700433382:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go '[[:ascii:]]'
+: 1700433409:0;gb
+: 1700433410:0;e
+: 1700433413:0;fd . .. |go run main.go '.go$'
+: 1700433419:0;fd . .. | go run main.go '.go$'
+: 1700433441:0;gb
+: 1700433442:0;fd . .. | go run main.go '.go$'
+: 1700433451:0;gb
+: 1700433452:0;fd . .. | go run main.go '.go$'
+: 1700433462:0;fd . .. | go run main.go '.go$'
+: 1700433472:0;fd . .. --max-depth=2 | go run main.go '.go$'
+: 1700433590:0;fd . .. | go run main.go '.go$'
+: 1700433593:0;fd . .. | go run main.go '.go$'
+: 1700433597:0;fd . .. --max-depth=2 | go run main.go '.go$'
+: 1700433600:0;fd . .. --max-depth=2 | go run main.go '.go$'
+: 1700433601:0;fd . .. --max-depth=2 | go run main.go '.go$'
+: 1700433610:0;gb
+: 1700433613:0;fd . .. --max-depth=2 | go run main.go '.go$'
+: 1700433618:0;fd . .. --max-depth=2 | go run main.go '.*.go$'
+: 1700433633:0;fd . .. --max-depth=2 | go run main.go '.*.go$'
+: 1700433689:0;fd . .. --max-depth=2 | go run main.go '.*.go$'
+: 1700433691:0;fd . .. --max-depth=2 | go run main.go '.*.go$'
+: 1700433695:0;fd . .. --max-depth=2 | go run main.go '.*.go$'
+: 1700433714:0;fd . .. --max-depth=2 | go run main.go '.*.go$'
+: 1700433736:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go '[[:ascii:]]'
+: 1700433740:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go '[[:upper:]]'
+: 1700433753:0;fd . .. --max-depth=2| go run main.go '[[:upper:]]'
+: 1700433758:0;fd . .. --max-depth=2 | go run main.go '[[:upper:]]'
+: 1700433833:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go 'e'
+: 1700433842:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go 'le'
+: 1700433893:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go 'le'
+: 1700433897:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go '[[:ascii:]]'
+: 1700433904:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go '[[:upper:]]'
+: 1700433908:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go '[[:lower:]]'
+: 1700433955:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go 'He'
+: 1700433959:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go 'unt'
+: 1700433966:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go 'Anal'
+: 1700433969:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go 'An'
+: 1700434003:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go 'An'
+: 1700434012:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go 'An'
+: 1700434032:0;cat ~/novels/killed-the-academy-player/ch-9.txt | go run main.go 'An'
+: 1700435029:0;repos
+: 1700435030:0;e
+: 1700435032:0;gc https://github.com/svent/sift.git
+: 1700435033:0;e
+: 1700435036:0;gb
+: 1700435044:0;go mod init github.com/svent/sift-tools
+: 1700435046:0;gmt
+: 1700435049:0;gb
+: 1700435051:0;e
+: 1700435053:0;./sift-tools
+: 1700435056:0;./sift-tools --help
+: 1700435083:0;fd . ~/dev --max-depth=2 | ./sift-tools '.go$'
+: 1700435085:0;fd . ~/dev --max-depth=2 | ./sift-tools '.go$'
+: 1700435085:0;fd . ~/dev --max-depth=2 | ./sift-tools '.go$'
+: 1700435093:0;cat ~/novels/killed-the-academy-player/ch-10.txt | ./sift-tools '.go$'
+: 1700435096:0;cat ~/novels/killed-the-academy-player/ch-10.txt | ./sift-tools 'An'
+: 1700435102:0;cat ~/novels/killed-the-academy-player/ch-10.txt | rg 'An'
+: 1700435118:0;cat ~/novels/killed-the-academy-player/ch-10.txt | rg '[:upper:]'
+: 1700435125:0;cat ~/novels/killed-the-academy-player/ch-10.txt | rg '[[:upper:]]'
+: 1700435129:0;cat ~/novels/killed-the-academy-player/ch-10.txt | rg '[[:lower:]]'
+: 1700435825:0;fd . .. --max-depth=2 | go run main.go '[[:upper:]]'
+: 1700435831:0;cat ~/novels/killed-the-academy-player/ch-10.txt | rg '[[:lower:]]'
+: 1700435844:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:lower:]]'
+: 1700435848:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:upper:]]'
+: 1700435863:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:upper:]]'
+: 1700435913:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:upper:]]'
+: 1700435919:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:upper:]]'
+: 1700435942:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:upper:]]'
+: 1700435958:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:upper:]]'
+: 1700436205:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:upper:]]'
+: 1700436225:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:lower:]]'
+: 1700436277:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:lower:]]'
+: 1700436303:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:lower:]]'
+: 1700436337:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:lower:]]'
+: 1700436346:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:lower:]]'
+: 1700436385:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:upper:]]'
+: 1700436459:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:ascii:]]'
+: 1700436476:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go 'An'
+: 1700436480:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go 'And'
+: 1700436570:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go 'CUM'
+: 1700436572:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go 'C'
+: 1700436574:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go 'a'
+: 1700436578:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go 'a.e'
+: 1700436582:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '.a.e'
+: 1700436586:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go ' .a.e'
+: 1700436592:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go ' .a.e?'
+: 1700436596:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go ' .a.e? '
+: 1700436622:0;fd . .. --max-depth=2 | go run main.go '[[:upper:]]'
+: 1700436625:0;fd . .. --max-depth=2 | go run main.go '[[:lower:]]'
+: 1700436650:0;fd . .. --max-depth=2 | go run main.go '[[::]]'
+: 1700436653:0;fd . .. --max-depth=2 | go run main.go '[[a]]'
+: 1700436656:0;fd . .. --max-depth=2 | go run main.go '[[a-z]]'
+: 1700436661:0;fd . .. --max-depth=2 | go run main.go '[[A-Za-z]]'
+: 1700436664:0;fd . .. --max-depth=2 | go run main.go '[A-Za-z]'
+: 1700436668:0;fd . .. --max-depth=2 | go run main.go '[A-Za-z1-9/]'
+: 1700436671:0;fd . .. --max-depth=2 | go run main.go '[A-Za-z1-9/.]'
+: 1700436675:0;fd . .. --max-depth=2 | go run main.go '[A-Za-z1-9/-.]'
+: 1700436677:0;fd . .. --max-depth=2 | go run main.go '[A-Za-z1-9/\-.]'
+: 1700436680:0;fd . .. --max-depth=2 | go run main.go '[A-Za-z1-9/\-._]'
+: 1700436689:0;fd . .. --max-depth=2 | go run main.go '[A-Za-z1-9/\-._].go'
+: 1700436693:0;fd . .. --max-depth=2 | go run main.go '[A-Za-z1-9/\-._].*.go'
+: 1700436696:0;fd . .. --max-depth=2 | go run main.go '[A-Za-z1-9/\-._].go'
+: 1700436701:0;fd . .. --max-depth=2 | go run main.go '[A-Za-z1-9/\-._]go'
+: 1700436704:0;fd . .. --max-depth=2 | go run main.go '[A-Za-z1-9/\-._]go$'
+: 1700436737:0;fd . .. --max-depth=2 | go run main.go 'go'
+: 1700436800:0;fd . .. --max-depth=2 | go run main.go 'go'
+: 1700436801:0;fd . .. --max-depth=2 | go run main.go 'go'
+: 1700436846:0;fd . .. --max-depth=2 | go run main.go 'go'
+: 1700436875:0;fd . .. --max-depth=2 | go run main.go 'go'
+: 1700436903:0;fd . ~ --max-depth=2 | go run main.go 'go'
+: 1700436953:0;fg
+: 1700436961:0;fd . ~ --max-depth=2 | go run main.go 'go'
+: 1700436964:0;fd . ~ --max-depth=2 | go run main.go 'go'
+: 1700437030:0;fd . ~ --max-depth=2 | go run main.go 'go'
+: 1700437032:0;gb
+: 1700437034:0;fd . ~ --max-depth=2 | go run main.go 'go'
+: 1700437045:0;fd . ~ --max-depth=2 | go run main.go 'go'
+: 1700437051:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go ' .a.e? '
+: 1700437058:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go ' .a.e? '
+: 1700437068:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go ' .a.e? ' | wc -l
+: 1700437073:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go ' .a.e? ' | wc -l
+: 1700437120:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[:upper:]'
+: 1700437129:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:upper:]]'
+: 1700437141:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:ctrl:]]'
+: 1700437145:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:print:]]'
+: 1700437159:0;e
+: 1700437193:0;hx ../go-ripcurl
+: 1700437223:0;e
+: 1700437424:0;./reg
+: 1700437426:0;./reg a
+: 1700437432:0;echo lol|./reg a
+: 1700437436:0;echo lol | ./reg 'o'
+: 1700437439:0;echo lol | ./reg 'o' -r
+: 1700437442:0;echo lol | ./reg 'o'
+: 1700437459:0;echo lol | ./reg 'o'
+: 1700437464:0;echo lol | ./reg 'o'
+: 1700437475:0;echo lol | ./reg 'o'
+: 1700437477:0;gb
+: 1700437478:0;echo lol | ./reg 'o'
+: 1700437481:0;echo lol | ./reg 'o' -r
+: 1700437635:0;gb
+: 1700437636:0;echo lol | ./reg 'o' -r
+: 1700437644:0;echo lol | ./reg 'o' -r "a"
+: 1700437715:0;echo lol | ./reg 'o' -r "a"
+: 1700437820:0;echo lol | ./reg 'o' -r "aa"
+: 1700437849:0;echo lol | ./reg 'o' -r "aa"
+: 1700437854:0;gb
+: 1700437855:0;echo lol | ./reg 'o' -r "aa"
+: 1700437871:0;echo lol | ./reg 'o'
+: 1700437887:0;gb
+: 1700437888:0;echo lol | ./reg 'o'
+: 1700437891:0;echo lol | ./reg 'o' -o
+: 1700437913:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:print:]]'
+: 1700437916:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:print:]]' -o
+: 1700437920:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:print:]]' -o | wc -l
+: 1700437924:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:print:]]' | wc -l
+: 1700437930:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:print:]]' -r '' | wc -l
+: 1700437933:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:print:]]' -r '' 
+: 1700437951:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:print:]]' -r '\x1b[35m$0\x1b[0m'
+: 1700437958:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:print:]]' -r '\x1b[35m$0\x1b[0m'
+: 1700437977:0;gb
+: 1700437978:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:print:]]' -r '\x1b[35m$0\x1b[0m'
+: 1700437983:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:print:]]' -r '\x1b[32m$0\x1b[0m'
+: 1700437989:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:lower:]]' -r '\x1b[32m$0\x1b[0m'
+: 1700437996:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:lower:]]' -r '\e[32m$0\e[0m'
+: 1700438013:0;gb
+: 1700438013:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:lower:]]' -r '\e[32m$0\e[0m'
+: 1700438096:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:lower:]]' -r '\x1b[32m$0\x1b[0m'
+: 1700438111:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:lower:]]' -r '\x1b[32m$0\x1b[0m'
+: 1700438152:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:lower:]]' -r '\\x1b[32m$0\\x1b[0m'
+: 1700438171:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:lower:]]' -r 'F'
+: 1700438185:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:lower:]]'
+: 1700438192:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:upper:]]'
+: 1700438204:0;..
+: 1700438205:0;rfv
+: 1700438408:0;gb
+: 1700438410:0;fd . ~ --max-depth=2 | go run main.go 'go'
+: 1700438415:0;fd . ~ --max-depth=2 | go run main.go 'go'
+: 1700438416:0;e
+: 1700438422:0;e
+: 1700438436:0;fd . ~ --max-depth=2 | go run main.go 'go'
+: 1700438448:0;fd . ~ --max-depth=2 | go run main.go 'go' | ./reg 's'
+: 1700438455:0;fd . ~ --max-depth=2 | go run main.go 'go' | ./reg 's'
+: 1700438474:0;fd . ~ --max-depth=2 | go run main.go 'go' | ./reg 's'
+: 1700438480:0;fd . ~ --max-depth=2 | go run main.go 'go' | ./reg 's'
+: 1700438488:0;fd . ~ --max-depth=2 | ./reg 'go' | ./reg 's'
+: 1700438490:0;gb
+: 1700438491:0;fd . ~ --max-depth=2 | ./reg 'go' | ./reg 's'
+: 1700438507:0;fd . ~ --max-depth=2 | ./reg 'go' | ./reg 's'
+: 1700438513:0;gb
+: 1700438517:0;fd . ~ --max-depth=1 | ./reg 'go' | ./reg 's'
+: 1700438526:0;fd . ~ --max-depth=1 | ./reg 'go'
+: 1700438534:0;fd . ~ --max-depth=1 | ./reg 'go' | ./reg 'sweet'
+: 1700438544:0;fd . ~ --max-depth=1 | ./reg 'go' | ./reg 'sweet'
+: 1700438549:0;fd . ~ --max-depth=1 | ./reg 'go' | ./reg 'sweet'
+: 1700438551:0;fd . ~ --max-depth=1 | ./reg 'go'
+: 1700438579:0;fd . ~ --max-depth=1 | ./reg 'go'
+: 1700438580:0;fd . ~ --max-depth=1 | ./reg 'go'
+: 1700438607:0;fd . ~ --max-depth=1 | ./reg 'go'
+: 1700438652:0;gb
+: 1700438653:0;fd . ~ --max-depth=1 | ./reg 'go'
+: 1700438655:0;fd . ~ --max-depth=1 | ./reg 'go' | ./reg 'sweet'
+: 1700438661:0;fd . ~ --max-depth=1 | ./reg 'go'
+: 1700438665:0;fd . ~ --max-depth=1 | ./reg 'go' -o
+: 1700438670:0;fd . ~ --max-depth=1 | ./reg 'go' -o | ./reg 'sweet'
+: 1700438679:0;gb
+: 1700438680:0;fd . ~ --max-depth=1 | ./reg 'go' -o | ./reg 'sweet'
+: 1700438683:0;fd . ~ --max-depth=2 | ./reg 'go' -o | ./reg 'sweet'
+: 1700438693:0;fd . ~ --max-depth=2 | ./reg 'go' -o | ./reg 'sweet' | ./reg pkg
+: 1700438697:0;fd . ~ --max-depth=2 | ./reg 'go' -o | ./reg 'sweet' | ./reg pkg -o
+: 1700438731:0;fd . ~ --max-depth=2 | ./reg 'go' -o | ./reg 'sweet' | ./reg pkg -o
+: 1700438735:0;fd . ~ --max-depth=2 | ./reg 'go' -o | ./reg 'sweet' | ./reg pkg
+: 1700438738:0;fd . ~ --max-depth=2 | ./reg 'go' -o | ./reg 'sweet'
+: 1700438741:0;fd . ~ --max-depth=2 | ./reg 'go' -o | ./reg 'sweet' -o
+: 1700438750:0;fd . ~ --max-depth=2 | ./reg 'go' -o | ./reg 'sweet' -o | ./reg '/'
+: 1700438754:0;fd . ~ --max-depth=2 | ./reg 'go' -o | ./reg 'sweet' -o | ./reg '/' -o
+: 1700438758:0;fd . ~ --max-depth=2 | ./reg 'go' -o | ./reg 'sweet' -o | ./reg 'd' -o
+: 1700438761:0;fd . ~ --max-depth=2 | ./reg 'go' -o | ./reg 'sweet' -o | ./reg 'dev' -o
+: 1700438766:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:upper:]]'
+: 1700438769:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:upper:]]' -o
+: 1700438776:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:upper:]]' -r 'a'
+: 1700438779:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:upper:]]' -r ''
+: 1700438784:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:upper:]]'
+: 1700438793:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:ascii:]]'
+: 1700438798:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:trunc:]]'
+: 1700438804:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:lower:]]'
+: 1700438813:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:lower:]]' | ./reg 'f'
+: 1700438817:0;e
+: 1700438819:0;e
+: 1700438821:0;git init
+: 1700438826:0;git add main.go go.mod
+: 1700438827:0;e
+: 1700438831:0;git commit -m "init"
+: 1700438954:0;gb
+: 1700438956:0;cat ~/novels/killed-the-academy-player/ch-10.txt | go run main.go '[[:lower:]]' | ./reg 'f'
+: 1700438962:0;cat ~/novels/killed-the-academy-player/ch-10.txt | ./reg '[A-Za-z1-9 ]'
+: 1700438965:0;cat ~/novels/killed-the-academy-player/ch-10.txt | ./reg '[A-Za-z1-9 !]'
+: 1700438974:0;cat ~/novels/killed-the-academy-player/ch-10.txt | ./reg '[?!1-9]'
+: 1700438996:0;cat ~/novels/killed-the-academy-player/ch-10.txt | ./reg -e '[?!1-9]'
+: 1700439002:0;cat ~/novels/killed-the-academy-player/ch-10.txt | ./reg '[?!1-9]' -e
+: 1700439005:0;cat ~/novels/killed-the-academy-player/ch-10.txt | ./reg '[?!1-9]' -o
+: 1700439011:0;cat ~/novels/killed-the-academy-player/ch-10.txt | ./reg '[?!1-9]' -O
+: 1700439013:0;cat ~/novels/killed-the-academy-player/ch-10.txt | ./reg '[?!1-9]'
+: 1700439027:0;cat ~/novels/killed-the-academy-player/ch-10.txt | ./reg '[?!1-9]' -r '\x1b[33m$0\x1b[0m'
+: 1700439037:0;cat ~/novels/killed-the-academy-player/ch-10.txt | ./reg '[?!1-9]' -r '\x1b[33m\$0\x1b[0m'
+: 1700439041:0;cat ~/novels/killed-the-academy-player/ch-10.txt | ./reg '[?!1-9]' -r '\x1b[33m$0\x1b[0m'
+: 1700439059:0;cat ~/novels/killed-the-academy-player/ch-10.txt | ./reg '[?!1-9]' -r '[$0]'
+: 1700439069:0;cat ~/novels/killed-the-academy-player/ch-10.txt | ./reg '[?!1-9]' -r '-[$0]-'
+: 1700439116:0;grep --line-regexp
+: 1700439117:0;e
+: 1700439147:0;cat ~/novels/killed-the-academy-player/ch-10.txt | ./reg '[There]' -r 'found it [[[$0]]]'
+: 1700439153:0;cat ~/novels/killed-the-academy-player/ch-10.txt | ./reg 'There' -r 'found it [[[$0]]]'
+: 1700439158:0;cat ~/novels/killed-the-academy-player/ch-10.txt | ./reg 'using' -r 'found it [[[$0]]]'
+: 1700439174:0;cat /proc/acpi/wakeup | ./reg 'using' -r 'found it [[[$0]]]'
+: 1700439185:0;cat /proc/acpi/wakeup | ./reg '\*disabled' -r 'found it [[[$0]]]'
+: 1700439191:0;cat /proc/acpi/wakeup | ./reg '\*disabled' -o -r 'found it [[[$0]]]'
+: 1700439204:0;cat /proc/acpi/wakeup | ./reg '\*disabled' -o -r 'found it [[[$1]]]'
+: 1700439207:0;cat /proc/acpi/wakeup | ./reg '\*disabled' -o -r 'found it [[[$0]]]'
+: 1700439211:0;cat /proc/acpi/wakeup | ./reg '\*disabled' -o -r 'found it [[[$0 $0]]]'
+: 1700439217:0;cat /proc/acpi/wakeup | ./reg '\*disabled' -o -r 'found it [[[$0 $0 $0]]]'
+: 1700439222:0;cat /proc/acpi/wakeup | ./reg '\*disabled' -o -r 'found it [[[ $0 $0 $0 ]]]'
+: 1700439236:0;cat /proc/acpi/wakeup | ./reg '\*disabled' -o -r '\e[33m [[[ $0 $0 $0 ]]]'
+: 1700439240:0;cat /proc/acpi/wakeup | ./reg '\*disabled' -o -r '\\e[33m [[[ $0 $0 $0 ]]]'
+: 1700439243:0;cat /proc/acpi/wakeup | ./reg '\*disabled' -o -r 'e[33m [[[ $0 $0 $0 ]]]'
+: 1700439247:0;cat /proc/acpi/wakeup | ./reg '\*disabled' -o -r '|\e[33m [[[ $0 $0 $0 ]]]'
+: 1700439251:0;e
+: 1700439252:0;e
+: 1700439261:0;cat /proc/acpi/wakeup | ./reg '\*disabled' -o -r '{{green}} [[[ $0 $0 $0 ]]]'
+: 1700439267:0;cat /proc/acpi/wakeup | ./reg '\*disabled' -o -r '{{green}} [[[ $0 $0 $0 ]]] {{blue}}'
+: 1700439338:0;gb
+: 1700439342:0;cat /proc/acpi/wakeup | ./reg '\*disabled' -o -r '{{green}} [[[ $0 $0 $0 ]]] {{blue}}'
+: 1700439365:0;cat /proc/acpi/wakeup | ./reg '\*disabled' -o -r '{{green}} [ $0 $0 $0 ] {{blue}}'
+: 1700439367:0;gb
+: 1700439367:0;gb
+: 1700439368:0;cat /proc/acpi/wakeup | ./reg '\*disabled' -o -r '{{green}} [ $0 $0 $0 ] {{blue}}'
+: 1700439375:0;gb
+: 1700439376:0;cat /proc/acpi/wakeup | ./reg '\*disabled' -o -r '{{green}} [ $0 $0 $0 ] {{blue}}'
+: 1700439392:0;e
+: 1700439394:0;gb
+: 1700439404:0;cat /proc/acpi/wakeup | ./reg 'disabled' -o -r '{{green}} [ $0 $0 $0 ] {{clr}}'
+: 1700439416:0;cat /proc/acpi/wakeup | ./reg 'disabled' -r '{{green}} [ $0 $0 $0 ] {{clr}}'
+: 1700439884:0;cat /proc/acpi/wakeup | ./reg 'disabled' -r '{{green}} [ $0 $0 $0 ] {{clr}}'
+: 1700439910:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'disabled' -r '{{green}} [ $0 $0 $0 ] {{clr}}'
+: 1700439949:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'And' -r '{{green}} [ $0 $0 ] {{clr}}'
+: 1700439954:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '.nd' -r '{{green}} [ $0 $0 ] {{clr}}'
+: 1700439974:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '.nd' -r '{{green}}$0{{clr}}'
+: 1700440009:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '.nd' -r '{{green}}$0{{clr}}'
+: 1700440014:0;cd go-regex
+: 1700440014:0;e
+: 1700440015:0;e
+: 1700440016:0;gb
+: 1700440018:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '.nd' -r '{{green}}$0{{clr}}'
+: 1700440057:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '.nd' -r '{{blue}}$0{{clr}}'
+: 1700440067:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '.,,,' -r '{{blue}}$0{{clr}}'
+: 1700440073:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '....' -r '{{blue}}$0{{clr}}'
+: 1700440079:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '...' -r '{{blue}}$0{{clr}}'
+: 1700440082:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '..' -r '{{blue}}$0{{clr}}'
+: 1700440085:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '.a.' -r '{{blue}}$0{{clr}}'
+: 1700440112:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '.a. ..' -r '{{blue}}$0{{clr}}'
+: 1700440121:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '.a...' -r '{{blue}}$0{{clr}}'
+: 1700440134:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'e-s' -r '{{blue}}$0{{clr}}'
+: 1700440142:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '.e.s.' -r '{{blue}}$0{{clr}}'
+: 1700440148:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '.e.s.' -r '{{blue}}$0{{clr}}' -o
+: 1700440169:0;e
+: 1700440175:0;e
+: 1700440179:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '.e.s.' -r '{{blue}}$0{{clr}}' -o
+: 1700440195:0;e
+: 1700440262:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '[[:graph:]]' -r '{{blue}}$0{{clr}}' -o
+: 1700440269:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '[[:digit:]]' -r '{{blue}}$0{{clr}}' -o
+: 1700440275:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '[[:xdigit:]]' -r '{{blue}}$0{{clr}}' -o
+: 1700440287:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '[[:word:]]' -r '{{blue}}$0{{clr}}' -o
+: 1700440296:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '[[:word:]]' -r '{{blue}}\n$0{{clr}}' -o
+: 1700440299:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '[[:word:]]' -r '{{blue}}\n$0\n{{clr}}' -o
+: 1700440306:0;hx main.go
+: 1700440324:0;gb
+: 1700440326:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '[[:word:]]' -r '{{blue}}\n$0\n{{clr}}' -o
+: 1700440329:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '[[:word:]]' -r '{{blue}}\n$0\n{{clr}}' -o
+: 1700440335:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '[[:word:]]' -r '{{blue}}\\n$0\n{{clr}}' -o
+: 1700440338:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '[[:word:]]' -r '{{blue}}\\n$0\\n{{clr}}' -o
+: 1700440338:0;e
+: 1700440340:0;hx main.go
+: 1700440363:0;gb
+: 1700440367:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '[[:word:]]' -r '{{blue}}\\n$0\\n{{clr}}' -o
+: 1700440372:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '[[:word:]]' -r '{{blue}}{{\\n}}$0\\n{{clr}}' -o
+: 1700440375:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '[[:word:]]' -r '{{blue}}{{\n}}$0\\n{{clr}}' -o
+: 1700440381:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '[[:word:]]' -r '{{blue}}{{\n}}$0{{\n}}{{clr}}' -o
+: 1700440385:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '[[:word:]]' -r '{{blue}}{{\n}}$0{{clr}}' -o
+: 1700440400:0;e
+: 1700440402:0;e
+: 1700440492:0;hx main.go
+: 1700440838:0;echo lol | grep l
+: 1700440841:0;echo lol | grep lo
+: 1700440842:0;echo lol | grep lol
+: 1700440855:0;echo lol | grep lol 2>1
+: 1700440862:0;echo lol | grep lol 2&>2
+: 1700440863:0;e
+: 1700440868:0;rm 1 2 f.html
+: 1700440868:0;e
+: 1700440881:0;echo lol | grep lol 2>&2
+: 1700440881:0;e
+: 1700440884:0;echo lol | grep lol 2>&1
+: 1700440888:0;echo lol | grep lol 2>&2
+: 1700440889:0;echo lol | grep lol 2>&3
+: 1700440890:0;e
+: 1700440896:0;echo lol | grep lol 2>&2
+: 1700440910:0;echo lol | grep lol 1>&/dev/null
+: 1700440913:0;echo lol | grep lol 2>&/dev/null
+: 1700441101:0;gb
+: 1700441102:0;e
+: 1700441108:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '[[:word:]]' -r '{{blue}}{{\n}}$0{{clr}}' -o
+: 1700441123:0;gb
+: 1700441124:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '[[:word:]]' -r '{{blue}}{{\n}}$0{{clr}}' -o
+: 1700441153:0;gb
+: 1700441154:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '[[:word:]]' -r '{{blue}}{{\n}}$0{{clr}}'
+: 1700441163:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '[[:upper:]]'
+: 1700441186:0;gb
+: 1700441187:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '[[:upper:]]'
+: 1700441252:0;gb
+: 1700441253:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '[[:upper:]]'
+: 1700441259:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '[[:lower:]]'
+: 1700441358:0;gb
+: 1700441360:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '[[:lower:]]'
+: 1700441364:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '[[:lower:]]'
+: 1700441377:0;gb
+: 1700441378:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '[[:lower:]]'
+: 1700441382:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '[[:upper:]]'
+: 1700441385:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'a'
+: 1700441576:0;gb
+: 1700441577:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '[[:upper:]]'
+: 1700441579:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '[[:upper:]]'
+: 1700441582:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '[[:upper:]]'
+: 1700441587:0;gb
+: 1700441588:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '[[:upper:]]'
+: 1700441608:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'and'
+: 1700441610:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'and.'
+: 1700441614:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '.and.'
+: 1700441619:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '...and.'
+: 1700441623:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg ''
+: 1700441624:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'a'
+: 1700441630:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '2'
+: 1700441635:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '(2)'
+: 1700441638:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '\(2\)'
+: 1700441645:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '(2).{5}'
+: 1700441650:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '(2).{11}'
+: 1700441672:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '[[:ascii:]]'
+: 1700441677:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '[[:print:]]'
+: 1700441683:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '[[:word:]]'
+: 1700441699:0;gb
+: 1700441699:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '[[:word:]]'
+: 1700441708:0;cat ~/novels/killed-the-academy-player/ch-11.txt | grep '[[:word:]]'
+: 1700441712:0;cat ~/novels/killed-the-academy-player/ch-11.txt | grep '[:word:]'
+: 1700441720:0;cat ~/novels/killed-the-academy-player/ch-11.txt | grep '[[:ascii:]]'
+: 1700441723:0;cat ~/novels/killed-the-academy-player/ch-11.txt | grep '[[:print:]]'
+: 1700441727:0;cat ~/novels/killed-the-academy-player/ch-11.txt | grep -o '[[:print:]]'
+: 1700441731:0;cat ~/novels/killed-the-academy-player/ch-11.txt | grep oE '[[:print:]]'
+: 1700441735:0;cat ~/novels/killed-the-academy-player/ch-11.txt | grep -oE '[[:print:]]'
+: 1700441742:0;cat ~/novels/killed-the-academy-player/ch-11.txt | grep -o 'gr'
+: 1700441744:0;cat ~/novels/killed-the-academy-player/ch-11.txt | grep -o 'grim'
+: 1700441747:0;cat ~/novels/killed-the-academy-player/ch-11.txt | grep 'grim'
+: 1700441787:0;gb
+: 1700441792:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '[[:word:]]'
+: 1700441797:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '[[:upper:]]'
+: 1700441802:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '[[:lower:]]'
+: 1700441807:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'Grim'
+: 1700441823:0;gb
+: 1700441824:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'Grim'
+: 1700441832:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'and'
+: 1700441839:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'standard'
+: 1700441886:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'standard'
+: 1700441887:0;gb
+: 1700441888:0;gb
+: 1700441889:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'standard'
+: 1700441902:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'standard rule'
+: 1700442008:0;gb
+: 1700442010:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'standard rule'
+: 1700442016:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'standard rule' -O
+: 1700442033:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'standard rule' -O
+: 1700442060:0;gb
+: 1700442061:0;e
+: 1700442065:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'standard rule' -O
+: 1700442072:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'standard' -O
+: 1700442078:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'standard'
+: 1700442087:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'standard' -o
+: 1700442169:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'standard'
+: 1700442173:0;cat ~/novels/killed-the-academy-player/ch-11.txt | grep 'standard'
+: 1700442179:0;cat ~/novels/killed-the-academy-player/ch-11.txt | grep 'standard' -o
+: 1700442342:0;gb
+: 1700442342:0;e
+: 1700442346:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'standard' -o
+: 1700442349:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'standard'
+: 1700442533:0;gb
+: 1700442535:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'standard'
+: 1700442537:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'standard' -o
+: 1700442589:0;gb
+: 1700442590:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'standard' -o
+: 1700442593:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'standard'
+: 1700442611:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'standard' -r '{{blue}}$0{{clr}}'
+: 1700442658:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'standard' -r '{{blue}}[ $0 ]{{clr}}'
+: 1700442692:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'standard' -r '{{blue}}[ $0 ]{{clr}}'
+: 1700442723:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'standard' -r '{{blue}}[]{{clr}}'
+: 1700442730:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'standard' -r '{{blue}}[#]{{clr}}'
+: 1700442732:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'standard' -r '{{blue}}[#]{{clr}}'
+: 1700442750:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'standard' -r '{{blue}}[#]{{clr}}'
+: 1700442756:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'standard' -r '{{blue}}[----]{{clr}}'
+: 1700442764:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'standard' -r '{{blue}}[--$0--]{{clr}}'
+: 1700442774:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'standard' -r '{{blue}}[--$0$1--]{{clr}}'
+: 1700442777:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'standard' -r '{{blue}}[--$0--]{{clr}}'
+: 1700442785:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'standard' -r '{{blue}}[--$0--]{{clr}}' -0
+: 1700442788:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'standard' -r '{{blue}}[--$0--]{{clr}}' -o
+: 1700442790:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'standard' -r '{{blue}}[--$0--]{{clr}}' -o
+: 1700442866:0;gb
+: 1700442869:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'standard' -r '{{blue}}[--$0--]{{clr}}' -o
+: 1700442872:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'standard' -r '{{blue}}[--$0--]{{clr}}'
+: 1700442876:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg 'standard' -r '{{blue}}[-$0]{{clr}}'
+: 1700442888:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '(... ).{10}' -r '{{blue}}[-$0]{{clr}}'
+: 1700442892:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '(... ).{10}' -r '{{blue}}[$0]{{clr}}'
+: 1700442900:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '(at 0).{10}' -r '{{blue}}[$0]{{clr}}'
+: 1700442915:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '(at).{10}' -r '{{blue}}[$0]{{clr}}'
+: 1700442922:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '(a).{10}' -r '{{blue}}[$0]{{clr}}'
+: 1700442927:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '(a.){10}' -r '{{blue}}[$0]{{clr}}'
+: 1700442930:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '(a){10}' -r '{{blue}}[$0]{{clr}}'
+: 1700442935:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '.{10}' -r '{{blue}}[$0]{{clr}}'
+: 1700442945:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '(?a).{10}' -r '{{blue}}[$0]{{clr}}'
+: 1700442951:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '(?<a>).{10}' -r '{{blue}}[$0]{{clr}}'
+: 1700442958:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '(?a...).{10}' -r '{{blue}}[$0]{{clr}}'
+: 1700442961:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '(?a...){10}' -r '{{blue}}[$0]{{clr}}'
+: 1700442971:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '[[:upper:]]' -r '{{blue}}[$0]{{clr}}'
+: 1700442984:0;cat ~/novels/killed-the-academy-player/ch-11.txt | ./reg '[[:upper:]]' -r '{{blue}}[ $0 ]{{clr}}'
+: 1700443014:0;git add main.go go.mod
+: 1700443023:0;git commit -m "playing around with color"
+: 1700443028:0;git push -u origin main
+: 1700443028:0;e
+: 1700443048:0;./reg a < ~/novels/killed-the-academy-player/ch-10.txt
+: 1700443063:0;./reg a -r '{{blue}}' < ~/novels/killed-the-academy-player/ch-10.txt
+: 1700443069:0;./reg a -r '{{blue}}{{clr}}' < ~/novels/killed-the-academy-player/ch-10.txt
+: 1700443074:0;./reg a -r '{{blue}}$0{{clr}}' < ~/novels/killed-the-academy-player/ch-10.txt
+: 1700443088:0;./reg a -r '{{blue}}          $0{{clr}}' < ~/novels/killed-the-academy-player/ch-10.txt
+: 1700443092:0;./reg a -r '{{blue}}          $0              {{clr}}' < ~/novels/killed-the-academy-player/ch-10.txt
+: 1700443103:0;./reg a -r '{{blue}}$0{{clr}}' < ~/novels/killed-the-academy-player/ch-10.txt
+: 1700443107:0;./reg a -r '{{blue}}\\\\$0{{clr}}' < ~/novels/killed-the-academy-player/ch-10.txt
+: 1700443110:0;./reg a -r '{{blue}}\\\\$0\\\\\{{clr}}' < ~/novels/killed-the-academy-player/ch-10.txt
+: 1700443123:0;nerdy
+: 1700443125:0;e
+: 1700443133:0;paruz
+: 1700443148:0;rofimoji
+: 1700443199:0;./reg a -r '{{blue}}ðƒ¿¤ƒ­{{clr}}' < ~/novels/killed-the-academy-player/ch-10.txt
+: 1700443213:0;./reg a -r '{{blue}}ðƒ¿¤ƒ­$0ðƒ¿¤ƒ­{{clr}}' < ~/novels/killed-the-academy-player/ch-10.txt
+: 1700443223:0;./reg puppy -r '{{blue}}ðƒ¿¤ƒ­$0ðƒ¿¤ƒ­{{clr}}' < ~/novels/killed-the-academy-player/ch-10.txt
+: 1700443228:0;./reg puppy -r '{{blue}}ðƒ¿¤ƒ­$0ðƒ¿¤ƒ­{{clr}}' < ~/novels/killed-the-academy-player/ch-10.txt
+: 1700443614:0;fd . .. --max-depth=2 |./reg '.go$' -r 'variable_file="$0"'
+: 1700443623:0;fd . .. --max-depth=2 |./reg '.go$' -o -r 'variable_file="$0"'
+: 1700443635:0;fd . .. --max-depth=2 |./reg '/.*.go$' -o -r 'variable_file="$0"'
+: 1700443651:0;fd . .. --max-depth=2 |./reg 'm.*.go$' -o -r 'variable_file="$0"'
+: 1700443663:0;fd . .. --max-depth=2 | ./reg 'm.*.go$' -o -r 'variable_file="$0"'
+: 1700443680:0;fd . .. --max-depth=2 | ./reg 'm.*.go$' -o -r 'variable_file="\$0"'
+: 1700443683:0;fd . .. --max-depth=2 | ./reg 'm.*.go$' -o -r 'variable_file="\$\0"'
+: 1700443686:0;fd . .. --max-depth=2 | ./reg 'm.*.go$' -o -r 'variable_file="$0"'
+: 1700443692:0;fd . .. --max-depth=2 | ./reg 'm.*.go$' -o -r 'variable_file="$$0"'
+: 1700443694:0;fd . .. --max-depth=2 | ./reg 'm.*.go$' -o -r 'variable_file="$0"'
+: 1700443747:0;e
+: 1700443751:0;gb
+: 1700443753:0;e
+: 1700443756:0;./reg 
+: 1700443784:0;gb
+: 1700443785:0;./reg 
+: 1700443816:0;echo lol | ./reg lol 2>&/dev/null
+: 1700443819:0;echo lol | ./reg lol 1>&/dev/null
+: 1700443824:0;echo lol | ./reg i
+: 1700443826:0;echo lol | ./reg o
+: 1700443829:0;echo lol | ./reg o -o
+: 1700443833:0;echo lol | ./reg l -o
+: 1700443838:0;echo lol | ./reg l -o
+: 1700443843:0;echo lol | ./reg lo -o
+: 1700443846:0;echo lol | ./reg lol -o
+: 1700443849:0;echo lol | ./reg l,l -o
+: 1700443851:0;echo lol | ./reg l.l -o
+: 1700443862:0;echo lol | ./reg l.l -o -r '{{blue}}$0'
+: 1700443864:0;e
+: 1700443869:0;git add main.go go.mod
+: 1700443871:0;git commit -m "playing around with color"
+: 1700443879:0;nf
+: 1700443881:0;nf
+: 1700443882:0;nf
+: 1700444218:0;pkill gammastep ; (gammastep -O 4000)&|
+: 1700444597:0;cd arch
+: 1700444597:0;e
+: 1700444599:0;mkcd test
+: 1700444599:0;e
+: 1700444603:0;hx init.S
+: 1700444611:0;e
+: 1700444614:0;mkdir d
+: 1700444631:0;as --64 -o init.o init.S
+: 1700444631:0;e
+: 1700444638:0;cd d
+: 1700444665:0;find . | cpio -o -H newc | gzip > ../rootfs.cpio.gz
+: 1700444666:0;e
+: 1700444670:0;ls ..
+: 1700444687:0;ROOTFS_PATH="$(pwd)/../rootfs.cpio.gz"
+: 1700444718:0;qemu-system-x86_64 -kernel /efi/737a893efafb46f49b7f0d05364a5362/6.6.1-zen1-1-zen/linux -initrd "$ROOTFS_PATH"
+: 1700444731:0;e
+: 1700444735:0;..
+: 1700444736:0;e
+: 1700444750:0;find . | cpio -o -H newc | gzip > rootfs.cpio.gz
+: 1700444751:0;e
+: 1700444755:0;qemu-system-x86_64 -kernel /efi/737a893efafb46f49b7f0d05364a5362/6.6.1-zen1-1-zen/linux -initrd "$ROOTFS_PATH"
+: 1700444767:0;e
+: 1700444781:0;ld -o init d/init.o
+: 1700444787:0;e
+: 1700444792:0;ld -o init init.o
+: 1700444793:0;e
+: 1700444799:0;cp init d
+: 1700444799:0;e
+: 1700444825:0;e
+: 1700444826:0;ls d
+: 1700444856:0;ls d
+: 1700444860:0;cp init.o d
+: 1700444860:0;e
+: 1700444863:0;cd d
+: 1700444864:0;e
+: 1700444866:0;find . | cpio -o -H newc | gzip > ../rootfs.cpio.gz
+: 1700444867:0;..
+: 1700444868:0;e
+: 1700444869:0;e
+: 1700444882:0;qemu-system-x86_64 -kernel /efi/737a893efafb46f49b7f0d05364a5362/6.6.1-zen1-1-zen/linux -initrd "$ROOTFS_PATH"
+: 1700444910:0;e
+: 1700444941:0;hx foo.c
+: 1700444963:0;gcc -static foo.c -o init
+: 1700444964:0;e
+: 1700444981:0;ls d
+: 1700444992:0;rm -r d
+: 1700444993:0;mkdir d
+: 1700444996:0;cp init d
+: 1700444997:0;e
+: 1700445002:0;cd d
+: 1700445003:0;find . | cpio -o -H newc | gzip > ../rootfs.cpio.gz
+: 1700445006:0;..
+: 1700445006:0;e
+: 1700445007:0;e
+: 1700445022:0;e
+: 1700445034:0;qemu-system-x86_64 -kernel /efi/737a893efafb46f49b7f0d05364a5362/6.6.1-zen1-1-zen/linux -initrd "$ROOTFS_PATH"
+: 1700445100:0;cd arch
+: 1700445103:0;mkcd broote
+: 1700445112:0;mv ../broote ../broot
+: 1700445117:0;cd arch/broot
+: 1700445117:0;e
+: 1700445123:0;hx buildroot.sh
+: 1700445146:0;e
+: 1700445149:0;chx buildroot.sh
+: 1700445152:0;./buildroot.sh
+: 1700445166:0;e
+: 1700445250:0;wget https://buildroot.org/downloads/buildroot-2023.11-rc1.tar.xz
+: 1700445252:0;e
+: 1700445263:0;ouch d buildroot-2023.11-rc1.tar.xz buildroot.sh 
+: 1700445265:0;ouch d buildroot-2023.11-rc1.tar.xz 
+: 1700445266:0;e
+: 1700445268:0;cd buildroot-2023.11-rc1
+: 1700445268:0;e
+: 1700445273:0;..
+: 1700445273:0;e
+: 1700445278:0;cat buildroot-2023.11-rc1
+: 1700445282:0;cat buildroot.sh
+: 1700445303:0;make qemu_x86defconfig
+: 1700445304:0;e
+: 1700445326:0;make menuconfig
+: 1700445382:0;make gconfig
+: 1700445385:0;make menuconfig
+: 1700445856:0;e
+: 1700445859:0;make
+: 1700445868:0;e
+: 1700445894:0;make
+: 1700445920:0;make
+: 1700445925:0;e
+: 1700445926:0;..
+: 1700445926:0;e
+: 1700445931:0;rm -r buildroot-2023.11-rc1
+: 1700445934:0;ouch d buildroot-2023.11-rc1.tar.xz 
+: 1700445935:0;e
+: 1700445937:0;cd buildroot-2023.11-rc1
+: 1700445937:0;e
+: 1700445938:0;make
+: 1700445942:0;make menuconfig
+: 1700446007:0;make
+: 1700446041:0;pkill gammastep ; (gammastep -O 3000)&|
+: 1700446821:0;paru
+: 1700448646:0;pkill gammastep ; (gammastep -O 2000)&|
+: 1700456574:0;grep 147 /etc/passwd
+: 1700456577:0;grep 1 /etc/passwd
+: 1700456592:0;dev/go-regex/reg 1 < /etc/passwd
+: 1700456610:0;dev/go-regex/reg 1000 < /etc/passwd
+: 1700456624:0;echo $(dev/go-regex/reg 1000 < /etc/passwd)
+: 1700457027:0;cut -d ':' $(dev/go-regex/reg 1000 < /etc/passwd)
+: 1700457030:0;cut -d ':' -f2 $(dev/go-regex/reg 1000 < /etc/passwd)
+: 1700457035:0;cut -d ':' -f1 < $(dev/go-regex/reg 1000 < /etc/passwd)
+: 1700457039:0;cut -d ':' -f1 $(dev/go-regex/reg 1000 < /etc/passwd)
+: 1700457057:0;dev/go-regex/reg 1000 < /etc/passwd | cut -d ':' -f2
+: 1700457060:0;dev/go-regex/reg 1000 < /etc/passwd | cut -d ':' -f3
+: 1700457064:0;dev/go-regex/reg 1000 < /etc/passwd | cut -d ':' -f3
+: 1700458249:0;r
+: 1700458249:0;dev/go-regex/reg 1000 < /etc/passwd | cut -d ':' -f3
+: 1700458253:0;kew
+: 1700458255:0;e
+: 1700458312:0;make
+: 1700458322:0;make gconfig
+: 1700458340:0;e
+: 1700458347:0;db enter debian
+: 1700458365:0;e
+: 1700458366:0;db enter debian
+ls
+rpm
+e
+ls
+make
+exit
+: 1700458383:0;e
+: 1700458388:0;db rm debian
+: 1700458395:0;db stop debian
+: 1700458397:0;db rm debian
+: 1700458399:0;e
+: 1700458401:0;db ls
+: 1700458411:0;db create -i debian:latest -n 'debian'
+: 1700458415:0;db enter debian
+: 1700458796:0;pgrep piper
+: 1700458801:0;pgrep piper
+: 1700458803:0;pgrep balcon.exe
+ls
+make
+apt
+apt search make
+apt install make
+sudo apt install make
+sudo apt install gtk
+ls
+make gconfig
+sudo apt install gtk+2.0
+apt search gtk
+sudo apt install libgtk2.0-dev
+pgrep piper
+ls
+make gconfig
+sudo apt install libflade-2.0
+sudo apt install libglade-2.0
+sudo apt install libglade-2
+sudo apt install libglade2
+sudo apt install libglade2-dev
+make gconfig
+make
+make list-defconfigs
+exit
+: 1700460230:0;make list-defconfigs
+: 1700460281:0;make qemu_x86_64_defconfig
+: 1700460290:0;make
+: 1700460301:0;paru -S bc
+: 1700460304:0;make
+: 1700460370:0;cd dev
+: 1700460370:0;e
+: 1700460375:0;mkcd go-up-print
+: 1700460375:0;e
+: 1700460415:0;newgo 'up'
+: 1700460416:0;e
+: 1700460418:0;hx main.go
+: 1700460437:0;hx ../go-shell1/cursor.go
+: 1700460446:0;e
+: 1700460449:0;hx cursor.go
+: 1700460454:0;e
+: 1700460458:0;hx main.go
+: 1700460508:0;cat ../go-shell1/history
+: 1700460558:0;hx ../go-shell1/main.go
+: 1700460767:0;go run main.go
+: 1700461024:0;go run main.go
+: 1700461030:0;go run *.go
+: 1700461209:0;go run *.go
+: 1700461236:0;go run *.go
+: 1700461238:0;go run *.go
+: 1700461240:0;go run *.go
+: 1700461244:0;go run *.go
+: 1700461245:0;go run *.go
+: 1700461247:0;go run *.go
+: 1700461248:0;go run *.go
+: 1700461249:0;go run *.go
+: 1700461250:0;go run *.go
+: 1700461251:0;go run *.go
+: 1700461309:0;go run *.go
+: 1700461310:0;go run *.go
+: 1700461348:0;go run *.go
+: 1700461349:0;go run *.go
+: 1700461358:0;go run *.go
+: 1700461370:0;go run *.go
+: 1700461532:0;hx ../go-progress/main.go
+: 1700461947:0;e
+: 1700461949:0;go run *.go
+: 1700461975:0;cd -
+: 1700461976:0;go run *.go
+: 1700461998:0;go run *.go
+: 1700462015:0;go run *.go
+: 1700462031:0;go run *.go
+: 1700462042:0;go run *.go
+: 1700462109:0;e
+: 1700462155:0;go run *.go
+: 1700462329:0;cd -
+: 1700462330:0;go run *.go
+: 1700462367:0;pip install
+: 1700462368:0;e
+: 1700462615:0;go run *.go
+: 1700462633:0;go run *.go
+: 1700462736:0;go run *.go
+: 1700462849:0;go run *.go
+: 1700462865:0;go run *.go
+: 1700462884:0;go run *.go
+: 1700462903:0;go run *.go
+: 1700462919:0;go run *.go
+: 1700462959:0;go run *.go
+: 1700462989:0;go run *.go
+: 1700463090:0;go run *.go
+: 1700463114:0;go run *.go
+: 1700463126:0;db enter debian
+
+ls
+go
+exit
+: 1700463810:0;e
+: 1700463813:0;go run *.go
+: 1700463824:0;go run *.go
+: 1700463843:0;nf
+: 1700463846:0;nf
+: 1700463847:0;nf
+: 1700463851:0;nf
+: 1700463852:0;nf
+: 1700463853:0;nf
+: 1700463870:0;e
+: 1700463904:0;cd arch/broot
+: 1700463904:0;e
+: 1700463907:0;cd buildroot-2023.11-rc1
+: 1700463907:0;e
+: 1700463911:0;ls output
+: 1700463914:0;ls output/images
+: 1700463920:0;output/images/start-qemu.sh
+: 1700463972:0;arch
+: 1700463974:0;arch
+: 1700463975:0;e
+: 1700464129:0;e
+: 1700464143:0;pidof kitty
+: 1700464146:0;pidof zsh
+: 1700464151:0;pidof 
+: 1700464152:0;pidof
+: 1700464153:0;pidof 1
+: 1700464155:0;pidof 3
+: 1700464157:0;pidof f
+: 1700464159:0;pidof firefox
+: 1700466576:0;go run *.go
+: 1700466582:0;go run *.go
+: 1700466672:0;db enter arch
+: 1700466851:0;man kbxutil
+: 1700466855:0;man kbd_mode
+: 1700466870:0;e
+ls /bin
+gpasswd
+sku
+ksu
+ls
+renice
+gpg2
+ls
+clear
+ll
+ls
+ll
+go
+sudo pacman -Syyu
+ls ~
+ls ~/sda
+ls ~/sda/arch
+ls ~/sda/arch/bin
+ls ~/sda/arch/bin/kbxutil 
+~/sda/arch/bin/kbxutil 
+man kbxutil 
+ls
+exit
+: 1700466877:0;db stop debian
+: 1700466881:0;db stop arch
+: 1700468930:0;go run *.go
+: 1700469135:0;go run *.go
+: 1700469141:0;e
+: 1700469144:0;gb
+: 1700469150:0;ldd up
+: 1700469155:0;./up
+: 1700469164:0;./up
+: 1700469183:0;./up
+: 1700469250:0;udevadm
+: 1700469254:0;tldr udevadm
+: 1700469260:0;sudo udevadm monitor
+: 1700469287:0;e
+: 1700469304:0;fff
+: 1700469305:0;w
+: 1700469306:0;e
+: 1700504454:0;sudo umount sda sdx ssd hdd
+: 1700504458:0;sync
+: 1700504473:0;pkill gammastep 
+: 1700504503:0;fuser
+: 1700504507:0;fuser /
+: 1700504510:0;fuser /ome
+: 1700504513:0;fuser /home
+: 1700504516:0;fuser /home/sweet
+: 1700504518:0;fuser /home/sweet
+: 1700504522:0;fuser /home/sweet
+: 1700504526:0;top
+: 1700504583:0;pkill eww
+: 1700504589:0;pkill rg
+: 1700504596:0;pkill ripgrep
+: 1700504597:0;e
+: 1700504653:0;sync
+: 1700504668:0;sync-filesystem
+: 1700504736:0;sync-watch.sh
+: 1700504759:0;pkill *
+: 1700504762:0;pkill '*'
+: 1700504763:0;pkill '*.'
+: 1700504766:0;pkill '.*'
+: 1700505286:0;sync
+: 1700505391:0;pgrep -a sync
+: 1700505627:0;pgrep -a sync
+: 1700505638:0;sudo kill 1743
+: 1700505640:0;pgrep -a sync
+: 1700505641:0;sudo kill 1743
+: 1700505642:0;sudo kill 1743
+: 1700505645:0;sudo kill -9 1743
+: 1700505646:0;sudo kill 1743
+: 1700505648:0;sudo kill -9 1743
+: 1700505650:0;pgrep -a sync
+: 1700505674:0;sudo sync
+: 1700505683:0;pgrep -a sync
+: 1700505720:0;iotop
+: 1700505724:0;paru -S iotop
+: 1700505728:0;iotop
+: 1700505732:0;sudo iotop
+: 1700505808:0;lsblk
+: 1700505811:0;lsblk -fa
+: 1700505826:0;ls nvme3n1p2
+: 1700505841:0;smartctl --health nvme3n1p2
+: 1700505844:0;sudo smartctl --health nvme3n1p2
+: 1700505848:0;sudo smartctl --health /dev/nvme3n1p2
+: 1700505874:0;sudo smartctl --help /dev/nvme3n1p2
+: 1700506003:0;e
+: 1700506007:0;pgrep -a sync
+: 1700506111:0;sudo helix /etc/sddm.conf
+: 1700506158:0;sudo shutdown now -r
+: 1700506451:0;ls ssd
+: 1700506454:0;ls ssd/lost+found
+: 1700506463:0;sudo chown sweet:sweet -R ssd/lost+found
+: 1700506468:0;rm -r ssd/lost+found
+: 1700506468:0;e
+: 1700506473:0;ls sda
+: 1700506484:0;sudo chown sweet:sweet -R sda/lost+found
+: 1700506486:0;sudo chown sweet:sweet -R sdx/lost+found
+: 1700506494:0;sudo chown sweet:sweet -R hdd/lost+found
+: 1700506502:0;sudo ls hdd/lost+found
+: 1700506506:0;sudo ls -lah hdd/lost+found
+: 1700506511:0;sudo rm -r hdd/lost+found
+: 1700506515:0;sudo rm -r sda/lost+found
+: 1700506517:0;sudo rm -r sdx/lost+found
+: 1700506518:0;e
+: 1700506524:0;sudo rm -r /lost+found
+: 1700506527:0;ls /
+: 1700506530:0;e
+: 1700506543:0;pacd
+: 1700506566:0;sudo systemctl enable --now ly.service
+: 1700506578:0;systemctl disable sddm
+: 1700506584:0;sudo systemctl enable --now ly.service
+: 1700506654:0;sync
+: 1700508514:0;swww img ~/Pictures/backgrounds/80s_retro_anime.jpg --transition-type=center
+: 1700508520:0;cd repos/u-root
+: 1700508520:0;e
+: 1700508541:0;hx cmds/core/cp/cp.go
+: 1700508546:0;cd dev
+: 1700508547:0;e
+: 1700508554:0;mkcd mybox
+: 1700508555:0;e
+: 1700508574:0;mkdir cmds
+: 1700508574:0;e
+: 1700508639:0;e
+: 1700508648:0;mkcd sync
+: 1700508649:0;e
+: 1700508653:0;hx sync.go
+: 1700508682:0;e
+: 1700508690:0;gb sync.go
+: 1700508690:0;e
+: 1700508693:0;..
+: 1700508693:0;e
+: 1700508696:0;e
+: 1700508700:0;e
+: 1700508706:0;fd go.mod
+: 1700508709:0;cat go.mod
+: 1700508724:0;gmi mybox
+: 1700508725:0;e
+: 1700508726:0;gmt
+: 1700508728:0;cd sync
+: 1700508728:0;e
+: 1700508732:0;go build *.go
+: 1700508733:0;e
+: 1700508736:0;gb sync.go
+: 1700508736:0;e
+: 1700508738:0;hx sync.go
+: 1700508746:0;e
+: 1700508748:0;..
+: 1700508748:0;e
+: 1700508753:0;gb sync/sync.go
+: 1700508754:0;e
+: 1700508759:0;gb sync/sync.go -o sync
+: 1700508760:0;e
+: 1700508768:0;cd sync
+: 1700508787:0;e
+: 1700508791:0;ls cmds
+: 1700508793:0;ls cmds/core
+: 1700508797:0;ls cmds/core/yew
+: 1700508798:0;ls cmds/core/yes
+: 1700508810:0;ls cmds/core/sync
+: 1700508814:0;ls cmds/core/sync/sync.go
+: 1700508818:0;hx cmds/core/sync/sync.go
+: 1700508872:0;go run *.go
+: 1700508873:0;e
+: 1700508876:0;hx sync.go
+: 1700508882:0;e
+: 1700508885:0;go run *.go
+: 1700508886:0;e
+: 1700508887:0;gb
+: 1700508888:0;e
+: 1700508890:0;./sync
+: 1700508892:0;./sync
+: 1700508902:0;hx sync.go
+: 1700509819:0;gmt
+: 1700509820:0;gb
+: 1700509821:0;e
+: 1700509823:0;./sync
+: 1700509825:0;./sync -h
+: 1700509832:0;./sync -data ~/hdd
+: 1700509840:0;./sync -filesystem ~/hdd
+: 1700509844:0;./sync --filesystem ~/hdd
+: 1700509849:0;./sync --data ~/hdd
+: 1700509850:0;./sync --data ~/ssd
+: 1700509857:0;./sync --data ~/sda
+: 1700509858:0;./sync --data ~/sdx
+: 1700509865:0;./sync --data ~/ssd
+: 1700509867:0;./sync --data ~/hdd
+: 1700509870:0;e
+: 1700509884:0;e
+: 1700509886:0;hx sync.go
+: 1700510190:0;wikit higher-order function
+: 1700510299:0;fd
+: 1700510372:0;e
+: 1700510373:0;nf
+: 1700510375:0;nf
+: 1700510376:0;nf
+: 1700510379:0;nf
+: 1700510383:0;nf
+: 1700510384:0;nf
+: 1700510385:0;nf
+: 1700510893:0;e
+: 1700510894:0;gb
+: 1700510895:0;e
+: 1700510897:0;./sync --data ~/hdd
+: 1700510902:0;./sync --help
+: 1700510910:0;hx sync.go
+: 1700510961:0;hx cmds/core/sync/sync.go
+: 1700511035:0;hx cmds/core/sync/sync.go
+: 1700511039:0;e
+: 1700511053:0;e
+: 1700511054:0;gb
+: 1700511055:0;./sync --help
+: 1700511058:0;./sync -h
+: 1700511071:0;hx sync.go
+: 1700511749:0;gb
+: 1700511750:0;e
+: 1700511751:0;./sync -h
+: 1700511768:0;hx sync.go
+: 1700511792:0;gb
+: 1700511794:0;./sync -h
+: 1700511797:0;./sync --help
+: 1700511799:0;./sync --help
+: 1700511806:0;./sync -help
+: 1700511809:0;./sync -h
+: 1700511813:0;hx sync.go
+: 1700511877:0;gb
+: 1700511877:0;e
+: 1700511878:0;./sync -h
+: 1700511882:0;./sync --help
+: 1700511932:0;./sync --help
+: 1700511933:0;./sync -h
+: 1700511966:0;gb
+: 1700511967:0;./sync -h
+: 1700511970:0;./sync --help
+: 1700511999:0;gb
+: 1700512000:0;./sync --help
+: 1700512009:0;gb
+: 1700512010:0;./sync --help
+: 1700512026:0;gb
+: 1700512027:0;./sync --help
+: 1700512037:0;gb
+: 1700512038:0;./sync --help
+: 1700512043:0;./sync -h
+: 1700512049:0;./sync --filesystem ~/hdd
+: 1700512058:0;./sync --filesystem $HOME/hdd
+: 1700512061:0;./sync --filesystem $HOME/sda
+: 1700512074:0;./sync --filesystem /home/sweet/sda
+: 1700512076:0;./sync --filesystem /home/sweet/sdx
+: 1700512077:0;./sync --filesystem /home/sweet/ssd
+: 1700512081:0;./sync --filesystem /home/sweet/hdd
+: 1700512100:0;gb
+: 1700512102:0;./sync --filesystem /home/sweet/hdd
+: 1700512112:0;gb
+: 1700512113:0;./sync --filesystem /home/sweet/hdd
+: 1700512162:0;gb
+: 1700512163:0;./sync --filesystem /home/sweet/hdd
+: 1700512168:0;./sync -d /home/sweet/hdd
+: 1700512171:0;./sync -f /home/sweet/hdd
+: 1700512177:0;./sync -f -d /home/sweet/hdd
+: 1700512182:0;./sync -h /home/sweet/hdd
+: 1700512185:0;e
+: 1700512192:0;e
+: 1700512197:0;e
+: 1700512204:0;hx cmds/core/sync/sync_test.go
+: 1700512258:0;hx sync_test.go
+: 1700512273:0;go run sync_test.go
+: 1700512275:0;e
+: 1700512281:0;go test
+: 1700512289:0;e
+: 1700512299:0;go test
+: 1700512332:0;go test
+: 1700512365:0;hx sync_test.go
+: 1700512415:0;e
+: 1700512431:0;./sync -f sync.go sync_test.go
+: 1700512438:0;./sync -d sync.go sync_test.go
+: 1700512443:0;go test
+: 1700512521:0;e
+: 1700512593:0;./sync -d f
+: 1700512597:0;./sync -d file1
+: 1700512618:0;./sync sync sync.go sync_test.go 
+: 1700512641:0;./sync -d sync.go 
+: 1700512641:0;e
+: 1700512653:0;hx sync.go
+: 1700512716:0;gb
+: 1700512717:0;e
+: 1700512719:0;./sync -d sync.go 
+: 1700512723:0;./sync -d ~/hdd
+: 1700512727:0;..
+: 1700512727:0;e
+: 1700512798:0;hx cmds/core/echo/echo.go
+: 1700512866:0;mkcd echo
+: 1700512867:0;e
+: 1700512869:0;hx echo.go
+: 1700512908:0;echo $(dev/go-regex/reg 1000 < /etc/passwd)
+: 1700512915:0;echo $(~/dev/go-regex/reg 1000 < /etc/passwd)
+: 1700512922:0;echo -e '\0123'
+: 1700512927:0;echo -e '\0111'
+: 1700512930:0;echo -e '\0999'
+: 1700512933:0;echo -e '\00023'
+: 1700512940:0;echo -e '\u02'
+: 1700512941:0;echo -e '\u0211'
+: 1700512943:0;echo -e '\u021f'
+: 1700512950:0;echo -e '\v'
+: 1700512953:0;echo -e '\t'
+: 1700512955:0;echo -e '\t\v'
+: 1700512959:0;echo -e '\b'
+: 1700512963:0;echo -e '\a'
+: 1700512965:0;echo -e '\\'
+: 1700512967:0;echo -e '\r'
+: 1700512970:0;echo -e '\r\n'
+: 1700512976:0;echo -e '\rf'
+: 1700512978:0;echo -e '\f'
+: 1700512983:0;echo -e '\x12'
+: 1700512985:0;echo -e '\x55'
+: 1700512988:0;echo -e '\x99'
+: 1700512992:0;echo -e '\x98'
+: 1700512994:0;echo -e '\x1'
+: 1700512995:0;echo -e '\x2'
+: 1700512998:0;echo -e '\x00'
+: 1700512999:0;echo -e '\x01'
+: 1700513000:0;echo -e '\x02'
+: 1700513002:0;echo -e '\x03'
+: 1700513004:0;echo -e '\x33'
+: 1700513005:0;echo -e '\x3'
+: 1700513007:0;echo -e '\x33'
+: 1700513045:0;echo -e '\x1b[33mafsdf'
+: 1700513051:0;echo -e '\x1b[33;23;14;14mafsdf'
+: 1700513055:0;echo -e '\x1b[;23;14;14mafsdf'
+: 1700513056:0;e
+: 1700513058:0;e
+: 1700513558:0;e
+: 1700513560:0;gb
+: 1700513560:0;e
+: 1700513571:0;./echo -e '\x1b[33mFUCK'
+: 1700513596:0;gb
+: 1700513597:0;./echo -e '\x1b[33mFUCK'
+: 1700513652:0;go run echo.go -e '\x1b[33mFUCK'
+: 1700513663:0;go run echo.go -e '\e[33mFUCK'
+: 1700513669:0;go run echo.go -e '\e[33mFUCK\e[0m'
+: 1700513677:0;go run echo.go -e '\e[33mFUCK\e[0m'
+: 1700513683:0;echo -e '\e[33mFUCK\e[0m'
+: 1700513686:0;echo '\e[33mFUCK\e[0m'
+: 1700513707:0;go run echo.go -e '\e[33mFUCK\e[0m'
+: 1700513712:0;go run echo.go '\e[33mFUCK\e[0m'
+: 1700513718:0;go run echo.go '\x1b[33mFUCK\e[0m'
+: 1700513722:0;go run echo.go '\x1b[33mFUCK\x1b[0m'
+: 1700513730:0;go run echo.go -e '\x1b[33mFUCK\x1b[0m'
+: 1700513733:0;go run echo.go -e '\e[33mFUCK\x1b[0m'
+: 1700513737:0;go run echo.go -e '\e[33mFUCK\e[0m'
+: 1700513745:0;go run echo.go -e '\x1b[33mFUCK\x1b[0m'
+: 1700513764:0;go run echo.go -e '\x1b[33mFUCK\x1b[0m'
+: 1700513779:0;go run echo.go -e '\x1b[33mFUCK\x1b[0m'
+: 1700513898:0;db enter arch
+ls
+sudo pacman -S powershell
+sudo pacman -Q powershell
+sudo pacman -Q pwsh
+paruz
+sudo pacman -S fzf
+paruz
+e
+ls
+exit
+: 1700513951:0;db stop arch
+: 1700513989:0;db enter debian
+: 1700514895:0;go run echo.go -e '\x1b[33mFUCK\x1b[0m'
+: 1700514898:0;go run echo.go -e '\x1b[33mFUCK\x1b[0m'
+: 1700514902:0;go run echo.go -E '\x1b[33mFUCK\x1b[0m'
+: 1700514904:0;go run echo.go -e '\x1b[33mFUCK\x1b[0m'
+: 1700515185:0;go run echo.go -e '\x1b[33mFUCK\x1b[0m'
+: 1700515188:0;go run echo.go -h '\x1b[33mFUCK\x1b[0m'
+: 1700515193:0;go run echo.go -E '\x1b[33mFUCK\x1b[0m'
+: 1700515197:0;go run echo.go -ne '\x1b[33mFUCK\x1b[0m'
+: 1700515200:0;go run echo.go -n -e '\x1b[33mFUCK\x1b[0m'
+: 1700515203:0;go run echo.go -e '\x1b[33mFUCK\x1b[0m'
+: 1700515209:0;echo -ne '\e[33mFUCK\e[0m'
+: 1700515307:0;echo -ne '\x1b[38;2;72;169;255mFUCK\e[0m'
+: 1700515313:0;e
+: 1700515502:0;snippy new
+: 1700515528:0;e
+: 1700515530:0;gb
+: 1700515531:0;e
+: 1700515533:0;./echo -e '\x1b[33mFUCK'
+: 1700515537:0;./echo -f '\x1b[33mFUCK'
+: 1700515541:0;./echo -E '\x1b[33mFUCK'
+: 1700515546:0;./echo -E -n '\x1b[33mFUCK'
+: 1700515549:0;./echo -n '\x1b[33mFUCK'
+: 1700515553:0;./echo -en '\x1b[33mFUCK'
+: 1700516140:0;e
+: 1700516146:0;hx ~/dev/go-regex/main.go
+: 1700516274:0;go run echo.go -e '\x1b[33mFUCK\x1b[0m'
+: 1700516278:0;go run echo.go -f '\x1b[33mFUCK\x1b[0m'
+: 1700516285:0;go run echo.go -f '{#1e1e1e}FUCK\x1b[0m'
+: 1700516297:0;go run echo.go -f '{#1e1e1e}FUCK\x1b[0m'
+: 1700516306:0;go run echo.go -f '{#1e1e1e}FUCK\x1b[0m'
+: 1700516378:0;go run echo.go -f '{#1e1e1e}FUCK\x1b[0m'
+: 1700516429:0;go run echo.go -F '{#1e1e1e}FUCK\x1b[0m'
+: 1700516435:0;go run echo.go -Ef '{#1e1e1e}FUCK\x1b[0m'
+: 1700516438:0;go run echo.go -E -f '{#1e1e1e}FUCK\x1b[0m'
+: 1700516442:0;go run echo.go -f '{#1e1e1e}FUCK\x1b[0m'
+: 1700516449:0;go run echo.go -f '#1e1e1eFUCK\x1b[0m'
+: 1700516452:0;go run echo.go -f '#1e1e1e FUCK\x1b[0m'
+: 1700516485:0;go run echo.go -f '#1e1e1e FUCK\x1b[0m'
+: 1700516503:0;go run echo.go -f '#1e1e1e FUCK\x1b[0m'
+: 1700516508:0;go run echo.go -f '#1e1e1e FUCK\x1b[0m'
+: 1700516511:0;go run echo.go -f '1e1e1e FUCK\x1b[0m'
+: 1700516519:0;go run echo.go -f '#1E1E1E FUCK\x1b[0m'
+: 1700516525:0;go run echo.go -f '#1E1E1E'
+: 1700516621:0;go run echo.go -f '#1E1E1E'
+: 1700516633:0;go run echo.go -f '#1E1E1E'
+: 1700516647:0;go run echo.go -f '#1E1E1E'
+: 1700516647:0;go run echo.go -f '#1E1E1E'
+: 1700516648:0;go run echo.go -f '#1E1E1E'
+: 1700516648:0;go run echo.go -f '#1E1E1E'
+: 1700516667:0;mkcd test
+: 1700516667:0;e
+: 1700516669:0;hx main.go
+: 1700516673:0;go run main.go
+: 1700516678:0;e
+: 1700516681:0;e
+: 1700516683:0;..
+: 1700516686:0;rm -r test
+: 1700516686:0;e
+: 1700516695:0;hx .snippets/snips/go-hex-regex.md
+: 1700516749:0;go run echo.go -f '#1E1E1E'
+: 1700516759:0;go run echo.go -f '#1E1E1E FUCK\x1b[0m'
+: 1700516765:0;go run echo.go -f '#1E1E1E FUCK\x1b[0m'
+: 1700516769:0;go run echo.go -f ' #1E1E1E FUCK\x1b[0m'
+: 1700516774:0;go run echo.go -f '{#1E1E1E} FUCK\x1b[0m'
+: 1700516789:0;go run echo.go -f '{#1E1E1E} FUCK\x1b[0m'
+: 1700517137:0;go run echo.go -f '{#1E1E1E} FUCK\x1b[0m'
+: 1700517148:0;go run echo.go -f '{#1E1E1E} FUCK\x1b[0m'
+: 1700517156:0;go run echo.go -f '{#1E1E1E} FUCK\x1b[0m'
+: 1700517171:0;go run echo.go -f '{#1E1E1E} FUCK {#2e2e2e}'
+: 1700517192:0;go run echo.go -f '{#1E1E1E} FUCK {#2e2e2e}'
+: 1700517329:0;go run echo.go -f '{#1E1E1E} FUCK {#2e2e2e}'
+: 1700517406:0;go run echo.go -f '{#1E1E1E} FUCK {#2e2e2e}'
+: 1700517455:0;go run echo.go -f '{#1E1E1E} FUCK {#2e2e2e}'
+: 1700517503:0;go run echo.go -f '{#1E1E1E} FUCK {#2e2e2e}'
+: 1700517528:0;go run echo.go -f '{#1E1E1E} FUCK {#2e2e2e}'
+: 1700517610:0;go run echo.go -f '{#1E1E1E} FUCK {#2e2e2e}'
+: 1700517633:0;go run echo.go -f '{#1E1E1E} FUCK {#2e2e2e}'
+: 1700517654:0;go run echo.go -f '{#1E1E1E} FUCK {#2e2e2e}'
+: 1700517667:0;go run echo.go -f '{#FFFFF} FUCK {#2e2e2e}'
+: 1700517677:0;go run echo.go -f '{#FFFFFF} FUCK {#fefe2e}'
+: 1700517694:0;go run echo.go -f '{#FFFFFF} FUCK {#fefe2e}'
+: 1700517704:0;go run echo.go -f '{#FFFFFF} FUCK {#fefe2e}'
+: 1700517740:0;go run echo.go -f '{#FFFFFF} FUCK {#fefe2e}'
+: 1700517775:0;go run echo.go -f '{#FFFFFF} FUCK {#fefe2e}'
+: 1700517780:0;go run echo.go -f '{#FFFFFF} FUCK {#fefe2e}'
+: 1700517794:0;go run echo.go -f '{#FFFFFF} FUCK {#fefe2e}'
+: 1700517800:0;go run echo.go -f '{#FFFFFF} FUCK {#fefe2e} YOU'
+: 1700517846:0;go run echo.go -f '{#FFFFFF}FUCK{#fefe2e} YOU'
+: 1700517861:0;go run echo.go -f '{#FFFFFF}FUCK{#fefe2e} YOU {#f3f3f3} bitch'
+: 1700517869:0;go run echo.go -f '{#FFFFFF}FUCK{#fefe2e} YOU {#f3}bitch'
+: 1700517875:0;go run echo.go -f '{#FFFFFF}FUCK{#fefe2e} YOU {#ff00ff}bitch'
+: 1700517878:0;go run echo.go -f '{#FFFFFF}FUCK{#fefe2e} YOU {#ff00f1}bitch'
+: 1700517881:0;go run echo.go -f '{#FFFFFF}FUCK{#fefe2e} YOU {#ff00a1}bitch'
+: 1700517885:0;go run echo.go -f '{#FFFFFF}FUCK{#fefe2e} YOU {#ff0aa1}bitch'
+: 1700517894:0;go run echo.go -f '{#FFFFFF}FUCK{#fefe2e} YOU {#ff0aa1}bitch{clear}'
+: 1700517897:0;go run echo.go -f '{#FFFFFF}FUCK{#fefe2e} YOU {#ff0aa1}bitch{clear}'
+: 1700518045:0;go run echo.go -f '{#FFFFFF}FUCK{#fefe2e} YOU {#ff0aa1}bitch{clear}'
+: 1700518048:0;go run echo.go -f '{#FFFFFF}FUCK{#fefe2e} YOU {#ff0aa1}bitch {clear}'
+: 1700518051:0;go run echo.go -f '{#FFFFFF}FUCK{#fefe2e} YOU {#ff0aa1}bitch {clear}'
+: 1700518073:0;go run echo.go -f '{#FFFFFF}FUCK{#fefe2e} YOU {#ff0aa1}bitch {clear}'
+: 1700518076:0;go run echo.go -f '{#FFFFFF}FUCK{#fefe2e} YOU {#ff0aa1}bitch{clear}'
+: 1700518079:0;go run echo.go -f '{#FFFFFF}FUCK{#fefe2e} YOU {#ff0aa1}bitch{clear}'
+: 1700518103:0;go run echo.go -f '{#FFFFFF}FUCK{#fefe2e} YOU {#ff0aa1}bitch {clear}'
+: 1700518113:0;go run echo.go -f '{#FFFFFF}FUCK{#fefe2e} YOU {#ff0aa1}bitch {{clear}}'
+: 1700518116:0;go run echo.go -f '{#FFFFFF}FUCK{#fefe2e} YOU {#ff0aa1}bitch clear'
+: 1700518126:0;go run echo.go -f '{clear}'
+: 1700518128:0;go run echo.go -f 'aa{clear}'
+: 1700518131:0;go run echo.go -f 'aa {clear}'
+: 1700518142:0;go run echo.go -f 'aa {clr}'
+: 1700518155:0;go run echo.go -f 'aa {clr}'
+: 1700518185:0;gb
+: 1700518191:0;./echo -e n '\x1b[33mFUCK'
+: 1700518194:0;./echo -e -n '\x1b[33mFUCK'
+: 1700518206:0;./echo -f '{#ffffff}FUCK'
+: 1700518209:0;./echo -f '{#ffffff}FUCK{clr}'
+: 1700518242:0;gb
+: 1700518242:0;./echo -f '{#ffffff}FUCK{clr}'
+: 1700518253:0;./echo -f '{#ffffff}FUCK{clr}'
+: 1700518272:0;./echo -f '{#ffffff}FUCK{clr} YOU {#111111}bitch'
+: 1700518282:0;./echo -f '{#ffffff}FUCK{clr} YOU {#10e1fa}bitch'
+: 1700518290:0;./echo -f '{#ffffff}FUCK{clr}YOU {#10e1fa}bitch'
+: 1700518300:0;./echo -f '{#ffffff}FUCK{clr} YOU {#10e1fa}bitch'
+: 1700518301:0;gb
+: 1700518302:0;./echo -f '{#ffffff}FUCK{clr} YOU {#10e1fa}bitch'
+: 1700518341:0;./echo -f '{#fff}FUCK{clr} YOU {#10e1fa}bitch'
+: 1700518348:0;./echo -f '{#fffaaa}FUCK{clr} YOU {#10e1fa}bitch'
+: 1700518419:0;e
+: 1700518420:0;e
+: 1700518486:0;gmt
+: 1700518491:0;hx echo.go
+: 1700518494:0;gb
+: 1700518495:0;e
+: 1700518500:0;./echo -fn '{#fffaaa}FUCK{clr} YOU {#10e1fa}bitch'
+: 1700518511:0;./echo -n '{#fffaaa}FUCK{clr} YOU {#10e1fa}bitch'
+: 1700518514:0;./echo -f '{#fffaaa}FUCK{clr} YOU {#10e1fa}bitch'
+: 1700518523:0;gb
+: 1700518524:0;./echo -f '{#fffaaa}FUCK{clr} YOU {#10e1fa}bitch'
+: 1700519392:0;ls -la
+: 1700519573:0;echo $TERM
+e
+ls
+cd arch
+ls
+mkcd pwsh
+mkdir pwsh && cd pwsh
+ls
+wget https://github.com/PowerShell/PowerShell/releases/download/v7.4.0-rc.1/powershell-preview_7.4.0-rc.1-1.deb_amd64.deb
+ls
+sudo apt intsall powershell-preview_7.4.0-rc.1-1.deb_amd64.deb 
+sudo apt install powershell-preview_7.4.0-rc.1-1.deb_amd64.deb 
+ls
+sudo apt install ./powershell-preview_7.4.0-rc.1-1.deb_amd64.deb 
+pwsh
+powershell
+sudo apt install ./powershell-preview_7.4.0-rc.1-1.deb_amd64.deb 
+powershell
+ls
+pkg
+dpkg
+dpkg-deb install powershell-preview_7.4.0-rc.1-1.deb_amd64.deb 
+sudo dpkg-deb install powershell-preview_7.4.0-rc.1-1.deb_amd64.deb 
+sudo dpkg-deb --help install powershell-preview_7.4.0-rc.1-1.deb_amd64.deb 
+sudo apt install ./powershell-preview_7.4.0-rc.1-1.deb_amd64.deb 
+powershell-preview
+ls
+pwsh-preview 
+ls
+clear
+ls
+ls ~/.terminfo
+ls
+ls -R
+pwsh-prev
+pwsh-preview
+env TERM=xterm-256color
+env TERM=xterm-256color pwsh-preview
+exit
+: 1700519771:0;db stop d
+: 1700519777:0;db stop debian
+: 1700519779:0;e
+: 1700519781:0;nf
+: 1700519783:0;nf
+: 1700519784:0;nf
+: 1700519787:0;nf -x
+: 1700519793:0;nf
+: 1700519795:0;nf
+: 1700519796:0;nf
+: 1700519800:0;nf
+: 1700519801:0;nf
+: 1700519802:0;nf
+: 1700519874:0;e
+: 1700519875:0;ls cmds
+: 1700519884:0;ls cmds/boot/boot
+: 1700519889:0;ls cmds/core
+: 1700519894:0;cmds/core
+: 1700519894:0;e
+: 1700519897:0;ls mroe
+: 1700519899:0;ls more
+: 1700519904:0;hx more/more.go
+: 1700519937:0;cat bin/0x0|more
+: 1700519941:0;cat bin/0x0|more
+: 1700519954:0;which mp
+: 1700519956:0;mp
+: 1700519966:0;mpv --vo=kitty Videos
+: 1700519967:0;e
+: 1700519995:0;cmp 
+: 1700519998:0;cmp -h
+: 1700520002:0;cmp --help
+: 1700520012:0;ls date
+: 1700520015:0;hx date/date.go
+: 1700520026:0;ls cat
+: 1700520030:0;ls blkid
+: 1700520033:0;ls ps
+: 1700520036:0;hx ps/ps.go
+: 1700520156:0;ls kill
+: 1700520158:0;hx kill/kill.go
+: 1700520168:0;e
+: 1700520170:0;ls /proc
+: 1700520174:0;ls /proc/stat
+: 1700520190:0;cat /proc/stat
+: 1700520212:0;which gpt
+: 1700520215:0;ls false
+: 1700520217:0;ls wc
+: 1700520218:0;ls wget
+: 1700520221:0;ls sort
+: 1700520225:0;uname
+: 1700520229:0;ls uniq
+: 1700520231:0;ls find
+: 1700520234:0;ls comm
+: 1700520236:0;ls 
+: 1700520239:0;ls free
+: 1700520242:0;hx free/free.go
+: 1700520266:0;cat /proc/meminfo
+: 1700520279:0;memfetch
+: 1700520281:0;ls ls
+: 1700520283:0;ls ln
+: 1700520285:0;ll
+: 1700520291:0;ls tar
+: 1700520294:0;hx tar/tar.go
+: 1700520355:0;e
+: 1700520358:0;ls dd
+: 1700520412:0;e
+: 1700520413:0;//
+: 1700520415:0;cd -
+: 1700520420:0;cd ..
+: 1700520425:0;mkcd free
+: 1700520434:0;hx free_linux.go
+: 1700520443:0;e
+: 1700520451:0;hx free/free.go
+: 1700520459:0;hx free.go
+: 1700520474:0;e
+: 1700520487:0;e
+: 1700520495:0;hx free/free.go
+: 1700520500:0;gb
+: 1700520500:0;e
+: 1700520504:0;./free
+: 1700520511:0;./free -h
+: 1700520515:0;./free --help
+: 1700520525:0;./free -h -m
+: 1700520528:0;./free -h
+: 1700520552:0;free -t
+: 1700520557:0;free -h
+: 1700520567:0;./free -h
+: 1700520588:0;..
+: 1700520588:0;e
+: 1700520627:0;fd . .. -te | grep gwob
+: 1700520794:0;ps
+: 1700520796:0;ps aux
+: 1700520892:0;ls pwd
+: 1700520895:0;hx pwd/pwd.go
+: 1700520913:0;pwd -P
+: 1700520917:0;pwd -h
+: 1700520922:0;man pwd
+: 1700520935:0;pwd --help
+: 1700520939:0;man pwd
+: 1700520947:0;pwd -L
+: 1700520949:0;pwd -P
+: 1700521002:0;mkcd pwd
+: 1700521003:0;e
+: 1700521007:0;hx pwd.go
+: 1700521227:0;e
+: 1700521228:0;gb
+: 1700521229:0;e
+: 1700521230:0;./pwd
+: 1700521234:0;./pwd -L
+: 1700521235:0;e
+: 1700521308:0;e
+: 1700521312:0;ls man
+: 1700521317:0;hx man/man.go
+: 1700521334:0;ls ts
+: 1700521337:0;hx ts/ts.go
+: 1700521344:0;ls grep
+: 1700521348:0;hx grep/grep.go
+: 1700521414:0;cd grep/
+: 1700521414:0;e
+: 1700521416:0;gb
+: 1700521417:0;e
+: 1700521438:0;./grep 'var' ../ps/ps.go
+: 1700521443:0;./grep --color 'var' ../ps/ps.go
+: 1700521454:0;./grep --count -F  'var' ../ps/ps.go
+: 1700521460:0;./grep -F  'var' ../ps/ps.go
+: 1700521467:0;./grep -s 'var' ../ps/ps.go
+: 1700521471:0;./grep -r 'var' ../ps/ps.go
+: 1700521479:0;./grep -n 'var' ../ps/ps.go
+: 1700521486:0;./grep -n -v 'var' ../ps/ps.go
+: 1700521493:0;..
+: 1700521493:0;e
+: 1700521496:0;mkcd grep
+: 1700521502:0;hx grep.go
+: 1700521509:0;wlc < grep.go
+: 1700521520:0;e
+: 1700521521:0;gb
+: 1700521522:0;e
+: 1700521526:0;..
+: 1700521526:0;e
+: 1700521530:0;..
+: 1700521531:0;e
+: 1700521539:0;hx uptime/uptime.go
+: 1700521556:0;cat /proc/uptime
+: 1700521557:0;uptime
+: 1700521566:0;man uptime
+: 1700521588:0;uptime -p
+: 1700521596:0;mkcd uptime
+: 1700521597:0;e
+: 1700521600:0;hx uptime.go
+: 1700521974:0;e
+: 1700521975:0;gb
+: 1700521975:0;e
+: 1700521978:0;./uptime
+: 1700521982:0;hx uptime.go
+: 1700521992:0;e
+: 1700521995:0;./uptime
+: 1700521997:0;gb
+: 1700521999:0;gb
+: 1700521999:0;./uptime
+: 1700522033:0;hx uptime.go
+: 1700522085:0;uptime
+: 1700522090:0;uptime -p
+: 1700522100:0;man uptime
+: 1700522242:0;gb
+: 1700522243:0;e
+: 1700522250:0;./uptime
+: 1700522258:0;./uptime -P
+: 1700523157:0;./uptime -P
+: 1700523160:0;ll
+: 1700523168:0;ls =lah
+: 1700523170:0;ls -lah
+: 1700523177:0;uptime
+: 1700523182:0;./uptime
+: 1700523302:0;uptime
+: 1700523311:0;cat /proc/uptime
+: 1700523317:0;cat /proc/loadavg
+: 1700523320:0;hx uptime.go
+: 1700523856:0;gb
+: 1700523856:0;e
+: 1700523859:0;./uptime
+: 1700523862:0;./uptime -P
+: 1700523882:0;hx uptime.go
+: 1700524071:0;e
+: 1700524072:0;gb
+: 1700524074:0;./uptime -P
+: 1700524113:0;./uptime 
+: 1700524115:0;./uptime
+: 1700524121:0;uptime
+: 1700524137:0;uptime -P
+: 1700524140:0;uptime -p
+: 1700524151:0;hx uptime.go
+: 1700524186:0;gb
+: 1700524192:0;./uptime
+: 1700524204:0;./uptime -p
+: 1700524225:0;..
+: 1700524225:0;e
+: 1700524233:0;e
+: 1700524239:0;hx mkdir/mkdir.go
+: 1700524279:0;e
+: 1700524300:0;hx kexec/kexec_linux.go
+: 1700524317:0;e
+: 1700524319:0;id
+: 1700524321:0;id -u
+: 1700524327:0;hx id/users.go
+: 1700524331:0;e
+: 1700524335:0;hostname
+: 1700524340:0;hx hostname/hostname.go
+: 1700524365:0;hostname sweetd
+: 1700524370:0;hostname
+: 1700524374:0;man hostname
+: 1700524382:0;hostname -a
+: 1700524383:0;hostname -d
+: 1700524386:0;hostname -f
+: 1700524389:0;hostname --long
+: 1700524394:0;hostname -i
+: 1700524398:0;hostname --i
+: 1700524405:0;hostname --ip-addresses
+: 1700520421:0;ls
+: 1700520426:0;ls
+: 1700520499:0;ls
+: 1700520628:0;ls
+: 1700520636:0;ls
+: 1700520886:0;ls
+: 1700520909:0;pwd
+: 1700520918:0;ls
+: 1700520919:0;ls
+: 1700520937:0;ls
+: 1700521598:0;ls
+: 1700523158:0;ls
+: 1700523159:0;ls
+: 1700523161:0;ls
+: 1700523161:0;ls
+: 1700523163:0;ls
+: 1700523164:0;ls
+: 1700523172:0;ls
+: 1700524224:0;ls
+: 1700524368:0;ls
+: 1700519990:0;ls
+: 1700519991:0;ls
+: 1700520010:0;ls
+: 1700520890:0;ls
+: 1700521309:0;ls
+: 1700521325:0;ls
+: 1700521326:0;ls
+: 1700521327:0;ls
+: 1700521332:0;ls
+: 1700521341:0;ls
+: 1700521343:0;ls
+: 1700521488:0;ls
+: 1700521489:0;ls
+: 1700524234:0;ls
+: 1700524281:0;ls
+: 1700524282:0;ls
+: 1700524290:0;ls
+: 1700524292:0;ls
+: 1700524298:0;ls
+: 1700525157:0;ls -l -a -h -1
+: 1700525163:0;ls -lah1
+: 1700525183:0;ls --long --oneline --all --human-readable
+: 1700525187:0;ls --long --oneline --all
+: 1700525190:0;ls -lah
+: 1700530393:0;pkill gammastep ; (gammastep -O 5000)&|
+: 1700530400:0;cd dev/mybox
+: 1700530400:0;e
+: 1700530401:0;e
+: 1700530415:0;echo/echo
+: 1700530420:0;echo/echo -f
+: 1700530423:0;echo/echo -f 'ls'
+: 1700530441:0;echo/echo -f 'fuck ya {#D3d3d3}motha'
+: 1700530445:0;echo/echo -f 'fuck ya {#d3d3d3}motha'
+: 1700530450:0;echo/echo -f 'fuck ya {#13d3d3}motha'
+: 1700530453:0;echo/echo -f 'fuck ya {#13dfd3}motha'
+: 1700530457:0;echo/echo -f 'fuck ya {#1adfd3}motha'
+: 1700530460:0;echo/echo -f 'fuck ya {#11dfd3}motha'
+: 1700530464:0;echo/echo -f 'fuck ya {#111111}motha'
+: 1700530467:0;echo/echo -f 'fuck ya {#111211}motha'
+: 1700530469:0;echo/echo -f 'fuck ya {#111311}motha'
+: 1700530471:0;echo/echo -f 'fuck ya {#111411}motha'
+: 1700530474:0;echo/echo -f 'fuck ya {#111415}motha'
+: 1700530477:0;echo/echo -f 'fuck ya {#E11415}motha'
+: 1700530479:0;echo/echo -f 'fuck ya {#A11415}motha'
+: 1700530483:0;echo/echo -f 'fuck ya {#A1A415}motha'
+: 1700530485:0;echo/echo -f 'fuck ya {#A1A4A5}motha'
+: 1700530490:0;echo/echo -f 'fuck ya {#A1A4Af}motha'
+: 1700530495:0;echo/echo -f 'fuck ya {#A1f4Af}motha'
+: 1700530501:0;echo/echo -f 'fuck ya {#A1f4Aa}motha'
+: 1700530503:0;echo/echo -f 'fuck ya {#A1f4Aaaa}motha'
+: 1700530507:0;echo/echo -f 'fuck ya {#A1f4Aa}motha'
+: 1700530511:0;echo/echo -f 'fuck ya {#A1f4Aa}motha'
+: 1700530517:0;echo/echo -f 'fuck ya {#A1f4Aa}motha{clr}'
+: 1700530520:0;echo/echo -f 'fuck ya {#A1f4Aa}motha{clr} bitch'
+: 1700530526:0;echo/echo -f 'fuck ya {#A1f4Aa}motha{clr} bitch' > buf
+: 1700530527:0;e
+: 1700530528:0;cat buf
+: 1700530531:0;hx buf
+: 1700530540:0;e
+: 1700530543:0;rm ./buf
+: 1700530555:0;free/free
+: 1700530558:0;free/free -p
+: 1700530560:0;free/free -b
+: 1700530562:0;free/free -h
+: 1700530564:0;free/free -h
+: 1700530568:0;ls -R
+: 1700530570:0;ll
+: 1700530616:0;cd repos/u-root
+: 1700530616:0;e
+: 1700530630:0;hx cmds/exp/ansi/ansi.go
+: 1700530640:0;ansi
+: 1700530644:0;ansi --help
+: 1700530652:0;ansi --color-table
+: 1700530671:0;ansi --cursor-up
+: 1700530683:0;ansi --up=10
+: 1700530686:0;ansi --up=10
+: 1700530687:0;ansi --up=10
+: 1700530687:0;ansi --up=10
+: 1700530688:0;ansi --up=10
+: 1700530692:0;ansi --up=10 |bat
+: 1700530696:0;ansi --up=10 | \cat
+: 1700530703:0;ansi --up=10 > buf
+: 1700530704:0;cat buf
+: 1700530706:0;hx buf
+: 1700530712:0;rm ./buf
+: 1700530712:0;e
+: 1700530736:0;pwd/pwd
+: 1700530739:0;pwd/pwd -P
+: 1700530741:0;pwd/pwd -L
+: 1700530743:0;pwd/pwd -f
+: 1700530745:0;pwd/pwd
+: 1700530773:0;ls cmds/core
+: 1700530779:0;ls cmds/exp
+: 1700530805:0;watch
+: 1700530943:0;e
+: 1700530946:0;ls pkg
+: 1700530951:0;ls files
+: 1700530954:0;ls files/etc
+: 1700530957:0;ls files/etc/profile.d
+: 1700530962:0;cat files/etc/profile.d/uroot.sh
+: 1700530965:0;e
+: 1700530967:0;ls integration
+: 1700530974:0;file integration/GET_KERNEL_QEMU
+: 1700530979:0;cat integration/GET_KERNEL_QEMU
+: 1700530988:0;e
+: 1700530992:0;ls cmds
+: 1700531003:0;ls cmds/fwtools/flash
+: 1700531009:0;ls cmds/fwtools/spidev/spidev_linux.go
+: 1700531014:0;cat cmds/fwtools/spidev/spidev_linux.go
+: 1700531023:0;e
+: 1700531028:0;cd cmds
+: 1700531029:0;e
+: 1700531032:0;ls contrib
+: 1700531035:0;ls contrib/fbptcat
+: 1700531039:0;cat contrib/fbptcat/fbptcat.go
+: 1700531079:0;hx core/basename/basename.go
+: 1700531167:0;mkcd basename
+: 1700531168:0;e
+: 1700531172:0;hx basename.go
+: 1700531261:0;man basename
+: 1700531289:0;basename bin/0x0
+: 1700531296:0;basename -o bin/0x0
+: 1700531303:0;basename -a bin/0x0
+: 1700531314:0;basename -o bin/0x0 bin/8mb.video
+: 1700531318:0;basename -a bin/0x0 bin/8mb.video
+: 1700531322:0;basename bin/0x0 bin/8mb.video
+: 1700531441:0;basename --suffix=ls bin/0x0 bin/8mb.video
+: 1700531444:0;basename --suffix=a bin/0x0 bin/8mb.video
+: 1700531447:0;basename --suffix=~ bin/0x0 bin/8mb.video
+: 1700531454:0;basename --suffix ~/ bin/0x0 bin/8mb.video
+: 1700531462:0;basename --suffix ~/a bin/0x0 bin/8mb.video
+: 1700531474:0;basename --suffix .video bin/0x0 bin/8mb.video
+: 1700531501:0;basename -z --suffix .video bin/0x0 bin/8mb.video
+: 1700532229:0;e
+: 1700532230:0;gb
+: 1700532231:0;e
+: 1700532236:0;./basename basename.go
+: 1700532250:0;./basename ~/dev/mybox/basename/basename.go
+: 1700532255:0;./basename -s go ~/dev/mybox/basename/basename.go
+: 1700532260:0;./basename -s .go ~/dev/mybox/basename/basename.go
+: 1700532277:0;./basename -s .go -a ~/dev/mybox/basename/basename.go ../basename ../cmds ../echo ../free ../go.mod ../go.sum ../grep ../pwd ../sync ../uptime 
+: 1700532282:0;./basename -s .go -a ~/dev/mybox/basename/basename.go ../basename ../cmds ../echo ../free ../go.mod ../go.sum ../grep ../pwd ../sync ../uptime -z
+: 1700532289:0;./basename -z -s .go -a ~/dev/mybox/basename/basename.go ../basename ../cmds ../echo ../free ../go.mod ../go.sum ../grep ../pwd ../sync ../uptime
+: 1700532296:0;./basename -s .go -a ~/dev/mybox/basename/basename.go ../basename ../cmds ../echo ../free ../go.mod ../go.sum ../grep ../pwd ../sync ../uptime
+: 1700532313:0;./basename -z -s .go -a ~/dev/mybox/basename/basename.go ../basename ../cmds ../echo ../free ../go.mod ../go.sum ../grep ../pwd ../sync ../uptime | xargs -0 echo
+: 1700532329:0;./basename -z -s .go -a ~/dev/mybox/basename/basename.go ../basename ../cmds ../echo ../free ../go.mod ../go.sum ../grep ../pwd ../sync ../uptime | xargs -0 echo ;echo -e '\n'
+: 1700532333:0;./basename -z -s .go -a ~/dev/mybox/basename/basename.go ../basename ../cmds ../echo ../free ../go.mod ../go.sum ../grep ../pwd ../sync ../uptime | xargs -0 echo -e '\n'
+: 1700532345:0;./basename -z -s .go -a ~/dev/mybox/basename/basename.go ../basename ../cmds ../echo ../free ../go.mod ../go.sum ../grep ../pwd ../sync ../uptime | xargs -0 printf '%s\n'
+: 1700532349:0;e
+: 1700532351:0;..
+: 1700532352:0;e
+: 1700532384:0;basename/basename -h
+: 1700532395:0;e
+: 1700532399:0;..
+: 1700532399:0;e
+: 1700532402:0;e
+: 1700532406:0;ls core
+: 1700532412:0;cd core
+: 1700532420:0;hx false/false.go
+: 1700532427:0;mkcd false
+: 1700532431:0;hx false.go
+: 1700532450:0;false
+: 1700532454:0;man false
+: 1700532461:0;e
+: 1700532470:0;e
+: 1700532472:0;..
+: 1700532472:0;e
+: 1700532475:0;mkcd true
+: 1700532475:0;e
+: 1700532483:0;cat ../false/false.go > true.go
+: 1700532484:0;e
+: 1700532485:0;hx true.go
+: 1700532489:0;e
+: 1700532491:0;e
+: 1700532495:0;gb
+: 1700532496:0;e
+: 1700532498:0;./true
+: 1700532500:0;..
+: 1700532502:0;cd false
+: 1700532502:0;e
+: 1700532503:0;gb
+: 1700532504:0;./false
+: 1700532506:0;..
+: 1700532507:0;e
+: 1700532508:0;e
+: 1700532521:0;e
+: 1700532567:0;pkill gammastep ; (gammastep -O 3000)&|
+: 1700532623:0;hx chmod/chmod.go
+: 1700532641:0;hx chroot/chroot.go
+: 1700532767:0;e
+: 1700532768:0;e
+: 1700532862:0;nf
+: 1700532863:0;nf
+: 1700532865:0;nf
+: 1700532941:0;nf -x
+: 1700533797:0;ls -lah
+: 1700533805:0;ls ~
+: 1700533814:0;ls ~/dev
+: 1700533818:0;e
+: 1700533822:0;echo/echo -f 'fuck ya {#A1f4Aa}motha{clr} bitch' > buf
+: 1700533829:0;cd buf
+: 1700533830:0;e
+: 1700533834:0;cat buf
+: 1700533836:0;rm buf
+: 1700533836:0;e
+: 1700533841:0;echo/echo -f 'fuck ya {#A1f4Aa}motha{clr} bitch'
+: 1700533867:0;echo/echo -f '{#101010}fuck ya {#A1f4Aa}motha{clr} bitch'
+: 1700533873:0;echo/echo -f '{#103}fuck ya {#A1f4Aa}motha{clr} bitch'
+: 1700533876:0;echo/echo -f '{#103aaa}fuck ya {#A1f4Aa}motha{clr} bitch'
+: 1700533881:0;echo/echo -f '{#aaaaaa}fuck ya {#A1f4Aa}motha{clr} bitch'
+: 1700533903:0;echo/echo -f '{#aaaaaa}fuck ya {#A1f4Aa}motha{clr} {#e2}bitch'
+: 1700533906:0;echo/echo -f '{#aaaaaa}fuck ya {#A1f4Aa}motha{clr} {#e22}bitch'
+: 1700533908:0;echo/echo -f '{#aaaaaa}fuck ya {#A1f4Aa}motha{clr} {#e22q}bitch'
+: 1700533911:0;echo/echo -f '{#aaaaaa}fuck ya {#A1f4Aa}motha{clr} {#e222}bitch'
+: 1700533915:0;echo/echo -f '{#aaaaaa}fuck ya {#A1f4Aa}motha{clr} {#e2222}bitch'
+: 1700533917:0;echo/echo -f '{#aaaaaa}fuck ya {#A1f4Aa}motha{clr} {#e22f22}bitch'
+: 1700533929:0;echo/echo -f '{#aaaaaa}fuck ya {#A1f4Aa}motha{clr} {#f22f22}bitch'
+: 1700533934:0;echo/echo -f '{#aaaaaa}fuck ya {#A1f4Aa}motha{clr} {#ff2f22}bitch'
+: 1700533936:0;echo/echo -f '{#aaaaaa}fuck ya {#A1f4Aa}motha{clr} {#ffff22}bitch'
+: 1700533940:0;echo/echo -f '{#aaaaaa}fuck ya {#A1f4Aa}motha{clr} {#fff442}bitch'
+: 1700533942:0;echo/echo -f '{#aaaaaa}fuck ya {#A1f4Aa}motha{clr} {#fff4a2}bitch'
+: 1700533945:0;echo/echo -f '{#aaaaaa}fuck ya {#A1f4Aa}motha{clr} {#fffaa2}bitch'
+: 1700533948:0;echo/echo -f '{#aaaaaa}fuck ya {#A1f4Aa}motha{clr} {#fffaaa}bitch'
+: 1700533950:0;echo/echo -f '{#aaaaaa}fuck ya {#A1f4Aa}motha{clr} {#fffaaa}bitch'
+: 1700533953:0;echo/echo -f '{#aaaaaa}fuck ya {#A1f4Aa}motha{clr} {#fffaa1}bitch'
+: 1700533955:0;echo/echo -f '{#aaaaaa}fuck ya {#A1f4Aa}motha{clr} {#fffaa2}bitch'
+: 1700533959:0;echo/echo -f '{#aaaaaa}fuck ya {#A1f4Aa}motha{clr} {#fffaaa}bitch'
+: 1700533962:0;echo/echo -f '{#aaaaaa}fuck ya {#A1f4Aa}motha{clr} {#fffaaf}bitch'
+: 1700533965:0;echo/echo -f '{#aaaaaa}fuck ya {#A1f4Aa}motha{clr} {#fffa1f}bitch'
+: 1700533969:0;echo/echo -f '{#aaaaaa}fuck ya {#A1f4Aa}motha{clr} {#fff11f}bitch'
+: 1700533972:0;echo/echo -f '{#aaaaaa}fuck ya {#A1f4Aa}motha{clr} {#fff11f}bitch'
+: 1700533974:0;echo/echo -f '{#aaaaaa}fuck ya {#A1f4Aa}motha{clr} {#1ff11f}bitch'
+: 1700533977:0;echo/echo -f '{#aaaaaa}fuck ya {#A1f4Aa}motha{clr} {#2ff11f}bitch'
+: 1700533980:0;echo/echo -f '{#aaaaaa}fuck ya {#A1f4Aa}motha{clr} {#3ff11f}bitch'
+: 1700533982:0;echo/echo -f '{#aaaaaa}fuck ya {#A1f4Aa}motha{clr} {#4ff11f}bitch'
+: 1700533986:0;echo/echo -f '{#aaaaaa}fuck ya {#A1f4Aa}motha{clr} {#5ff11f}bitch'
+: 1700533989:0;echo/echo -f '{#aaaaaa}fuck ya {#A1f4Aa}motha{clr} {#6ff11f}bitch'
+: 1700533994:0;echo/echo -f '{#aaaaaa}fuck ya {#A1f4Aa}motha{clr} {#7ff11f}bitch'
+: 1700533998:0;echo/echo -f '{#aaaaaa}fuck ya {#A1f4Aa}motha{clr} {#8ff11f}bitch'
+: 1700534001:0;echo/echo -f '{#aaaaaa}fuck ya {#A1f4Aa}motha{clr} {#9ff11f}bitch'
+: 1700534003:0;echo/echo -f '{#aaaaaa}fuck ya {#A1f4Aa}motha{clr} {#aff11f}bitch'
+: 1700534007:0;echo/echo -f '{#aaaaaa}fuck ya {#A1f4Aa}motha{clr} {#bff11f}bitch'
+: 1700534009:0;echo/echo -f '{#aaaaaa}fuck ya {#A1f4Aa}motha{clr} {#cff11f}bitch'
+: 1700534011:0;echo/echo -f '{#aaaaaa}fuck ya {#A1f4Aa}motha{clr} {#dff11f}bitch'
+: 1700534013:0;echo/echo -f '{#aaaaaa}fuck ya {#A1f4Aa}motha{clr} {#eff11f}bitch'
+: 1700534017:0;echo/echo -f '{#aaaaaa}fuck ya {#A1f4Aa}motha{clr} {#fff11f}bitch'
+: 1700534063:0;echo/echo -f '{#aaaaaa}fuck ya {#A1f4Aa}motha{clr} {#fff11f}bitch'
+: 1700534065:0;ll
+: 1700534069:0;ls -lah
+: 1700534072:0;ls -l -a -h -1
+: 1700534077:0;ls -lah1
+: 1700550022:0;pkill gammastep ; (gammastep -O 2000)&|
+: 1700550033:0;hx .config/hypr/configs/window_rules.conf 
+: 1700550040:0;hx .config/hypr/configs/monitors.conf
+: 1700550113:0;pkill eww
+: 1700550117:0;hyprctl reload
+: 1700550221:0;hx .config/eww/eww.yuck
+: 1700550227:0;e
+: 1700550244:0;hx .config/eww/windows.yuck
+: 1700550354:0;swww img ~/Pictures/backgrounds/80s_retro_anime.jpg --transition-type=center
+: 1700550424:0;nf
+: 1700550425:0;nf
+: 1700550426:0;nf
+: 1700550436:0;rm -r /lost+found
+: 1700550438:0;sudo rm -r /lost+found
+: 1700550445:0;sudo rm -r ./sda/lost+found
+: 1700550449:0;sudo rm -r ./ssd/lost+found
+: 1700550454:0;sudo rm -r ./hdd/lost+found
+: 1700550460:0;sudo rm -r ./sdx/lost+found
+: 1700550466:0;ls -R
+: 1700550487:0;while true\
+do echo; done
+: 1700550557:0;x=0 ; while true\
+do printf "\x1b[50;50H%s\n" $x ; x=$((x+1)); done
+: 1700550568:0;e
+: 1700550577:0;x=0 ; while true\
+do printf "\x1b[100;50H%s\n" $x ; x=$((x+1)); done
+: 1700550586:0;x=0 ; while true\
+do printf "\x1b[100;100H%s\n" $x ; x=$((x+1)); done
+: 1700550594:0;e
+: 1700550677:0;x=0; while true; do printf "\x1b[2J\x1b[10;100H%s\n" $x ; x=$((x+1)); if [ x -eq 1000000 ]; then break; fi ; done
+: 1700550682:0;e
+: 1700550700:0;x=0; while true; do printf "\x1b[2J\x1b[10;100H%s\n" "$x" ; x=$((x+1)); if [ "$x" -eq 1000000 ]; then break; fi ; done
+: 1700550771:0;cd dev
+: 1700550772:0;e
+: 1700550774:0;cd mybox
+: 1700550775:0;e
+: 1700550783:0;cd grep
+: 1700550783:0;e
+: 1700550787:0;./grep -n -v 'var' ../ps/ps.go
+: 1700550794:0;./grep -n -v 'var' ../basename
+: 1700550796:0;./grep -n -v 'var' ../basename/basename.go
+: 1700550801:0;./grep -n 'var' ../basename/basename.go
+: 1700550806:0;./grep -n 'r' ../basename/basename.go
+: 1700550818:0;./grep -n '[a-z]' ../basename/basename.go
+: 1700550823:0;./grep -n '[A-Za-z]' ../basename/basename.go
+: 1700550829:0;./grep -n '[A-Za-z1-0 ]' ../basename/basename.go
+: 1700550834:0;./grep -n '[A-Za-z1-9 ]' ../basename/basename.go
+: 1700550845:0;..
+: 1700550845:0;e
+: 1700550849:0;echo/echo -f '{#aaaaaa}fuck ya {#A1f4Aa}motha{clr} {#fff11f}bitch'
+: 1700550873:0;..
+: 1700550882:0;ll
+: 1700550893:0;ls shell_name
+: 1700550896:0;ls shell_name/main.go
+: 1700550901:0;go run shell_name/main.go
+: 1700550917:0;hx shell_name/main.go
+: 1700550930:0;go run shell_name/main.go
+: 1700550945:0;pkgtop
+: 1700550969:0;e
+: 1700550971:0;s
+: 1700550971:0;e
+: 1700550973:0;e
+: 1700554627:0;e
+: 1700554635:0;env
+: 1700554638:0;env
+: 1700554974:0;cd repos/u-root\ 
+: 1700554975:0;cd repos/u-root
+: 1700554976:0;e
+: 1700554977:0;e
+: 1700554978:0;cd mds
+: 1700554980:0;cd cmds
+: 1700554980:0;e
+: 1700554982:0;cd core
+: 1700554983:0;e
+: 1700554989:0;hx ls/ls.go
+: 1700555140:0;e
+: 1700555147:0;mkcd go-fuzzy
+: 1700555147:0;e
+: 1700555154:0;newgo fuzz
+: 1700555154:0;e
+: 1700555157:0;hx main.go
+: 1700555198:0;gmt
+: 1700555203:0;hx main.go
+: 1700555463:0;gmt
+: 1700555483:0;go run main.go
+: 1700555484:0;e
+: 1700555488:0;hx main.go
+: 1700556058:0;go run main.go
+: 1700556080:0;e
+: 1700556082:0;hx main.go
+: 1700556105:0;go run main.go
+: 1700556119:0;e
+: 1700556121:0;hx main.go
+: 1700556192:0;go run main.go
+: 1700556202:0;e
+: 1700556233:0;hx ../go-render
+: 1700556248:0;hx ../go-shell1
+: 1700556284:0;go run main.go
+: 1700556303:0;e
+: 1700556305:0;hx main.go
+: 1700556369:0;go run main.go
+: 1700556382:0;e
+: 1700556384:0;hx main.go
+: 1700556414:0;printf '\x1b[1;0H'
+: 1700556418:0;printf '\x1b[2;0H'
+: 1700556421:0;printf '\x1b[3;0H'
+: 1700556424:0;printf '\x1b[113;0H'
+: 1700556427:0;printf '\x1b[11;0H'
+: 1700556453:0;e
+: 1700556456:0;go run main.go
+: 1700556463:0;e
+: 1700556464:0;hx main.go
+: 1700556499:0;go run main.go
+: 1700556503:0;e
+: 1700556527:0;go run main.go
+: 1700556552:0;hx
+: 1700556558:0;hx main.go
+: 1700556633:0;go run main.go
+: 1700556644:0;hx main.go
+: 1700556668:0;go run main.go
+: 1700556673:0;hx main.go
+: 1700556751:0;go run main.go
+: 1700556772:0;e
+: 1700556773:0;hx main.go
+: 1700556790:0;go run main.go
+: 1700556817:0;e
+: 1700556827:0;ls/
+: 1700556828:0;e
+: 1700556829:0;gb
+: 1700556830:0;e
+: 1700556834:0;./ls
+: 1700556837:0;./ls ~
+: 1700556840:0;./ls ~ -1
+: 1700556844:0;./ls ~ -a
+: 1700556846:0;./ls ~ -F
+: 1700556850:0;./ls ~ f
+: 1700556853:0;./ls ~ -a
+: 1700556855:0;./ls ~ -af
+: 1700556870:0;./ls ~ -l -h -a -F -d -Q -R -S
+: 1700556914:0;./ls ~ -l -h -a -F -d -Q -S
+: 1700556928:0;./ls ~ -l -Q -S
+: 1700556932:0;./ls ~ -l -Q -S -d
+: 1700556939:0;./ls ~ -l -Q -S -F
+: 1700556945:0;./ls ~/bin -l -Q -S -F
+: 1700556955:0;ls ~/bin
+: 1700556962:0;ll ~/bin
+: 1700556978:0;..
+: 1700556979:0;e
+: 1700556982:0;ls find
+: 1700556985:0;hx find/find.go
+: 1700557036:0;e
+: 1700557042:0;cat kexec/kexec_linux.go
+: 1700557047:0;ls ping
+: 1700557051:0;hx ping/ping.go
+: 1700557062:0;e
+: 1700557065:0;ls scp
+: 1700557067:0;hx scp/scp.go
+: 1700557080:0;e
+: 1700557084:0;hx shutdown
+: 1700557141:0;cd dev/mybox
+: 1700557142:0;e
+: 1700557146:0;mkcd reboot
+: 1700557146:0;e
+: 1700557151:0;hx reboot.go
+: 1700558350:0;e
+: 1700558352:0;gb
+: 1700558353:0;e
+: 1700558364:0;e
+: 1700558365:0;e
+: 1700558386:0;cat tee/tee.go
+: 1700558400:0;e
+: 1700558401:0;e
+: 1700558402:0;..
+: 1700558402:0;e
+: 1700559970:0;pkill balcon.exe
+: 1700559970:0;e
+: 1700560325:0;pkill balcon.exe
+: 1700560325:0;e
+: 1700560335:0;hx .config/hypr/configs/keybinds.conf
+: 1700560380:0;pgrep agetty
+: 1700560475:0;e
+: 1700560555:0;YOU ARE READING\
+One day, Axel finds a cardboard box on the sidewalk while walking home. It reads "Copy and Paste" What is it? What will Axel do? Show his friends, mom, or dad? Well, you might be surprised at what happens.\
+#abdl #accidents #crossdressing #device #diapermessing #diapers #feminization #forced #forcedfem #forcedfeminization #magic #magicbutton #pullups #sissy #tbdl #wishbutton\
+To my disappointment, nothing happened. I still thought the same, and i still knew what a toilet was. Until i felt a wet warmth in my crotch. I looked down to see wetness running down my crotch. "Oh shit, It works."\
+I just sat there, in my own pee pants. I was super happy that it worked. I was flooded with ideas. But just then, my mom came in. She said "Hey Axel, can you give me your dirty laun- AXEL In a swift motion, i put the device into her body and pasted, hoping that it would make my mom think this is normal.\
+I just stood there, as her face went blank and smiled. "Oh honey\! You had another accident. Lets get changed into new pants. I went with her and got me new pants. Almost exactly the same as my current wet ones. Once i put it on, i ran upstairs and wrote another note. "I still know how to use the restroom, and i have full control over my body." and I Pasted it into me. Then i snuck up to my mother and pasted it into her, without her even noticing. I then got the best idea ever. "Mom\! Is it okay if i go to the Corner Store? I wanna buy something." She said "Sure, I don't have a problem with that. So on i went, on a quest to get diapers, making sure to turn the copier to normal mode before i left.\
+\
+Inside my body, my heart was pounding. I was finally gonna get to try diapers for the first time\! I can get all of this baby stuff, I can wear pull-ups, and maybe even dress in some kids clothes.\
+But before i could finish my thought, i had arrived at the corner store. As i entered, i quickly sprinted towards the pull-ups and diapers. Luckily, i didn't see any of my moms friends. As i ran, i started to see all the baby stuff, and notice how much baby things this store has. Finally, i get to the diaper isle. It is backed mostly with pull-ups, and some actual diapers.\
+I decide to take it slow first, and get some pull-ups. I then realized there were only girls pull-ups, but i thought that that was okay. I ended up copying a Minnie mouse design 24 pull-ups box. I quickly headed back home, seeing that my mom was asleep. I went to my room, and hoped for the best. I clicked the paste button, and the same Minnie Mouse pull-up box fell from where i was holding the remote.\
+Âƒ€"This is gonna be fun."\
+Sorry for the short chapter. But, i need to get this out sooner to please this crowd.\
+\
+\
+\
+1y ago\
+1y ago\
+wlp
+: 1700560556:0;wlp
+: 1700560599:0;pkill balcon.exe
+: 1700560605:0;pkill -9 balcon.exe
+: 1700560606:0;pkill -9 balcon.exe
+: 1700560608:0;pkill -9 balcon.exe
+: 1700560611:0;e
+: 1700560616:0;e
+: 1700560744:0;e
+: 1700560752:0;cd ssd/godot/practice
+: 1700560753:0;e
+: 1700560811:0;godot .
+: 1700560859:0;hx d
+: 1700560933:0;wlc < d
+: 1700561280:0;hx c
+: 1700561298:0;mv c copy
+: 1700561298:0;e
+: 1700561301:0;hx copy
+: 1700561319:0;hx copy
+: 1700561368:0;wlc < copy
+: 1700566839:0;hx copy
+: 1700594445:0;cd dev/mybox
+: 1700594445:0;e
+: 1700594457:0;sync/sync
+: 1700594465:0;sudo umount sda sdx ssd hdd
+: 1700594475:0;pkill gammastep
+: 1700594487:0;pgrep sync
+: 1700594500:0;e
+                                    : 1700594569:0;ls
+: 1700594571:0;ll
+: 1700594585:0;e
+: 1700594589:0;rm copy 
+: 1700594591:0;rm d
+: 1700594593:0;rm -r /lost+found
+: 1700594596:0;sudo rm -r /lost+found
+: 1700594611:0;sudo rm -r sda/lost+found sdx/lost+found ssd/lost+found hdd/lost+found 
+: 1700594629:0;ls /
+: 1700594633:0;sync
+: 1700594875:0;swww img ~/Pictures/backgrounds/80s_retro_anime.jpg --transition-type=center
+: 1700596932:0;cd repos
+: 1700596933:0;e
+: 1700596935:0;gc https://github.com/sweetbbak/unix-std-flags.git
+: 1700596937:0;e
+: 1700596943:0;ls examples
+: 1700597010:0;e
+: 1700597048:0;git branch
+: 1700597058:0;git branch -b
+: 1700597062:0;tldr git branch
+: 1700597077:0;git branch merges
+: 1700597145:0;e
+: 1700597152:0;gh pr
+: 1700597157:0;gh pr list
+: 1700597173:0;gh repo set-default
+: 1700597182:0;gh pr list
+: 1700597614:0;git pull https://github.com/jessevdk/go-flags.git master
+: 1700597621:0;git branch 
+: 1700597627:0;git checkout merges
+: 1700597628:0;e
+: 1700597631:0;git branch 
+: 1700597640:0;gb
+: 1700597642:0;e
+: 1700598774:0;repos
+: 1700598775:0;e
+: 1700598777:0;cd repos
+: 1700598777:0;e
+: 1700598807:0;mv ~/.config/zsh/.zsh_history ~/.config/zsh/.zsh_history1
