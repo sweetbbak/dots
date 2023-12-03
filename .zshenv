@@ -17,6 +17,7 @@ $path
 path=(
 ~/.cargo/bin
 ~/go/bin
+~/.local/share/hysp/bin
 $path
 )
 
