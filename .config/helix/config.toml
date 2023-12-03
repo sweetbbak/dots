@@ -55,6 +55,14 @@ esc = ["collapse_selection", "keep_primary_selection"]
 "C-m" = [":buffer-previous"]
 "C-q" = [":buffer-close"]
 
+# stops cursor moving to inverted selection
+i = ["collapse_selection", "insert_mode"]
+# dont yank when deleting or changing - I dont need it often
+A-d = "delete_selection"
+d = "delete_selection_noyank"
+A-c = "change_selection"
+c = "change_selection_noyank"
+
 # Global search under cursor
 # also 'm i w * <space> /' works as well
 "@" = [
@@ -64,6 +72,16 @@ esc = ["collapse_selection", "keep_primary_selection"]
   "global_search",
 ]
 
+# ctrl+f find word under cursor local
+"C-f" = [
+  "move_prev_word_start",
+  "move_next_word_end",
+  "search_selection",
+  "search",
+]
+
+"C-+" = ["jump_forward"]
+"C-minus" = ["jump_backward"]
 
 V = ["goto_first_nonwhitespace", "extend_to_line_end"]
 # D = ["ensure_selections_forward", "extend_to_line_end"]
@@ -104,8 +122,8 @@ r = ":run-shell-command just"
 [keys.normal.space]
 # x = ":sh kitty @ send-text -m 'title:^hxterm' kitty +kitten icat ~/Pictures/ \\\\n"
 # F = { r = ":sh kitty @ send-text --match 'title:^Terminal' cargo run \\\\n", t = ":sh kitty @ send-text --match 'title:^Terminal' 'clear \\ncargo test \\n'" }
-t = [ ":sh kitty --directory=." ]
-x = [ ":sh kitty --directory=. --hold kitty icat $(wl-paste)" ]
+# x = [ ":sh kitty --directory=. --hold kitty icat $(wl-paste)" ]
+t = [ ":sh kitty --directory=. --start-as=fullscreen" ]
 c = [ ":buffer-close" ]
  
 # x = { x = ":sh ~/scripts/snippy get", n = ":sh ~/scripts/snippy new" } 
