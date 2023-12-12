@@ -472,6 +472,6 @@ function mkcd() { mkdir -p -- "$@" && cd -- "$@"; }
 
 #interactive cd
 function jj {
-    command -v llama -h &>/dev/null || exit
+    # command -v llama -h &>/dev/null || exit
     cd "$(llama "$@")"
 }
