@@ -39,7 +39,7 @@ STARSHIP_THEME="$HOME/.config/starship/gum.toml"
 
 # bindkey -M vicmd s prepend-sudo
 
-/usr/bin/cp "$HISTFILE" "${HISTFILE}.bak"
+# /usr/bin/cp "$HISTFILE" "${HISTFILE}.bak"
 
 # select all
 function _ctrl-a {
