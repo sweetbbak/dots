@@ -113,7 +113,7 @@ V = ["goto_first_nonwhitespace", "extend_to_line_end"]
 
 [keys.normal."+"]
 x = ":run-shell-command ls"
-t = ":run-shell-command go mod tidy"
+t = [":run-shell-command go mod tidy", ":lsp-restart"]
 n = ":run-shell-command (snippy new)&"
 g = ":run-shell-command (snippy get)&"
 r = ":run-shell-command just"
