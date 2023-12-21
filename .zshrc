@@ -91,8 +91,6 @@ function __source() {
   [ -f "$1" ] && source "$1"
 }
 
-# eval "$(pixi completion --shell zsh)"
-
 # KEYBINDS
 WORDCHARS='~!#$%^&*(){}[]<>?.+;-'
 bindkey '^[[1;5C' forward-word     # ctrl + ->

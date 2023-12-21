@@ -24,7 +24,6 @@ $path
 # script dirs
 path=(
 ~/scripts
-~/.pixi/bin
 $path
 )
 
