@@ -9,6 +9,7 @@ alias nv='nvim'
 alias cat='bat -p'
 alias gsw='gamescope -f -W 1920 -H 1080 -- wine'
 alias piper_play='piper-tts --model ~/ssd/pipertts/ivona-8-23/amy.onnx --output_raw | aplay -r 22050 -c 1 -f S16_LE -t raw'
+alias aplay_tts='aplay -r 22050 -c 1 -f S16_LE -t raw'
 alias ip_show="ip addr show | grep 'inet ' | cut -d ' ' -f 6 | cut -d / -f 1"
 
 alias wlc='wl-copy'
