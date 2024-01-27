@@ -1,9 +1,21 @@
 ## some handy functions I've written or collected
 CLIPBOARD=wl-copy
 
+function zr () { zellij run --name "$*" -- zsh -ic "$*";}
+function zrf () { zellij run --name "$*" --floating -- zsh -ic "$*";}
+function ze () { zellij edit "$*";}
+function zef () { zellij edit --floating "$*";}
+
 function gocd () { cd `go list -f '{{.Dir}}' $1` }
 
+function lx() {
+    # makes it easy to list files and dirs and then also see their contents
+    # without having to ctrl+<- and change the command name to (cat|icat|xxd)
+    ls "$@" && ~/scripts/lessfilter.sh "$@"
+}
+
 function contize() {
+    echo -e "\x1b[32m[WARN]\x1b[0m your home directory [$HOME] will NOT be read-only. It is mounted in a container and is accessible from insde"
     podman run -it --rm \
         --security-opt label=disable \
         --userns=keep-id \
@@ -451,8 +463,17 @@ function qa() { eval $( (alias && functions|sed -nE 's@^([^_].*)\(\).*@\1@p')|cu
 
 # quickly edit zsh config stuff
 function zzz() {
-  # var=$(gum choose "zshrc" "functions" "aliases" "zshenv" --item.foreground="360" --cursor="→ ")
-  var=$(printf "%s\n" "zshrc" "functions" "aliases" "zshenv" | fzf --reverse --height=15%)
+  var=$(printf "%s\n" "zshrc" "functions" "aliases" "zshenv" | fzf --bind='tab:toggle-down' --reverse --height=15% --cycle --preview='
+            file={}
+            case {} in
+                zshrc) bat ~/.zshrc ;;
+                zshenv) bat ~/.zshenv ;;
+                functions) bat ~/.config/zsh/functions.zsh ;;
+                aliases) bat ~/.config/zsh/alias.zsh ;;
+                *) echo "lol :p" ;;
+            esac
+        ')
+
   case $var in
     zshrc)
       $EDITOR $HOME/.zshrc && exec zsh ;;

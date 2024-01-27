@@ -2475,6 +2475,7 @@ grammar = "bash"
 name = "ini"
 scope = "source.ini"
 file-types = [
+  "conf",
   "ini",
   # Systemd unit files
   "service",

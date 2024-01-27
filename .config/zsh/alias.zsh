@@ -1,6 +1,6 @@
 #-----------[Alias]---------------------#
-alias hx="helix"
-alias hx.="helix ."
+# alias hx="helix"
+# alias hx.="helix ."
 alias ff="firefox"
 alias zz="zathura"
 alias nsxiv="nsxiv -a"
@@ -15,6 +15,8 @@ alias ip_show="ip addr show | grep 'inet ' | cut -d ' ' -f 6 | cut -d / -f 1"
 alias wlc='wl-copy'
 alias wlp='wl-paste'
 alias db='distrobox'
+
+alias pm='podman'
 alias history_most_used="history 0 | awk '{print $2}' | sort | uniq -c | sort -n -r | head"
 
 # Core utils + replacements

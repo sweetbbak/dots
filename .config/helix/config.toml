@@ -1,6 +1,6 @@
-theme = "vscode_dark"
+# theme = "vscode_dark"
 # theme = "kanagawa"
-# theme = "fleet_dark"
+theme = "fleet_dark"
 # theme = "gruvbox"
 # theme = "ferra"
 # theme = "rose_pine_moon"
@@ -28,7 +28,7 @@ render = "none"
 
 [editor.indent-guides]
 render = true
-character = "⸽" # Some characters that work well: "▏", "┆", "┊", "⸽", "│" 
+character = "│" # Some characters that work well: "▏", "┆", "┊", "⸽", "│" 
 skip-levels = 1
 
 # Helix's statusline
@@ -49,7 +49,7 @@ esc = ["collapse_selection", "keep_primary_selection"]
 "C-s" = [":w"]
 "C-e" = ["save_selection"]
 "C-o" = [":open ~/.config/helix/config.toml"]
-"C-i" = [":insert-output echo -e '\tif err != nil {\n\t\tfmt.Println(err)\n\t}'"]
+"C-i" = [":insert-output echo -e '\tif err != nil {\n\t\treturn err\n\t}'"]
 
 "C-n" = [":buffer-next"]
 "C-m" = [":buffer-previous"]
@@ -80,8 +80,8 @@ c = "change_selection_noyank"
   "search",
 ]
 
-"C-+" = ["jump_forward"]
-"C-minus" = ["jump_backward"]
+# "C-+" = ["jump_forward"]
+# "C-minus" = ["jump_backward"]
 
 V = ["goto_first_nonwhitespace", "extend_to_line_end"]
 # D = ["ensure_selections_forward", "extend_to_line_end"]
@@ -106,14 +106,14 @@ V = ["goto_first_nonwhitespace", "extend_to_line_end"]
 
 # C-left = "move_char_left"
 # C-right = "move_char_right"
-"C-h" = "select_prev_sibling"
-"C-l" = "select_next_sibling"
+"C-h" = "move_prev_word_end"
+"C-l" = "move_next_word_end"
 # "A-j" = "shrink_selection"
 # "A-k" = "expand_selection"
 
 [keys.normal."+"]
-x = ":run-shell-command ls"
-t = [":run-shell-command go mod tidy", ":lsp-restart"]
+x = ":run-shell-command setsid kitty --start-as=fullscreen --directory=."
+t = [":run-shell-command go mod tidy && /usr/bin/sleep 0.5", ":lsp-restart"]
 n = ":run-shell-command (snippy new)&"
 g = ":run-shell-command (snippy get)&"
 r = ":run-shell-command just"
@@ -134,10 +134,18 @@ c = [ ":buffer-close" ]
 
 [keys.insert]
 j = { k = "normal_mode" } # Maps `jk` to exit insert mode
-C-right = "move_next_word_end"
-C-left = "move_prev_word_start"
-C-h = "move_prev_word_start"
-C-l = "move_next_word_end"
+"C-s" = [":w"]
+
+C-right = "move_char_right"
+C-left = "move_char_left"
+
+C-l= "move_char_right"
+C-h = "move_char_left"
+C-o = "normal_mode"
+
+# C-h = "move_prev_word_start"
+# C-l = "move_next_word_end"
+
 up = "move_line_up"
 down = "move_line_down"
 left = "move_char_left"

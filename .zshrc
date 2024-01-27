@@ -1,6 +1,9 @@
+##########
+# ENVVARS
+##########
 export EDITOR='helix'
 export visual='kitty helix'
-export SHELL=/bin/bash
+# export SHELL=/bin/bash
 export HISTFILE=~/.config/zsh/.zsh_history
 export HISTSIZE=1000000000
 export SAVEHIST=1000000000
@@ -8,6 +11,8 @@ export PAGER='bat --color=always'
 export DIFFPROG="nvim -d"
 export MANPAGER="less -R --use-color -Dd+r -Du+b"
 export MANROFFOPT='-c'
+
+# alias hx='/opt/helix-extended/hx'
 
 # STARSHIP
 # --- uncomment your theme ---
@@ -19,17 +24,6 @@ STARSHIP_THEME="$HOME/.config/starship/gum.toml"
 # STARSHIP_THEME="$HOME/.config/starship/material.toml"
 # ---------------------------
 
-# __inshellisense__() {
-#     input=$LBUFFER
-#     LBUFFER=
-#     inshellisense -c "$input" -s zsh < $TTY
-#     print -s $(inshellisense --history)
-#     zle reset-prompt
-# }
-
-# zle     -N   __inshellisense __inshellisense__
-# bindkey '^w' __inshellisense
-
 # function prepend-sudo {
 #   if [[ $BUFFER != "sudo "* ]]; then
 #     BUFFER="sudo $BUFFER"; CURSOR+=5
@@ -39,7 +33,9 @@ STARSHIP_THEME="$HOME/.config/starship/gum.toml"
 
 # bindkey -M vicmd s prepend-sudo
 
-/usr/bin/cat "$HISTFILE" >> "${HISTFILE}.bak"
+/usr/bin/cat "$HISTFILE" | ~/dev/mybox/bin/uniq2 >> "${HISTFILE}.bak"
+
+# eval "$(direnv hook zsh)"
 
 # select all
 function _ctrl-a {
@@ -129,14 +125,21 @@ bindkey "^[[B" down-line-or-beginning-search # Down
 setopt extendedglob
 setopt auto_cd
 setopt auto_pushd
-# setopt auto_param_slash
-# setopt always_to_end
 setopt interactive_comments
 setopt AUTO_LIST           # Automatically list choices on ambiguous completion.
 setopt AUTO_PARAM_SLASH    # If completed parameter is a directory, add a trailing slash.
 unsetopt FLOW_CONTROL      # Disable start/stop characters in shell editor.
 zstyle ':completion::complete:*' use-cache on
 zstyle ':completion::complete:*' cache-path "$_zcompcache"
+
+setopt EXTENDED_HISTORY
+setopt HIST_VERIFY
+setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
+setopt HIST_IGNORE_DUPS          # Dont record an entry that was just recorded again.
+setopt HIST_IGNORE_ALL_DUPS      # Delete old recorded entry if new entry is a duplicate.
+setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
+setopt HIST_IGNORE_SPACE         # Dont record an entry starting with a space.
+setopt HIST_SAVE_NO_DUPS         # Dont write duplicate entries in the history file.
 
 # Initialize completion styles. Users can set their preferred completion style by
 # calling `compstyle <compstyle>` in their .zshrc, or by defining their own
@@ -178,11 +181,16 @@ setopt COMPLETE_IN_WORD    # Complete from both ends of a word.
 setopt AUTO_LIST           # Automatically list choices on ambiguous completion.
 setopt magicequalsubst     # enable filename expansion for arguments of the form ‘anything=expression’
 setopt nonomatch           # hide error message if there is no match for the pattern
-# setopt notify              # report the status of background jobs immediately
 setopt numericglobsort     # sort filenames numerically when it makes sense
 setopt promptsubst         # enable command substitution in prompt
 setopt inc_append_history
 setopt share_history
+unsetopt flowcontrol
+setopt auto_menu
+setopt complete_in_word
+setopt always_to_end
+setopt auto_pushd
+
 export HISTORY_IGNORE="(ls|cd|pwd|exit|rm)"
 
 
@@ -196,17 +204,13 @@ __source "$HOME/.config/zsh/functions.zsh"
 # default fzf options
 __source "$HOME/.config/zsh/fzf.zsh"
 
-# double tap ESC to prepend line with SUDO
-__source "$HOME/.config/zsh/zsh-sudo-plugin.zsh"
-
-#+BEGIN_SRC zsh
-# __source "$HOME/.config/zsh/plugins/zsh-histdb/zsh-histdb.plugin.zsh"
-# autoload -Uz add-zsh-hook
-#+END_SRC
-
 # --- fzf tab ---
+# this needs to be sourced before auto-suggestions and highlighting
 __source "$HOME/.config/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh"
 __source "$HOME/.config/zsh/plugins/fzf-history/zsh-fzf-history-search.zsh"
+
+# double tap ESC to prepend line with SUDO
+__source "$HOME/.config/zsh/zsh-sudo-plugin.zsh"
 
 # auto color cmd output with regex (pretty color output for ping - ps - etc...)
 # install grc - pacman -S grc
@@ -221,7 +225,7 @@ __source "$HOME/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 # tab sources for better completion
 zstyle ':autocomplete:*' default-context history-incremental-search-backward
-__source "$HOME/.config/zsh/plugins/fzf-tab-source/fzf-tab-source.plugin.zsh"
+# __source "$HOME/.config/zsh/plugins/fzf-tab-source/fzf-tab-source.plugin.zsh"
 
 # COMPLETION
 zstyle ':completion:*' fzf-search-display true
@@ -230,34 +234,91 @@ zle -C alias-expension complete-word _generic
 bindkey '^e' alias-expension
 zstyle ':completion:alias-expension:*' completer _expand_alias
 
+# FZF TAB COMPLETE
+###################
 # disable preview for command options
 zstyle ':fzf-tab:complete:*:options' fzf-preview 
-# zstyle ':fzf-tab:complete:*:options*' fzf-preview 
-# zstyle ':fzf-tab:complete:*:options:*' fzf-preview 
-# zstyle ':fzf-tab:complete:ls:*Pictures*' fzf-preview 'kitty icat --clear --transfer-mode=memory --stdin=no --place=${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES}@0x0 {}'
-zstyle ':fzf-tab:complete:icat:*' fzf-preview 'kitty icat --clear --transfer-mode=memory --stdin=no --place=${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES}@0x0 {}'
+zstyle ':fzf-tab:complete:*:argument-1' fzf-preview
+
+# zstyle ':fzf-tab:complete:kitten:icat:*' fzf-preview 'kitten icat --clear --transfer-mode=memory --stdin=no --place=${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES}@0x0 $realpath'
+# zstyle ':fzf-tab:complete:kitten:icat:*' fzf-preview 'kitten icat --clear --transfer-mode=memory --stdin=no --place=10x10@0x0 ${(Q)realpath}'
+# zstyle ':fzf-tab:complete:icat:argument-1' fzf-preview \
+#   'kitten icat --clear --transfer-mode=memory --stdin=no --place=30x30@0x0 {}'
+
+# zstyle ':fzf-tab:complete:(\\|*/|)kitty:*' fzf-preview
+
+# zstyle ':fzf-tab:complete:icat:*' fzf-preview \
+#   'kitten icat --clear --transfer-mode=stream --stdin=no --place=10x10@0x0 ${realpath} | sed \$d' \
+#   fzf-flags --preview-window=down:3:wrap
+
+# zstyle ':fzf-tab:complete:icat:argument-1' fzf-preview \
+#   fzf-flags --preview-window=down:3:wrap --preview='kitten icat --clear --transfer-mode=stream --stdin=no --place=${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES}@0x0 {}'
+  # 'kitten icat --clear --transfer-mode=stream --stdin=no --place=10x10@0x0 ${word}' \
 
 # preview directory's content with exa when completing cd
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
-zstyle ':fzf-tab:complete:eww:open:*' fzf-preview 'eww windows'
+zstyle ':fzf-tab:complete:eza:*' fzf-preview '/home/sweet/scripts/lessfilter.sh $realpath'
+zstyle ':fzf-tab:complete:ls:*' fzf-preview '/home/sweet/scripts/lessfilter.sh $realpath'
+zstyle ':fzf-tab:complete:lx:*' fzf-preview '/home/sweet/scripts/lessfilter.sh $realpath'
+
+zstyle ':fzf-tab:complete:systemctl-*:*' fzf-preview 'SYSTEMD_COLORS=1 systemctl status $word'
+
+# give a preview of commandline arguments when completing `kill`
+zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
+
+zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview \
+  '[[ $group == "[process ID]" ]] && ps --pid=$word -o cmd --no-headers -w -w'
+zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags --preview-window=down:3:wrap
 
 # switch group using `,` and `.`
 zstyle ':fzf-tab:*' switch-group ',' '.'
-# disable preview for subcommands
-# zstyle ':fzf-tab:complete:*:argument-1' fzf-preview
-# zstyle ':fzf-tab:complete:*:argument-2' fzf-preview
 
-zstyle ':fzf-tab:complete:*' fzf-bindings \
-	'ctrl-v:execute-silent({_FTB_INIT_}code "$realpath")' \
-    'ctrl-e:execute-silent({_FTB_INIT_}helix "$realpath")'
-
-# fzf preview images
 # disable sort when completing `git checkout`
 zstyle ':completion:*:git-checkout:*' sort false
 # set descriptions format to enable group support
 zstyle ':completion:*:descriptions' format '[%d]'
+
+# it is an example. you can change it
+zstyle ':fzf-tab:complete:git-(add|diff|restore):*' fzf-preview \
+	'git diff $word | delta'
+zstyle ':fzf-tab:complete:git-log:*' fzf-preview \
+	'git log --color=always $word'
+zstyle ':fzf-tab:complete:git-help:*' fzf-preview \
+	'git help $word | bat -plman --color=always'
+zstyle ':fzf-tab:complete:git-show:*' fzf-preview \
+	'case "$group" in
+	"commit tag") git show --color=always $word ;;
+	*) git show --color=always $word | delta ;;
+	esac'
+zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview \
+	'case "$group" in
+	"modified file") git diff $word | delta ;;
+	"recent commit object name") git show --color=always $word | delta ;;
+	*) git log --color=always $word ;;
+	esac'
+
+# less open
+# zstyle ':fzf-tab:complete:*:*' fzf-preview 'less ${(Q)realpath}'
+# export LESSOPEN='|~/scripts/lessfilter.sh %s'
+
+# tldr
+ zstyle ':fzf-tab:complete:tldr:argument-1' fzf-preview 'tldr --color $word'
+###################
+
 # set list-colors to enable filename colorizing
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+zstyle ':fzf-tab:complete:*' fzf-bindings \
+	'ctrl-v:execute-silent({_FTB_INIT_}code "$realpath")' \
+    'ctrl-e:execute-silent({_FTB_INIT_}kitty helix "$realpath")'
+
+# TMUX popup
+# zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
+# zstyle ':fzf-tab:complete:cd:*' popup-pad 30 0
+
+# zstyle ':fzf-tab:*' popup-min-size 50 8
+# zstyle ':fzf-tab:complete:diff:*' popup-min-size 80 12
 
 # _zsh_autosuggest_strategy_histdb_top_here() {
 #     local query="select commands.argv from
