@@ -16,11 +16,11 @@ function lx() {
 
 function contize() {
     echo -e "\x1b[32m[WARN]\x1b[0m your home directory [$HOME] will NOT be read-only. It is mounted in a container and is accessible from insde"
-    podman run -it --rm \
-        --security-opt label=disable \
-        --userns=keep-id \
+    podman run -it --rm               \
+        --security-opt label=disable  \
+        --userns=keep-id              \
         -v "$HOME:$HOME" -v /tmp:/tmp \
-        -w "$PWD" \
+        -w "$PWD"                     \
         "$@"
 }
 
@@ -106,8 +106,13 @@ function ya() {
 function rp() {
     case "$1" in
         -h|--help) echo "rp <file> - copies files full path" ;;
-        *) realpath "${1}" | sed 's/\n//g' |wl-copy && echo "copied filepath" ;;
+        *) realpath "${1}" | tr -d \\n | wl-copy && echo "copied filepath" ;;
     esac
+}
+
+# realpath paste
+function rpp() {
+    wl-paste | tr -d \\n
 }
 
 # termcap

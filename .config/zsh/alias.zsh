@@ -1,5 +1,5 @@
 #-----------[Alias]---------------------#
-# alias hx="helix"
+alias hx="helix"
 # alias hx.="helix ."
 alias ff="firefox"
 alias zz="zathura"
@@ -15,13 +15,16 @@ alias ip_show="ip addr show | grep 'inet ' | cut -d ' ' -f 6 | cut -d / -f 1"
 alias wlc='wl-copy'
 alias wlp='wl-paste'
 alias db='distrobox'
+alias zj='zellij'
+alias yz='yazi'
 
 alias pm='podman'
+alias which-gpu='glxinfo|grep -E "OpenGL vendor|OpenGL renderer"'
 alias history_most_used="history 0 | awk '{print $2}' | sort | uniq -c | sort -n -r | head"
 
 # Core utils + replacements
 alias ls="eza --icons=always"
-alias ll='eza -Fal --icons  --group-directories-first '
+alias ll='eza -F -a -l --icons  --group-directories-first '
 alias l='eza --long --grid --icons=always'
 alias lsd="eza -l --group-directories-first"
 

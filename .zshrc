@@ -16,12 +16,26 @@ export MANROFFOPT='-c'
 
 # STARSHIP
 # --- uncomment your theme ---
-# STARSHIP_THEME="$HOME/.config/starship/starship.toml"
-STARSHIP_THEME="$HOME/.config/starship/gum.toml"
-# STARSHIP_THEME="$HOME/.config/starship/kana.toml"
-# STARSHIP_THEME="$HOME/.config/starship/terminal.toml"
+# STARSHIP_THEME="$HOME/.config/starship/blue.toml"
+# STARSHIP_THEME="$HOME/.config/starship/bracketed-segments.toml"
+# STARSHIP_THEME="$HOME/.config/starship/gruvbox-rainbow.toml"
+# STARSHIP_THEME="$HOME/.config/starship/gum.toml"
 # STARSHIP_THEME="$HOME/.config/starship/helix.toml"
+# STARSHIP_THEME="$HOME/.config/starship/jetpack.toml"
+# STARSHIP_THEME="$HOME/.config/starship/kali.toml"
+# STARSHIP_THEME="$HOME/.config/starship/kana.toml"
 # STARSHIP_THEME="$HOME/.config/starship/material.toml"
+# STARSHIP_THEME="$HOME/.config/starship/nerd-font-symbols.toml"
+# STARSHIP_THEME="$HOME/.config/starship/no-empty-icons.toml"
+# STARSHIP_THEME="$HOME/.config/starship/no-nerd-font.toml"
+# STARSHIP_THEME="$HOME/.config/starship/no-runtime-versions.toml"
+# STARSHIP_THEME="$HOME/.config/starship/pastel-powerline.toml"
+# STARSHIP_THEME="$HOME/.config/starship/plain-text-symbols.toml"
+STARSHIP_THEME="$HOME/.config/starship/pure-preset.toml"
+# STARSHIP_THEME="$HOME/.config/starship/pure.toml"
+# STARSHIP_THEME="$HOME/.config/starship/starship.toml"
+# STARSHIP_THEME="$HOME/.config/starship/terminal.toml"
+# STARSHIP_THEME="$HOME/.config/starship/tokyo-night.toml"
 # ---------------------------
 
 # function prepend-sudo {
@@ -32,6 +46,10 @@ STARSHIP_THEME="$HOME/.config/starship/gum.toml"
 # zle -N prepend-sudo
 
 # bindkey -M vicmd s prepend-sudo
+autoload edit-command-line
+zle -N edit-command-line
+zle -N edit-command-line
+bindkey "^X^E" edit-command-line
 
 /usr/bin/cat "$HISTFILE" | ~/dev/mybox/bin/uniq2 >> "${HISTFILE}.bak"
 

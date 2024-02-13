@@ -91,6 +91,6 @@ map ctrl+alt+enter launch --cwd=current
 # include ~/.cache/wal/colors-kitty.conf
 
 # BEGIN_KITTY_THEME
-# Rosé Pine Dawn
+# 80s-Anime
 include current-theme.conf
 # END_KITTY_THEME

@@ -55,3 +55,5 @@ fpath+=(
 
 export FPATH
 # source your secrets from another file and dont push them to git
+
+if [ -e /home/sweet/.nix-profile/etc/profile.d/nix.sh ]; then . /home/sweet/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer

@@ -230,6 +230,14 @@ args = { attachCommands = [ "platform select remote-gdb-server", "platform conne
 name = "rust"
 source = { git = "https://github.com/tree-sitter/tree-sitter-rust", rev = "0431a2c60828731f27491ee9fdefe25e250ce9c9" }
 
+# [[language]]
+# name = ""
+# scope = "hyprland.conf"
+# injection-regex = "hypr"
+# file-types = ["conf"]
+# indent = { tab-width = 4, unit = "    " }
+# comment-token = "#"
+
 [[language]]
 name = "sway"
 scope = "source.sway"
@@ -2336,7 +2344,7 @@ source = { git = "https://github.com/charmbracelet/tree-sitter-vhs", rev = "c6d8
 [[language]]
 name = "kdl"
 scope = "source.kdl"
-file-types = ["kdl"]
+file-types = ["kdl", "hyprland.conf"]
 roots = []
 comment-token = "//"
 injection-regex = "kdl"
