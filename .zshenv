@@ -18,6 +18,7 @@ path=(
 ~/.cargo/bin
 ~/go/bin
 ~/.local/share/hysp/bin
+~/.local/share/nvim/mason/bin
 $path
 )
 

@@ -7,7 +7,7 @@
 
 # map f1 toggle_marker regex 1 '^#(?:[0-9a-fA-F]{3}){1,2}$'
 # map f1 toggle_marker function ~/.config/kitty/hex_marker.py
-map f1 launch --allow-remote-control kitty +kitten broadcast
+# map f1 launch --allow-remote-control kitty +kitten broadcast
 
 ####################################
 # simple tab bar w/rounded buttons #
@@ -33,10 +33,10 @@ modify_font underline_position 1 # 3 -> 1
 modify_font underline_thickness 1
 modify_font baseline 0
 
-# map ctrl+shift+f launch --stdin-source=@screen_scrollback --type=overlay fzf --no-sort --exact --tac --bind "enter:execute(xsel --primary <<< {}; notify-send copied! {})"
 # map kitty_mod+/      launch --location=hsplit --allow-remote-control kitty +kitten search.py @active-kitty-window-id
+map kitty_mod+/ launch --type=overlay --cwd=. nvim
 
-open_url_with default
+open_url_with firefox
 
 ##### CURSOR #####
 cursor_shape beam
@@ -91,6 +91,6 @@ map ctrl+alt+enter launch --cwd=current
 # include ~/.cache/wal/colors-kitty.conf
 
 # BEGIN_KITTY_THEME
-# 80s-Anime
+# Monokai Soda
 include current-theme.conf
 # END_KITTY_THEME

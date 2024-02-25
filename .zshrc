@@ -3,16 +3,13 @@
 ##########
 export EDITOR='helix'
 export visual='kitty helix'
-# export SHELL=/bin/bash
 export HISTFILE=~/.config/zsh/.zsh_history
 export HISTSIZE=1000000000
 export SAVEHIST=1000000000
-export PAGER='bat --color=always'
+export PAGER='bat --color=always -p'
 export DIFFPROG="nvim -d"
 export MANPAGER="less -R --use-color -Dd+r -Du+b"
 export MANROFFOPT='-c'
-
-# alias hx='/opt/helix-extended/hx'
 
 # STARSHIP
 # --- uncomment your theme ---
@@ -31,36 +28,42 @@ export MANROFFOPT='-c'
 # STARSHIP_THEME="$HOME/.config/starship/no-runtime-versions.toml"
 # STARSHIP_THEME="$HOME/.config/starship/pastel-powerline.toml"
 # STARSHIP_THEME="$HOME/.config/starship/plain-text-symbols.toml"
-STARSHIP_THEME="$HOME/.config/starship/pure-preset.toml"
+# STARSHIP_THEME="$HOME/.config/starship/pure-preset.toml"
 # STARSHIP_THEME="$HOME/.config/starship/pure.toml"
 # STARSHIP_THEME="$HOME/.config/starship/starship.toml"
 # STARSHIP_THEME="$HOME/.config/starship/terminal.toml"
-# STARSHIP_THEME="$HOME/.config/starship/tokyo-night.toml"
+STARSHIP_THEME="$HOME/.config/starship/tokyo-night.toml"
 # ---------------------------
 
-# function prepend-sudo {
-#   if [[ $BUFFER != "sudo "* ]]; then
-#     BUFFER="sudo $BUFFER"; CURSOR+=5
+# function _helper {
+#   if [[ $BUFFER != "suwu "* ]]; then
+#     BUFFER="suwu $BUFFER"; CURSOR+=5
 #   fi
 # }
-# zle -N prepend-sudo
+# zle -N _helper
+# bindkey "^w" _helper
 
 # bindkey -M vicmd s prepend-sudo
+
+# edit cmd buffer in editor
 autoload edit-command-line
 zle -N edit-command-line
 zle -N edit-command-line
 bindkey "^X^E" edit-command-line
 
-/usr/bin/cat "$HISTFILE" | ~/dev/mybox/bin/uniq2 >> "${HISTFILE}.bak"
+# janky history back up
+[ -x ~/dev/mybox/bin/uniq2 ] && {
+    /usr/bin/cat "$HISTFILE" | ~/dev/mybox/bin/uniq2 >> "${HISTFILE}.bak"
+}
 
 # eval "$(direnv hook zsh)"
 
 # select all
-function _ctrl-a {
-  MARK=0
-  CURSOR=$#BUFFER
-  REGION_ACTIVE=1
-}
+# function _ctrl-a {
+#   MARK=0
+#   CURSOR=$#BUFFER
+#   REGION_ACTIVE=1
+# }
 
 zle -N _ctrl-a _ctrl-a
 bindkey '^s' _ctrl-a
@@ -86,8 +89,10 @@ else
 fi
 
 # Zoxide
+# _ZO_FZF_OPTS='--reverse --height=20% --preview="eza --icons=always {}"'
 if command -v zoxide &>/dev/null; then
-  eval "$(zoxide init zsh)"
+  eval "$(zoxide init --cmd cd zsh)"
+  # eval "$(zoxide init --cmd cd zsh)"
   true
 fi
 
@@ -140,16 +145,18 @@ bindkey "^[[B" down-line-or-beginning-search # Down
 # ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS+=(forward-char)
 
 # OPTIONS
-setopt extendedglob
-setopt auto_cd
-setopt auto_pushd
-setopt interactive_comments
-setopt AUTO_LIST           # Automatically list choices on ambiguous completion.
-setopt AUTO_PARAM_SLASH    # If completed parameter is a directory, add a trailing slash.
-unsetopt FLOW_CONTROL      # Disable start/stop characters in shell editor.
 zstyle ':completion::complete:*' use-cache on
 zstyle ':completion::complete:*' cache-path "$_zcompcache"
 
+# Initialize completion styles. Users can set their preferred completion style by
+# calling `compstyle <compstyle>` in their .zshrc, or by defining their own
+# `compstyle_<name>_setup` functions similar to the zsh prompt system.
+fpath+="${0:A:h}/functions"
+
+autoload -Uz compinit
+compinit -d ~/.cache/zcompdump
+
+# History opts
 setopt EXTENDED_HISTORY
 setopt HIST_VERIFY
 setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
@@ -158,61 +165,44 @@ setopt HIST_IGNORE_ALL_DUPS      # Delete old recorded entry if new entry is a d
 setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
 setopt HIST_IGNORE_SPACE         # Dont record an entry starting with a space.
 setopt HIST_SAVE_NO_DUPS         # Dont write duplicate entries in the history file.
+setopt INC_APPEND_HISTORY
 
-# Initialize completion styles. Users can set their preferred completion style by
-# calling `compstyle <compstyle>` in their .zshrc, or by defining their own
-# `compstyle_<name>_setup` functions similar to the zsh prompt system.
-fpath+="${0:A:h}/functions"
-# autoload -Uz compstyleinit && compstyleinit
+# opts
+setopt EXTENDEDGLOB         # better globbing !(folder)
+setopt AUTO_CD              #
+setopt AUTO_PUSHD           #
+setopt INTERACTIVE_COMMENTS #
+unsetopt FLOW_CONTROL       # Disable start/stop characters in shell editor.
+setopt AUTO_PARAM_SLASH     # If completed parameter is a directory, add a trailing slash.
+setopt COMPLETE_IN_WORD     # Complete from both ends of a word.
+setopt AUTO_LIST            # Automatically list choices on ambiguous completion.
+setopt MAGICEQUALSUBST      # enable filename expansion for arguments of the form ‘anything=expression’
+setopt NONOMATCH            # hide error message if there is no match for the pattern
+setopt NUMERICGLOBSORT      # sort filenames numerically when it makes sense
+setopt PROMPTSUBST          # enable command substitution in prompt
+setopt SHARE_HISTORY
+setopt AUTO_MENU
+setopt COMPLETE_IN_WORD
+setopt ALWAYS_TO_END
+setopt AUTO_PUSHD
 
-# Load and initialize the completion system ignoring insecure directories with a
-# cache time of 20 hours, so it should almost always regenerate the first time a
-# shell is opened each day.
-# autoload -Uz compinit
-# _zcompdump=~/.cache/zcompdump
-# _comp_files=($_zcompdump(Nmh-20))
-# if (( $#_comp_files )); then
-#   compinit -i -C -d "$_zcompdump"
-# else
-#   compinit -i -d "$_zcompdump"
-#   # Keep $_zcompdump younger than cache time even if it isn't regenerated.
-#   touch "$_zcompdump"
-# fi
-
-# cleanup
-# unset _cache_dir _comp_files _zcompdump _zcompcache
-
-autoload -Uz compinit
-compinit -d ~/.cache/zcompdump
-
-# zsh history
-# setopt hist_ignore_dups
-# setopt hist_find_no_dups
-# setopt hist_save_no_dups
-# setopt hist_verify
-# setopt appendhistory
-# setopt extended_history
-# setopt inc_append_history_time
-
-setopt hist_ignore_space
-setopt COMPLETE_IN_WORD    # Complete from both ends of a word.
-setopt AUTO_LIST           # Automatically list choices on ambiguous completion.
-setopt magicequalsubst     # enable filename expansion for arguments of the form ‘anything=expression’
-setopt nonomatch           # hide error message if there is no match for the pattern
-setopt numericglobsort     # sort filenames numerically when it makes sense
-setopt promptsubst         # enable command substitution in prompt
-setopt inc_append_history
-setopt share_history
+# unsetopts
 unsetopt flowcontrol
-setopt auto_menu
-setopt complete_in_word
-setopt always_to_end
-setopt auto_pushd
 
-export HISTORY_IGNORE="(ls|cd|pwd|exit|rm)"
+# attempt to fix alias completion for zoxide
+setopt completealiases
 
+HISTORY_IGNORE="(ls|cd|pwd|exit|rm)"
+HIST_IGNORE="(ls|cd|pwd|exit|rm)"
+export HISTORY_IGNORE
+export HIST_IGNORE
 
 # SOURCE
+# NIX
+__source "$HOME/.nix-profile/etc/profile.d/nix.sh"
+__source "/etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh" # doesnt exist lol
+__source "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+
 # aliases
 __source "$HOME/.config/zsh/alias.zsh"
 
@@ -225,6 +215,8 @@ __source "$HOME/.config/zsh/fzf.zsh"
 # --- fzf tab ---
 # this needs to be sourced before auto-suggestions and highlighting
 __source "$HOME/.config/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh"
+
+# fzf ctrl_r reverse history search
 __source "$HOME/.config/zsh/plugins/fzf-history/zsh-fzf-history-search.zsh"
 
 # double tap ESC to prepend line with SUDO
@@ -286,6 +278,7 @@ zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w 
 
 zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview \
   '[[ $group == "[process ID]" ]] && ps --pid=$word -o cmd --no-headers -w -w'
+
 zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags --preview-window=down:3:wrap
 
 # switch group using `,` and `.`
@@ -293,6 +286,7 @@ zstyle ':fzf-tab:*' switch-group ',' '.'
 
 # disable sort when completing `git checkout`
 zstyle ':completion:*:git-checkout:*' sort false
+
 # set descriptions format to enable group support
 zstyle ':completion:*:descriptions' format '[%d]'
 
@@ -330,7 +324,12 @@ zstyle ':fzf-tab:complete:*' fzf-bindings \
 	'ctrl-v:execute-silent({_FTB_INIT_}code "$realpath")' \
     'ctrl-e:execute-silent({_FTB_INIT_}kitty helix "$realpath")'
 
-# TMUX popup
+
+function icat() {
+    kitten icat "$@"
+}
+
+zstyle ':fzf-tab:complete:icat:*' fzf-preview 'kitten icat --clear --transfer-mode=memory --stdin=no --place=30x30@0x0 $realpath'# TMUX popup
 # zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 # zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
 # zstyle ':fzf-tab:complete:cd:*' popup-pad 30 0
@@ -347,9 +346,6 @@ zstyle ':fzf-tab:complete:*' fzf-bindings \
 # group by commands.argv order by count(*) desc limit 1"
 #     suggestion=$(_histdb_query "$query")
 # }
-
-# ZSH_AUTOSUGGEST_STRATEGY=histdb_top_here
-# __source "$HOME/.config/zsh/plugins/sql_fzf_history.zsh"
 
 # Syntax highlighting must be loaded last
 __source "$HOME/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"

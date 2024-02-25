@@ -1,6 +1,17 @@
 ## some handy functions I've written or collected
 CLIPBOARD=wl-copy
 
+vv() {
+  # Assumes all configs exist in directories named ~/.config/nvim-*
+  local config=$(fd --max-depth 1 --glob 'nvim*' ~/.config | fzf --prompt="Neovim Configs > " --height=~50% --layout=reverse --border --exit-0)
+ 
+  # If I exit fzf without selecting a config, don't open Neovim
+  [[ -z $config ]] && echo "No config selected" && return
+ 
+  # Open Neovim with the selected config
+  NVIM_APPNAME=$(basename $config) nvim $@
+}
+
 function zr () { zellij run --name "$*" -- zsh -ic "$*";}
 function zrf () { zellij run --name "$*" --floating -- zsh -ic "$*";}
 function ze () { zellij edit "$*";}
@@ -494,7 +505,7 @@ function zzz() {
 }
 
 #makes dir and cd's into it
-function mkcd() { mkdir -p -- "$@" && cd -- "$@"; }
+function mkcd() { mkdir -p -- "$@" && builtin cd -- "$@"; }
 
 #interactive cd
 function jj {
