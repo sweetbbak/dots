@@ -47,7 +47,7 @@
       DIFFPROG = "nvim -d";
       MANPAGER = "less -R --use-color -Dd+r -Du+b";
       MANROFFOPT = "-c";
-      STARSHIP_CONFIG = "${config.xdg.configHome}/starship/tokyo-night.toml";
+      STARSHIP_CONFIG = "${config.xdg.configHome}/starship/gum.toml";
     };
 
     initExtra = ''
