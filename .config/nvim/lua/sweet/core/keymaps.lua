@@ -86,6 +86,8 @@ keymap.set({ "n", "v" }, "<leader>ig", ":Gen Generate<CR>", { desc = "A[I] [G]en
 keymap.set({ "n", "v" }, "<leader>ir", ":Gen Review_Code<CR>", { desc = "A[I] [R]eview Code" })
 keymap.set({ "n", "v" }, "<leader>is", ":Gen Summarize<CR>", { desc = "A[I] [S]ummarize" })
 keymap.set({ "n", "v" }, "<leader>is", ":Gen Summarize<CR>", { desc = "A[I] [S]ummarize" })
+-- stylua: ignore
+keymap.set({ "n", "v" }, "<leader>dd", '<cmd>lua require("dapui").eval()<cr>', { desc = "Debug selection with nvim-dap"})
 
 -- If this is a script, make it executable, and execute it in a split pane on the right
 -- Had to include quotes around "%" because there are some apple dirs that contain spaces, like iCloud
