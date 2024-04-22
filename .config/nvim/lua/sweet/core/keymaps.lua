@@ -87,7 +87,13 @@ keymap.set({ "n", "v" }, "<leader>ir", ":Gen Review_Code<CR>", { desc = "A[I] [R
 keymap.set({ "n", "v" }, "<leader>is", ":Gen Summarize<CR>", { desc = "A[I] [S]ummarize" })
 keymap.set({ "n", "v" }, "<leader>is", ":Gen Summarize<CR>", { desc = "A[I] [S]ummarize" })
 -- stylua: ignore
-keymap.set({ "n", "v" }, "<leader>dd", '<cmd>lua require("dapui").eval()<cr>', { desc = "Debug selection with nvim-dap"})
+keymap.set({ "n", "v" }, "<leader>dd", '<cmd>lua require("dapui").eval()<cr>', { desc = "[D]ebug selection with nvim-dap"})
+-- stylua: ignore
+keymap.set({ "n", "v" }, "<leader>db", '<cmd>:DapToggleBreakpoint<cr>', { desc = "[D]ebug [B]reakpoint"})
+-- stylua: ignore
+keymap.set({ "n", "v" }, "<leader>dr", '<cmd>:DapContinue<cr>', { desc = "[D]ebug [R]un"})
+-- stylua: ignore
+keymap.set({ "n", "v" }, "<leader>dg", '<cmd>lua require("dap-go").debug_test()<cr>', { desc = "[D]ebug [G]o func"})
 
 -- If this is a script, make it executable, and execute it in a split pane on the right
 -- Had to include quotes around "%" because there are some apple dirs that contain spaces, like iCloud
