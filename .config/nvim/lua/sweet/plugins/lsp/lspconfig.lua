@@ -166,6 +166,19 @@ return {
             on_attach = on_attach,
         })
 
+        -- configure python server
+        lspconfig["rust_analyzer"].setup({
+            capabilities = capabilities,
+            on_attach = on_attach,
+            -- settings = {
+            --     ["rust-analyzer"] = {
+            --         check = {
+            --             extraArgs = { "-r" },
+            --         },
+            --     },
+            -- },
+        })
+
         -- lspconfig["nil_ls"].setup({
         --     capabilities = capabilities,
         --     on_attach = on_attach,
