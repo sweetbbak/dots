@@ -157,11 +157,22 @@ return {
         lspconfig["gopls"].setup({
             capabilities = capabilities,
             on_attach = on_attach,
-            filetypes = { "go" },
+            -- filetypes = { "go" },
         })
+
+        -- lspconfig["java-language-server"].setup({
+        --     capabilities = capabilities,
+        --     on_attach = on_attach,
+        --     -- filetypes = { "go" },
+        -- })
 
         -- configure python server
         lspconfig["pyright"].setup({
+            capabilities = capabilities,
+            on_attach = on_attach,
+        })
+
+        lspconfig["csharp_ls"].setup({
             capabilities = capabilities,
             on_attach = on_attach,
         })

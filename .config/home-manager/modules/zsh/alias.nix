@@ -18,6 +18,7 @@
     hx = "nvim";
     top = "btop";
     py = "python";
+    db = "distrobox";
 
     mpvv = "mpv --vo=kitty --vo-kitty-use-shm=yes";
     mpvs = "mpv --vo=kitty --vo-kitty-use-shm=yes ytdl://ytsearch:";
