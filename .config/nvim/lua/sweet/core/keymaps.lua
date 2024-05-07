@@ -46,6 +46,8 @@ keymap.set({ "n", "x", "o" }, "gp", '"+p') -- paste
 keymap.set("n", "<C-n>", "<cmd>BufferLineCycleNext<CR>", { desc = "Cycle buffer next" })
 keymap.set("n", "<C-m>", "<cmd>BufferLineCyclePrev<CR>", { desc = "Cycle buffer previous" })
 
+-- keymap.set("n", "<leader>|", "<cmd>%r! <CR>", { desc = "Cycle buffer previous" })
+
 -- helix like motions
 local motion_modes = { "n", "o", "x" }
 keymap.set(motion_modes, "gs", "^")
@@ -110,3 +112,8 @@ keymap.set("n", "<leader>f.", function()
         vim.cmd("echo 'Not a script. Shebang line not found.'")
     end
 end, { desc = "Execute current file in terminal (if it's a script)" })
+
+keymap.set("n", "<leader>|", function()
+    local cmd = vim.fn.input("cmd > ", "", "file") -- Get the current file name
+    vim.cmd("%r! " .. cmd)
+end, { desc = "Insert output of a command" })
