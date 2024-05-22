@@ -140,7 +140,7 @@
       esac'
 
 
-      zstyle ':fzf-tab:complete:tldr:argument-1' fzf-preview 'tldr --color $word'
+      zstyle ':fzf-tab:complete:tldr:argument-1' fzf-preview 'tldr --color=always $word'
       # zstyle ':completion:*' list-colors ''${s.:. LS_COLORS}
 
       function icat() {

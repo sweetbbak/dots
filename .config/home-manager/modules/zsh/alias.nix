@@ -14,6 +14,7 @@
     # ignore loop devices
     lsblk = "lsblk -e7";
     aplay_tts = "aplay -r 22050 -c 1 -f S16_LE -t raw";
+    ns = "nix-shell";
 
     hx = "nvim";
     top = "btop";

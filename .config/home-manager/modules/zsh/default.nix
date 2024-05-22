@@ -1,6 +1,5 @@
 {
   pkgs,
-  lib,
   config,
   ...
 }: {
@@ -105,6 +104,7 @@
           unfunction kitty-integration
       fi
 
+      zstyle ":completion:*" matcher-list 'm:{a-z}={A-Za-z}'
       . $HOME/.config/home-manager/modules/zsh/opts.zsh
       . $HOME/.config/home-manager/modules/zsh/functions.zsh
       . $HOME/.config/home-manager/modules/zsh/zsh-sudo-plugin.zsh
