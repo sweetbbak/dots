@@ -1,0 +1,111 @@
+/* Macchiato Pink */
+@define-color accent #f5bde6;
+/* @define-color txt #cad3f5; */
+/* @define-color bg #24273a; */
+/* @define-color bg2 #494d64; */
+
+@define-color txt #5B9C96;
+@define-color bg #1D1E1E;
+@define-color bg2 #494d64;
+
+* {
+  font-family: "JetBrains Mono Nerd Font", monospace;
+  font-size: 14px;
+}
+
+/* Window */
+#window {
+  background-color: @bg;
+  opacity: 0.5;
+  background: rgba(0, 0, 0, 0.6);
+  margin: 0px;
+  padding: 10px;
+  border: 3px solid @accent;
+  border-radius: 7px;
+  /* animation: slideIn 0.5s ease-in-out both; */
+}
+
+/* #window { */
+/*   all: unset; */
+/*   /*background-color: --wofi-color0;*/
+/*   color: --wofi-color2; */
+/*   border: 2px solid --wofi-color1; */
+/*   border-radius: 0px; */
+/* } */
+
+/* Slide In */
+/* @keyframes slideIn { */
+/*   0% { */
+/*     opacity: 0; */
+/*   } */
+/**/
+/*   100% { */
+/*     opacity: 1; */
+/*   } */
+/* } */
+
+/* Inner Box */
+#inner-box {
+  background-color: @bg;
+  background: rgba(0, 0, 0, 0.6);
+  margin: 5px;
+  padding: 10px;
+  border: none;
+  animation: fadeIn 0.5s ease-in-out both;
+}
+
+/* Fade In */
+/* @keyframes fadeIn { */
+/*   0% { */
+/*     opacity: 0; */
+/*   } */
+/**/
+/*   100% { */
+/*     opacity: 1; */
+/*   } */
+/* } */
+
+/* Outer Box */
+#outer-box {
+  margin: 5px;
+  padding: 10px;
+  border: none;
+  background-color: @bg;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+/* Scroll */
+#scroll {
+  margin: 0px;
+  padding: 10px;
+  border: none;
+}
+
+/* Input */
+#input {
+  margin: 5px;
+  padding: 10px;
+  border: none;
+  color: @accent;
+  background-color: @bg2;
+  animation: fadeIn 0.5s ease-in-out both;
+}
+
+/* Text */
+#text {
+  margin: 5px;
+  padding: 10px;
+  border: none;
+  color: @txt;
+  animation: fadeIn 0.5s ease-in-out both;
+}
+
+/* Selected Entry */
+#entry:selected {
+  background-color: @accent;
+}
+
+#entry:selected #text {
+  color: @bg;
+  background: rgba(0, 0, 0, 0.6);
+}

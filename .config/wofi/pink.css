@@ -1,0 +1,62 @@
+/* Macchiato Pink */
+/* @define-color Txt #5B9C96; */
+/* @define-color Accent #5B9C96; */
+/* @define-color Bg #1D1E1E; */
+/* @define-color Bg2 #494d64; */
+
+/* #303030 */
+* {
+  /* font-family: "Maple Mono NF", monospace; */
+  font-family: "Jetbrains Mono", monospace;
+  /* font-family: "Iosevka Regular", monospace; */
+  font-size: 15px;
+}
+
+/* Window */
+window {
+  background-color: #1e1e1e;
+  border: 3px solid #5b9c96;
+}
+
+/* Outer Box */
+#outer-box {
+  margin: 33px;
+  padding: 1px;
+  background-color: #1e1e1e;
+  background: #1e1e1e;
+}
+
+/* Scroll */
+#scroll {
+  margin: 0px;
+  padding: 10px;
+  border: none;
+}
+
+/* Input */
+#input {
+  margin: 5px;
+  padding: 10px;
+  border: none;
+  color: #5b9c96;
+  background-color: #303030;
+}
+
+/* Text */
+#text {
+  margin: 5px;
+  padding: 10px;
+  border: none;
+  color: #eeeeee;
+  /* animation: fadeIn 0.5s ease-in-out both; */
+}
+
+/* Selected Entry */
+#entry:selected {
+  background-color: #5b9c96;
+  background: #5b9c96;
+}
+
+#entry:selected #text {
+  color: #1e1e1e;
+}
